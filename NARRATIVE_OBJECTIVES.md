@@ -1,8 +1,9 @@
 # Phase 1: Narrative & Objectives Specification
 
-**Project Title:** Hyderabad & Telangana Hyper-Local, Budget-Intelligent Trip Planner  
+**Project Title:** Hyderabad & Telangana Hyper-Local, Budget-Intelligent Trip Planner (Working Title)  
 **Regional Focus:** Hyderabad Metro Area & Surrounding Telangana Day-Trips  
 **Target Audience:** Solo Travelers, Duos/Friends, and Families  
+**Primary Device Context:** **Mobile-First / On-The-Go** (Optimized for one-handed use, high glanceability, and walking/transit access)  
 **Role:** Creative Director & Product Lead (NIFT Hyderabad) | Technical Project Architect (AGY)
 
 ---
@@ -10,6 +11,13 @@
 ## 1. Executive Summary & Product Philosophy
 
 The **Hyderabad Hyper-Local Trip Planner** is designed to eliminate **logistical harassment and cognitive fatigue** during travel. Current market solutions (Google Maps, TripAdvisor, MakeMyTrip) provide fragmented listings without spatial logic, causing travelers to criss-cross the city, miss venue opening hours, overspend on food and transit, and experience trip burnout.
+
+### Primary Device Context: Mobile-First Strategy
+Since travelers will use this platform while walking through lanes, riding autos/metro, or sitting at cafes:
+* **Glanceable UI Cards:** Information structured for quick 3-second comprehension.
+* **One-Handed Navigation:** Core actions accessible within natural thumb reach.
+* **Location-Aware Contextual Triggers:** Surfacing nearby food and rest options based on current position.
+* **Offline Resilience:** Saved itinerary cards accessible without continuous high-speed data.
 
 ### The "Harassment-Free & Frictionless" Definition
 In this platform, "Harassment-Free" extends beyond physical safety to encompass **logistical & financial friction**:
@@ -36,6 +44,7 @@ flowchart TD
     E --> F2["Time-Dwell & Operational Validation Engine"]
     E --> F3["Contextual Proximity Dining (On-Demand Meal Breaks)"]
     E --> F4["3-Tiered Granular Budget Matrix"]
+    E --> F5["Mobile-First Glanceable Interface"]
 ```
 
 ### Competitor Audit Matrix
@@ -51,7 +60,7 @@ flowchart TD
 ## 3. Jobs-To-Be-Done (JTBD) & Value Proposition Canvas
 
 ### Core User "Job":
-> *"When I travel to Hyderabad for 2–5 days with a specific budget and group (solo/duo/family), I want an accurate, realistic, and spatially organized itinerary with nearby dining choices and built-in rest time, so that I can enjoy an authentic, relaxed, and budget-smart trip without missing places or getting exhausted."*
+> *"When I travel to Hyderabad for 2–5 days with a specific budget and group (solo/duo/family), I want an accurate, realistic, and spatially organized itinerary on my mobile device with nearby dining choices and built-in rest time, so that I can enjoy an authentic, relaxed, and budget-smart trip without missing places or getting exhausted."*
 
 ### Budget Architecture Breakdown
 
