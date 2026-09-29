@@ -3,7 +3,8 @@
 **Project Title:** Hyderabad & Telangana Hyper-Local, Budget-Intelligent Trip Planner (Working Title)  
 **Regional Focus:** Hyderabad Metro Area & Surrounding Telangana Day-Trips  
 **Target Audience:** Solo Travelers, Duos/Friends, and Families  
-**Primary Device Context:** **Mobile-First / On-The-Go** (Optimized for one-handed use, high glanceability, and walking/transit access)  
+**Primary Device Context:** **Mobile-First / On-The-Go** (One-handed navigation, high glanceability, quick access)  
+**Editorial Voice & Tone:** **Pragmatic Utility Guide** (Direct, clear, functional, high-efficiency)  
 **Role:** Creative Director & Product Lead (NIFT Hyderabad) | Technical Project Architect (AGY)
 
 ---
@@ -12,12 +13,11 @@
 
 The **Hyderabad Hyper-Local Trip Planner** is designed to eliminate **logistical harassment and cognitive fatigue** during travel. Current market solutions (Google Maps, TripAdvisor, MakeMyTrip) provide fragmented listings without spatial logic, causing travelers to criss-cross the city, miss venue opening hours, overspend on food and transit, and experience trip burnout.
 
-### Primary Device Context: Mobile-First Strategy
+### Primary Device Context & Editorial Voice
 Since travelers will use this platform while walking through lanes, riding autos/metro, or sitting at cafes:
-* **Glanceable UI Cards:** Information structured for quick 3-second comprehension.
-* **One-Handed Navigation:** Core actions accessible within natural thumb reach.
-* **Location-Aware Contextual Triggers:** Surfacing nearby food and rest options based on current position.
-* **Offline Resilience:** Saved itinerary cards accessible without continuous high-speed data.
+* **Pragmatic Utility Voice:** Direct, fluff-free guidance focused on high-utility travel facts (timings, costs, dwell time, nearby food).
+* **Saved Offline Itinerary Pass:** Ability to download/save generated Day Itineraries containing sequential timelines, dwell times, and nearby budget meal options.
+* **Distance & Travel Mode Estimates:** Simple, non-cluttered distance and travel time indicators between consecutive stops by mode (Walking, Car/Auto, Metro/Public Transit).
 
 ### The "Harassment-Free & Frictionless" Definition
 In this platform, "Harassment-Free" extends beyond physical safety to encompass **logistical & financial friction**:
@@ -44,7 +44,7 @@ flowchart TD
     E --> F2["Time-Dwell & Operational Validation Engine"]
     E --> F3["Contextual Proximity Dining (On-Demand Meal Breaks)"]
     E --> F4["3-Tiered Granular Budget Matrix"]
-    E --> F5["Mobile-First Glanceable Interface"]
+    E --> F5["Mobile-First Pragmatic Interface with Offline Pass"]
 ```
 
 ### Competitor Audit Matrix
@@ -107,6 +107,7 @@ flowchart TD
 ### The "Smart Day" Structure:
 1. **Morning Anchor Spot:** High-energy or outdoor location (e.g., KBR Park / Bhongir Fort) during cool hours.
 2. **Dwell Time Calculation:** Pre-set dwell buffers (e.g., 1.5 hrs for KBR Park, 3 hrs for Bhongir Fort).
-3. **Contextual Meal Break:** Triggers a radius search for dining options matching the user's selected budget category (Budget/Mid-Range/Luxury) within 500m–1km of the current site.
-4. **Afternoon Rest Window:** Dedicated quiet/rest buffer during peak heat hours (1:30 PM – 3:30 PM).
-5. **Evening Anchor Spot:** Scenic/sunset location (e.g., Durgam Cheruvu / Maula Ali Hill / Chowmahalla).
+3. **Distance & Time Between Spots:** Displaying estimated walking / car / metro duration to the next stop.
+4. **Contextual Meal Break:** Triggers a radius search for dining options matching the user's selected budget category (Budget/Mid-Range/Luxury) within 500m–1km of the current site.
+5. **Afternoon Rest Window:** Dedicated quiet/rest buffer during peak heat hours (1:30 PM – 3:30 PM).
+6. **Evening Anchor Spot:** Scenic/sunset location (e.g., Durgam Cheruvu / Maula Ali Hill / Chowmahalla).
