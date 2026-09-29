@@ -11,7 +11,7 @@
 **YES, 100% FEASIBLE.**  
 The entire vision defined in [NARRATIVE_OBJECTIVES.md](file:///c:/Users/ANKITA/Documents/Ankita_BD-24-618/NARRATIVE_OBJECTIVES.md) is technically achievable using modern web/mobile software architecture (React / Vue / HTML5, Tailwind CSS, Leaflet/Mapbox/Google Maps, and structured JSON data). 
 
-Because we decoupled complex real-time transport APIs and live fare haggling, the app's core value rests on **superior Information Architecture (IA), curatorial data tagging, and spatial clustering logic**—all of which are completely within control.
+Because we decoupled complex real-time transport APIs, live fare haggling, and in-app payment processing, the app's core value rests on **superior Information Architecture (IA), curatorial data tagging, and spatial clustering logic**—all of which are completely within control.
 
 ---
 
@@ -25,6 +25,7 @@ Because we decoupled complex real-time transport APIs and live fare haggling, th
 | **Contextual Meal-Break Discovery** | Medium | ✅ **100% Feasible** | Calculate spatial proximity (Haversine formula or distance radius) between the current site and nearby food spots matching selected budget. |
 | **Downloadable Offline Pass** | Low–Medium | ✅ **100% Feasible** | Save generated itinerary state to browser `localStorage` or `IndexedDB`; render a clean PDF or printable offline card. |
 | **Distance & Transit Estimates** | Low–Medium | ✅ **100% Feasible** | Use Mapbox / OpenStreetMap / Google Distance Matrix API or static point-to-point distance matrices for key Hyderabad hubs. |
+| **Transparent Ticket & Fee Guidance** | Low | ✅ **100% Feasible** | Display exact ticket prices, entry requirements, and accepted payment modes (UPI / Cash / Online) without in-app payment processing. |
 
 ---
 
@@ -44,13 +45,11 @@ Because we decoupled complex real-time transport APIs and live fare haggling, th
 
 ---
 
-## 4. What Concepts Are NOT Feasible Now (And Their Smart Alternatives)
+## 4. Architectural Boundaries (Scope Exclusions)
 
-| Concept / Speculative Idea | Why It's Problematic Now | Smart Design Alternative (Our Approach) |
-| :--- | :--- | :--- |
-| **Live Crowd Density Tracking** | Requires live CCTV feeds or costly Telecom/Google Popular Times APIs. | **Static Peak Hour Guidance:** Tag venues with `recommended_visit_hours` (e.g., "Best at 7:00 AM; Avoid 4:00 PM"). |
-| **Live Transport Booking & Auto Fares** | Requires complex ride-hailing API partnerships and fluctuating pricing logic. | **Standard Transit Time Indicators:** Display estimated duration for Walking, Metro, and Auto/Car without handling bookings. |
-| **Direct Ticket Booking & Payment Processing** | Involves payment gateway compliance (PCI-DSS), merchant accounts, and vendor contracts. | **Direct Official Ticket Links & Cash Notes:** Show official booking URLs and exact cash/UPI entrance fee amounts. |
+1. **No In-App Payment Gateway / Vendor Booking:** The app will NOT process ticket purchases or vendor payments. It provides complete transparency (exact ticket costs, UPI/Cash guidance, official links) so users can pay seamlessly using their standard payment apps (GPay, PhonePe, Paytm, Cash).
+2. **No Live Transport Fare Haggling Engine:** Displays standard walking, car/auto, and metro duration/distance estimates without booking rides.
+3. **No Speculative Live CCTV Crowd Sensors:** Uses static peak-hour metadata tags for visit recommendations.
 
 ---
 
