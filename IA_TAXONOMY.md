@@ -42,17 +42,18 @@ Each card contains only the essential, objective parameters needed for users to 
 
 ---
 
-## 3. Master Card Inventory (61 Places)
+## 3. Master Card Inventory (45 Destination Cards)
 
-The complete master dataset of 61 verified places formatted for this study is maintained in:
+The complete master dataset of 45 verified places formatted for this study is maintained in:
 👉 **[HYDERABAD_PLACES_DATASET.md](file:///c:/Users/ANKITA/Documents/Ankita_BD-24-618/HYDERABAD_PLACES_DATASET.md)**
 
+*(Note: Cafes, bakeries, and restaurants are dynamically discovered on-demand via the Real-Time Proximity API inside the app rather than static cards).*
+
 ### Inventory Overview:
-* **Heritage & Palaces (8):** Charminar, Golconda Fort, Qutb Shahi Tombs, Chowmahalla Palace, Salar Jung Museum, Paigah Tombs, British Residency, Taj Falaknuma Palace.
-* **Spiritual & Cultural Landmarks (5):** Mecca Masjid, Birla Mandir, Rasoolpura Sri Ujjaini Mahakali Temple, Statue of Equality, Ammapalle Stepwell & Temple.
+* **Heritage & Royal Palaces (8):** Charminar, Golconda Fort, Qutb Shahi Tombs, Chowmahalla Palace, Salar Jung Museum, Paigah Tombs, British Residency, Taj Falaknuma Palace.
+* **Spiritual & Sacred Landmarks (5):** Mecca Masjid, Birla Mandir, Rasoolpura Sri Ujjaini Mahakali Temple, Statue of Equality, Ammapalle Stepwell & Temple.
 * **Nature, Lakes & Scenic Parks (10):** KBR National Park, Durgam Cheruvu & Cable Bridge, Hussain Sagar & Buddha Statue, Lakefront Park (PVNR Marg), Nehru Zoological Park, Maula Ali Dargah Hill, Khajaguda Hills, Gandipet Landscape & Eco Park, Himayat Sagar Dam, Ficus Garden (Botanical Garden).
-* **Urban Walking & Arts Enclaves (4):** Raidurg Skywalk, Shilparamam Arts & Crafts Village, State Gallery of Art, Laad Bazaar.
-* **Entertainment & Shopping Malls (5):** Prasad's Multiplex & Experium, Inorbit Mall Cyberabad, Sarath City Capital Mall, Nexus Hyderabad Mall, Suncity Mall.
-* **Adventure & Outdoor Parks (2):** Narsapur Forest Urban Park, Cliffin Adventures.
-* **Iconic Culinary & Cafe Institutions (16):** Nimrah Cafe & Bakery, Cafe Niloufer, Hotel Shadab, Roastery Coffee House, Subhan Bakery, Conçu Patisserie, Bawarchi Restaurant, Paradise Food Court, Chutneys, Taaza Kitchen, Autumn Leaf Cafe, The Hole in the Wall Cafe, Farzi Cafe, Pista House, Shah Ghouse Hotel, The Gallery Cafe (Kalakriti).
-* **Regional Outskirts & Extended Trips (11):** Ramoji Film City, Bhongir Fort, Rachakonda Fort, Ananthagiri Hills (Vikarabad), Kotepally Reservoir, Pocharam Wildlife Sanctuary & Dam, Medak Cathedral & Fort, Nagarjuna Sagar Dam, Srisailam, Belum Caves / Billa Surgam Caves, Chirala Beach & Handlooms.
+* **Urban Pedestrian & Cultural Enclaves (4):** Raidurg Skywalk, Shilparamam Arts & Crafts Village, State Gallery of Art, Laad Bazaar.
+* **Entertainment & Major Malls (5):** Prasad's Multiplex & Experium, Inorbit Mall Cyberabad, Sarath City Capital Mall, Nexus Hyderabad Mall, Suncity Mall.
+* **Outdoor & Adventure Parks (2):** Narsapur Forest Urban Park, Cliffin Adventures.
+* **Regional Outskirts & Extended Day Trips (11):** Ramoji Film City, Bhongir Fort, Rachakonda Fort, Ananthagiri Hills (Vikarabad), Kotepally Reservoir, Pocharam Wildlife Sanctuary & Dam, Medak Cathedral & Fort, Nagarjuna Sagar Dam, Srisailam, Belum Caves / Billa Surgam Caves, Chirala Beach & Handlooms.

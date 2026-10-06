@@ -3,13 +3,14 @@
 **Project:** Hyderabad & Telangana Hyper-Local Trip Planner  
 **Role:** Creative Director & Product Lead (NIFT Hyderabad) | Technical Project Architect (AGY)  
 **UX Research Phase:** Phase 3 — Open Card Sorting Study  
-**Document Purpose:** Neutral, unbiased cards for individual places in and around Hyderabad, prepared specifically for Card Sorting user research to uncover user mental models, categorization patterns, and intuitive sorting behaviors.
+**Document Purpose:** Neutral, unbiased cards for individual destinations, landmarks, and activity spots in and around Hyderabad, prepared specifically for Card Sorting user research to uncover user mental models and categorization patterns.  
+*(Note: Food, cafes, and restaurants are dynamically discovered on-demand via the Real-Time Proximity API inside the app rather than static cards).*
 
 ---
 
 ## 🎴 Card Anatomy for Card Sorting Study
 
-To allow research participants to sort places naturally—whether by geography, pricing, dwell time, timing, or vibe—every card provides only the core factual attributes:
+Every destination card provides only core factual attributes to allow research participants to sort naturally:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -26,7 +27,7 @@ To allow research participants to sort places naturally—whether by geography, 
 
 ---
 
-# Master List of 61 Place Cards for Card Sorting
+# Master List of 45 Place Cards for Card Sorting
 
 ### 1. Charminar
 * **Location:** Old City
@@ -334,61 +335,7 @@ To allow research participants to sort places naturally—whether by geography, 
 
 ---
 
-### 35. Nimrah Cafe & Bakery
-* **Location:** Charminar (Old City)
-* **Dwell Time:** 30 – 45 Mins
-* **Operating Hours:** 04:00 AM – 11:30 PM (Daily)
-* **Ticket Price:** Free entry; Items ₹20 – ₹100
-* **Type / Activity:** Heritage cafe famed for Irani chai and hot Osmania biscuits facing Charminar
-
----
-
-### 36. Cafe Niloufer
-* **Location:** Lakdikapul / Banjara Hills
-* **Dwell Time:** 45 Mins
-* **Operating Hours:** 06:00 AM – 11:00 PM (Daily)
-* **Ticket Price:** Free entry; Items ₹50 – ₹200
-* **Type / Activity:** Iconic tea house known for Niloufer special tea, Maska Bun, and malai buns
-
----
-
-### 37. Hotel Shadab
-* **Location:** Madina Circle, Ghansi Bazaar
-* **Dwell Time:** 1 Hour
-* **Operating Hours:** 05:30 AM – 01:00 AM (Daily)
-* **Ticket Price:** Free entry; Meals ₹250 – ₹500
-* **Type / Activity:** Renowned traditional restaurant for Hyderabadi Dum Biryani, kebabs, and seasonal Haleem
-
----
-
-### 38. Roastery Coffee House
-* **Location:** Road No. 14, Banjara Hills
-* **Dwell Time:** 1 – 1.5 Hours
-* **Operating Hours:** 08:00 AM – 11:00 PM (Daily)
-* **Ticket Price:** Free entry; Items ₹400 – ₹900
-* **Type / Activity:** Specialty coffee cafe in a courtyard bungalow setting with pour-overs and continental food
-
----
-
-### 39. Subhan Bakery
-* **Location:** Nampally
-* **Dwell Time:** 20 – 30 Mins
-* **Operating Hours:** 08:00 AM – 11:00 PM (Daily)
-* **Ticket Price:** Free entry; Bakery items ₹100 – ₹350
-* **Type / Activity:** Historic 1890s bakery famous for packaged Osmania biscuits and Dum-ke-Roat
-
----
-
-### 40. Conçu Patisserie & Cafe
-* **Location:** Jubilee Hills
-* **Dwell Time:** 45 – 60 Mins
-* **Operating Hours:** 11:00 AM – 11:00 PM (Daily)
-* **Ticket Price:** Free entry; Items ₹400 – ₹800
-* **Type / Activity:** European-style artisanal dessert studio and cafe known for choux pastries and entremets
-
----
-
-### 41. Ramoji Film City
+### 35. Ramoji Film City
 * **Location:** Hayathnagar / Abdullapurmet (30 km East of Hyderabad)
 * **Dwell Time:** Full Day (6 – 8 Hours)
 * **Operating Hours:** 09:00 AM – 05:30 PM (Daily)
@@ -397,7 +344,7 @@ To allow research participants to sort places naturally—whether by geography, 
 
 ---
 
-### 42. Bhongir Fort (Bhuvanagiri)
+### 36. Bhongir Fort (Bhuvanagiri)
 * **Location:** Bhongir, Yadadri District (48 km from Hyderabad)
 * **Dwell Time:** 3 – 4 Hours
 * **Operating Hours:** 09:00 AM – 05:00 PM (Daily)
@@ -406,7 +353,7 @@ To allow research participants to sort places naturally—whether by geography, 
 
 ---
 
-### 43. Rachakonda Fort
+### 37. Rachakonda Fort
 * **Location:** Rachakonda (55 km South-East of Hyderabad)
 * **Dwell Time:** 2.5 – 3.5 Hours
 * **Operating Hours:** 06:00 AM – 06:00 PM (Sunrise to sunset)
@@ -415,7 +362,7 @@ To allow research participants to sort places naturally—whether by geography, 
 
 ---
 
-### 44. Ananthagiri Hills & Vikarabad Forest
+### 38. Ananthagiri Hills & Vikarabad Forest
 * **Location:** Vikarabad District (80 km West of Hyderabad)
 * **Dwell Time:** 4 – 5 Hours
 * **Operating Hours:** 06:00 AM – 06:00 PM (Daily)
@@ -424,7 +371,7 @@ To allow research participants to sort places naturally—whether by geography, 
 
 ---
 
-### 45. Kotepally (Kotapally) Reservoir
+### 39. Kotepally (Kotapally) Reservoir
 * **Location:** Kotapally, Vikarabad (90 km from Hyderabad)
 * **Dwell Time:** 2 – 3 Hours
 * **Operating Hours:** 08:30 AM – 06:00 PM (Daily)
@@ -433,7 +380,7 @@ To allow research participants to sort places naturally—whether by geography, 
 
 ---
 
-### 46. Pocharam Wildlife Sanctuary & Dam
+### 40. Pocharam Wildlife Sanctuary & Dam
 * **Location:** Medak District (110 km North-West of Hyderabad)
 * **Dwell Time:** 3 – 4 Hours
 * **Operating Hours:** 08:30 AM – 05:30 PM (Daily)
@@ -442,7 +389,7 @@ To allow research participants to sort places naturally—whether by geography, 
 
 ---
 
-### 47. Medak Cathedral & Medak Fort
+### 41. Medak Cathedral & Medak Fort
 * **Location:** Medak Town (100 km North-West of Hyderabad)
 * **Dwell Time:** 2 – 3 Hours
 * **Operating Hours:** Cathedral: 07:00 AM – 06:00 PM | Fort: 09:00 AM – 05:00 PM (Daily)
@@ -451,7 +398,7 @@ To allow research participants to sort places naturally—whether by geography, 
 
 ---
 
-### 48. Nagarjuna Sagar Dam & Island Museum
+### 42. Nagarjuna Sagar Dam & Island Museum
 * **Location:** Nalgonda / Guntur Border (150 km South-East of Hyderabad)
 * **Dwell Time:** 4 – 5 Hours
 * **Operating Hours:** 09:00 AM – 05:00 PM (Dam viewpoints & boat service; Closed Fridays for museum)
@@ -460,7 +407,7 @@ To allow research participants to sort places naturally—whether by geography, 
 
 ---
 
-### 49. Srisailam (Mallikarjuna Swamy Temple & Dam)
+### 43. Srisailam (Mallikarjuna Swamy Temple & Dam)
 * **Location:** Nallamala Hills, Andhra Pradesh (215 km South of Hyderabad)
 * **Dwell Time:** 1 – 2 Days (Extended trip)
 * **Operating Hours:** Temple: 04:30 AM – 10:00 PM (Daily)
@@ -469,7 +416,7 @@ To allow research participants to sort places naturally—whether by geography, 
 
 ---
 
-### 50. Belum Caves / Billa Surgam Caves
+### 44. Belum Caves / Billa Surgam Caves
 * **Location:** Kurnool District (320 km South of Hyderabad)
 * **Dwell Time:** 2 – 3 Hours
 * **Operating Hours:** 10:00 AM – 05:00 PM (Daily)
@@ -478,99 +425,9 @@ To allow research participants to sort places naturally—whether by geography, 
 
 ---
 
-### 51. Chirala Beach & Handloom Village
+### 45. Chirala Beach & Handloom Village
 * **Location:** Bapatla / Prakasam District (300 km South-East of Hyderabad)
 * **Dwell Time:** 1 – 2 Days (Weekend getaway)
 * **Operating Hours:** Open 24/7 (Beach); 10:00 AM – 08:00 PM (Handloom markets)
 * **Ticket Price:** Free
 * **Type / Activity:** Coastal destination featuring pristine sandy beach shores (Vodarevu) and famous handloom saree weaving villages
-
----
-
-### 52. Bawarchi Restaurant
-* **Location:** RTC X Roads, Chikkadpally
-* **Dwell Time:** 1 – 1.5 Hours
-* **Operating Hours:** 11:30 AM – 11:30 PM (Daily)
-* **Ticket Price:** Free entry; Meals ₹250 – ₹500
-* **Type / Activity:** Legendary culinary landmark celebrated for charcoal-dum Hyderabadi Biryani and Boti Kebab
-
----
-
-### 53. Paradise Food Court (Secunderabad Flagship)
-* **Location:** MG Road, Secunderabad
-* **Dwell Time:** 1 – 1.5 Hours
-* **Operating Hours:** 11:00 AM – 11:00 PM (Daily)
-* **Ticket Price:** Free entry; Meals ₹300 – ₹600
-* **Type / Activity:** Historic multi-level dining institution (since 1953) famed worldwide for classic Biryani and Double Ka Meetha
-
----
-
-### 54. Chutneys
-* **Location:** Road No. 1, Banjara Hills / Nagarjuna Circle
-* **Dwell Time:** 45 – 60 Mins
-* **Operating Hours:** 07:00 AM – 11:00 PM (Daily)
-* **Ticket Price:** Free entry; Meals ₹200 – ₹450
-* **Type / Activity:** Renowned vegetarian dining destination famous for Guntur Idli, Babai Dosa, and 6 signature flavored chutneys
-
----
-
-### 55. Taaza Kitchen
-* **Location:** 100 Feet Road, Madhapur
-* **Dwell Time:** 20 – 30 Mins
-* **Operating Hours:** 07:00 AM – 12:30 PM & 04:30 PM – 09:30 PM (Daily)
-* **Ticket Price:** Free entry; Items ₹40 – ₹120
-* **Type / Activity:** High-efficiency self-service breakfast hub famous for crisp Ghee Roast Dosa, soft Button Idlis, and filter coffee
-
----
-
-### 56. Autumn Leaf Cafe
-* **Location:** Road No. 35, Jubilee Hills
-* **Dwell Time:** 1.5 – 2 Hours
-* **Operating Hours:** 09:00 AM – 10:30 PM (Daily)
-* **Ticket Price:** Free entry; Items ₹400 – ₹900
-* **Type / Activity:** Rustic open-air heritage bungalow garden cafe surrounded by lush trees, vintage decor, and artisan craft store
-
----
-
-### 57. The Hole in the Wall Cafe
-* **Location:** Road No. 86, Jubilee Hills
-* **Dwell Time:** 1 – 1.5 Hours
-* **Operating Hours:** 08:30 AM – 11:00 PM (Closed on **Mondays**)
-* **Ticket Price:** Free entry; Meals ₹350 – ₹700
-* **Type / Activity:** Cheerful pet-friendly all-day brunch cafe famous for monster breakfast platters, waffles, and pancakes
-
----
-
-### 58. Farzi Cafe
-* **Location:** Road No. 59, Jubilee Hills
-* **Dwell Time:** 1.5 – 2 Hours
-* **Operating Hours:** 12:00 PM – 11:30 PM (Daily)
-* **Ticket Price:** Free entry; Meals ₹900 – ₹1,800
-* **Type / Activity:** High-energy modern progressive Indian culinary lounge featuring molecular gastronomy illusions and craft tapas
-
----
-
-### 59. Pista House
-* **Location:** Shalibanda / Charminar (Flagship at Tolichowki)
-* **Dwell Time:** 45 – 60 Mins
-* **Operating Hours:** 11:00 AM – 12:00 AM (Daily)
-* **Ticket Price:** Free entry; Meals ₹150 – ₹450
-* **Type / Activity:** Global exporter of GI-tagged Hyderabadi Haleem, Zafrani Chai, and traditional Osmania bakery items
-
----
-
-### 60. Shah Ghouse Hotel & Restaurant
-* **Location:** Tolichowki (Near Flyover)
-* **Dwell Time:** 45 – 60 Mins
-* **Operating Hours:** 05:00 AM – 02:00 AM (Late night / Early morning)
-* **Ticket Price:** Free entry; Meals ₹200 – ₹450
-* **Type / Activity:** Midnight culinary cult spot beloved by locals for late-night Mutton Biryani, Paya Nahari, and Boti Kabab
-
----
-
-### 61. The Gallery Cafe (Kalakriti)
-* **Location:** Road No. 10, Banjara Hills
-* **Dwell Time:** 1 – 1.5 Hours
-* **Operating Hours:** 11:30 AM – 10:30 PM (Daily)
-* **Ticket Price:** Free entry; Items ₹300 – ₹650
-* **Type / Activity:** Intimate bohemian arts cafe attached to contemporary art gallery, hosting live acoustic music, poetry, and books
