@@ -26,7 +26,7 @@ To allow research participants to sort places naturally—whether by geography, 
 
 ---
 
-# Master List of 51 Place Cards for Card Sorting
+# Master List of 61 Place Cards for Card Sorting
 
 ### 1. Charminar
 * **Location:** Old City
@@ -484,3 +484,93 @@ To allow research participants to sort places naturally—whether by geography, 
 * **Operating Hours:** Open 24/7 (Beach); 10:00 AM – 08:00 PM (Handloom markets)
 * **Ticket Price:** Free
 * **Type / Activity:** Coastal destination featuring pristine sandy beach shores (Vodarevu) and famous handloom saree weaving villages
+
+---
+
+### 52. Bawarchi Restaurant
+* **Location:** RTC X Roads, Chikkadpally
+* **Dwell Time:** 1 – 1.5 Hours
+* **Operating Hours:** 11:30 AM – 11:30 PM (Daily)
+* **Ticket Price:** Free entry; Meals ₹250 – ₹500
+* **Type / Activity:** Legendary culinary landmark celebrated for charcoal-dum Hyderabadi Biryani and Boti Kebab
+
+---
+
+### 53. Paradise Food Court (Secunderabad Flagship)
+* **Location:** MG Road, Secunderabad
+* **Dwell Time:** 1 – 1.5 Hours
+* **Operating Hours:** 11:00 AM – 11:00 PM (Daily)
+* **Ticket Price:** Free entry; Meals ₹300 – ₹600
+* **Type / Activity:** Historic multi-level dining institution (since 1953) famed worldwide for classic Biryani and Double Ka Meetha
+
+---
+
+### 54. Chutneys
+* **Location:** Road No. 1, Banjara Hills / Nagarjuna Circle
+* **Dwell Time:** 45 – 60 Mins
+* **Operating Hours:** 07:00 AM – 11:00 PM (Daily)
+* **Ticket Price:** Free entry; Meals ₹200 – ₹450
+* **Type / Activity:** Renowned vegetarian dining destination famous for Guntur Idli, Babai Dosa, and 6 signature flavored chutneys
+
+---
+
+### 55. Taaza Kitchen
+* **Location:** 100 Feet Road, Madhapur
+* **Dwell Time:** 20 – 30 Mins
+* **Operating Hours:** 07:00 AM – 12:30 PM & 04:30 PM – 09:30 PM (Daily)
+* **Ticket Price:** Free entry; Items ₹40 – ₹120
+* **Type / Activity:** High-efficiency self-service breakfast hub famous for crisp Ghee Roast Dosa, soft Button Idlis, and filter coffee
+
+---
+
+### 56. Autumn Leaf Cafe
+* **Location:** Road No. 35, Jubilee Hills
+* **Dwell Time:** 1.5 – 2 Hours
+* **Operating Hours:** 09:00 AM – 10:30 PM (Daily)
+* **Ticket Price:** Free entry; Items ₹400 – ₹900
+* **Type / Activity:** Rustic open-air heritage bungalow garden cafe surrounded by lush trees, vintage decor, and artisan craft store
+
+---
+
+### 57. The Hole in the Wall Cafe
+* **Location:** Road No. 86, Jubilee Hills
+* **Dwell Time:** 1 – 1.5 Hours
+* **Operating Hours:** 08:30 AM – 11:00 PM (Closed on **Mondays**)
+* **Ticket Price:** Free entry; Meals ₹350 – ₹700
+* **Type / Activity:** Cheerful pet-friendly all-day brunch cafe famous for monster breakfast platters, waffles, and pancakes
+
+---
+
+### 58. Farzi Cafe
+* **Location:** Road No. 59, Jubilee Hills
+* **Dwell Time:** 1.5 – 2 Hours
+* **Operating Hours:** 12:00 PM – 11:30 PM (Daily)
+* **Ticket Price:** Free entry; Meals ₹900 – ₹1,800
+* **Type / Activity:** High-energy modern progressive Indian culinary lounge featuring molecular gastronomy illusions and craft tapas
+
+---
+
+### 59. Pista House
+* **Location:** Shalibanda / Charminar (Flagship at Tolichowki)
+* **Dwell Time:** 45 – 60 Mins
+* **Operating Hours:** 11:00 AM – 12:00 AM (Daily)
+* **Ticket Price:** Free entry; Meals ₹150 – ₹450
+* **Type / Activity:** Global exporter of GI-tagged Hyderabadi Haleem, Zafrani Chai, and traditional Osmania bakery items
+
+---
+
+### 60. Shah Ghouse Hotel & Restaurant
+* **Location:** Tolichowki (Near Flyover)
+* **Dwell Time:** 45 – 60 Mins
+* **Operating Hours:** 05:00 AM – 02:00 AM (Late night / Early morning)
+* **Ticket Price:** Free entry; Meals ₹200 – ₹450
+* **Type / Activity:** Midnight culinary cult spot beloved by locals for late-night Mutton Biryani, Paya Nahari, and Boti Kabab
+
+---
+
+### 61. The Gallery Cafe (Kalakriti)
+* **Location:** Road No. 10, Banjara Hills
+* **Dwell Time:** 1 – 1.5 Hours
+* **Operating Hours:** 11:30 AM – 10:30 PM (Daily)
+* **Ticket Price:** Free entry; Items ₹300 – ₹650
+* **Type / Activity:** Intimate bohemian arts cafe attached to contemporary art gallery, hosting live acoustic music, poetry, and books

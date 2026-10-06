@@ -42,9 +42,9 @@ Each card contains only the essential, objective parameters needed for users to 
 
 ---
 
-## 3. Master Card Inventory (51 Places)
+## 3. Master Card Inventory (61 Places)
 
-The complete master dataset of 51 verified places formatted for this study is maintained in:
+The complete master dataset of 61 verified places formatted for this study is maintained in:
 👉 **[HYDERABAD_PLACES_DATASET.md](file:///c:/Users/ANKITA/Documents/Ankita_BD-24-618/HYDERABAD_PLACES_DATASET.md)**
 
 ### Inventory Overview:
@@ -54,5 +54,5 @@ The complete master dataset of 51 verified places formatted for this study is ma
 * **Urban Walking & Arts Enclaves (4):** Raidurg Skywalk, Shilparamam Arts & Crafts Village, State Gallery of Art, Laad Bazaar.
 * **Entertainment & Shopping Malls (5):** Prasad's Multiplex & Experium, Inorbit Mall Cyberabad, Sarath City Capital Mall, Nexus Hyderabad Mall, Suncity Mall.
 * **Adventure & Outdoor Parks (2):** Narsapur Forest Urban Park, Cliffin Adventures.
-* **Iconic Culinary Institutions (6):** Nimrah Cafe & Bakery, Cafe Niloufer, Hotel Shadab, Roastery Coffee House, Subhan Bakery, Conçu Patisserie.
+* **Iconic Culinary & Cafe Institutions (16):** Nimrah Cafe & Bakery, Cafe Niloufer, Hotel Shadab, Roastery Coffee House, Subhan Bakery, Conçu Patisserie, Bawarchi Restaurant, Paradise Food Court, Chutneys, Taaza Kitchen, Autumn Leaf Cafe, The Hole in the Wall Cafe, Farzi Cafe, Pista House, Shah Ghouse Hotel, The Gallery Cafe (Kalakriti).
 * **Regional Outskirts & Extended Trips (11):** Ramoji Film City, Bhongir Fort, Rachakonda Fort, Ananthagiri Hills (Vikarabad), Kotepally Reservoir, Pocharam Wildlife Sanctuary & Dam, Medak Cathedral & Fort, Nagarjuna Sagar Dam, Srisailam, Belum Caves / Billa Surgam Caves, Chirala Beach & Handlooms.
