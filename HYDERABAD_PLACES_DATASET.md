@@ -26,7 +26,7 @@ To allow research participants to sort places naturally—whether by geography, 
 
 ---
 
-# Master List of 50 Place Cards for Card Sorting
+# Master List of 51 Place Cards for Card Sorting
 
 ### 1. Charminar
 * **Location:** Old City
