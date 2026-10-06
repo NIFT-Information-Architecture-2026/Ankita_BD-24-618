@@ -2,80 +2,99 @@
 
 **Project Title:** Hyderabad & Telangana Hyper-Local, Budget-Intelligent Trip Planner  
 **Role:** Creative Director & Product Lead (NIFT Hyderabad) | Technical Project Architect (AGY)  
-**Lifecycle Stage:** Phase 3 — Information Architecture & Taxonomy
+**Lifecycle Stage:** Phase 3 — Information Architecture & Taxonomy (Card Sorting Edition)
 
 ---
 
-## 1. Executive Summary & Phase 3 Objectives
+## 1. Card Sorting Framework (Simplified Overview)
 
-In **Phase 3**, we translate our 9 User Personas (Personas A–I) and Narrative Objectives into a clear, structured **Information Architecture (IA)**. 
+In our app, **Card Sorting** is the method of grouping every piece of content into clear, intuitive categories so travelers never feel overwhelmed. 
 
-Since our app's editorial tone is a **Pragmatic Utility Guide** operating on a **Mobile-First / On-the-Go** device context, the Information Architecture must prioritize:
-- **Low Depth & Instant Access:** Core tasks (generating an itinerary, filtering by budget, viewing a saved day pass) completed in 2–3 taps.
-- **Structured Curation Data:** Rich metadata tagging for venues, food spots, and stays to enable deterministic spatial clustering.
-- **Glanceable Hierarchy:** Clear distinction between Primary Landmark Anchors, Contextual Meal Breaks, and Offline Saved Passes.
+We have established **3 Main Sets of Cards** for the application:
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                              THE 3 SETS OF APP CARDS                                   │
+├──────────────────────────┬──────────────────────────┬──────────────────────────────────┤
+│ SET 1: VENUE CARDS       │ SET 2: CATEGORY CARDS    │ SET 3: NAVIGATION CARDS          │
+│ (The Content Items)      │ (The Filter Groups)      │ (The Main App Screens)           │
+├──────────────────────────┼──────────────────────────┼──────────────────────────────────┤
+│ • Charminar Card         │ • Heritage & Palaces     │ • Tab 1: [Plan Trip]             │
+│ • Golconda Fort Card     │ • Green & Scenic Escapes │ • Tab 2: [My Day Pass]           │
+│ • Irani Chai Cafe Card   │ • Local Eats & Cafes     │ • Tab 3: [Explore Spots]         │
+│ • KBR Park Card          │ • Pre-Verified Stays     │ • Tab 4: [Saved]                 │
+│ • Taj Falaknuma Card     │ • Off-Beat Trails        │                                  │
+└──────────────────────────┴──────────────────────────┴──────────────────────────────────┘
+```
 
 ---
 
-## 2. Proposed Mobile Sitemap & Screen Hierarchy
+## 2. SET 1: Venue Cards (Individual Content Items)
+
+Every location in the app is presented as a **Venue Card** containing 6 core information components:
+
+1. **Venue Title & Photo Header** (e.g., *Charminar & Laad Bazaar Heritage Walk*)
+2. **Category Badge Tag** (e.g., `[Heritage & Palaces]`)
+3. **Budget Tier Badge** (e.g., `[Easy Trip]` / `[Premium]` / `[Luxury]`)
+4. **Dwell Time Estimate** (e.g., `⏱️ 1.5 Hours`)
+5. **Transit Distance Indicator** (e.g., `🚶 10 min walk from previous stop`)
+6. **Ticket Cost & Payment Modes Accepted** (e.g., `₹25 | Accepts UPI & Cash`)
+
+---
+
+## 3. SET 2: Category Filter Cards (How Places Are Grouped)
+
+To keep browsing clean and structured, all places in Hyderabad are sorted into **5 Category Filter Cards**:
+
+1. **`[Heritage & Palaces]`**: Monuments, historical fortresses, royal palaces, and museums (Charminar, Golconda, Chowmahalla, Salar Jung).
+2. **`[Green & Scenic Escapes]`**: Nature spots, lakes, parks, and sunset hill views (KBR Park, Durgam Cheruvu, Maula Ali Hill, Ficus Garden).
+3. **`[Local Eats & Cafes]`**: Authentic local food, Irani chai cafes, rooftop lounges, and fine-dining Nizami spots.
+4. **`[Pre-Verified Stays]`**: Clean, hygienic hostels, boutique hotels, and 5-star resorts.
+5. **`[Off-Beat Trails]`**: Hidden local alleys, artisanal craft centers, and outskirts day trips (Bhongir Fort, Pocharam Reservoir).
+
+---
+
+## 4. SET 3: Navigation Cards (Main App Screens)
+
+The app is structured into **4 Primary Navigation Screens** accessible at all times via the bottom navigation bar:
+
+1. **Tab 1: `[Plan Trip]` (Trip Generator)**
+   * *Purpose:* Select Budget Tier (Easy / Premium / Luxury) and Group Type (Solo / Duo / Family) to generate a dynamic day plan.
+2. **Tab 2: `[My Day Pass]` (Offline Saved Itinerary)**
+   * *Purpose:* View today's step-by-step timeline, dwell times, transit durations, and nearby contextual meal options.
+3. **Tab 3: `[Explore Spots]` (Category Directory)**
+   * *Purpose:* Browse and search all Hyderabad venues using the 5 Category Filter Cards.
+4. **Tab 4: `[Saved]` (Bookmarks & Saved Trips)**
+   * *Purpose:* Access bookmarked favorite places and saved multi-day itineraries.
+
+---
+
+## 5. Mobile Sitemap & Navigation Flow
 
 ```mermaid
 graph TD
-    A[App Launch / Onboarding] --> B[Home / Trip Generator Screen]
+    A[App Launch Screen] --> B[Bottom Navigation Bar]
     
-    B --> C1[1. Input Parameters Mode]
-    C1 --> C1A[Select Budget Tier: Easy / Premium / Luxury]
-    C1 --> C1B[Select Group Dynamic: Solo / Duo / Family]
-    C1 --> C1C[Select Trip Focus: Micro-Cluster / Regional Outskirts]
+    B --> Tab1[Tab 1: Plan Trip Generator]
+    Tab1 --> Gen1[Select Budget: Easy / Premium / Luxury]
+    Gen1 --> Gen2[Select Group: Solo / Duo / Family]
+    Gen2 --> Gen3[Generate Spatial Day Itinerary]
+    Gen3 --> PassView[View / Save to Day Pass]
 
-    B --> C2[2. Interactive Itinerary View]
-    C2 --> C2A[Spatial Timeline / Day View]
-    C2 --> C2B[Contextual Meal Break Drawer]
-    C2 --> C2C[Distance & Mode Indicators]
-    
-    B --> C3[3. Offline Saved Day Pass]
-    C3 --> C3A[Glanceable Timeline Cards]
-    C3 --> C3B[Saved Venue Notes & Cash/UPI Ticket Info]
+    B --> Tab2[Tab 2: My Day Pass]
+    PassView --> Tab2
+    Tab2 --> Pass1[Sequential Timeline]
+    Tab2 --> Pass2[Contextual Meal Drawer]
+    Tab2 --> Pass3[Offline Pass Mode]
 
-    B --> C4[4. Curated Directory & Search]
-    C4 --> C4A[Landmarks & Hidden Trails]
-    C4 --> C4B[Pre-Verified Hygienic Stays]
-    C4 --> C4C[Local Food & Irani Cafes]
+    B --> Tab3[Tab 3: Explore Spots]
+    Tab3 --> Cat1[Heritage & Palaces]
+    Tab3 --> Cat2[Green & Scenic Escapes]
+    Tab3 --> Cat3[Local Eats & Cafes]
+    Tab3 --> Cat4[Pre-Verified Stays]
+    Tab3 --> Cat5[Off-Beat Trails]
+
+    B --> Tab4[Tab 4: Saved]
+    Tab4 --> Fav1[Favorite Venues]
+    Tab4 --> Fav2[Past Saved Itineraries]
 ```
-
----
-
-## 3. Metadata Taxonomy Schema (Data Backbone)
-
-Each venue or item in our Hyderabad database will follow a standardized JSON metadata schema:
-
-```json
-{
-  "item_id": "hyd_charminar_01",
-  "name": "Charminar & Laad Bazaar Heritage Walk",
-  "category": "Landmark",
-  "zone": "Old_City",
-  "coordinates": { "lat": 17.3616, "lng": 78.4747 },
-  "budget_tiers": ["Easy", "Premium", "Luxury"],
-  "group_suitability": ["Solo", "Duo", "Family"],
-  "dwell_time_mins": 90,
-  "opening_hours": "09:00 - 17:30",
-  "closed_days": [],
-  "recommended_visit_window": "08:00 - 10:30",
-  "ticket_cost": {
-    "indian_national_inr": 25,
-    "foreign_national_inr": 300,
-    "payment_modes_accepted": ["Cash", "UPI", "Card"]
-  },
-  "experiential_tags": ["Primary Landmark", "Heritage Architecture", "Street Photography", "Walkable"],
-  "nearby_meal_radius_m": 500
-}
-```
-
----
-
-## 4. Proposed Phase 3 UX Methods
-
-1. **Hierarchical Sitemap & Navigation Mapping:** Structuring the mobile bottom tab bar and screen flow for friction-free operation while walking/riding.
-2. **Content Inventory & JSON Metadata Taxonomy:** Defining all data attributes required for Hyderabad landmarks, food spots, and hygienic stays.
-3. **Card Sorting & Categorization Logic:** Defining how users discover and filter spots (by budget, zone, or experience type).
