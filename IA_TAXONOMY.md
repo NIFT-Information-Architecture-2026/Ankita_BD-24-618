@@ -2,99 +2,96 @@
 
 **Project Title:** Hyderabad & Telangana Hyper-Local, Budget-Intelligent Trip Planner  
 **Role:** Creative Director & Product Lead (NIFT Hyderabad) | Technical Project Architect (AGY)  
-**Lifecycle Stage:** Phase 3 — Information Architecture & Taxonomy (Card Sorting Edition)
+**Lifecycle Stage:** Phase 3 — Information Architecture & Taxonomy (Set 1 Venue Cards Edition)
 
 ---
 
-## 1. Card Sorting Framework (Simplified Overview)
+## 1. Card Architecture Strategy
 
-In our app, **Card Sorting** is the method of grouping every piece of content into clear, intuitive categories so travelers never feel overwhelmed. 
+Based on product steering, we are focusing directly on **Set 1: Individual Venue Cards** as our primary structural unit. 
 
-We have established **3 Main Sets of Cards** for the application:
+Instead of forcing artificial category buckets, every place in Hyderabad is presented as a rich, self-contained **Venue Card**. Travelers can sort, view, and organize these cards based on their own priorities, budget tier, and location.
 
 ```
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                              THE 3 SETS OF APP CARDS                                   │
-├──────────────────────────┬──────────────────────────┬──────────────────────────────────┤
-│ SET 1: VENUE CARDS       │ SET 2: CATEGORY CARDS    │ SET 3: NAVIGATION CARDS          │
-│ (The Content Items)      │ (The Filter Groups)      │ (The Main App Screens)           │
-├──────────────────────────┼──────────────────────────┼──────────────────────────────────┤
-│ • Charminar Card         │ • Heritage & Palaces     │ • Tab 1: [Plan Trip]             │
-│ • Golconda Fort Card     │ • Green & Scenic Escapes │ • Tab 2: [My Day Pass]           │
-│ • Irani Chai Cafe Card   │ • Local Eats & Cafes     │ • Tab 3: [Explore Spots]         │
-│ • KBR Park Card          │ • Pre-Verified Stays     │ • Tab 4: [Saved]                 │
-│ • Taj Falaknuma Card     │ • Off-Beat Trails        │                                  │
-└──────────────────────────┴──────────────────────────┴──────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────┐
+│                      PHASE 3 CARD WORKFLOW ORDER                       │
+├───────────────────────────────────────┬────────────────────────────────┤
+│ STEP 1: SET 1 VENUE CARDS (CURRENT)   │ STEP 2: SET 3 NAVIGATION CARDS │
+│ • Individual Place Data Architecture  │ • Main Mobile App Screens      │
+│ • Component Hierarchy & Metadata      │ • Bottom Navigation Bar Tabs   │
+└───────────────────────────────────────┴────────────────────────────────┘
 ```
 
 ---
 
-## 2. SET 1: Venue Cards (Individual Content Items)
+## 2. SET 1: Individual Venue Card Anatomy & Data Fields
 
-Every location in the app is presented as a **Venue Card** containing 6 core information components:
+Each Venue Card is designed for high glanceability on mobile screens and contains 8 structured data fields:
 
-1. **Venue Title & Photo Header** (e.g., *Charminar & Laad Bazaar Heritage Walk*)
-2. **Category Badge Tag** (e.g., `[Heritage & Palaces]`)
-3. **Budget Tier Badge** (e.g., `[Easy Trip]` / `[Premium]` / `[Luxury]`)
-4. **Dwell Time Estimate** (e.g., `⏱️ 1.5 Hours`)
-5. **Transit Distance Indicator** (e.g., `🚶 10 min walk from previous stop`)
-6. **Ticket Cost & Payment Modes Accepted** (e.g., `₹25 | Accepts UPI & Cash`)
-
----
-
-## 3. SET 2: Category Filter Cards (How Places Are Grouped)
-
-To keep browsing clean and structured, all places in Hyderabad are sorted into **5 Category Filter Cards**:
-
-1. **`[Heritage & Palaces]`**: Monuments, historical fortresses, royal palaces, and museums (Charminar, Golconda, Chowmahalla, Salar Jung).
-2. **`[Green & Scenic Escapes]`**: Nature spots, lakes, parks, and sunset hill views (KBR Park, Durgam Cheruvu, Maula Ali Hill, Ficus Garden).
-3. **`[Local Eats & Cafes]`**: Authentic local food, Irani chai cafes, rooftop lounges, and fine-dining Nizami spots.
-4. **`[Pre-Verified Stays]`**: Clean, hygienic hostels, boutique hotels, and 5-star resorts.
-5. **`[Off-Beat Trails]`**: Hidden local alleys, artisanal craft centers, and outskirts day trips (Bhongir Fort, Pocharam Reservoir).
-
----
-
-## 4. SET 3: Navigation Cards (Main App Screens)
-
-The app is structured into **4 Primary Navigation Screens** accessible at all times via the bottom navigation bar:
-
-1. **Tab 1: `[Plan Trip]` (Trip Generator)**
-   * *Purpose:* Select Budget Tier (Easy / Premium / Luxury) and Group Type (Solo / Duo / Family) to generate a dynamic day plan.
-2. **Tab 2: `[My Day Pass]` (Offline Saved Itinerary)**
-   * *Purpose:* View today's step-by-step timeline, dwell times, transit durations, and nearby contextual meal options.
-3. **Tab 3: `[Explore Spots]` (Category Directory)**
-   * *Purpose:* Browse and search all Hyderabad venues using the 5 Category Filter Cards.
-4. **Tab 4: `[Saved]` (Bookmarks & Saved Trips)**
-   * *Purpose:* Access bookmarked favorite places and saved multi-day itineraries.
-
----
-
-## 5. Mobile Sitemap & Navigation Flow
-
-```mermaid
-graph TD
-    A[App Launch Screen] --> B[Bottom Navigation Bar]
-    
-    B --> Tab1[Tab 1: Plan Trip Generator]
-    Tab1 --> Gen1[Select Budget: Easy / Premium / Luxury]
-    Gen1 --> Gen2[Select Group: Solo / Duo / Family]
-    Gen2 --> Gen3[Generate Spatial Day Itinerary]
-    Gen3 --> PassView[View / Save to Day Pass]
-
-    B --> Tab2[Tab 2: My Day Pass]
-    PassView --> Tab2
-    Tab2 --> Pass1[Sequential Timeline]
-    Tab2 --> Pass2[Contextual Meal Drawer]
-    Tab2 --> Pass3[Offline Pass Mode]
-
-    B --> Tab3[Tab 3: Explore Spots]
-    Tab3 --> Cat1[Heritage & Palaces]
-    Tab3 --> Cat2[Green & Scenic Escapes]
-    Tab3 --> Cat3[Local Eats & Cafes]
-    Tab3 --> Cat4[Pre-Verified Stays]
-    Tab3 --> Cat5[Off-Beat Trails]
-
-    B --> Tab4[Tab 4: Saved]
-    Tab4 --> Fav1[Favorite Venues]
-    Tab4 --> Fav2[Past Saved Itineraries]
 ```
+┌────────────────────────────────────────────────────────────────────────┐
+│                        INDIVIDUAL VENUE CARD ANATOMY                   │
+├────────────────────────────────────────────────────────────────────────┤
+│ [PHOTO HEADER: High-Res Image of Spot]                                 │
+│                                                                        │
+│ 📍 Venue Title: Charminar & Laad Bazaar Heritage Walk                  │
+│ 🏷️ Budget Tier Badges: [Easy Trip] [Premium] [Luxury]                  │
+│ ⏱️ Dwell Time: 1.5 Hours (90 Mins)                                     │
+│ ⏰ Recommended Visit Hours: 08:00 AM - 10:30 AM (Best Light/Low Rush)   │
+│ 🚶 Transit Distance: 10 Min Walk from Previous Stop (0.8 km)           │
+│ 💰 Ticket Price & Payments: ₹25 (Indian) | Accepts UPI & Cash           │
+│ 💡 Local Insider Tip: Visit Nimrah Cafe right opposite for Irani Chai  │
+│ 🏨 Hygienic Accommodation Note: Clean Hostels/Stays within 1 km       │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+### Detailed Field Breakdown:
+
+1. **Visual Header (Image Component):** High-resolution hero image showcasing the spot's aesthetic character.
+2. **Venue Name & Regional Tag:** Official name + micro-neighborhood zone (e.g., *Charminar, Old City*).
+3. **Budget Tier Suitability Badges:** Indicates which budget tiers this spot fits into (`[Easy]`, `[Premium]`, `[Luxury]`).
+4. **Dwell Time Estimate (`dwell_time_mins`):** Exact recommended time to spend at the venue (e.g., 45 mins, 1.5 hrs, 3 hrs).
+5. **Recommended Visit Window:** Optimal time of day to visit (e.g., *08:00 AM – 10:30 AM* for cool morning light and low crowds).
+6. **Transit Distance & Duration:** Estimated distance/duration from previous stop by walking, metro, or car/auto.
+7. **Ticket Cost & Accepted Payment Modes:** Precise entry fees + payment methods accepted (Cash, UPI, Card).
+8. **Contextual Insider Tip & Hygiene Note:** Proximity notes for food, rest spots, and clean stay radius.
+
+---
+
+## 3. Sample Set 1 Venue Cards (Hyderabad Reference Dataset)
+
+### Card 1.1: Heritage Monument Anchor
+* **Title:** Golconda Fort Monolithic Citadel Walk
+* **Zone:** Golconda / Western Heritage Zone
+* **Budget Tiers:** `[Easy]` `[Premium]` `[Luxury]`
+* **Dwell Time:** 3 Hours (180 Mins)
+* **Recommended Visit Window:** 08:30 AM – 11:30 AM (Morning) or 04:00 PM – 06:30 PM (Sound & Light Show)
+* **Ticket Cost:** ₹25 (Indian) / ₹300 (Foreign) | Payment Modes: UPI, Cash, Online
+* **Transit Note:** 15 Min Auto / Car from Qutb Shahi Tombs (3.2 km)
+* **Insider Tip:** Wear comfortable walking shoes; carry water. Sound & light show starts at 6:30 PM.
+
+### Card 1.2: Green & Scenic Escape
+* **Title:** KBR National Park Nature Trail
+* **Zone:** Jubilee Hills
+* **Budget Tiers:** `[Easy]` `[Premium]` `[Luxury]`
+* **Dwell Time:** 1.5 Hours (90 Mins)
+* **Recommended Visit Window:** 06:00 AM – 09:00 AM (Cool Morning Air)
+* **Ticket Cost:** ₹40 (Adult) / ₹20 (Child) | Payment Modes: Cash, UPI
+* **Transit Note:** 5 Min Walk from Jubilee Hills Checkpost Metro Station
+* **Insider Tip:** Ideal quiet walking trail for morning bird watching. Clean hygienic cafes nearby.
+
+### Card 1.3: Iconic Local Culinary Spot
+* **Title:** Nimrah Cafe & Bakery (Irani Chai & Osmania Biscuits)
+* **Zone:** Old City (Opposite Charminar)
+* **Budget Tiers:** `[Easy]` `[Premium]` `[Luxury]`
+* **Dwell Time:** 30 Mins
+* **Recommended Visit Window:** 07:00 AM – 09:00 AM or 05:00 PM – 07:00 PM
+* **Ticket/Food Cost:** ₹20 – ₹100 per person | Payment Modes: Cash, UPI
+* **Transit Note:** 1 Min Walk from Charminar monument exit
+* **Insider Tip:** Grab fresh hot Osmania biscuits paired with Irani chai while viewing Charminar.
+
+---
+
+## 4. Next Step: Set 3 Navigation Cards (Main Mobile Screens)
+
+Once Set 1 Venue Card architecture is reviewed and locked, we will move directly to **Set 3 Navigation Cards** to define the 4 primary mobile screens (`[Plan Trip]`, `[My Day Pass]`, `[Explore Spots]`, `[Saved]`).
