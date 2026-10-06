@@ -2,96 +2,57 @@
 
 **Project Title:** Hyderabad & Telangana Hyper-Local, Budget-Intelligent Trip Planner  
 **Role:** Creative Director & Product Lead (NIFT Hyderabad) | Technical Project Architect (AGY)  
-**Lifecycle Stage:** Phase 3 — Information Architecture & Taxonomy (Streamlined Venue Cards Edition)
+**Lifecycle Stage:** Phase 3 — Open Card Sorting Study & Information Architecture
 
 ---
 
-## 1. Card Architecture Strategy
+## 1. UX Research Method: Open Card Sorting Study
 
-Based on product steering, we have refined **Set 1: Individual Venue Cards** to be strictly objective, factual, and clutter-free. 
+To understand how users naturally structure and relate places in their minds, we adopt an **Open Card Sorting Methodology**. 
 
-* **Dropped Fields:** `Transit Info` (belongs dynamically between itinerary stops, not on static place cards) and `Insider Tip` (removed to preserve a clean, pragmatic utility aesthetic).
-* **Core Philosophy:** Clean, highly glanceable, factual data cards that travelers can evaluate and sort independently.
+Instead of imposing our own assumptions or pre-filtering destinations by Budget Tier, Zone, or Category, research participants are given neutral, factual cards for 51 diverse locations in and around Hyderabad.
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                      PHASE 3 CARD WORKFLOW ORDER                       │
-├───────────────────────────────────────┬────────────────────────────────┤
-│ STEP 1: SET 1 VENUE CARDS (CURRENT)   │ STEP 2: SET 3 NAVIGATION CARDS │
-│ • Factual Place Data Architecture     │ • Main Mobile App Screens      │
-│ • Streamlined Component Hierarchy     │ • Bottom Navigation Bar Tabs   │
-└───────────────────────────────────────┴────────────────────────────────┘
-```
+### What We Observe from User Sorting Behaviors:
+1. **Spatial / Geographic Clustering:** Do users group spots by geographical proximity (e.g., Old City spots vs. Hitec City spots vs. Outskirts)?
+2. **Temporal / Operational Grouping:** Do users group spots by operating times (e.g., Morning trails vs. Afternoon indoor museums vs. Night viewpoints)?
+3. **Budget & Value Mental Models:** How do users rank free public parks, low-cost monuments (₹25), and high-cost destinations (Ramoji Film City ₹1,350+ or Falaknuma)?
+4. **Dwell Time & Pacing:** Do users pair short 30-min spots with long 3-hour anchor destinations?
+5. **Activity / Vibe Association:** How do users group spiritual sites, nature hikes, shopping malls, and historic palaces?
 
 ---
 
-## 2. SET 1: Streamlined Individual Venue Card Anatomy
+## 2. Streamlined Card Anatomy for Card Sorting
 
-Each Venue Card contains 6 focused, essential data fields:
+Each card contains only the essential, objective parameters needed for users to sort them naturally:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                   STREAMLINED INDIVIDUAL VENUE CARD                    │
+│                        CARD SORTING ITEM CARD                          │
 ├────────────────────────────────────────────────────────────────────────┤
-│ [PHOTO HEADER: High-Res Image of Spot]                                 │
-│                                                                        │
-│ 📍 Venue Title: Charminar & Laad Bazaar Heritage Walk                  │
-│ 🏷️ Budget Tier Badges: [Easy Trip] [Premium] [Luxury]                  │
-│ ⏱️ Dwell Time: 1.5 Hours (90 Mins)                                     │
-│ ⏰ Recommended Visit Hours: 08:00 AM - 10:30 AM (Best Light/Low Rush)   │
-│ 💰 Ticket Price & Payments: ₹25 (Indian) | Accepts UPI & Cash           │
-│ 🏨 Hygienic Stays Proximity: Clean Hostels/Stays within 1 km           │
+│ 📍 Place Name: Charminar                                               │
+│ 📌 Location: Old City                                                  │
+│ ⏱️ Dwell Time: 45 – 60 Mins                                            │
+│ ⏰ Operating Hours: 09:30 AM – 05:30 PM (All 7 Days)                   │
+│ 💰 Ticket Price: ₹25 (Indian) / ₹300 (Foreign) / Free (Under 15)       │
+│ 🏷️ Type / Activity: 16th-century historic monument & landmark arches   │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Detailed Field Breakdown:
-
-1. **Visual Header (Image Component):** High-resolution hero image showcasing the spot.
-2. **Venue Name & Regional Zone:** Official venue name and micro-neighborhood zone (e.g., *Charminar, Old City*).
-3. **Budget Tier Badges:** Indicates which budget tiers this place fits (`[Easy]`, `[Premium]`, `[Luxury]`).
-4. **Dwell Time Estimate (`dwell_time_mins`):** Recommended duration to spend at the venue (e.g., 45 mins, 1.5 hrs, 3 hrs).
-5. **Recommended Visit Window / Operating Hours:** Best time of day to visit and general operational hours.
-6. **Ticket Cost & Accepted Payment Modes:** Exact entry fee structure + payment methods accepted (Cash, UPI, Card).
-7. **Hygienic Stays Proximity:** Direct indicator of verified clean and safe accommodation options nearby.
+* **Removed Attributes:** `Recommended Visit Windows`, `Payment Modes`, `Hygiene Stays Proximity`, and `Budget Tiers` have been deliberately stripped so participants are not biased by pre-assigned labels.
 
 ---
 
-## 3. Sample Set 1 Venue Cards (Hyderabad Reference Dataset)
+## 3. Master Card Inventory (51 Places)
 
-The complete real-world dataset of 27 verified Hyderabad places formatted as Set 1 Venue Cards has been compiled in:
+The complete master dataset of 51 verified places formatted for this study is maintained in:
 👉 **[HYDERABAD_PLACES_DATASET.md](file:///c:/Users/ANKITA/Documents/Ankita_BD-24-618/HYDERABAD_PLACES_DATASET.md)**
 
-Below are three representative samples illustrating the data schema:
-
-### Card 1.1: Heritage Monument Anchor
-* **Title:** Golconda Fort Monolithic Citadel Walk
-* **Zone:** Golconda / Western Heritage Zone
-* **Budget Tiers:** `[Easy]` `[Premium]` `[Luxury]`
-* **Dwell Time:** 3 Hours (180 Mins)
-* **Recommended Visit Window:** 08:30 AM – 11:30 AM or 04:00 PM – 06:30 PM
-* **Ticket Cost:** ₹25 (Indian) / ₹300 (Foreign) | Payment Modes: UPI, Cash, Online
-* **Hygienic Stays Proximity:** Verified boutique hotels & heritage homestays within 3 km
-
-### Card 1.2: Green & Scenic Escape
-* **Title:** KBR National Park Nature Trail
-* **Zone:** Jubilee Hills
-* **Budget Tiers:** `[Easy]` `[Premium]` `[Luxury]`
-* **Dwell Time:** 1.5 Hours (90 Mins)
-* **Recommended Visit Window:** 06:00 AM – 09:00 AM
-* **Ticket Cost:** ₹40 (Adult) / ₹20 (Child) | Payment Modes: Cash, UPI
-* **Hygienic Stays Proximity:** Verified clean hotels and serviced apartments within 1.5 km
-
-### Card 1.3: Iconic Local Culinary Spot
-* **Title:** Nimrah Cafe & Bakery (Irani Chai & Osmania Biscuits)
-* **Zone:** Old City (Opposite Charminar)
-* **Budget Tiers:** `[Easy]` `[Premium]` `[Luxury]`
-* **Dwell Time:** 30 Mins
-* **Recommended Visit Window:** 07:00 AM – 09:00 AM or 05:00 PM – 07:00 PM
-* **Price / Average Spend:** ₹20 – ₹100 per person | Payment Modes: Cash, UPI
-* **Hygienic Stays Proximity:** Verified backpacker hostels & budget stays within 800m
-
----
-
-## 4. Next Step: Set 3 Navigation Cards (Main Mobile Screens)
-
-With Set 1 streamlined and locked, we proceed to **Set 3 Navigation Cards** to define the primary mobile app screens and bottom navigation bar tabs.
+### Inventory Overview:
+* **Heritage & Palaces (8):** Charminar, Golconda Fort, Qutb Shahi Tombs, Chowmahalla Palace, Salar Jung Museum, Paigah Tombs, British Residency, Taj Falaknuma Palace.
+* **Spiritual & Cultural Landmarks (5):** Mecca Masjid, Birla Mandir, Rasoolpura Sri Ujjaini Mahakali Temple, Statue of Equality, Ammapalle Stepwell & Temple.
+* **Nature, Lakes & Scenic Parks (10):** KBR National Park, Durgam Cheruvu & Cable Bridge, Hussain Sagar & Buddha Statue, Lakefront Park (PVNR Marg), Nehru Zoological Park, Maula Ali Dargah Hill, Khajaguda Hills, Gandipet Landscape & Eco Park, Himayat Sagar Dam, Ficus Garden (Botanical Garden).
+* **Urban Walking & Arts Enclaves (4):** Raidurg Skywalk, Shilparamam Arts & Crafts Village, State Gallery of Art, Laad Bazaar.
+* **Entertainment & Shopping Malls (5):** Prasad's Multiplex & Experium, Inorbit Mall Cyberabad, Sarath City Capital Mall, Nexus Hyderabad Mall, Suncity Mall.
+* **Adventure & Outdoor Parks (2):** Narsapur Forest Urban Park, Cliffin Adventures.
+* **Iconic Culinary Institutions (6):** Nimrah Cafe & Bakery, Cafe Niloufer, Hotel Shadab, Roastery Coffee House, Subhan Bakery, Conçu Patisserie.
+* **Regional Outskirts & Extended Trips (11):** Ramoji Film City, Bhongir Fort, Rachakonda Fort, Ananthagiri Hills (Vikarabad), Kotepally Reservoir, Pocharam Wildlife Sanctuary & Dam, Medak Cathedral & Fort, Nagarjuna Sagar Dam, Srisailam, Belum Caves / Billa Surgam Caves, Chirala Beach & Handlooms.
