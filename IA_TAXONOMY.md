@@ -58,6 +58,11 @@ Each Venue Card contains 6 focused, essential data fields:
 
 ## 3. Sample Set 1 Venue Cards (Hyderabad Reference Dataset)
 
+The complete real-world dataset of 27 verified Hyderabad places formatted as Set 1 Venue Cards has been compiled in:
+👉 **[HYDERABAD_PLACES_DATASET.md](file:///c:/Users/ANKITA/Documents/Ankita_BD-24-618/HYDERABAD_PLACES_DATASET.md)**
+
+Below are three representative samples illustrating the data schema:
+
 ### Card 1.1: Heritage Monument Anchor
 * **Title:** Golconda Fort Monolithic Citadel Walk
 * **Zone:** Golconda / Western Heritage Zone
