@@ -47,6 +47,9 @@ Each card contains only the essential, objective parameters needed for users to 
 The complete master dataset of 45 verified places formatted for this study is maintained in:
 👉 **[HYDERABAD_PLACES_DATASET.md](file:///c:/Users/ANKITA/Documents/Ankita_BD-24-618/HYDERABAD_PLACES_DATASET.md)**
 
+The complete **4-Dimensional Information Architecture Filter Matrices** (Proximity Clusters, Operating Hours/Closed Days, Price/Budget Tiers, and Dwell Times) is detailed in:
+👉 **[HYDERABAD_ITINERARY_FILTERS.md](file:///c:/Users/ANKITA/Documents/Ankita_BD-24-618/HYDERABAD_ITINERARY_FILTERS.md)**
+
 *(Note: Cafes, bakeries, and restaurants are dynamically discovered on-demand via the Real-Time Proximity API inside the app rather than static cards).*
 
 ### Inventory Overview:
