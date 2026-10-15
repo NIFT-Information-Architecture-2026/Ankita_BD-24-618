@@ -114,7 +114,7 @@ graph TD
 
 ---
 
-### 3.5 Branch 4: `Your Itinerary` (Active On-The-Ground Guide)
+### 3.5 Branch 4: `Your Itinerary` (Live Itinerary)
 The live companion used by travelers while moving through the city:
 1. **`Timeline Schedule`:** Morning-to-evening step-by-step sequence of stops with dwell times.
 2. **`Intra Day Modification`:** Real-time on-the-ground flexibility controls:
