@@ -42,13 +42,16 @@ Each card contains only the essential, objective parameters needed for users to 
 
 ---
 
-## 3. Master Card Inventory (45 Destination Cards)
+## 3. Master Card Inventory (45 Destination Cards & 23 Feature Cards)
 
-The complete master dataset of 45 verified places formatted for this study is maintained in:
-👉 **[HYDERABAD_PLACES_DATASET.md](file:///c:/Users/ANKITA/Documents/Ankita_BD-24-618/HYDERABAD_PLACES_DATASET.md)**
-
-The complete **4-Dimensional Information Architecture Filter Matrices** (Proximity Clusters, Operating Hours/Closed Days, Price/Budget Tiers, and Dwell Times) is detailed in:
-👉 **[HYDERABAD_ITINERARY_FILTERS.md](file:///c:/Users/ANKITA/Documents/Ankita_BD-24-618/HYDERABAD_ITINERARY_FILTERS.md)**
+* The complete master dataset of 45 verified places formatted for this study is maintained in:  
+  👉 **[HYDERABAD_PLACES_DATASET.md](file:///c:/Users/ANKITA/Documents/Ankita_BD-24-618/HYDERABAD_PLACES_DATASET.md)**
+* The complete **4-Dimensional Information Architecture Filter Matrices** (Proximity Clusters, Operating Hours/Closed Days, Price/Budget Tiers, and Dwell Times) is detailed in:  
+  👉 **[HYDERABAD_ITINERARY_FILTERS.md](file:///c:/Users/ANKITA/Documents/Ankita_BD-24-618/HYDERABAD_ITINERARY_FILTERS.md)**
+* The complete deck of **23 Master Feature & Task Cards** prepared for the participant Card Sorting study is maintained in:  
+  👉 **[FEATURE_CARDS_FOR_SORTING.md](file:///c:/Users/ANKITA/Documents/Ankita_BD-24-618/FEATURE_CARDS_FOR_SORTING.md)**
+* The complete **Master Sitemap & Navigation Architecture Specification** synthesized from our mental model is detailed in:  
+  👉 **[SITEMAP_AND_NAVIGATION.md](file:///c:/Users/ANKITA/Documents/Ankita_BD-24-618/SITEMAP_AND_NAVIGATION.md)**
 
 *(Note: Cafes, bakeries, and restaurants are dynamically discovered on-demand via the Real-Time Proximity API inside the app rather than static cards).*
 
