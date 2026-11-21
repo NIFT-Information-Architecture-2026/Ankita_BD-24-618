@@ -1,0 +1,889 @@
+/* ==========================================================================
+   HYDERABAD TRIP PLANNER - MASTER HIGH-FIDELITY DESIGN SYSTEM
+   Phase 4 Dual-State Dashboard Architecture & Visual Design
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+
+:root {
+  /* Exact Reference Color Palette */
+  --bg-canvas: #FAF6F0;
+  --bg-card: #FFFFFF;
+  --color-charcoal: #1E1F22;
+  --color-slate: #6E7179;
+  --color-terracotta: #BD5338;
+  --color-terracotta-dark: #A3422A;
+  --color-terracotta-soft: #FDF3EB;
+  --color-green-open: #28724F;
+  --color-green-soft: #EBF4EC;
+  --color-peach-soft: #FDF0E7;
+  --color-lavender-soft: #F1EDFA;
+  --color-lavender-text: #6B46C1;
+  --color-border: #EBE6DC;
+  --color-border-subtle: #F0ECE4;
+  --color-gold: #C59B27;
+
+  /* Typography */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Border Radii */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-card: 20px;
+  --radius-pill: 999px;
+
+  /* Ambient Soft Shadows */
+  --shadow-ambient: 0 8px 24px -4px rgba(30, 31, 34, 0.05), 0 2px 6px -1px rgba(30, 31, 34, 0.03);
+  --shadow-ambient-md: 0 12px 30px -4px rgba(30, 31, 34, 0.08), 0 4px 10px -2px rgba(30, 31, 34, 0.04);
+  --shadow-hero: 0 16px 36px -6px rgba(189, 83, 56, 0.22);
+  --shadow-sheet: 0 -12px 36px -4px rgba(30, 31, 34, 0.16);
+}
+
+/* Base Reset & Mobile Shell */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #EFE9E0;
+  color: var(--color-charcoal);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.device-container {
+  width: 100%;
+  max-width: 414px;
+  height: 896px;
+  max-height: 100vh;
+  background-color: var(--bg-canvas);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 64px -12px rgba(30, 31, 34, 0.28);
+}
+
+@media (min-width: 480px) {
+  .device-container {
+    border-radius: 44px;
+    border: 10px solid #1A1A1C;
+    margin: 20px 0;
+  }
+}
+
+/* iOS Native Status Bar (9:41) */
+.ios-status-bar {
+  height: 40px;
+  padding: 10px 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.status-icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+/* Top App Header Row */
+.top-header-row {
+  padding: 8px 18px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  z-index: 90;
+}
+
+.location-dropdown-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  cursor: pointer;
+}
+
+.pin-icon {
+  color: var(--color-terracotta);
+  font-size: 13px;
+}
+
+.dropdown-arrow {
+  font-size: 10px;
+  color: var(--color-slate);
+}
+
+.header-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-sos-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--color-terracotta);
+  color: #FFF;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 6px 13px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(189, 83, 56, 0.25);
+  transition: background 0.15s ease;
+}
+
+.btn-sos-top:hover {
+  background: var(--color-terracotta-dark);
+}
+
+.user-avatar-small {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid #FFF;
+  box-shadow: var(--shadow-ambient);
+  cursor: pointer;
+}
+
+/* Dual State Switcher Bar (For testing/reviewing both Dashboard states) */
+.dashboard-state-switcher {
+  background: #ECE5D8;
+  padding: 5px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-slate);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.state-toggle-btn {
+  background: #FFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-terracotta);
+  cursor: pointer;
+}
+
+/* Scrollable Viewport */
+.app-viewport {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.app-screen {
+  display: none;
+  padding: 4px 18px 80px;
+  animation: screenFade 0.2s ease-out;
+}
+
+.app-screen.active {
+  display: block;
+}
+
+@keyframes screenFade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   STATE A: DASHBOARD WITHOUT ONGOING TRIP (PLAN A NEW TRIP DIRECT VIEW)
+   ========================================================================== */
+
+.plan-hero-header {
+  position: relative;
+  padding: 6px 0 14px;
+}
+
+.plan-hero-main-title {
+  font-family: var(--font-serif);
+  font-size: 27px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  line-height: 1.2;
+}
+
+.plan-hero-cursive-sub {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--color-slate);
+  margin-top: 2px;
+}
+
+.plan-hero-landmark-bg {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 140px;
+  height: 125px;
+  background-image: url('https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=400&q=80');
+  background-size: cover;
+  background-position: center;
+  border-radius: 50% 50% 0 0;
+  opacity: 0.85;
+  mask-image: radial-gradient(circle at 60% 40%, black 50%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 60% 40%, black 50%, transparent 80%);
+  pointer-events: none;
+}
+
+/* Top Slideshow Carousel of Recommended Places (6th Section) */
+.slideshow-carousel-wrap {
+  margin-bottom: 14px;
+}
+
+.slideshow-label-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-slate);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slideshow-scroll-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+}
+
+.slideshow-scroll-row::-webkit-scrollbar {
+  display: none;
+}
+
+.slideshow-card-pill {
+  flex: 0 0 135px;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  box-shadow: var(--shadow-ambient);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.slideshow-card-pill:hover {
+  transform: translateY(-2px);
+}
+
+.slideshow-card-img {
+  width: 100%;
+  height: 65px;
+  object-fit: cover;
+}
+
+.slideshow-card-body {
+  padding: 6px 8px;
+}
+
+.slideshow-card-name {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.slideshow-card-tag {
+  font-size: 9px;
+  color: var(--color-slate);
+}
+
+/* Main Planning Form Container Card */
+.planning-master-container {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-ambient);
+  padding: 16px 14px 20px;
+}
+
+.section-block-title {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0 8px;
+}
+
+.section-block-title:first-child {
+  margin-top: 0;
+}
+
+/* Section 1: Your Destination (With Autocomplete Dropdown) */
+.destination-search-box {
+  position: relative;
+}
+
+.destination-input-bar {
+  width: 100%;
+  padding: 11px 40px 11px 36px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: #FAF8F5;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--color-charcoal);
+  outline: none;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.destination-input-bar:focus {
+  border-color: var(--color-terracotta);
+  background: #FFF;
+}
+
+.search-magnifier-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: var(--color-slate);
+}
+
+.paper-plane-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: var(--color-terracotta);
+}
+
+/* Autocomplete Suggestion Dropdown */
+.autocomplete-dropdown-list {
+  display: none;
+  position: absolute;
+  top: 105%;
+  left: 0;
+  right: 0;
+  background: #FFF;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-ambient-md);
+  z-index: 150;
+  overflow: hidden;
+}
+
+.autocomplete-dropdown-list.active {
+  display: block;
+}
+
+.autocomplete-item {
+  padding: 9px 14px;
+  font-size: 12px;
+  color: var(--color-charcoal);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  transition: background 0.1s ease;
+}
+
+.autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-item:hover {
+  background: var(--color-terracotta-soft);
+  color: var(--color-terracotta);
+}
+
+/* Section 2: Trip Dates */
+.trip-dates-pair-row {
+  display: flex;
+  gap: 8px;
+}
+
+.trip-date-select-btn {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: #FAF8F5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.trip-date-select-btn:hover {
+  border-color: var(--color-terracotta);
+  background: #FFF;
+}
+
+.date-btn-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Section 3: Travel Dynamic */
+.dynamic-toggle-grid {
+  display: flex;
+  gap: 8px;
+}
+
+.dynamic-option-card {
+  flex: 1;
+  padding: 10px 6px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: #FAF8F5;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  transition: all 0.15s ease;
+}
+
+.dynamic-option-card.active {
+  background: #FFF;
+  border-color: var(--color-terracotta);
+  box-shadow: 0 2px 8px rgba(189, 83, 56, 0.12);
+  color: var(--color-terracotta);
+}
+
+.dynamic-icon {
+  font-size: 18px;
+}
+
+/* Section 4: Budget Range (3 Tiers with 3 Sub-ranges each) */
+.budget-tier-container-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.budget-tier-expand-card {
+  background: #FAF8F5;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.budget-tier-bar {
+  padding: 11px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.budget-tier-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+.budget-chevron-arrow {
+  font-size: 12px;
+  color: var(--color-slate);
+  transition: transform 0.2s ease;
+}
+
+.budget-tier-expand-card.open .budget-chevron-arrow {
+  transform: rotate(90deg);
+}
+
+.budget-subranges-container {
+  display: none;
+  padding: 4px 12px 10px;
+  background: #FFF;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.budget-tier-expand-card.open .budget-subranges-container {
+  display: block;
+}
+
+.subrange-tier-item {
+  padding: 8px 10px;
+  margin-top: 6px;
+  border-radius: var(--radius-sm);
+  background: #FAF8F5;
+  border: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.subrange-tier-item.selected {
+  border-color: var(--color-terracotta);
+  background: var(--color-terracotta-soft);
+  font-weight: 700;
+  color: var(--color-terracotta);
+}
+
+/* Section 5: Experience Choice (Illustrated Cards) */
+.experience-illustrations-grid {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.experience-card-illustrated {
+  flex: 1;
+  padding: 12px 10px;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  background: #FAF8F5;
+  cursor: pointer;
+  position: relative;
+  text-align: center;
+  transition: all 0.15s ease;
+}
+
+.experience-card-illustrated.active {
+  border-color: var(--color-terracotta);
+  background: #FFF;
+  box-shadow: 0 4px 12px rgba(189, 83, 56, 0.12);
+}
+
+.exp-radio-circle {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-slate);
+}
+
+.experience-card-illustrated.active .exp-radio-circle {
+  border-color: var(--color-terracotta);
+  background: var(--color-terracotta);
+  box-shadow: inset 0 0 0 3px #FFF;
+}
+
+.exp-art-thumb {
+  font-size: 32px;
+  margin: 4px 0 6px;
+  display: block;
+}
+
+.exp-card-heading {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+}
+
+.exp-card-tagline {
+  font-size: 10px;
+  color: var(--color-slate);
+  line-height: 1.3;
+  margin-top: 2px;
+}
+
+/* Big Terracotta Generate Itinerary CTA */
+.btn-generate-itinerary-hero {
+  width: 100%;
+  padding: 14px;
+  background: var(--color-terracotta);
+  color: #FFF;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(189, 83, 56, 0.3);
+  transition: background 0.15s ease;
+}
+
+.btn-generate-itinerary-hero:hover {
+  background: var(--color-terracotta-dark);
+}
+
+/* ==========================================================================
+   STATE B: DASHBOARD WITH ONGOING / ACTIVE TRIP
+   ========================================================================== */
+
+.active-trip-pass-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-ambient);
+  overflow: hidden;
+  margin-bottom: 14px;
+  cursor: pointer;
+  display: flex;
+  position: relative;
+}
+
+.pass-card-left {
+  flex: 1.2;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pass-badge {
+  display: inline-block;
+  background: var(--color-terracotta);
+  color: #FFF;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  width: fit-content;
+  margin-bottom: 8px;
+}
+
+.pass-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.pass-subtitle {
+  font-size: 11px;
+  color: var(--color-slate);
+}
+
+.pass-card-right {
+  flex: 1;
+  position: relative;
+}
+
+.pass-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* "Build a New Trip (1–3 Days)" Action Card */
+.nav-action-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-ambient);
+  padding: 16px 14px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.nav-action-card:hover {
+  transform: translateY(-2px);
+}
+
+.action-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.action-card-icon {
+  width: 34px;
+  height: 34px;
+  background: #F8F5F0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  color: var(--color-charcoal);
+  flex-shrink: 0;
+}
+
+.action-card-title-group {
+  flex: 1;
+}
+
+.action-card-title {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.action-card-desc {
+  font-size: 11px;
+  color: var(--color-slate);
+  margin-top: 2px;
+}
+
+.budget-preview-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.budget-chip-box {
+  flex: 1;
+  padding: 6px 4px;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.budget-chip-box.easy { background: var(--color-green-soft); }
+.budget-chip-box.easy .chip-tier { color: #587963; }
+.budget-chip-box.easy .chip-val { color: #28724F; }
+
+.budget-chip-box.premium { background: var(--color-peach-soft); }
+.budget-chip-box.premium .chip-tier { color: #A6654A; }
+.budget-chip-box.premium .chip-val { color: var(--color-terracotta); }
+
+.budget-chip-box.luxury { background: var(--color-lavender-soft); }
+.budget-chip-box.luxury .chip-tier { color: #7B68A6; }
+.budget-chip-box.luxury .chip-val { color: var(--color-lavender-text); }
+
+.chip-tier { font-size: 9px; font-weight: 600; }
+.chip-val { font-size: 12px; font-weight: 700; }
+
+/* ==========================================================================
+   BOTTOM NAVIGATION BAR (4 TABS)
+   ========================================================================== */
+
+.bottom-tab-bar {
+  height: 62px;
+  background: var(--bg-card);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-shrink: 0;
+  z-index: 100;
+  padding-bottom: 4px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: #8C8F96;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.tab-btn.active {
+  color: var(--color-terracotta);
+}
+
+.tab-icon {
+  font-size: 18px;
+}
+
+/* Modals & Dialogs */
+.modal-overlay {
+  display: none;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(30, 31, 34, 0.55);
+  z-index: 200;
+  align-items: flex-end;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-bottom-sheet {
+  width: 100%;
+  background: var(--bg-canvas);
+  border-radius: 28px 28px 0 0;
+  padding: 22px 20px;
+  box-shadow: var(--shadow-sheet);
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.modal-dialog-box {
+  width: 88%;
+  background: #FFF;
+  border-radius: var(--radius-card);
+  padding: 24px;
+  margin: auto;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Hyderabad Hyper-Local Trip Planner</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+  <!-- Mobile Viewport Shell -->
+  <div class="device-container">
+    
+    <!-- Native Status Bar (9:41) -->
+    <div class="ios-status-bar">
+      <span>9:41</span>
+      <div class="status-icons">
+        <span>📶</span>
+        <span>⚡</span>
+        <span>🔋</span>
+      </div>
+    </div>
+
+    <!-- Top App Header Row: Location Pill + SOS + Profile -->
+    <header class="top-header-row">
+      <div class="location-dropdown-pill" id="btn-location-dropdown" title="Select City">
+        <span class="pin-icon">📍</span>
+        <span id="current-location-label">Hyderabad, Telangana</span>
+        <span class="dropdown-arrow">∨</span>
+      </div>
+      <div class="header-right-actions">
+        <button id="btn-top-sos" class="btn-sos-top">
+          <span>🛡️</span> SOS
+        </button>
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="User Profile" class="user-avatar-small" />
+      </div>
+    </header>
+
+    <!-- State Switcher Bar: Demonstrating Dual-State Dashboard Behavior -->
+    <div class="dashboard-state-switcher">
+      <span>Dashboard Mode:</span>
+      <div style="display:flex; gap:6px;">
+        <button id="btn-state-no-trip" class="state-toggle-btn" style="background:var(--color-terracotta); color:#FFF;">
+          No Active Trip (Left Ref)
+        </button>
+        <button id="btn-state-has-trip" class="state-toggle-btn">
+          Has Active Trip (Right Ref)
+        </button>
+      </div>
+    </div>
+
+    <!-- Scrollable Screen Viewport -->
+    <main id="app-viewport" class="app-viewport">
+
+      <!-- ====================================================================
+           SCREEN 1A: DASHBOARD STATE A (FOR USERS WITHOUT ACTIVE TRIP)
+           Direct 6-Section Planning Integration + Top Recommendation Slideshow
+           ==================================================================== -->
+      <section id="screen-dashboard-no-trip" class="app-screen active">
+        
+        <!-- Hero Title with Charminar Backdrop Art -->
+        <div class="plan-hero-header">
+          <h1 class="plan-hero-main-title">Plan a New Trip</h1>
+          <div class="plan-hero-cursive-sub">Let's explore more ✨</div>
+          <div class="plan-hero-landmark-bg"></div>
+        </div>
+
+        <!-- 6th Section: Top Places Recommended Slideshow Carousel -->
+        <div class="slideshow-carousel-wrap">
+          <div class="slideshow-label-title">
+            <span>✨ Popular Places Recommendation</span>
+            <span style="font-size:9px; color:var(--color-terracotta); cursor:pointer;">View All ›</span>
+          </div>
+          <div class="slideshow-scroll-row">
+            
+            <div class="slideshow-card-pill" onclick="selectDestinationQuick('Goa')">
+              <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=300&q=80" alt="Goa" class="slideshow-card-img" />
+              <div class="slideshow-card-body">
+                <div class="slideshow-card-name">Trip to Goa</div>
+                <div class="slideshow-card-tag">Coastal & Forts</div>
+              </div>
+            </div>
+
+            <div class="slideshow-card-pill" onclick="selectDestinationQuick('Bali')">
+              <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=300&q=80" alt="Bali" class="slideshow-card-img" />
+              <div class="slideshow-card-body">
+                <div class="slideshow-card-name">Trip to Bali</div>
+                <div class="slideshow-card-tag">Culture & Trails</div>
+              </div>
+            </div>
+
+            <div class="slideshow-card-pill" onclick="selectDestinationQuick('Hampi')">
+              <img src="https://images.unsplash.com/photo-1600100397608-f010f4438317?auto=format&fit=crop&w=300&q=80" alt="Hampi" class="slideshow-card-img" />
+              <div class="slideshow-card-body">
+                <div class="slideshow-card-name">Trip to Hampi</div>
+                <div class="slideshow-card-tag">Ancient Boulders</div>
+              </div>
+            </div>
+
+            <div class="slideshow-card-pill" onclick="selectDestinationQuick('Benares')">
+              <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=300&q=80" alt="Benares" class="slideshow-card-img" />
+              <div class="slideshow-card-body">
+                <div class="slideshow-card-name">Trip to Benares</div>
+                <div class="slideshow-card-tag">Sacred Ghats</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Master Planning Card -->
+        <div class="planning-master-container">
+          
+          <!-- Section 1: Your Destination (With Autocomplete Dropdown) -->
+          <div class="section-block-title">
+            <span style="color:var(--color-terracotta);">📍</span> Your Destination
+          </div>
+          <div class="destination-search-box">
+            <span class="search-magnifier-icon">🔍</span>
+            <input type="text" id="input-destination-city" class="destination-input-bar" placeholder="Where do you want to go?" value="Hyderabad, Telangana" />
+            <span class="paper-plane-icon">✈️</span>
+            
+            <!-- Autocomplete suggestions popup -->
+            <div id="dropdown-city-autocomplete" class="autocomplete-dropdown-list">
+              <div class="autocomplete-item" data-city="Hyderabad, Telangana">📍 Hyderabad, Telangana (Active Theme)</div>
+              <div class="autocomplete-item" data-city="Himachal Pradesh">🏔️ Himachal Pradesh (Hill Trails)</div>
+              <div class="autocomplete-item" data-city="Hampi, Karnataka">🏛️ Hampi, Karnataka (Heritage Ruins)</div>
+              <div class="autocomplete-item" data-city="Goa">🏖️ Goa (Coastal Trails)</div>
+            </div>
+          </div>
+
+          <!-- Section 2: Trip Dates (Arrival & Return with Calendar Icons) -->
+          <div class="section-block-title">
+            <span style="color:var(--color-terracotta);">📅</span> Trip Dates
+          </div>
+          <div class="trip-dates-pair-row">
+            <div class="trip-date-select-btn" onclick="openDateModal('arrival')">
+              <div class="date-btn-content">
+                <span>📅</span>
+                <span id="label-arrival-date">18 Oct 2026</span>
+              </div>
+              <span style="color:var(--color-slate); font-size:11px;">›</span>
+            </div>
+            <div class="trip-date-select-btn" onclick="openDateModal('return')">
+              <div class="date-btn-content">
+                <span>📅</span>
+                <span id="label-return-date">21 Oct 2026</span>
+              </div>
+              <span style="color:var(--color-slate); font-size:11px;">›</span>
+            </div>
+          </div>
+
+          <!-- Section 3: Travel Dynamic (Solo, Duo, Family) -->
+          <div class="section-block-title">
+            <span style="color:var(--color-terracotta);">👥</span> Travel Dynamic
+          </div>
+          <div class="dynamic-toggle-grid">
+            <div class="dynamic-option-card active" data-dyn="Solo">
+              <span class="dynamic-icon">👤</span>
+              <span>Solo</span>
+            </div>
+            <div class="dynamic-option-card" data-dyn="Duo">
+              <span class="dynamic-icon">👥</span>
+              <span>Duo</span>
+            </div>
+            <div class="dynamic-option-card" data-dyn="Family">
+              <span class="dynamic-icon">👨‍👩‍👧‍👦</span>
+              <span>Family</span>
+            </div>
+          </div>
+
+          <!-- Section 4: Budget Range (3 Tiers with 3 Sub-Ranges each) -->
+          <div class="section-block-title">
+            <span style="color:var(--color-terracotta);">₹</span> Budget Range
+          </div>
+          <div class="budget-tier-container-stack">
+            
+            <!-- Tier 1: Budget Friendly -->
+            <div class="budget-tier-expand-card open" data-tier="Budget-Friendly">
+              <div class="budget-tier-bar">
+                <div class="budget-tier-left">
+                  <span>👛</span>
+                  <span>Budget Friendly</span>
+                </div>
+                <span class="budget-chevron-arrow">›</span>
+              </div>
+              <div class="budget-subranges-container">
+                <div class="subrange-tier-item selected" data-range="₹500 – ₹1,000 / day">
+                  <span>Range 1: Baseline Saver</span>
+                  <strong>₹500 – ₹1,000 / day</strong>
+                </div>
+                <div class="subrange-tier-item" data-range="₹1,000 – ₹1,800 / day">
+                  <span>Range 2: Mid Comfort</span>
+                  <strong>₹1,000 – ₹1,800 / day</strong>
+                </div>
+                <div class="subrange-tier-item" data-range="₹1,800 – ₹2,500 / day">
+                  <span>Range 3: Plus Deluxe</span>
+                  <strong>₹1,800 – ₹2,500 / day</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tier 2: Premium -->
+            <div class="budget-tier-expand-card" data-tier="Premium">
+              <div class="budget-tier-bar">
+                <div class="budget-tier-left">
+                  <span>👑</span>
+                  <span>Premium</span>
+                </div>
+                <span class="budget-chevron-arrow">›</span>
+              </div>
+              <div class="budget-subranges-container">
+                <div class="subrange-tier-item" data-range="₹3,000 – ₹5,000 / day">
+                  <span>Range 1: Baseline Saver</span>
+                  <strong>₹3,000 – ₹5,000 / day</strong>
+                </div>
+                <div class="subrange-tier-item" data-range="₹5,000 – ₹8,000 / day">
+                  <span>Range 2: Mid Comfort</span>
+                  <strong>₹5,000 – ₹8,000 / day</strong>
+                </div>
+                <div class="subrange-tier-item" data-range="₹8,000 – ₹12,000 / day">
+                  <span>Range 3: Plus Deluxe</span>
+                  <strong>₹8,000 – ₹12,000 / day</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tier 3: Exclusive Luxury -->
+            <div class="budget-tier-expand-card" data-tier="Exclusive">
+              <div class="budget-tier-bar">
+                <div class="budget-tier-left">
+                  <span>💎</span>
+                  <span>Luxury / Exclusive</span>
+                </div>
+                <span class="budget-chevron-arrow">›</span>
+              </div>
+              <div class="budget-subranges-container">
+                <div class="subrange-tier-item" data-range="₹15,000 – ₹25,000 / day">
+                  <span>Range 1: Baseline Saver</span>
+                  <strong>₹15,000 – ₹25,000 / day</strong>
+                </div>
+                <div class="subrange-tier-item" data-range="₹25,000 – ₹40,000 / day">
+                  <span>Range 2: Mid Comfort</span>
+                  <strong>₹25,000 – ₹40,000 / day</strong>
+                </div>
+                <div class="subrange-tier-item" data-range="₹40,000+ / day">
+                  <span>Range 3: Plus Deluxe</span>
+                  <strong>₹40,000+ / day</strong>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Section 5: Experience Choice (Illustrated Cards) -->
+          <div class="section-block-title">
+            <span style="color:var(--color-terracotta);">✨</span> Experience Choice
+          </div>
+          <div class="experience-illustrations-grid">
+            
+            <div class="experience-card-illustrated active" data-exp="1st-timer">
+              <div class="exp-radio-circle"></div>
+              <span class="exp-art-thumb">🎒</span>
+              <div class="exp-card-heading">1st Timer</div>
+              <div class="exp-card-tagline">A perfect start to your journey!</div>
+            </div>
+
+            <div class="experience-card-illustrated" data-exp="return-explorer">
+              <div class="exp-radio-circle"></div>
+              <span class="exp-art-thumb">🔭</span>
+              <div class="exp-card-heading">Experience Explorer</div>
+              <div class="exp-card-tagline">Discover more, go deeper!</div>
+            </div>
+
+          </div>
+
+          <!-- Primary CTA Button: Generate Itinerary -->
+          <button id="btn-generate-plan-submit" class="btn-generate-itinerary-hero">
+            <span>✈️</span> Generate Itinerary ➔
+          </button>
+
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           SCREEN 1B: DASHBOARD STATE B (FOR USERS WITH ACTIVE/ONGOING TRIP)
+           Features Active Trip Pass + "Build a New Trip" leading into State A
+           ==================================================================== -->
+      <section id="screen-dashboard-has-trip" class="app-screen">
+        
+        <div class="plan-hero-header" style="padding-bottom:10px;">
+          <h1 class="plan-hero-main-title" style="font-size:24px;">Where would you like to explore today?</h1>
+          <div class="plan-hero-landmark-bg"></div>
+        </div>
+
+        <!-- Active Trip Pass Card -->
+        <div id="card-active-trip-pass" class="active-trip-pass-card" title="Tap to open your live itinerary">
+          <div class="pass-card-left">
+            <span class="pass-badge">Active Trip Pass</span>
+            <h2 class="pass-title">Old City Heritage Day</h2>
+            <p class="pass-subtitle">Next: Chowmahalla Palace • 11:30 AM</p>
+          </div>
+          <div class="pass-card-right">
+            <img src="https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=500&q=80" alt="Charminar & Bazaar" class="pass-img" />
+          </div>
+        </div>
+
+        <!-- "Build a New Trip (1–3 Days)" Card (Tapping opens State A Dashboard) -->
+        <div id="card-trigger-new-trip-flow" class="nav-action-card" title="Tap to open Plan a New Trip view">
+          <div class="action-card-header">
+            <div class="action-card-icon">📖</div>
+            <div class="action-card-title-group">
+              <div class="action-card-title">
+                <div>Build a New Trip <span style="font-size:12px; font-weight:500; color:var(--color-slate);">(1–3 Days)</span></div>
+                <span style="font-size:16px; color:#B5B0A8;">›</span>
+              </div>
+              <p class="action-card-desc">Choose your budget, interests & we'll curate the perfect plan for you.</p>
+            </div>
+          </div>
+          <div class="budget-preview-row">
+            <div class="budget-chip-box easy">
+              <span class="chip-tier">Easy</span>
+              <span class="chip-val">₹1.7k</span>
+            </div>
+            <div class="budget-chip-box premium">
+              <span class="chip-tier">Premium</span>
+              <span class="chip-val">₹5k</span>
+            </div>
+            <div class="budget-chip-box luxury">
+              <span class="chip-tier">Luxury</span>
+              <span class="chip-val">₹25k</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- "Explore 45 Curated Spots" Card -->
+        <div id="card-trigger-explore-catalog" class="nav-action-card">
+          <div class="action-card-header">
+            <div class="action-card-icon" style="color:var(--color-terracotta);">📍</div>
+            <div class="action-card-title-group">
+              <div class="action-card-title">
+                <div>Explore 45 Curated Spots</div>
+                <span style="font-size:16px; color:#B5B0A8;">›</span>
+              </div>
+              <p class="action-card-desc">Monuments, food, culture, nature & more</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           SCREEN 2: "YOUR ITINERARY" (LIVE DAY EXECUTION)
+           ==================================================================== -->
+      <section id="screen-itinerary" class="app-screen">
+        
+        <div class="plan-hero-header" style="padding-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h1 class="plan-hero-main-title" style="font-size:22px;">Your Itinerary</h1>
+            <div style="font-size:12px; color:var(--color-slate);">Old City Heritage Day • 1.8 km Cluster</div>
+          </div>
+          <div style="display:flex; gap:10px; font-size:18px;">
+            <span style="cursor:pointer;" onclick="alert('🗺️ Map View: 3 clustered stops')">🗺️</span>
+            <span style="cursor:pointer;">⋮</span>
+          </div>
+        </div>
+
+        <!-- Day Selector Row -->
+        <div style="display:flex; gap:8px; margin-bottom:14px;">
+          <button class="state-toggle-btn" style="background:var(--color-terracotta); color:#FFF; padding:6px 14px; font-size:11px;">
+            Day 1: Charminar Cluster
+          </button>
+          <button class="state-toggle-btn" style="padding:6px 12px; font-size:11px;">Day 2</button>
+          <button class="state-toggle-btn" style="padding:6px 12px; font-size:11px;">Day 3</button>
+        </div>
+
+        <!-- Timeline Thread Container -->
+        <div id="timeline-thread-feed" style="position:relative; padding-left:26px;">
+          <!-- Node 1 -->
+          <div style="position:relative; margin-bottom:16px;">
+            <div style="position:absolute; left:-26px; top:12px; width:18px; height:18px; border-radius:50%; background:var(--color-terracotta); color:#FFF; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center;">1</div>
+            <div style="background:#FFF; border-radius:18px; padding:14px; border:1px solid var(--color-border); box-shadow:var(--shadow-ambient);">
+              <div style="display:flex; gap:10px; margin-bottom:10px;">
+                <img src="https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=200&q=80" style="width:70px; height:70px; border-radius:10px; object-fit:cover;" />
+                <div>
+                  <h3 style="font-family:var(--font-serif); font-size:15px; font-weight:700;">Charminar & Laad Bazaar</h3>
+                  <div style="font-size:10px; color:var(--color-slate); margin-bottom:6px;">Heritage • Shopping • Culture</div>
+                  <div style="font-size:11px; font-weight:600; display:flex; gap:10px;">
+                    <span>⏱️ Dwell: 1.5 hrs</span>
+                    <span>🎟️ ₹25 Entry</span>
+                  </div>
+                  <span style="display:inline-block; margin-top:4px; font-size:10px; font-weight:700; color:var(--color-green-open); background:var(--color-green-soft); padding:2px 6px; border-radius:4px;">🟢 Open Now • Closes 5:30 PM</span>
+                </div>
+              </div>
+              <div style="display:flex; gap:6px; border-top:1px solid var(--color-border-subtle); padding-top:8px;">
+                <button class="state-toggle-btn" style="flex:1;" onclick="handleReorderTimeline()">⇅ Reorder</button>
+                <button class="state-toggle-btn" style="flex:1;" onclick="openSwapDialog()">⇄ Swap Spot</button>
+                <button class="state-toggle-btn" style="flex:1;" onclick="handleSkipTimeline()">✕ Skip</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transit Indicator -->
+          <div style="font-size:11px; font-weight:600; color:var(--color-slate); background:#F4EFEA; padding:4px 10px; border-radius:999px; width:fit-content; margin:8px 0 14px;">
+            🚶 12 min walk (900m)
+          </div>
+
+          <!-- Node 2 -->
+          <div style="position:relative; margin-bottom:16px;">
+            <div style="position:absolute; left:-26px; top:12px; width:18px; height:18px; border-radius:50%; background:var(--color-terracotta); color:#FFF; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center;">2</div>
+            <div style="background:#FFF; border-radius:18px; padding:14px; border:1px solid var(--color-border); box-shadow:var(--shadow-ambient);">
+              <div style="display:flex; gap:10px;">
+                <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=200&q=80" style="width:70px; height:70px; border-radius:10px; object-fit:cover;" />
+                <div>
+                  <h3 style="font-family:var(--font-serif); font-size:15px; font-weight:700;">Chowmahalla Palace</h3>
+                  <div style="font-size:10px; color:var(--color-slate); margin-bottom:6px;">Royal • Architecture • History</div>
+                  <div style="font-size:11px; font-weight:600; display:flex; gap:10px;">
+                    <span>⏱️ Dwell: 2.0 hrs</span>
+                    <span>🎟️ ₹100 Entry</span>
+                  </div>
+                  <span style="display:inline-block; margin-top:4px; font-size:10px; font-weight:700; color:var(--color-green-open); background:var(--color-green-soft); padding:2px 6px; border-radius:4px;">🟢 Open Now • Closes 5:00 PM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           SCREEN 3: "EXPLORE HYDERABAD" (MANUAL CATALOG)
+           ==================================================================== -->
+      <section id="screen-explore" class="app-screen">
+        
+        <div class="plan-hero-header" style="padding-bottom:10px;">
+          <h1 class="plan-hero-main-title" style="font-size:24px;">Explore Hyderabad</h1>
+          <div style="font-size:12px; color:var(--color-slate);">Discover more. Plan better.</div>
+        </div>
+
+        <div class="destination-search-box" style="margin-bottom:12px;">
+          <span class="search-magnifier-icon">🔍</span>
+          <input type="text" id="input-search-explore" class="destination-input-bar" placeholder="Search monuments, cafes, gardens..." />
+          <span class="paper-plane-icon" style="color:var(--color-charcoal); cursor:pointer;">🎛️</span>
+        </div>
+
+        <!-- Filter Pills -->
+        <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:12px;">
+          <button class="state-toggle-btn" style="background:var(--color-terracotta); color:#FFF; flex-shrink:0;">Old City Zone</button>
+          <button class="state-toggle-btn" style="flex-shrink:0;">Hitec City</button>
+          <button class="state-toggle-btn" style="flex-shrink:0;">Under ₹100</button>
+          <button class="state-toggle-btn" style="flex-shrink:0;">Dwell &lt; 2 hrs</button>
+          <button class="state-toggle-btn" style="flex-shrink:0;">Open Today</button>
+        </div>
+
+        <!-- 2-Column Grid -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; padding-bottom:60px;">
+          
+          <div style="background:#FFF; border-radius:16px; border:1px solid var(--color-border); overflow:hidden; box-shadow:var(--shadow-ambient);">
+            <img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=300&q=80" style="width:100%; height:90px; object-fit:cover;" />
+            <div style="padding:8px;">
+              <h4 style="font-family:var(--font-serif); font-size:13px; font-weight:700;">Qutb Shahi Tombs</h4>
+              <div style="font-size:9px; color:var(--color-slate);">Heritage • History</div>
+              <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:600; margin:4px 0;">
+                <span>🎟️ ₹25</span>
+                <span>🚶 18m walk</span>
+              </div>
+              <button class="state-toggle-btn" style="width:100%;" onclick="this.textContent = '✓ Added'; this.style.background='var(--color-green-open)'; this.style.color='#FFF';">+ Add to Plan</button>
+            </div>
+          </div>
+
+          <div style="background:#FFF; border-radius:16px; border:1px solid var(--color-border); overflow:hidden; box-shadow:var(--shadow-ambient);">
+            <img src="https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=300&q=80" style="width:100%; height:90px; object-fit:cover;" />
+            <div style="padding:8px;">
+              <h4 style="font-family:var(--font-serif); font-size:13px; font-weight:700;">Golconda Fort</h4>
+              <div style="font-size:9px; color:var(--color-slate);">Heritage • History</div>
+              <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:600; margin:4px 0;">
+                <span>🎟️ ₹75</span>
+                <span>🚗 20m drive</span>
+              </div>
+              <button class="state-toggle-btn" style="width:100%;" onclick="this.textContent = '✓ Added'; this.style.background='var(--color-green-open)'; this.style.color='#FFF';">+ Add to Plan</button>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar: [ Home ] [ Itinerary ] [ Explore ] [ Saved ] -->
+    <nav class="bottom-tab-bar">
+      <button class="tab-btn active" data-nav="home">
+        <span class="tab-icon">🏠</span>
+        <span>Home</span>
+      </button>
+      <button class="tab-btn" data-nav="itinerary">
+        <span class="tab-icon">🗺️</span>
+        <span>Itinerary</span>
+      </button>
+      <button class="tab-btn" data-nav="explore">
+        <span class="tab-icon">🧭</span>
+        <span>Explore</span>
+      </button>
+      <button class="tab-btn" data-nav="saved">
+        <span class="tab-icon">🔖</span>
+        <span>Saved</span>
+      </button>
+    </nav>
+
+    <!-- ====================================================================
+         MODALS & OVERLAYS
+         ==================================================================== -->
+
+    <!-- Swap Spot Bottom Sheet -->
+    <div id="modal-swap-sheet" class="modal-overlay">
+      <div class="modal-bottom-sheet">
+        <div style="width:36px; height:4px; background:#D4CEBF; border-radius:2px; margin:0 auto 12px;"></div>
+        <h3 style="font-family:var(--font-serif); font-size:18px; font-weight:700; margin-bottom:4px;">⇄ Swap Destination</h3>
+        <p style="font-size:11px; color:var(--color-slate); margin-bottom:12px;">
+          Choose an alternative in the same geographic cluster to prevent transit delay:
+        </p>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="background:#FFF; padding:12px; border-radius:12px; border:1px solid var(--color-border); cursor:pointer;" onclick="closeModal('modal-swap-sheet'); alert('✓ Swapped with Salar Jung Museum.');">
+            <div style="font-weight:700; font-size:13px;">Salar Jung Museum</div>
+            <div style="font-size:11px; color:var(--color-green-open); font-weight:600;">⚡ Same Cluster • 1.2 km away</div>
+          </div>
+          <div style="background:#FFF; padding:12px; border-radius:12px; border:1px solid #F59E0B; cursor:pointer;" onclick="closeModal('modal-swap-sheet'); openModal('modal-spatial-alert');">
+            <div style="font-weight:700; font-size:13px; color:#B45309;">⚠️ Golconda Fort (Cross-City)</div>
+            <div style="font-size:11px; color:var(--color-slate);">14 km away • ~45 min travel time</div>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-swap-sheet')" style="width:100%; margin-top:14px; padding:10px; background:#EFE9E0; border:none; border-radius:var(--radius-pill); font-size:12px; font-weight:700; cursor:pointer;">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Spatial Travel Alert Modal -->
+    <div id="modal-spatial-alert" class="modal-overlay">
+      <div class="modal-dialog-box">
+        <div style="font-size:32px; margin-bottom:8px;">⚠️</div>
+        <h3 style="font-family:var(--font-serif); font-size:18px; font-weight:700; margin-bottom:6px;">Spatial Travel Warning</h3>
+        <p style="font-size:12px; color:var(--color-slate); line-height:1.45; margin-bottom:16px;">
+          Golconda Fort is located 14 km away. Transit will take ~45 minutes across city traffic. Proceed anyway?
+        </p>
+        <div style="display:flex; gap:8px;">
+          <button onclick="closeModal('modal-spatial-alert')" style="flex:1; padding:10px; background:#F4EFEA; border:1px solid var(--color-border); border-radius:var(--radius-pill); font-size:12px; font-weight:700; cursor:pointer;">Stay in Cluster</button>
+          <button onclick="closeModal('modal-spatial-alert'); alert('Proceeding with swap.');" style="flex:1; padding:10px; background:var(--color-terracotta); color:#FFF; border:none; border-radius:var(--radius-pill); font-size:12px; font-weight:700; cursor:pointer;">Proceed Anyway</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Emergency SOS Modal -->
+    <div id="modal-sos-overlay" class="modal-overlay">
+      <div class="modal-dialog-box">
+        <div style="font-size:32px; margin-bottom:8px;">🚨</div>
+        <h3 style="font-family:var(--font-serif); font-size:18px; font-weight:700; margin-bottom:4px;">Emergency SOS</h3>
+        <p style="font-size:12px; color:var(--color-slate); margin-bottom:14px;">
+          Instant dispatch to local emergency responders and trusted contacts with live GPS coordinates.
+        </p>
+        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+          <a href="tel:112" style="padding:12px; background:var(--color-terracotta); color:#FFF; border-radius:var(--radius-pill); font-size:13px; font-weight:700; text-decoration:none;">
+            📞 Call Police Emergency (112)
+          </a>
+          <a href="tel:1091" style="padding:12px; background:#4B5563; color:#FFF; border-radius:var(--radius-pill); font-size:13px; font-weight:700; text-decoration:none;">
+            📞 Call Women Helpline (1091)
+          </a>
+        </div>
+        <button onclick="closeModal('modal-sos-overlay')" style="width:100%; padding:8px; background:none; border:none; color:var(--color-slate); font-size:12px; font-weight:600; cursor:pointer;">Dismiss</button>
+      </div>
+    </div>
+
+    <!-- Date Picker Modal -->
+    <div id="modal-date-picker" class="modal-overlay">
+      <div class="modal-dialog-box">
+        <div style="font-size:28px; margin-bottom:6px;">📅</div>
+        <h3 id="date-picker-modal-title" style="font-family:var(--font-serif); font-size:17px; font-weight:700; margin-bottom:8px;">Select Date</h3>
+        <input type="date" id="date-picker-input-native" style="width:100%; padding:10px; border-radius:10px; border:1px solid var(--color-border); font-size:13px; margin-bottom:14px;" value="2026-10-18" />
+        <div style="display:flex; gap:8px;">
+          <button onclick="closeModal('modal-date-picker')" style="flex:1; padding:9px; background:#F4EFEA; border:1px solid var(--color-border); border-radius:var(--radius-pill); font-size:12px; font-weight:700; cursor:pointer;">Cancel</button>
+          <button onclick="applyDateSelection()" style="flex:1; padding:9px; background:var(--color-terracotta); color:#FFF; border:none; border-radius:var(--radius-pill); font-size:12px; font-weight:700; cursor:pointer;">Confirm Date</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Master Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

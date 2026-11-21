@@ -36,82 +36,102 @@ In Phase 4, the Information Architecture from Phase 3 was translated into **conc
 
 ## 3. Structural Wireframe Layouts
 
-### Screen 1.0: Open Dashboard (Home Screen)
+### Screen 1A: Open Dashboard (No Active/Ongoing Trip)
+*Default landing hub for new visitors or users between trips. Directly integrates the 6-section planning flow and top recommendation slideshow.*
+
 ```
 ┌────────────────────────────────────────────────────────┐
-│  ☰   [Profile / Avatar]                       ( SOS )  │
+│  📍 Hyderabad, Telangana ∨             [+ SOS]   (👤)  │
 ├────────────────────────────────────────────────────────┤
 │                                                        │
-│   WHERE WOULD YOU LIKE TO GO?                          │
-│   [ Search destination...                            ] │
+│   Plan a New Trip                                      │
+│   Let's explore more ✨                                │
 │                                                        │
 │  ┌──────────────────────────────────────────────────┐  │
-│  │  🔴 LIVE ITINERARY                               │  │
-│  │  NEXT: Chowmahalla Palace • 11:30 AM             │  │
+│  │ 🖼️ [RECOMMENDED DESTINATIONS SLIDESHOW CAROUSEL]  │  │
+│  │ « Trip to Goa  •  Trip to Bali  •  Trip to Hampi »│  │
 │  └──────────────────────────────────────────────────┘  │
 │                                                        │
+│  SECTION 1: YOUR DESTINATION                           │
 │  ┌──────────────────────────────────────────────────┐  │
-│  │                                                  │  │
-│  │   PLAN A NEW TRIP                            >   │  │
-│  │   Build your hyper-local, budget-smart plan      │  │
-│  │                                                  │  │
+│  │ 🔍 Where do you want to go?                   ✈️ │  │
 │  └──────────────────────────────────────────────────┘  │
+│    └─► [AUTOCOMPLETE DROPDOWN: "H" ➔ Hyderabad,        │
+│                                      Himachal Pradesh] │
 │                                                        │
-│   POPULAR RECOMMENDATIONS                              │
+│  SECTION 2: TRIP DATES                                 │
+│  ┌───────────────────────┐   ┌───────────────────────┐ │
+│  │ 📅 Arrival Date     > │   │ 📅 Return Date      > │ │
+│  └───────────────────────┘   └───────────────────────┘ │
+│                                                        │
+│  SECTION 3: TRAVEL DYNAMIC                             │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
-│  │ TRIP TO GOA  │  │ TRIP TO BALI │  │ TRIP TO...   │  │
-│  │ Beaches &    │  │ Culture &    │  │ Heritage &   │  │
-│  │ Sunset Trails│  │ Rice Terraces│  │ Hills        │  │
+│  │   👤 Solo    │  │   👥 Duo     │  │  👨‍👩‍👧‍👦 Family   │  │
 │  └──────────────┘  └──────────────┘  └──────────────┘  │
 │                                                        │
+│  SECTION 4: BUDGET RANGE (3 Tiers with 3 Sub-Ranges)   │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ 👛 Budget Friendly                               > │  │
+│  │   • Baseline Saver   • Mid Comfort   • Plus Day  │  │
+│  └──────────────────────────────────────────────────┘  │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ 👑 Premium                                       > │  │
+│  │   • Baseline Saver   • Mid Comfort   • Plus Day  │  │
+│  └──────────────────────────────────────────────────┘  │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ 💎 Luxury / Exclusive                            > │  │
+│  │   • Baseline Saver   • Mid Comfort   • Plus Day  │  │
+│  └──────────────────────────────────────────────────┘  │
+│                                                        │
+│  SECTION 5: EXPERIENCE CHOICE                          │
+│  ┌───────────────────────┐   ┌───────────────────────┐ │
+│  │     [🎒 Backpack]     │   │    [🔭 Binoculars]    │ │
+│  │ 1st Timer         (○) │   │ Experience Explorer(○)│ │
+│  │ A perfect start to    │   │ Discover more, go     │ │
+│  │ your journey!         │   │ deeper!               │ │
+│  └───────────────────────┘   └───────────────────────┘ │
+│                                                        │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │           ✈️ GENERATE ITINERARY ➔                 │  │
+│  └──────────────────────────────────────────────────┘  │
+│                                                        │
 ├────────────────────────────────────────────────────────┤
-│      [ 🏠 HOME ]                     [ 📁 SAVED ]       │
+│  [🏠 Home]    [🗺️ Itinerary]    [🧭 Explore]   [🔖 Saved]│
 └────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-### Screen 2.0: "Plan a New Trip" Screen (Single-Page Setup)
+### Screen 1B: Open Dashboard (With Active/Ongoing Trip)
+*Dynamic landing screen for travelers currently on an active journey. Tapping "Build a New Trip" dynamically switches to Screen 1A.*
+
 ```
 ┌────────────────────────────────────────────────────────┐
-│  ← Back                                                │
+│  📍 Hyderabad, Telangana ∨             [+ SOS]   (👤)  │
 ├────────────────────────────────────────────────────────┤
 │                                                        │
-│  [ 🔍 SEARCH CITY (e.g. Hyderabad)                   ] │
-│                                                        │
-│  ┌───────────────────────┐   ┌───────────────────────┐ │
-│  │ DEPARTURE DATE        │   │ RETURN DATE           │ │
-│  │ [ 18 Oct 2026 ]       │   │ [ 21 Oct 2026 ]       │ │
-│  └───────────────────────┘   └───────────────────────┘ │
-│                                                        │
-│  TRAVELLER TYPE                                        │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
-│  │  [ SOLO ]    │  │  [ DUO ]     │  │ [ FAMILY ]   │  │
-│  └──────────────┘  └──────────────┘  └──────────────┘  │
-│                                                        │
-│  SELECT BUDGET RANGE                                   │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │  Budget Friendly                              >  │  │
-│  │  (Sub-ranges: Range 1 | Range 2 | Range 3)       │  │
-│  └──────────────────────────────────────────────────┘  │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │  Premium                                      >  │  │
-│  │  (Sub-ranges: Range 1 | Range 2 | Range 3)       │  │
-│  └──────────────────────────────────────────────────┘  │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │  Exclusive                                    >  │  │
-│  │  (Sub-ranges: Range 1 | Range 2 | Range 3)       │  │
-│  └──────────────────────────────────────────────────┘  │
-│                                                        │
-│  EXPERIENCE CHOICE                                     │
-│  ┌───────────────────────┐   ┌───────────────────────┐ │
-│  │  1st Timer            │   │  Return Explorer      │ │
-│  │  (Guided Auto-Plan)   │   │  (Manual Self-Planner)│ │
-│  └───────────────────────┘   └───────────────────────┘ │
+│   Where would you like to explore today?               │
 │                                                        │
 │  ┌──────────────────────────────────────────────────┐  │
-│  │              GENERATE ITINERARY                  │  │
+│  │ [Active Trip Pass Pill]                          │  │
+│  │ Old City Heritage Day            [Charminar      │  │
+│  │ Next: Chowmahalla Palace • 11:30 AM  Photo]      │  │
 │  └──────────────────────────────────────────────────┘  │
+│                                                        │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ 📖 Build a New Trip (1–3 Days)                 > │  │
+│  │    Choose your budget, interests & we'll curate  │  │
+│  │    [Easy ₹1.7k]    [Premium ₹5k]    [Luxury ₹25k]│  │
+│  │    *(Tapping this card opens Screen 1A directly)  │  │
+│  └──────────────────────────────────────────────────┘  │
+│                                                        │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ 📍 Explore 45 Curated Spots                    > │  │
+│  │    Monuments, food, culture, nature & more       │  │
+│  └──────────────────────────────────────────────────┘  │
+│                                                        │
+├────────────────────────────────────────────────────────┤
+│  [🏠 Home]    [🗺️ Itinerary]    [🧭 Explore]   [🔖 Saved]│
 └────────────────────────────────────────────────────────┘
 ```
 
