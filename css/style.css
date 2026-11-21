@@ -887,3 +887,510 @@ body {
   text-align: center;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
 }
+
+/* ==========================================================================
+   SCREEN 2: "YOUR ITINERARY" / "LIVE ITINERARY" HIGH-FIDELITY LAYOUT
+   Direct Implementation of Reference media_1795249816175.png
+   ========================================================================== */
+
+.itinerary-screen-wrapper {
+  position: relative;
+  margin: -4px -18px 0;
+  padding-bottom: 20px;
+}
+
+/* Header Bar */
+.itinerary-top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  position: relative;
+  z-index: 10;
+}
+
+.itinerary-back-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: var(--color-charcoal);
+  cursor: pointer;
+  padding: 4px 8px 4px 0;
+  line-height: 1;
+}
+
+.itinerary-page-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 700;
+  color: #1A2730;
+  flex: 1;
+  margin-left: 6px;
+}
+
+.itinerary-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.itinerary-map-icon-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--color-charcoal);
+  display: flex;
+  align-items: center;
+}
+
+.itinerary-sos-pill {
+  background: #E04E36;
+  color: #FFF;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(224, 78, 54, 0.3);
+}
+
+.itinerary-user-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid #FFF;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Hero Backdrop with Watercolor Charminar & Cursive Text */
+.itinerary-hero-banner {
+  position: relative;
+  height: 160px;
+  margin-top: -6px;
+  background-image: linear-gradient(180deg, rgba(250, 246, 240, 0.2) 0%, rgba(250, 246, 240, 0.95) 90%), url('https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=700&q=80');
+  background-size: cover;
+  background-position: center 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 18px 12px;
+}
+
+.itinerary-cursive-quote {
+  font-family: 'Playfair Display', Georgia, cursive, serif;
+  font-style: italic;
+  font-size: 26px;
+  font-weight: 600;
+  color: #2D3A44;
+  line-height: 1.1;
+  position: relative;
+  width: fit-content;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+}
+
+.itinerary-cursive-quote .quote-spark {
+  color: #E29938;
+  font-size: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.itinerary-brush-stroke {
+  width: 120px;
+  height: 3px;
+  background: #E27B58;
+  border-radius: 2px;
+  margin-top: 4px;
+  opacity: 0.85;
+}
+
+/* Floating Day Switcher Segmented Pills */
+.itinerary-days-container {
+  padding: 0 18px;
+  margin-top: -8px;
+  position: relative;
+  z-index: 5;
+}
+
+.itinerary-days-pill-row {
+  display: flex;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(235, 230, 220, 0.8);
+}
+
+.itin-day-pill {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: #4A4D53;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.itin-day-pill.active {
+  background: var(--color-terracotta);
+  color: #FFF;
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(189, 83, 56, 0.3);
+}
+
+/* Timeline Layout */
+.itinerary-timeline-feed {
+  position: relative;
+  padding: 22px 18px 18px 48px;
+}
+
+/* The continuous terracotta timeline rail on the left */
+.itinerary-timeline-rail {
+  position: absolute;
+  left: 28px;
+  top: 36px;
+  bottom: 80px;
+  width: 2px;
+  background: #E6A792;
+  z-index: 1;
+}
+
+/* Node Stop Item */
+.timeline-stop-block {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+/* Circular Node Badge (1, 2) */
+.timeline-node-badge {
+  position: absolute;
+  left: -32px;
+  top: 14px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-terracotta);
+  color: #FFF;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(189, 83, 56, 0.35);
+}
+
+/* Timeline Midpoint Connector Dot for Meal Radar */
+.timeline-node-bullet {
+  position: absolute;
+  left: -24px;
+  top: 26px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-terracotta);
+  z-index: 2;
+  box-shadow: 0 0 0 3px rgba(189, 83, 56, 0.2);
+}
+
+/* Card: Stop Details */
+.itinerary-stop-card {
+  background: var(--bg-card);
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 6px 20px rgba(30, 31, 34, 0.05);
+  padding: 14px;
+}
+
+.stop-card-main-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.stop-card-thumb {
+  width: 74px;
+  height: 74px;
+  border-radius: 14px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.stop-card-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stop-card-name {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  margin-bottom: 6px;
+  line-height: 1.25;
+}
+
+.stop-card-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.itin-badge-entry {
+  background: #FDF3E7;
+  color: #A3681F;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.itin-badge-dwell {
+  background: #F3EFE9;
+  color: #5D6067;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.itin-badge-status {
+  background: var(--color-green-soft);
+  color: var(--color-green-open);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.itin-badge-status .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-green-open);
+}
+
+/* 3 Bottom Action Pill Buttons */
+.stop-card-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.itin-action-pill-btn {
+  background: #F9F7F4;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 7px 4px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+}
+
+.itin-action-pill-btn:hover {
+  background: #EFE9E0;
+  border-color: #DDD6C9;
+}
+
+/* Card: Feeling Hungry? (Within 500m) */
+.itinerary-food-radar-card {
+  background: #FFF4EC;
+  border: 1px solid #FCDDC7;
+  border-radius: 20px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(189, 83, 56, 0.06);
+  position: relative;
+}
+
+.food-radar-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.food-radar-left-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.food-radar-icon-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #E0633C;
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.food-radar-title-text {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: #26211E;
+  line-height: 1.2;
+}
+
+.food-radar-dist-sub {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--color-slate);
+}
+
+.food-radar-view-link {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-terracotta);
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.food-options-mini-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.food-mini-choice-box {
+  background: #FFFFFF;
+  border: 1px solid #F4E2D3;
+  border-radius: 14px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  transition: transform 0.15s ease;
+}
+
+.food-mini-choice-box:hover {
+  transform: translateY(-1px);
+}
+
+.food-mini-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.food-mini-name {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  line-height: 1.2;
+}
+
+.food-mini-price-pill {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--color-slate);
+  background: #FAF6F0;
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  margin-top: 3px;
+  display: inline-block;
+}
+
+/* Floating "Next Stop" Banner Card at Bottom */
+.itinerary-next-stop-bar {
+  background: #FDF1E7;
+  border: 1px solid #F6D8C4;
+  border-radius: 24px;
+  padding: 8px 14px 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 18px 24px;
+  box-shadow: 0 6px 18px rgba(189, 83, 56, 0.08);
+  cursor: pointer;
+}
+
+.next-stop-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.next-stop-info {
+  flex: 1;
+}
+
+.next-stop-label {
+  font-size: 10px;
+  color: var(--color-slate);
+  font-weight: 500;
+}
+
+.next-stop-destination {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  line-height: 1.2;
+}
+
+.next-stop-eta-pill {
+  background: #FFF;
+  border: 1px solid #F1D4BF;
+  color: var(--color-terracotta);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

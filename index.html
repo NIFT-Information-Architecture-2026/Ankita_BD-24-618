@@ -354,76 +354,159 @@
 
       <!-- ====================================================================
            SCREEN 2: "YOUR ITINERARY" (LIVE DAY EXECUTION)
+           Matching Reference media_1795249816175.png
            ==================================================================== -->
-      <section id="screen-itinerary" class="app-screen">
+      <section id="screen-itinerary" class="app-screen" style="padding:0 0 70px;">
         
-        <div class="plan-hero-header" style="padding-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
-          <div>
-            <h1 class="plan-hero-main-title" style="font-size:22px;">Your Itinerary</h1>
-            <div style="font-size:12px; color:var(--color-slate);">Old City Heritage Day • 1.8 km Cluster</div>
-          </div>
-          <div style="display:flex; gap:10px; font-size:18px;">
-            <span style="cursor:pointer;" onclick="alert('🗺️ Map View: 3 clustered stops')">🗺️</span>
-            <span style="cursor:pointer;">⋮</span>
-          </div>
-        </div>
-
-        <!-- Day Selector Row -->
-        <div style="display:flex; gap:8px; margin-bottom:14px;">
-          <button class="state-toggle-btn" style="background:var(--color-terracotta); color:#FFF; padding:6px 14px; font-size:11px;">
-            Day 1: Charminar Cluster
-          </button>
-          <button class="state-toggle-btn" style="padding:6px 12px; font-size:11px;">Day 2</button>
-          <button class="state-toggle-btn" style="padding:6px 12px; font-size:11px;">Day 3</button>
-        </div>
-
-        <!-- Timeline Thread Container -->
-        <div id="timeline-thread-feed" style="position:relative; padding-left:26px;">
-          <!-- Node 1 -->
-          <div style="position:relative; margin-bottom:16px;">
-            <div style="position:absolute; left:-26px; top:12px; width:18px; height:18px; border-radius:50%; background:var(--color-terracotta); color:#FFF; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center;">1</div>
-            <div style="background:#FFF; border-radius:18px; padding:14px; border:1px solid var(--color-border); box-shadow:var(--shadow-ambient);">
-              <div style="display:flex; gap:10px; margin-bottom:10px;">
-                <img src="https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=200&q=80" style="width:70px; height:70px; border-radius:10px; object-fit:cover;" />
-                <div>
-                  <h3 style="font-family:var(--font-serif); font-size:15px; font-weight:700;">Charminar & Laad Bazaar</h3>
-                  <div style="font-size:10px; color:var(--color-slate); margin-bottom:6px;">Heritage • Shopping • Culture</div>
-                  <div style="font-size:11px; font-weight:600; display:flex; gap:10px;">
-                    <span>⏱️ Dwell: 1.5 hrs</span>
-                    <span>🎟️ ₹25 Entry</span>
-                  </div>
-                  <span style="display:inline-block; margin-top:4px; font-size:10px; font-weight:700; color:var(--color-green-open); background:var(--color-green-soft); padding:2px 6px; border-radius:4px;">🟢 Open Now • Closes 5:30 PM</span>
-                </div>
-              </div>
-              <div style="display:flex; gap:6px; border-top:1px solid var(--color-border-subtle); padding-top:8px;">
-                <button class="state-toggle-btn" style="flex:1;" onclick="handleReorderTimeline()">⇅ Reorder</button>
-                <button class="state-toggle-btn" style="flex:1;" onclick="openSwapDialog()">⇄ Swap Spot</button>
-                <button class="state-toggle-btn" style="flex:1;" onclick="handleSkipTimeline()">✕ Skip</button>
-              </div>
+        <div class="itinerary-screen-wrapper">
+          
+          <!-- Top Navigation Header -->
+          <div class="itinerary-top-nav">
+            <button id="btn-itinerary-back" class="itinerary-back-btn" title="Back to Dashboard">←</button>
+            <h1 class="itinerary-page-title">Your Itinerary</h1>
+            <div class="itinerary-nav-actions">
+              <button class="itinerary-map-icon-btn" title="View Map" onclick="alert('🗺️ Map Cluster View: Old City heritage route')">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+              </button>
+              <button class="itinerary-sos-pill" id="btn-itinerary-sos">
+                <span>🛡️</span> SOS
+              </button>
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="User Profile" class="itinerary-user-avatar" />
             </div>
           </div>
 
-          <!-- Transit Indicator -->
-          <div style="font-size:11px; font-weight:600; color:var(--color-slate); background:#F4EFEA; padding:4px 10px; border-radius:999px; width:fit-content; margin:8px 0 14px;">
-            🚶 12 min walk (900m)
+          <!-- Hero Backdrop with Watercolor Art & Cursive Headline -->
+          <div class="itinerary-hero-banner">
+            <div class="itinerary-cursive-quote">
+              Your trip,<br>well planned <span class="quote-spark">✨</span>
+            </div>
+            <div class="itinerary-brush-stroke"></div>
           </div>
 
-          <!-- Node 2 -->
-          <div style="position:relative; margin-bottom:16px;">
-            <div style="position:absolute; left:-26px; top:12px; width:18px; height:18px; border-radius:50%; background:var(--color-terracotta); color:#FFF; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center;">2</div>
-            <div style="background:#FFF; border-radius:18px; padding:14px; border:1px solid var(--color-border); box-shadow:var(--shadow-ambient);">
-              <div style="display:flex; gap:10px;">
-                <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=200&q=80" style="width:70px; height:70px; border-radius:10px; object-fit:cover;" />
-                <div>
-                  <h3 style="font-family:var(--font-serif); font-size:15px; font-weight:700;">Chowmahalla Palace</h3>
-                  <div style="font-size:10px; color:var(--color-slate); margin-bottom:6px;">Royal • Architecture • History</div>
-                  <div style="font-size:11px; font-weight:600; display:flex; gap:10px;">
-                    <span>⏱️ Dwell: 2.0 hrs</span>
-                    <span>🎟️ ₹100 Entry</span>
+          <!-- Floating Day Switcher Segmented Pills -->
+          <div class="itinerary-days-container">
+            <div class="itinerary-days-pill-row">
+              <button class="itin-day-pill active" data-day="1">
+                📍 Day 1: Old City (Active)
+              </button>
+              <button class="itin-day-pill" data-day="2">
+                Day 2: Western Forts
+              </button>
+              <button class="itin-day-pill" data-day="3">
+                Day 3: Cyberabad
+              </button>
+            </div>
+          </div>
+
+          <!-- Vertical Timeline Feed -->
+          <div class="itinerary-timeline-feed">
+            <!-- Left Continuous Terracotta Timeline Rail -->
+            <div class="itinerary-timeline-rail"></div>
+
+            <!-- Stop 1: Charminar & Laad Bazaar -->
+            <div class="timeline-stop-block">
+              <div class="timeline-node-badge">1</div>
+              <div class="itinerary-stop-card">
+                <div class="stop-card-main-row">
+                  <img src="https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=300&q=80" alt="Charminar & Laad Bazaar" class="stop-card-thumb" />
+                  <div class="stop-card-meta">
+                    <h2 class="stop-card-name">Charminar &amp; Laad Bazaar</h2>
+                    <div class="stop-card-badges-row">
+                      <span class="itin-badge-entry">🎫 ₹25 Entry</span>
+                      <span class="itin-badge-dwell">🕒 Dwell: 1.5 hrs</span>
+                    </div>
+                    <span class="itin-badge-status"><span class="status-dot"></span> Open Now • Closes 5:30 PM</span>
                   </div>
-                  <span style="display:inline-block; margin-top:4px; font-size:10px; font-weight:700; color:var(--color-green-open); background:var(--color-green-soft); padding:2px 6px; border-radius:4px;">🟢 Open Now • Closes 5:00 PM</span>
+                </div>
+                <div class="stop-card-actions-grid">
+                  <button class="itin-action-pill-btn" onclick="handleReorderTimeline()">
+                    <span>⇅</span> Reorder
+                  </button>
+                  <button class="itin-action-pill-btn" onclick="openSwapDialog()">
+                    <span>⇄</span> Swap
+                  </button>
+                  <button class="itin-action-pill-btn" onclick="handleSkipTimeline()">
+                    <span>✕</span> Skip Stop
+                  </button>
                 </div>
               </div>
+            </div>
+
+            <!-- Midpoint Food Break: Feeling Hungry? (Within 500m) -->
+            <div class="timeline-stop-block" style="margin: 20px 0;">
+              <div class="timeline-node-bullet"></div>
+              <div class="itinerary-food-radar-card">
+                <div class="food-radar-top-row">
+                  <div class="food-radar-left-title">
+                    <div class="food-radar-icon-badge">🍴</div>
+                    <div>
+                      <div class="food-radar-title-text">Feeling Hungry?</div>
+                      <div class="food-radar-dist-sub">(Within 500m)</div>
+                    </div>
+                  </div>
+                  <div class="food-radar-view-link" onclick="openFoodOptionsModal()">
+                    View Options ›
+                  </div>
+                </div>
+                <div class="food-options-mini-grid">
+                  <div class="food-mini-choice-box" onclick="alert('Nimrah Cafe: Renowned for hot Irani Chai & Osmania Biscuits (₹50-₹100)')">
+                    <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80" alt="Nimrah Cafe" class="food-mini-thumb" />
+                    <div>
+                      <div class="food-mini-name">Nimrah Cafe</div>
+                      <span class="food-mini-price-pill">₹50 – ₹100</span>
+                    </div>
+                  </div>
+                  <div class="food-mini-choice-box" onclick="alert('Hotel Shadab: Legendary Hyderabadi Dum Biryani & Kebabs (₹100-₹200)')">
+                    <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80" alt="Shadab" class="food-mini-thumb" />
+                    <div>
+                      <div class="food-mini-name">Shadab</div>
+                      <span class="food-mini-price-pill">₹100 – ₹200</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stop 2: Chowmahalla Palace -->
+            <div class="timeline-stop-block">
+              <div class="timeline-node-badge">2</div>
+              <div class="itinerary-stop-card">
+                <div class="stop-card-main-row">
+                  <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=300&q=80" alt="Chowmahalla Palace" class="stop-card-thumb" />
+                  <div class="stop-card-meta">
+                    <h2 class="stop-card-name">Chowmahalla Palace</h2>
+                    <div class="stop-card-badges-row">
+                      <span class="itin-badge-entry">🎫 ₹100 Entry</span>
+                      <span class="itin-badge-dwell">🕒 Dwell: 2 hrs</span>
+                    </div>
+                    <span class="itin-badge-status"><span class="status-dot"></span> Open Now</span>
+                  </div>
+                </div>
+                <div class="stop-card-actions-grid">
+                  <button class="itin-action-pill-btn" onclick="handleReorderTimeline()">
+                    <span>⇅</span> Reorder
+                  </button>
+                  <button class="itin-action-pill-btn" onclick="openSwapDialog()">
+                    <span>⇄</span> Swap
+                  </button>
+                  <button class="itin-action-pill-btn" onclick="handleSkipTimeline()">
+                    <span>✕</span> Skip Stop
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Elevated Floating Next Stop Banner -->
+          <div class="itinerary-next-stop-bar" onclick="alert('Proceeding to next stop: Golconda Fort (Western Cluster)')">
+            <img src="https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=200&q=80" alt="Golconda Fort" class="next-stop-thumb" />
+            <div class="next-stop-info">
+              <div class="next-stop-label">Next Stop</div>
+              <div class="next-stop-destination">Golconda Fort</div>
+            </div>
+            <div class="next-stop-eta-pill">
+              <span>📍 ~ 20 min away ›</span>
             </div>
           </div>
 

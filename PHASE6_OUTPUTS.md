@@ -57,14 +57,17 @@ Ankita_BD-24-618/
   * Selecting `[ 1st Timer ]` + `GENERATE` ➔ Builds a zero-transit-waste itinerary on **Screen 3.0**.
   * Selecting `[ Return Explorer ]` + `GENERATE` ➔ Opens the manual discovery catalog on **Screen 4.0**.
 
-### 3. Screen 3.0: Live Itinerary (Ground Companion)
-* **Vertical Timeline Thread:** Numbered itinerary stops with dwell times (`⏱️ 1.5 hrs`), ticket prices (`🎟️ ₹25`), and live operational badges (`🟢 Open Now` vs `🔴 Closed Today`).
+### 3. Screen 3.0: "Your Itinerary" Screen (Ground Navigation Companion)
+* **Top Navigation Bar:** With Back button (`←`), serif page title `Your Itinerary`, Map icon (`🗺️`), red SOS pill (`[ 🛡️ SOS ]`), and circular profile avatar.
+* **Hero Heritage Watercolor Backdrop:** Rich watercolor banner of Charminar & palace domes with script headline *"Your trip, well planned ✨"* and warm brush stroke accent.
+* **Segmented Day Switcher Bar:** Floating pill row with `[ 📍 Day 1: Old City (Active) ]`, `[ Day 2: Western Forts ]`, and `[ Day 3: Cyberabad ]`.
+* **Vertical Continuous Timeline Rail:** Numbered itinerary stops (`1`, `2`) with dwell times (`🕒 Dwell: 1.5 hrs`), ticket prices (`🎫 ₹25 Entry`), and live status (`🟢 Open Now • Closes 5:30 PM`).
 * **Intra-Day Modification Controls:**
   * `[ ⇅ Reorder ]`: Dynamically shifts and swaps sequence order.
-  * `[ ✕ Skip ]`: Drops the selected stop cleanly and updates the schedule.
-  * `[ ⇄ Swap Spot ]`: Slides up a bottom sheet with same-cluster verified alternatives. Selecting a distant landmark triggers the **`⚠️ Spatial Advisory Warning Pop-up`** showing travel time and dwell impact.
-* **Nearby Meal Radar:** Inline dining picks within 350m of active stops (Nimrah Cafe, Shadab Biryani).
-* **Stays Handoff:** Top utility pill routes directly to **Screen 5.0**.
+  * `[ ⇄ Swap ]`: Slides up bottom sheet with same-cluster alternatives (with Spatial Warning pop-up for cross-city distances).
+  * `[ ✕ Skip Stop ]`: Drops the selected stop cleanly and updates the schedule.
+* **Inline Food Radar Card:** *"Feeling Hungry? (Within 500m)"* with `View Options ›` and quick-access dining cards for Nimrah Cafe and Hotel Shadab.
+* **Floating Next Stop Banner:** Elevated preview banner above bottom dock (`Next Stop Golconda Fort • 📍 ~ 20 min away ›`).
 
 ### 4. Screen 4.0: Explore Hyderabad (Return Explorer Catalog)
 * **4-D Filter Pills:** Instant filtering by *Old City*, *Hitec City*, *Under ₹100*, and *Dwell < 2 hrs*.

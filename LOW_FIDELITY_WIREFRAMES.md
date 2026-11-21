@@ -17,13 +17,17 @@
    * Hero action card: **"PLAN A NEW TRIP >"**.
    * Horizontal recommendation grid: Curated trip cards (e.g., *"Trip to Goa"*, *"Trip to Bali"*).
    * Bottom Navigation: Simple, accessible bar with `HOME` and `SAVED`.
-3. **Single-Screen Planning Flow:**
-   * Direct, scrollable setup: `SEARCH CITY` ➔ `DEPARTURE DATE` & `RETURN DATE` ➔ `[SOLO] [DUO] [FAMILY]` ➔ 3 Expandable Budget Cards (`Budget Friendly >`, `Premium >`, `Exclusive >`) ➔ Experience Choice (`[1st Timer]` vs `[Return Explorer]`).
-4. **Live Itinerary Thread with Inline State Controls:**
-   * Vertical timeline with numbered nodes, dwell times, entry fees, and live Open/Closed badge.
-   * Intra-day modification tools (`Reorder`, `Skip`, `Swap Spot` with Spatial Warning alert) function as **lightweight bottom sheets and inline pop-ups directly over Screen 3.0**, requiring no separate screens.
-   * Inline contextual meal break card: *"Feeling Hungry? Nearby Budget Meal Radar"*.
-   * Transit pill indicator between stops (e.g., `🚶 12 min walk (900m)`).
+3. **Single-Screen Scrollable Planning Setup (Creative Steering Question 2 Resolution):**
+   * Completely consolidated into a fluid **Single-Screen Scrollable Setup** (no fragmented multi-screen wizard pagination).
+   * Direct vertical scroll flow: Top Destination Slideshow ➔ `[1st Sec] YOUR DESTINATION` (with predictive autocomplete dropdown) ➔ `[2nd Sec] TRIP DATES` (Arrival & Return with calendar pickers) ➔ `[3rd Sec] TRAVEL DYNAMIC` (`[Solo]` `[Duo]` `[Family]`) ➔ `[4th Sec] BUDGET RANGE` (3 expandable accordion tiers with identical sub-range naming) ➔ `[5th Sec] EXPERIENCE CHOICE` (`[1st Timer]` vs `[Experience Explorer]`) ➔ Sticky Terracotta CTA `GENERATE ITINERARY ➔`.
+4. **"Your Itinerary" Screen Architecture (Creative Steering Question 3 Resolution & Reference `media_1795249816175.png`):**
+   * Top navigation bar with Back Arrow (`←`), `Your Itinerary` serif title, map icon (`🗺️`), red SOS pill (`[ 🛡️ SOS ]`), and circular profile avatar.
+   * Heritage watercolor hero backdrop featuring Charminar and cursive script: *"Your trip, well planned ✨"* with warm brush stroke.
+   * Floating segmented day switcher: `[ 📍 Day 1: Old City (Active) ]`, `[ Day 2: Western Forts ]`, `[ Day 3: Cyberabad ]`.
+   * Continuous vertical terracotta timeline rail running down the left connecting numbered circle nodes (`1`, `2`) and a midpoint dot.
+   * Stop Cards with thumbnail, title, entry badge (`🎫 ₹25 Entry`), dwell badge (`🕒 Dwell: 1.5 hrs`), live status (`🟢 Open Now • Closes 5:30 PM`), and 3 bottom pill buttons (`[ ⇅ Reorder ]`, `[ ⇄ Swap ]`, `[ ✕ Skip Stop ]`).
+   * Contextual peach meal break card: *"Feeling Hungry? (Within 500m)"* with `View Options ›` and 2 horizontal mini cards (`Nimrah Cafe`, `Shadab`).
+   * Floating "Next Stop" banner above bottom nav (`Next Stop Golconda Fort • 📍 ~ 20 min away ›`).
 5. **Explore Hyderabad Screen (Manual Self-Planner for Returning Explorers):**
    * Dedicated catalog screen for users who select **"Return Explorer"**.
    * Search bar with 4-D filter modal icon.
@@ -139,61 +143,63 @@
 
 ---
 
-### WIREFRAME 3: "Live Itinerary" Screen (With Inline Intra-Day Controls)
+### WIREFRAME 3: "Your Itinerary" Screen (Direct Reference `media_1795249816175.png`)
+*Step-by-step active navigation screen with watercolor heritage hero banner, segmented day switcher pills, vertical terracotta timeline rail, inline food radar, and floating next stop banner.*
 
 ```
 ┌────────────────────────────────────────────────────────┐
-│  ←       Live Itinerary                    🗺️   ⋮      │
-│          Old City Heritage Day                         │
+│  ←  Your Itinerary                     [🗺️] [🛡️ SOS] (👤)│
 ├────────────────────────────────────────────────────────┤
+│  [HERO WATERCOLOR BACKDROP: CHARMINAR & HERITAGE DOMES]│
 │                                                        │
-│  [ Day 1: Charminar Cluster ]   [ Day 2 ]   [ Day 3 ]  │
+│  "Your trip,                                           │
+│   well planned ✨"                                     │
+│   ───────────────── (warm brush stroke)                │
 │                                                        │
-│  ┌───────────────────────┬──────────────────────────┐  │
-│  │ 🏨 View Stays Page    │ 📥 Offline Pass Saved    │  │
-│  │ (Budget Match)        │ 🛡️ Safety Shield [ON]    │  │
-│  └───────────────────────┴──────────────────────────┘  │
-│                                                        │
-│   :                                                    │
-│  (1)── ┌────────────────────────────────────────────┐  │
-│   │    │ [Photo]  Charminar & Laad Bazaar        🔖 │  │
-│   │    │          Heritage • Shopping • Culture     │  │
-│   │    │                                            │  │
-│   │    │  ⏱️ Dwell: 1.5 hrs        🎟️ ₹25 Entry      │  │
-│   │    │  🟢 Open Now • Closes 5:30 PM              │  │
-│   │    ├────────────────────────────────────────────┤  │
-│   │    │ [ ⇅ Reorder ]   [ ⇄ Swap Spot ]   [ ✕ Skip]│  │
-│   │    └────────────────────────────────────────────┘  │
-│   :                                                    │
 │  ┌──────────────────────────────────────────────────┐  │
-│  │ 🍽️  Feeling Hungry?                              │  │
-│  │     Nearby Budget Meal Radar (Within 350m)       │  │
-│  │                                                  │  │
-│  │   ┌────────────────────┐   ┌─────────────────┐   │  │
-│  │   │ Cafe 555           │   │ Shadab Biryani  │ > │  │
-│  │   │ Irani Chai         │   │ Non-Veg         │   │  │
-│  │   │ ₹50 - ₹120         │   │ ₹150 - ₹300     │   │  │
-│  │   └────────────────────┘   └─────────────────┘   │  │
+│  │ [📍 Day 1: Old City (Active)] [Day 2] [Day 3]    │  │
 │  └──────────────────────────────────────────────────┘  │
-│   :                                                    │
-│  (2)── ┌────────────────────────────────────────────┐  │
-│   │    │ [Photo]  Chowmahalla Palace             🔖 │  │
-│   │    │          Royal • Architecture • History    │  │
-│   │    │                                            │  │
-│   │    │  [ 🚶 12 min walk (900m) ]                 │  │
-│   │    │  ⏱️ Dwell: 2.0 hrs        🎟️ ₹100 Entry     │  │
-│   │    │  🟢 Open Now • Closes 5:00 PM              │  │
-│   │    ├────────────────────────────────────────────┤  │
-│   │    │ [ ⇅ Reorder ]   [ ⇄ Swap Spot ]   [ ✕ Skip]│  │
-│   │    └────────────────────────────────────────────┘  │
-│   :                                                    │
+│                                                        │
+│  │ (Vertical Terracotta Timeline Rail)                 │
+│ (1)── ┌─────────────────────────────────────────────┐  │
+│  │    │ [Thumb]  Charminar & Laad Bazaar            │  │
+│  │    │          [🎫 ₹25 Entry]  [🕒 Dwell: 1.5 hrs] │  │
+│  │    │          [🟢 Open Now • Closes 5:30 PM]     │  │
+│  │    ├─────────────────────────────────────────────┤  │
+│  │    │  [ ⇅ Reorder ]   [ ⇄ Swap ]   [ ✕ Skip Stop]│  │
+│  │    └─────────────────────────────────────────────┘  │
+│  │                                                     │
+│ (•)── ┌─────────────────────────────────────────────┐  │
+│  │    │ 🍴 Feeling Hungry? (Within 500m)   View >   │  │
+│  │    │ ┌───────────────────┐  ┌──────────────────┐ │  │
+│  │    │ │ [☕] Nimrah Cafe  │  │ [🍲] Shadab      │ │  │
+│  │    │ │     ₹50 - ₹100    │  │     ₹100 - ₹200  │ │  │
+│  │    │ └───────────────────┘  └──────────────────┘ │  │
+│  │    └─────────────────────────────────────────────┘  │
+│  │                                                     │
+│ (2)── ┌─────────────────────────────────────────────┐  │
+│  │    │ [Thumb]  Chowmahalla Palace                 │  │
+│  │    │          [🎫 ₹100 Entry] [🕒 Dwell: 2 hrs]   │  │
+│  │    │          [🟢 Open Now]                      │  │
+│  │    ├─────────────────────────────────────────────┤  │
+│  │    │  [ ⇅ Reorder ]   [ ⇄ Swap ]   [ ✕ Skip Stop]│  │
+│  │    └─────────────────────────────────────────────┘  │
+│  │                                                     │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ [🏰 Thumb] Next Stop: Golconda Fort [📍 ~20m >]  │  │
+│  └──────────────────────────────────────────────────┘  │
+│                                                        │
+├────────────────────────────────────────────────────────┤
+│  [🏠 Home]    [📅 Itinerary]    [🔍 Explore]   [🔖 Saved]│
 └────────────────────────────────────────────────────────┘
-
-[INLINE STATE OVERLAYS OVER SCREEN 3.0]:
-• Tapping [⇄ Swap Spot] ➔ Bottom Sheet slides up with Same-Cluster Recommendations.
-• Selecting Distant Spot ➔ Overlay alert: "⚠️ Spatial Advisory: Golconda is 14 km away (~45m transit). Proceed?"
-• Tapping [✕ Skip] ➔ Removes stop and smoothly reconnects timeline to next stop.
 ```
+
+[INLINE STATE OVERLAYS OVER SCREEN 3]:
+• Tapping `[⇄ Swap]` ➔ Bottom Sheet slides up with Same-Cluster Recommendations.
+• Selecting Distant Spot ➔ Overlay alert: *"⚠️ Spatial Advisory: Golconda is 14 km away (~45m transit). Proceed?"*
+• Tapping `[✕ Skip Stop]` ➔ Removes stop and smoothly reconnects timeline to next stop.
+• Tapping `[ 🍴 View Options ]` ➔ Expands nearby food radar places within 500m walking radius.
+
 
 ---
 

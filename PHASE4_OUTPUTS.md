@@ -28,7 +28,7 @@ In Phase 4, the Information Architecture from Phase 3 was translated into **conc
 | :--- | :--- | :--- | :--- |
 | **Screen 1.0** | **Open Dashboard (Home Screen)** | Unhurried landing hub with trip hero, live status, and recommendation grid | • Tap `PLAN A NEW TRIP >`<br>• Tap `🔴 LIVE ITINERARY` status tile<br>• 1-Tap `SOS`<br>• Browse recommendation cards |
 | **Screen 2.0** | **Plan a New Trip (Single-Page Setup)** | Unified trip configuration wizard with expandable budget tiers | • Search City<br>• Select Departure & Return Dates<br>• Select Dynamic (`Solo`, `Duo`, `Family`)<br>• Expand Budget Range (`Budget-Friendly`, `Premium`, `Exclusive`)<br>• Choose Experience (`1st Timer` vs. `Return Explorer`)<br>• Tap `GENERATE ITINERARY` |
-| **Screen 3.0** | **Live Itinerary (Timeline Execution)** | Step-by-step ground navigation companion with spatial micro-clusters | • View timeline nodes, dwell times & fees<br>• `[⇅ Reorder]` stops<br>• `[✕ Skip]` next stop<br>• `[⇄ Swap Spot]` (with spatial warning pop-up)<br>• Nearby Budget Meal Radar (within 350m)<br>• `[🏨 View Stays Page]` quick link<br>• Offline Pass Saved badge & Safety Shield toggle |
+| **Screen 3.0** | **Your Itinerary (Timeline Execution)** | Step-by-step ground navigation companion with heritage hero banner, segmented day switcher, vertical rail, inline food radar & floating next stop bar | • View timeline nodes, dwell times & fees<br>• `[⇅ Reorder]` stops<br>• `[⇄ Swap]` stop<br>• `[✕ Skip Stop]` stop<br>• `Feeling Hungry?` food radar (Nimrah, Shadab)<br>• Tap `Next Stop Golconda Fort`<br>• Top `←` Back to Dashboard |
 | **Screen 4.0** | **Explore Hyderabad (Manual Self-Planner)** | Freeform discovery catalog for returning visitors | • Search & 4-D filter pills (Zone, Cost, Dwell, Hours)<br>• 2-column place cards with photo, rating & dwell tags<br>• Bookmark & `[ + Add to My Plan ]`<br>• Sticky Bottom Bar: `ORGANISE ITINERARY (X Chosen) ➔ FINALISED` |
 | **Screen 5.0** | **Curated Stays (Accommodations Finder)** | Dedicated verified lodging discovery filtered strictly by budget and party size | • Filter by Budget Tier (`Budget-Friendly`, `Premium`, `Exclusive`)<br>• Filter by Traveler Dynamic (`Solo Hostels`, `Duo Rooms`, `Family Suites`)<br>• Verified listings with distance from core cluster<br>• `[ Book on Official Site / Agoda ➔ ]` (Direct booking handoff) |
 
@@ -137,60 +137,63 @@ In Phase 4, the Information Architecture from Phase 3 was translated into **conc
 
 ---
 
-### Screen 3.0: "Live Itinerary" Screen (With Inline Intra-Day Controls)
+### Screen 3.0: "Your Itinerary" Screen (Direct Reference `media_1795249816175.png`)
+*Step-by-step active navigation screen with watercolor heritage hero banner, segmented day switcher pills, vertical terracotta timeline rail, inline food radar, and floating next stop banner.*
+
 ```
 ┌────────────────────────────────────────────────────────┐
-│  ←       Live Itinerary                    🗺️   ⋮      │
-│          Old City Heritage Day                         │
+│  ←  Your Itinerary                     [🗺️] [🛡️ SOS] (👤)│
 ├────────────────────────────────────────────────────────┤
+│  [HERO WATERCOLOR BACKDROP: CHARMINAR & HERITAGE DOMES]│
 │                                                        │
-│  [ Day 1: Charminar Cluster ]   [ Day 2 ]   [ Day 3 ]  │
+│  "Your trip,                                           │
+│   well planned ✨"                                     │
+│   ───────────────── (warm brush stroke)                │
 │                                                        │
-│  ┌───────────────────────┬──────────────────────────┐  │
-│  │ 🏨 View Stays Page    │ 📥 Offline Pass Saved    │  │
-│  │ (Budget Match)        │ 🛡️ Safety Shield [ON]    │  │
-│  └───────────────────────┴──────────────────────────┘  │
-│                                                        │
-│   :                                                    │
-│  (1)── ┌────────────────────────────────────────────┐  │
-│   │    │ [Photo]  Charminar & Laad Bazaar        🔖 │  │
-│   │    │          Heritage • Shopping • Culture     │  │
-│   │    │                                            │  │
-│   │    │  ⏱️ Dwell: 1.5 hrs        🎟️ ₹25 Entry      │  │
-│   │    │  🟢 Open Now • Closes 5:30 PM              │  │
-│   │    ├────────────────────────────────────────────┤  │
-│   │    │ [ ⇅ Reorder ]   [ ⇄ Swap Spot ]   [ ✕ Skip]│  │
-│   │    └────────────────────────────────────────────┘  │
-│   :                                                    │
 │  ┌──────────────────────────────────────────────────┐  │
-│  │ 🍽️  Feeling Hungry?                              │  │
-│  │     Nearby Budget Meal Radar (Within 350m)       │  │
-│  │                                                  │  │
-│  │   ┌────────────────────┐   ┌─────────────────┐   │  │
-│  │   │ Cafe 555           │   │ Shadab Biryani  │ > │  │
-│  │   │ Irani Chai         │   │ Non-Veg         │   │  │
-│  │   │ ₹50 - ₹120         │   │ ₹150 - ₹300     │   │  │
-│  │   └────────────────────┘   └─────────────────┘   │  │
+│  │ [📍 Day 1: Old City (Active)] [Day 2] [Day 3]    │  │
 │  └──────────────────────────────────────────────────┘  │
-│   :                                                    │
-│  (2)── ┌────────────────────────────────────────────┐  │
-│   │    │ [Photo]  Chowmahalla Palace             🔖 │  │
-│   │    │          Royal • Architecture • History    │  │
-│   │    │                                            │  │
-│   │    │  [ 🚶 12 min walk (900m) ]                 │  │
-│   │    │  ⏱️ Dwell: 2.0 hrs        🎟️ ₹100 Entry     │  │
-│   │    │  🟢 Open Now • Closes 5:00 PM              │  │
-│   │    ├────────────────────────────────────────────┤  │
-│   │    │ [ ⇅ Reorder ]   [ ⇄ Swap Spot ]   [ ✕ Skip]│  │
-│   │    └────────────────────────────────────────────┘  │
-│   :                                                    │
+│                                                        │
+│  │ (Vertical Terracotta Timeline Rail)                 │
+│ (1)── ┌─────────────────────────────────────────────┐  │
+│  │    │ [Thumb]  Charminar & Laad Bazaar            │  │
+│  │    │          [🎫 ₹25 Entry]  [🕒 Dwell: 1.5 hrs] │  │
+│  │    │          [🟢 Open Now • Closes 5:30 PM]     │  │
+│  │    ├─────────────────────────────────────────────┤  │
+│  │    │  [ ⇅ Reorder ]   [ ⇄ Swap ]   [ ✕ Skip Stop]│  │
+│  │    └─────────────────────────────────────────────┘  │
+│  │                                                     │
+│ (•)── ┌─────────────────────────────────────────────┐  │
+│  │    │ 🍴 Feeling Hungry? (Within 500m)   View >   │  │
+│  │    │ ┌───────────────────┐  ┌──────────────────┐ │  │
+│  │    │ │ [☕] Nimrah Cafe  │  │ [🍲] Shadab      │ │  │
+│  │    │ │     ₹50 - ₹100    │  │     ₹100 - ₹200  │ │  │
+│  │    │ └───────────────────┘  └──────────────────┘ │  │
+│  │    └─────────────────────────────────────────────┘  │
+│  │                                                     │
+│ (2)── ┌─────────────────────────────────────────────┐  │
+│  │    │ [Thumb]  Chowmahalla Palace                 │  │
+│  │    │          [🎫 ₹100 Entry] [🕒 Dwell: 2 hrs]   │  │
+│  │    │          [🟢 Open Now]                      │  │
+│  │    ├─────────────────────────────────────────────┤  │
+│  │    │  [ ⇅ Reorder ]   [ ⇄ Swap ]   [ ✕ Skip Stop]│  │
+│  │    └─────────────────────────────────────────────┘  │
+│  │                                                     │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ [🏰 Thumb] Next Stop: Golconda Fort [📍 ~20m >]  │  │
+│  └──────────────────────────────────────────────────┘  │
+│                                                        │
+├────────────────────────────────────────────────────────┤
+│  [🏠 Home]    [📅 Itinerary]    [🔍 Explore]   [🔖 Saved]│
 └────────────────────────────────────────────────────────┘
+```
 
 [INLINE STATE CONTROLS OVER SCREEN 3.0]:
-• Tapping [⇄ Swap Spot] ➔ Bottom Sheet slides up with Same-Cluster Recommendations.
-• Selecting Distant Spot ➔ Overlay alert: "⚠️ Spatial Advisory: Golconda is 14 km away (~45m transit). Proceed?"
-• Tapping [✕ Skip] ➔ Removes stop and smoothly reconnects timeline to next stop.
-```
+• Tapping `[⇄ Swap]` ➔ Bottom Sheet slides up with Same-Cluster Recommendations.
+• Selecting Distant Spot ➔ Overlay alert: *"⚠️ Spatial Advisory: Golconda is 14 km away (~45m transit). Proceed?"*
+• Tapping `[✕ Skip Stop]` ➔ Removes stop and smoothly reconnects timeline to next stop.
+• Tapping `[ 🍴 View Options ]` ➔ Expands nearby food radar places within 500m walking radius.
+
 
 ---
 

@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupDynamicAndExperience();
   setupBottomTabsNavigation();
   setupEmergencySOS();
+  setupItineraryInteractions();
 });
 
 // --------------------------------------------------------------------------
@@ -281,4 +282,39 @@ window.handleSkipTimeline = function() {
 
 window.openSwapDialog = function() {
   openModal("modal-swap-sheet");
+};
+
+// --------------------------------------------------------------------------
+// 8. Screen 2: "Your Itinerary" Controller
+// --------------------------------------------------------------------------
+function setupItineraryInteractions() {
+  // Back button returns to Dashboard
+  document.getElementById("btn-itinerary-back")?.addEventListener("click", () => {
+    switchDashboardState("has-trip");
+  });
+
+  // SOS button in Itinerary header
+  document.getElementById("btn-itinerary-sos")?.addEventListener("click", () => {
+    openModal("modal-sos-overlay");
+  });
+
+  // Day switcher pills
+  document.querySelectorAll(".itin-day-pill").forEach(pill => {
+    pill.addEventListener("click", () => {
+      document.querySelectorAll(".itin-day-pill").forEach(p => p.classList.remove("active"));
+      pill.classList.add("active");
+      const dayNum = pill.dataset.day;
+      if (dayNum === "1") {
+        // Already active
+      } else if (dayNum === "2") {
+        alert("Day 2: Western Forts Cluster (Golconda Fort, Qutb Shahi Tombs, Taramati Baradari)");
+      } else if (dayNum === "3") {
+        alert("Day 3: Cyberabad & Modern Heritage (Durgam Cheruvu, Shilparamam, HITEC City)");
+      }
+    });
+  });
+}
+
+window.openFoodOptionsModal = function() {
+  alert("🍴 Nearby Food Options (Within 500m):\n1. Nimrah Cafe (Irani Chai & Osmania Biscuit: ₹50-₹100)\n2. Hotel Shadab (Hyderabadi Dum Biryani: ₹100-₹200)\n3. Shah Ghouse Cafe (Mutton Biryani: ₹120-₹220)\n4. Matwale Doodh Ghar (Lassi & Falooda: ₹60-₹110)");
 };
