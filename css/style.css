@@ -1231,6 +1231,75 @@ body {
   border-color: #DDD6C9;
 }
 
+/* Drag & Drop Reorder & Skipped Stop Visual States */
+.timeline-stop-block {
+  cursor: grab;
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease;
+}
+
+.timeline-stop-block.dragging {
+  opacity: 0.35;
+  transform: scale(0.97);
+}
+
+.timeline-stop-block.drag-over {
+  border-top: 3px solid var(--color-terracotta);
+  border-radius: 20px;
+}
+
+.itinerary-stop-card.skipped {
+  opacity: 0.5;
+  background: #F8F5F1;
+  border-style: dashed;
+  border-color: #D6D0C5;
+  filter: grayscale(0.6);
+}
+
+.timeline-node-badge.skipped {
+  background: #9CA3AF;
+  box-shadow: none;
+}
+
+.itin-badge-skipped {
+  background: #FEE2E2;
+  color: #B91C1C;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.btn-undo-skip-pill {
+  background: var(--color-green-soft);
+  color: var(--color-green-open);
+  border: 1px solid #B7E4C7;
+  border-radius: var(--radius-pill);
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-undo-skip-pill:hover {
+  background: #D8F3DC;
+}
+
+.drag-handle-pill {
+  cursor: grab;
+  color: #8C8F96;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+
 /* Card: Feeling Hungry? (Within 500m) */
 .itinerary-food-radar-card {
   background: #FFF4EC;
