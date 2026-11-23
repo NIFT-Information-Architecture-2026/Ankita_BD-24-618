@@ -12,6 +12,7 @@
 let activeDateTarget = "arrival";
 let activeExperienceChoice = "1st-timer";
 const selectedCustomPlaces = new Set();
+window.selectedCustomPlaces = selectedCustomPlaces;
 let currentActiveDay = 1;
 let swappingStopIndex = null;
 let draggedStopIndex = null;
@@ -1771,56 +1772,417 @@ function setupExperienceExplorer() {
     });
   });
 
-  // Generate itinerary with custom chosen places
+  // Master metadata for all 18 Experience Explorer destinations
+  const MASTER_PLACES_METADATA = {
+    "Charminar": {
+      name: "Charminar",
+      cluster: "old-city",
+      image: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 ₹25 Entry",
+      dwell: "🕒 Dwell: 1.0 hr",
+      status: "🟢 Open Now • Closes 5:30 PM"
+    },
+    "Golconda Fort": {
+      name: "Golconda Fort",
+      cluster: "western-forts",
+      image: "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 ₹25 Entry",
+      dwell: "🕒 Dwell: 2.5 hrs",
+      status: "🟢 Open Now • Closes 5:30 PM"
+    },
+    "Laad Bazaar": {
+      name: "Laad Bazaar",
+      cluster: "old-city",
+      image: "https://images.unsplash.com/photo-1600100397608-f010f4438317?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 Free Entry",
+      dwell: "🕒 Dwell: 1.5 hrs",
+      status: "🟢 Open Now • Closes 10:30 PM"
+    },
+    "Chowmahalla Palace": {
+      name: "Chowmahalla Palace",
+      cluster: "old-city",
+      image: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 ₹100 Entry",
+      dwell: "🕒 Dwell: 2.0 hrs",
+      status: "🟢 Open Now • Closes 5:00 PM"
+    },
+    "Mecca Masjid": {
+      name: "Mecca Masjid",
+      cluster: "old-city",
+      image: "https://images.unsplash.com/photo-1585123388867-3bfe6dd4bdbf?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 Free Entry",
+      dwell: "🕒 Dwell: 45 mins",
+      status: "🟢 Open Now • Closes 9:00 PM"
+    },
+    "Badshahi Ashurkhana": {
+      name: "Badshahi Ashurkhana",
+      cluster: "old-city",
+      image: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 Free Entry",
+      dwell: "🕒 Dwell: 45 mins",
+      status: "🟢 Open Now • Closes 7:00 PM"
+    },
+    "Mozamjahi Market": {
+      name: "Mozamjahi Market",
+      cluster: "old-city",
+      image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 Free Entry",
+      dwell: "🕒 Dwell: 1.0 hr",
+      status: "🟢 Open Now • Closes 10:00 PM"
+    },
+    "Salar Jung Museum": {
+      name: "Salar Jung Museum",
+      cluster: "old-city",
+      image: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 ₹50 Entry",
+      dwell: "🕒 Dwell: 2.5 hrs",
+      status: "🟢 Open Now • Closes 5:00 PM"
+    },
+    "Qutb Shahi Tombs": {
+      name: "Qutb Shahi Tombs",
+      cluster: "western-forts",
+      image: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 ₹25 Entry",
+      dwell: "🕒 Dwell: 2.0 hrs",
+      status: "🟢 Open Now • Closes 6:30 PM"
+    },
+    "Taramati Baradari": {
+      name: "Taramati Baradari",
+      cluster: "western-forts",
+      image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 Free Entry",
+      dwell: "🕒 Dwell: 1.5 hrs",
+      status: "🟢 Open Now • Closes 6:00 PM"
+    },
+    "Durgam Cheruvu Lake": {
+      name: "Durgam Cheruvu Lake",
+      cluster: "cyberabad",
+      image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 Free Entry",
+      dwell: "🕒 Dwell: 1.5 hrs",
+      status: "🟢 Open Now • Closes 8:00 PM"
+    },
+    "Raidurg Skywalk": {
+      name: "Raidurg Skywalk",
+      cluster: "cyberabad",
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 Free Entry",
+      dwell: "🕒 Dwell: 45 mins",
+      status: "🟢 Open Now • Open 24 Hours"
+    },
+    "Shilparamam Arts Village": {
+      name: "Shilparamam Arts Village",
+      cluster: "cyberabad",
+      image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 ₹60 Entry",
+      dwell: "🕒 Dwell: 2.5 hrs",
+      status: "🟢 Open Now • Closes 8:30 PM"
+    },
+    "Hussain Sagar Lake": {
+      name: "Hussain Sagar Lake",
+      cluster: "central-lakes",
+      image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 ₹20 Boat Ride",
+      dwell: "🕒 Dwell: 1.5 hrs",
+      status: "🟢 Open Now • Closes 10:00 PM"
+    },
+    "Birla Mandir": {
+      name: "Birla Mandir",
+      cluster: "central-lakes",
+      image: "https://images.unsplash.com/photo-1542314831-c6a4d275b28e?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 Free Entry",
+      dwell: "🕒 Dwell: 1.5 hrs",
+      status: "🟢 Open Now • Closes 9:00 PM"
+    },
+    "Maula Ali Hill": {
+      name: "Maula Ali Hill",
+      cluster: "central-lakes",
+      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 Free Entry",
+      dwell: "🕒 Dwell: 2.0 hrs",
+      status: "🟢 Open Now • Closes 8:30 PM"
+    },
+    "Paigah Tombs": {
+      name: "Paigah Tombs",
+      cluster: "old-city",
+      image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 Free Entry",
+      dwell: "🕒 Dwell: 1.0 hr",
+      status: "🟢 Open Now • Closes 5:00 PM"
+    },
+    "Ramoji Film City": {
+      name: "Ramoji Film City",
+      cluster: "outskirts",
+      image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=400&q=80",
+      entry: "🎫 ₹1,350 Entry",
+      dwell: "🕒 Dwell: 6.0 hrs",
+      status: "🟢 Open Now • Closes 5:30 PM"
+    }
+  };
+
+  const CLUSTER_DINING_CATALOG = {
+    "old-city": {
+      "budget-friendly": [
+        { name: "Nimrah Cafe", price: "₹50 – ₹100", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "Legendary Irani Chai & Osmania Biscuits" },
+        { name: "Hotel Shadab", price: "₹100 – ₹200", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Authentic Hyderabadi Dum Biryani" },
+        { name: "Pista House Charminar", price: "₹120 – ₹220", img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=150&q=80", desc: "Traditional Haleem & Zafrani Tea" }
+      ],
+      "premium": [
+        { name: "Grand Hotel Abids", price: "₹400 – ₹800", img: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=150&q=80", desc: "Classic Heritage Mughlai & Biryani" },
+        { name: "Paradise Heritage", price: "₹500 – ₹900", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Historic Dum Biryani Specialty" }
+      ],
+      "luxury": [
+        { name: "Adaa at Taj Falaknuma", price: "₹4,500 – ₹8,000", img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=150&q=80", desc: "Royal Nizam 6-Course Degustation" },
+        { name: "The Jade Room Afternoon Tea", price: "₹3,000 – ₹6,000", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "High Tea Served on Nizam Silverware" }
+      ]
+    },
+    "western-forts": {
+      "budget-friendly": [
+        { name: "Shah Ghouse Tolichowki", price: "₹150 – ₹250", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Zaffrani Mutton Biryani & Roti" },
+        { name: "Mandar Restaurant", price: "₹120 – ₹200", img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=150&q=80", desc: "Deccani Curries & Fresh Kebabs" }
+      ],
+      "premium": [
+        { name: "The Golconda Pavilion", price: "₹800 – ₹1,500", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Deccani Gourmet Feast & Kebabs" },
+        { name: "Jewel of Nizam", price: "₹1,000 – ₹1,800", img: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=150&q=80", desc: "Minaret Fine Dining with Fort View" }
+      ],
+      "luxury": [
+        { name: "Private Nizam Verandah Dining", price: "₹3,500 – ₹7,000", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Slow-cooked Dum Pukht by Master Chefs" },
+        { name: "Skyline Heritage Lounge", price: "₹2,500 – ₹5,500", img: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=150&q=80", desc: "Handcrafted Heritage Elixirs & Sunset View" }
+      ]
+    },
+    "cyberabad": {
+      "budget-friendly": [
+        { name: "Rayalaseema Ruchulu", price: "₹180 – ₹300", img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=150&q=80", desc: "Spicy Telugu Thalis & Ragi Sangati" },
+        { name: "Chutneys Hitec City", price: "₹150 – ₹250", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "Guntur Idli & 7 Signature Chutneys" }
+      ],
+      "premium": [
+        { name: "Olive Bistro & Bar", price: "₹800 – ₹1,500", img: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=150&q=80", desc: "Mediterranean Dining Overlooking Durgam Lake" },
+        { name: "Flying Spaghetti Monster", price: "₹600 – ₹1,200", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Artisanal Thin-crust Pizzas & Pastas" }
+      ],
+      "luxury": [
+        { name: "Ottimo at ITC Kohenur", price: "₹3,000 – ₹6,000", img: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=150&q=80", desc: "Pan-Italian Fine Dining & Truffle Risotto" },
+        { name: "Yi Jing at ITC Kohenur", price: "₹3,500 – ₹6,500", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Contemporary Chinese Tasting Experience" }
+      ]
+    },
+    "central-lakes": {
+      "budget-friendly": [
+        { name: "Minerva Coffee Shop", price: "₹100 – ₹200", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "Crispy Dosas & Filter Kaapi" },
+        { name: "Ohri's 70MM", price: "₹250 – ₹400", img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=150&q=80", desc: "Cinema Themed Buffet near Tank Bund" }
+      ],
+      "premium": [
+        { name: "Waterfront Restaurant", price: "₹700 – ₹1,200", img: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=150&q=80", desc: "Lakeside Panoramic Dining & Cocktails" },
+        { name: "Sahib's Barbeque", price: "₹700 – ₹1,100", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Hyderabadi Live Grill Barbecue Feast" }
+      ],
+      "luxury": [
+        { name: "Dakshin at ITC Kakatiya", price: "₹3,500 – ₹7,000", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Grand South Indian Royal Thali Experience" },
+        { name: "Aish at The Park", price: "₹3,000 – ₹6,000", img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=150&q=80", desc: "Historic Nizami Recipes in Palatial Silver Interior" }
+      ]
+    },
+    "outskirts": {
+      "budget-friendly": [
+        { name: "Tara Dining Hall", price: "₹200 – ₹350", img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=150&q=80", desc: "Multi-Cuisine Family Thali in Studio Complex" },
+        { name: "Sitara Food Court", price: "₹150 – ₹250", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "Quick Bites & South Indian Snacks" }
+      ],
+      "premium": [
+        { name: "Shaan-e-Ramoji Restaurant", price: "₹600 – ₹1,200", img: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=150&q=80", desc: "Royal Thematic Studio Lunch Buffet" },
+        { name: "Galaxy Restaurant", price: "₹700 – ₹1,300", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Celebrity-Style Multi-Cuisine Dining" }
+      ],
+      "luxury": [
+        { name: "Sitara Luxury Hotel Dining", price: "₹2,500 – ₹5,000", img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=150&q=80", desc: "Exclusive 5-Star Film City Luxury Dining" }
+      ]
+    }
+  };
+
+  const CLUSTER_CONFIG = {
+    "old-city": {
+      name: "Old City Heritage Core",
+      dayTitle: "Old City Heritage",
+      subtitle: "Old City Heritage Cluster • Historic Walking Circuit",
+      nextStop: { name: "Golconda Fort", eta: "~ 20 min away", image: "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=200&q=80" },
+      fallbackPlaces: ["Charminar", "Chowmahalla Palace", "Mecca Masjid"],
+      swappables: [
+        { name: "Salar Jung Museum", dwell: "2.5 hrs", price: "₹50", reason: "Major art museum & Nizam antiquities" },
+        { name: "Mecca Masjid", dwell: "45 mins", price: "Free", reason: "Historic granite mosque near Charminar" },
+        { name: "Badshahi Ashurkhana", dwell: "45 mins", price: "Free", reason: "Persian enamel tile royal mourning hall" },
+        { name: "Mozamjahi Market", dwell: "1 hr", price: "Free", reason: "Historic clock tower stone fruit market" },
+        { name: "Paigah Tombs", dwell: "1 hr", price: "Free", reason: "Exquisite stucco & marble filigree craftsmanship" }
+      ]
+    },
+    "western-forts": {
+      name: "Western Forts & Royal Tombs",
+      dayTitle: "Western Forts",
+      subtitle: "Western Fort & Royal Tombs • 3.2 km Cluster",
+      nextStop: { name: "Durgam Cheruvu & Cable Bridge", eta: "~ 15 min away", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=200&q=80" },
+      fallbackPlaces: ["Golconda Fort", "Qutb Shahi Tombs", "Taramati Baradari"],
+      swappables: [
+        { name: "Taramati Baradari", dwell: "1.5 hrs", price: "Free", reason: "Sunset music pavilion & acoustic architecture" },
+        { name: "Qutb Shahi Tombs", dwell: "2 hrs", price: "₹25", reason: "Landscaped necropolis of 7 Qutb Shahi rulers" },
+        { name: "Golconda Fort", dwell: "2.5 hrs", price: "₹25", reason: "Medieval citadel fortress with acoustic dome" }
+      ]
+    },
+    "cyberabad": {
+      name: "Cyberabad Modern Corridor",
+      dayTitle: "Cyberabad Corridor",
+      subtitle: "Hitec City & Modern Cyberabad • 2.5 km Cluster",
+      nextStop: { name: "Hussain Sagar Lake", eta: "~ 18 min away", image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=200&q=80" },
+      fallbackPlaces: ["Durgam Cheruvu Lake", "Shilparamam Arts Village", "Raidurg Skywalk"],
+      swappables: [
+        { name: "Raidurg Skywalk", dwell: "45 mins", price: "Free", reason: "Elevated covered urban skywalk walkway" },
+        { name: "Shilparamam Arts Village", dwell: "2.5 hrs", price: "₹60", reason: "Ethnic craft bazaars & folk performances" },
+        { name: "Durgam Cheruvu Lake", dwell: "1.5 hrs", price: "Free", reason: "Lakefront promenade & illuminated bridge" }
+      ]
+    },
+    "central-lakes": {
+      name: "Central Lakes & Heights",
+      dayTitle: "Central Lakes",
+      subtitle: "Central Lakes & Hilltop Heights • 2.0 km Cluster",
+      nextStop: { name: "Charminar Monument", eta: "~ 15 min away", image: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=200&q=80" },
+      fallbackPlaces: ["Hussain Sagar Lake", "Birla Mandir", "Maula Ali Hill"],
+      swappables: [
+        { name: "Birla Mandir", dwell: "1.5 hrs", price: "Free", reason: "Hilltop white marble temple with panoramic views" },
+        { name: "Maula Ali Hill", dwell: "2 hrs", price: "Free", reason: "Panoramic hilltop viewpoint with 500 stone steps" },
+        { name: "Hussain Sagar Lake", dwell: "1.5 hrs", price: "₹20", reason: "Heart-shaped lake & Buddha monolithic statue" }
+      ]
+    },
+    "outskirts": {
+      name: "Ramoji Film City Excursion",
+      dayTitle: "Film City Excursion",
+      subtitle: "Grand Studio Sets & Thematic Cinematic Entertainment",
+      nextStop: { name: "Evening Light Show", eta: "~ 5 min away", image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=200&q=80" },
+      fallbackPlaces: ["Ramoji Film City"],
+      swappables: [
+        { name: "Action Studio Stunt Show", dwell: "1 hr", price: "Included", reason: "Live stunt coordination and sets" },
+        { name: "Mughal Gardens Walk", dwell: "1.5 hrs", price: "Included", reason: "Thematic garden sets and fountains" }
+      ]
+    }
+  };
+
+  // Generate itinerary with custom chosen places, geographically clustered day-wise
   document.getElementById("btn-generate-from-experience")?.addEventListener("click", () => {
     if (selectedCustomPlaces.size === 0) {
       alert("Please select at least 1 place using 'Add Plan +' before generating your custom itinerary.");
       return;
     }
-    const chosenList = Array.from(selectedCustomPlaces);
-    
-    // Build Day 1 from user's custom chosen places
-    const customStops = [];
-    chosenList.forEach((pName, idx) => {
-      const card = Array.from(document.querySelectorAll(".exp-place-card")).find(c => {
-        const text = c.querySelector(".exp-place-name")?.textContent.trim() || "";
-        return text === pName || pName.includes(text) || text.includes(pName);
-      });
-      const img = card?.querySelector(".exp-place-photo")?.src || "https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=400&q=80";
-      const cost = card?.dataset.cost || "50";
-      const dwell = card?.dataset.dwell || "1.5";
 
-      customStops.push({
-        id: `custom-stop-${idx + 1}`,
+    const chosenList = Array.from(selectedCustomPlaces);
+    const totalDays = activePlanDuration || 3;
+    const budgetTier = currentPlanBudgetTier || "budget-friendly";
+    const travelDynamic = currentPlanDynamic || "Solo";
+
+    // 1. Group chosen places by micro-cluster
+    const clusterBuckets = {};
+    chosenList.forEach(pName => {
+      const meta = MASTER_PLACES_METADATA[pName] || {
         name: pName,
-        image: img,
-        entry: `🎫 ₹${cost} Entry`,
-        dwell: `🕒 Dwell: ${dwell} hrs`,
-        status: "🟢 Open Now • Closes 6:00 PM",
-        skipped: false,
-        foodBreak: {
-          title: "Feeling Hungry? (Within 500m)",
-          options: [
-            { name: "Nimrah Cafe", price: "₹50 – ₹100", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "Legendary Irani Chai & Osmania Biscuits" },
-            { name: "Hotel Shadab", price: "₹100 – ₹200", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Authentic Hyderabadi Dum Biryani" }
-          ]
-        }
-      });
+        cluster: "old-city",
+        image: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=400&q=80",
+        entry: "🎫 Free Entry",
+        dwell: "🕒 Dwell: 1.5 hrs",
+        status: "🟢 Open Now • Closes 6:00 PM"
+      };
+      if (!clusterBuckets[meta.cluster]) clusterBuckets[meta.cluster] = [];
+      clusterBuckets[meta.cluster].push(meta);
     });
 
-    activeItineraryState[1] = {
-      dayNum: 1,
-      name: "Custom Explorer Plan",
-      clusterName: "Self-Curated Explorer Loop",
-      subtitle: `Custom Explorer Plan • ${customStops.length} Selected Stops`,
-      stops: customStops,
-      nextStop: { name: "Evening Scenic Walk", eta: "~ 15 min away", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=200&q=80" },
-      swappables: ITINERARY_DAYS_DATA[1].swappables
-    };
+    // 2. Canonical cluster sequence for smooth city navigation
+    const canonicalOrder = ["old-city", "western-forts", "cyberabad", "central-lakes", "outskirts"];
+    const chosenClusters = canonicalOrder.filter(c => clusterBuckets[c] && clusterBuckets[c].length > 0);
 
-    const prefsLabel = document.getElementById("itin-user-prefs-label");
-    if (prefsLabel) prefsLabel.innerHTML = `🔭 Experience Explorer • Self-Curated Plan (${customStops.length} Spots)`;
+    // 3. Allocate clusters to days based on user trip duration
+    const daysPlan = [];
 
+    if (chosenClusters.length <= totalDays) {
+      // Each cluster gets its own day
+      chosenClusters.forEach(cKey => {
+        daysPlan.push({ clusterKey: cKey, places: clusterBuckets[cKey] });
+      });
+
+      // Fill remaining days with complementary unchosen clusters so traveler has a complete trip
+      for (const unchosen of canonicalOrder) {
+        if (daysPlan.length >= totalDays) break;
+        if (!chosenClusters.includes(unchosen)) {
+          const cfg = CLUSTER_CONFIG[unchosen];
+          const fallbackMetas = cfg.fallbackPlaces.map(p => MASTER_PLACES_METADATA[p]).filter(Boolean);
+          daysPlan.push({ clusterKey: unchosen, places: fallbackMetas });
+        }
+      }
+    } else {
+      // More clusters chosen than available days -> merge adjacent clusters cleanly into totalDays
+      for (let i = 0; i < totalDays; i++) {
+        daysPlan.push({ clusterKey: chosenClusters[i], places: [...clusterBuckets[chosenClusters[i]]] });
+      }
+      // Distribute overflow clusters to closest day
+      for (let i = totalDays; i < chosenClusters.length; i++) {
+        const targetDayIdx = Math.min(i % totalDays, totalDays - 1);
+        daysPlan[targetDayIdx].places.push(...clusterBuckets[chosenClusters[i]]);
+      }
+    }
+
+    // 4. Build activeItineraryState for each day with authentic stops, food radar, and swappables
+    for (let d = 1; d <= totalDays; d++) {
+      const dayConfig = daysPlan[d - 1] || daysPlan[0];
+      const cKey = dayConfig.clusterKey;
+      const cfg = CLUSTER_CONFIG[cKey] || CLUSTER_CONFIG["old-city"];
+      const diningTier = (CLUSTER_DINING_CATALOG[cKey] && CLUSTER_DINING_CATALOG[cKey][budgetTier]) || CLUSTER_DINING_CATALOG["old-city"]["budget-friendly"];
+
+      const stops = dayConfig.places.map((placeMeta, pIdx) => {
+        const foodIdx1 = pIdx % diningTier.length;
+        const foodIdx2 = (pIdx + 1) % diningTier.length;
+        return {
+          id: `exp-d${d}-stop${pIdx + 1}`,
+          name: placeMeta.name,
+          image: placeMeta.image,
+          entry: placeMeta.entry,
+          dwell: placeMeta.dwell,
+          status: placeMeta.status,
+          skipped: false,
+          foodBreak: {
+            title: "Feeling Hungry? (Within 500m)",
+            options: [diningTier[foodIdx1], diningTier[foodIdx2]]
+          }
+        };
+      });
+
+      // Ensure at least 2 stops per day
+      if (stops.length < 2 && cfg.fallbackPlaces) {
+        for (const fp of cfg.fallbackPlaces) {
+          if (stops.length >= 2) break;
+          if (!stops.some(s => s.name === fp)) {
+            const fallbackMeta = MASTER_PLACES_METADATA[fp];
+            if (fallbackMeta) {
+              stops.push({
+                id: `exp-d${d}-stop${stops.length + 1}`,
+                name: fallbackMeta.name,
+                image: fallbackMeta.image,
+                entry: fallbackMeta.entry,
+                dwell: fallbackMeta.dwell,
+                status: fallbackMeta.status,
+                skipped: false,
+                foodBreak: {
+                  title: "Feeling Hungry? (Within 500m)",
+                  options: [diningTier[0], diningTier[1]]
+                }
+              });
+            }
+          }
+        }
+      }
+
+      activeItineraryState[d] = {
+        dayNum: d,
+        name: cfg.dayTitle,
+        clusterName: cfg.name,
+        subtitle: `${cfg.dayTitle} • ${stops.length} Self-Curated Stops`,
+        stops: stops,
+        nextStop: cfg.nextStop,
+        swappables: cfg.swappables
+      };
+    }
+
+    // 5. Synchronize Curated Stays to user budget & duration
+    renderCuratedStays(travelDynamic, budgetTier);
+
+    // 6. Navigate to Live Itinerary Screen
     switchAppScreen("screen-itinerary");
     setActiveBottomTab("itinerary");
     renderItineraryDay(1);
