@@ -1308,7 +1308,7 @@ window.openFoodOptionsModalForStop = function(stopName) {
 // --------------------------------------------------------------------------
 // 12. Screen 4.0: Curated Stays Controller (Budget-Proportionate Engine)
 // --------------------------------------------------------------------------
-const STAYS_DATA = {
+const DYNAMIC_STAYS_CATALOG = {
   "budget-friendly": {
     "Solo": [
       {
@@ -1587,11 +1587,11 @@ window.renderCuratedStays = function(travelDynamic = "Solo", budgetTier = "budge
 
   if (activeFilter === "all") {
     // Show the customized stays matching the user's travel dynamic and budget tier
-    const tierStays = (STAYS_DATA[budgetTier] && STAYS_DATA[budgetTier][travelDynamic]) || STAYS_DATA["budget-friendly"]["Solo"];
+    const tierStays = (DYNAMIC_STAYS_CATALOG[budgetTier] && DYNAMIC_STAYS_CATALOG[budgetTier][travelDynamic]) || DYNAMIC_STAYS_CATALOG["budget-friendly"]["Solo"];
     staysToShow = [...tierStays];
   } else {
     const tierKey = activeFilter === "budget" ? "budget-friendly" : (activeFilter === "premium" ? "premium" : "luxury");
-    const tierStays = (STAYS_DATA[tierKey] && STAYS_DATA[tierKey][travelDynamic]) || (STAYS_DATA[tierKey] && STAYS_DATA[tierKey]["Solo"]) || [];
+    const tierStays = (DYNAMIC_STAYS_CATALOG[tierKey] && DYNAMIC_STAYS_CATALOG[tierKey][travelDynamic]) || (DYNAMIC_STAYS_CATALOG[tierKey] && DYNAMIC_STAYS_CATALOG[tierKey]["Solo"]) || [];
     staysToShow = [...tierStays];
   }
 
