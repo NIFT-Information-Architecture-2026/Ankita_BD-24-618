@@ -1687,17 +1687,6 @@ window.renderCuratedStays = function(travelDynamic = "Solo", budgetTier = "budge
 
   // Calculate nights from trip duration
   const nights = Math.max(1, activePlanDuration - 1);
-  const durationDays = activePlanDuration || 4;
-
-  // Update budget summary pill at the top of Screen 4.0
-  const summaryPillText = document.getElementById("stays-budget-pill-text");
-  const summaryNightsTag = document.getElementById("stays-budget-nights-tag");
-  if (summaryPillText) {
-    summaryPillText.textContent = `✨ All verified stays matching your ${durationDays}-day ${travelDynamic} budget`;
-  }
-  if (summaryNightsTag) {
-    summaryNightsTag.textContent = `${nights} ${nights === 1 ? 'Night' : 'Nights'} Stay`;
-  }
 
   staysToShow.forEach(stay => {
     const card = document.createElement("div");
