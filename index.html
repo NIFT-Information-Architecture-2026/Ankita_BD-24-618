@@ -477,117 +477,15 @@
             <div style="font-size:12px; color:var(--color-terracotta); margin-top:2px;">📍</div>
           </div>
 
-          <!-- Filter Pills Row -->
-          <div class="stays-filter-pill-row">
-            <button class="stay-filter-chip active" data-stay-tier="all">
-              <span>🛏️</span> All Stays
-            </button>
-            <button class="stay-filter-chip" data-stay-tier="budget">
-              <span>💼</span> Budget-Friendly
-            </button>
-            <button class="stay-filter-chip" data-stay-tier="premium">
-              <span>💎</span> Premium
-            </button>
-            <button class="stay-filter-chip" data-stay-tier="exclusive">
-              <span>⭐</span> Exclusive
-            </button>
+          <!-- Curated Stays Budget Context Banner (Auto-matched to Trip Days & Travel Dynamic) -->
+          <div class="stays-budget-summary-pill" id="stays-budget-summary-pill">
+            <span id="stays-budget-pill-text">✨ Verified stays matching your budget</span>
+            <span id="stays-budget-nights-tag" style="font-weight:600; color:var(--color-slate); font-size:10px;">3 Nights Stay</span>
           </div>
 
-          <!-- Stays Feed Container -->
+          <!-- Stays Feed Container (Dynamically rendered with all options matching user budget) -->
           <div class="stays-feed-container" id="stays-feed-container">
-            
-            <!-- Stay Card 1: Zostel Hyderabad -->
-            <div class="stay-listing-card" data-stay-tier="budget">
-              <div class="stay-photo-slider-box">
-                <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80" alt="Zostel Hyderabad" class="stay-photo-slider-img" />
-                <div class="stay-rating-badge">⭐ 4.6</div>
-                <div class="stay-dots-indicator">
-                  <span class="stay-dot active"></span>
-                  <span class="stay-dot"></span>
-                  <span class="stay-dot"></span>
-                  <span class="stay-dot"></span>
-                </div>
-              </div>
-              <h2 class="stay-name-title">Zostel Hyderabad</h2>
-              <div class="stay-location-sub">📍 Old City, Abids • 2.2 km from Charminar</div>
-              <div class="stay-amenities-chips-row">
-                <span class="amenity-chip">🛏️ Dorms &amp; Rooms</span>
-                <span class="amenity-chip">📶 Free Wi-Fi</span>
-                <span class="amenity-chip">🍴 Cafe On-Site</span>
-                <span class="amenity-chip">🍃 Eco-Friendly</span>
-              </div>
-              <div class="stay-footer-row">
-                <div>
-                  <span class="stay-price-bold">₹799</span>
-                  <span class="stay-price-sub"> / night</span>
-                </div>
-                <button class="btn-stay-details-cta" onclick="alert('Redirecting to official booking partner for Zostel Hyderabad (Zero Commission).')">
-                  View Details →
-                </button>
-              </div>
-            </div>
-
-            <!-- Stay Card 2: Hotel Name (Courtyard Hub) -->
-            <div class="stay-listing-card" data-stay-tier="premium">
-              <div class="stay-photo-slider-box">
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80" alt="Courtyard Hub Hotel" class="stay-photo-slider-img" />
-                <div class="stay-rating-badge">⭐ 4.4</div>
-                <div class="stay-dots-indicator">
-                  <span class="stay-dot active"></span>
-                  <span class="stay-dot"></span>
-                  <span class="stay-dot"></span>
-                </div>
-              </div>
-              <h2 class="stay-name-title">Courtyard Hotel Hub</h2>
-              <div class="stay-location-sub">📍 Hitech City • 4.4 km from Charminar</div>
-              <div class="stay-amenities-chips-row">
-                <span class="amenity-chip">❄️ AC Rooms</span>
-                <span class="amenity-chip">🏊 Swimming Pool</span>
-                <span class="amenity-chip">🍴 In-Room Dining</span>
-                <span class="amenity-chip">📶 Free Wi-Fi</span>
-              </div>
-              <div class="stay-footer-row">
-                <div>
-                  <span class="stay-price-bold">₹1,999</span>
-                  <span class="stay-price-sub"> / night</span>
-                </div>
-                <button class="btn-stay-details-cta" onclick="alert('Redirecting to official booking partner for Courtyard Hotel Hub.')">
-                  View Details →
-                </button>
-              </div>
-            </div>
-
-            <!-- Stay Card 3: Taj Falaknuma Palace -->
-            <div class="stay-listing-card" data-stay-tier="exclusive">
-              <div class="stay-photo-slider-box">
-                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80" alt="Taj Falaknuma Palace" class="stay-photo-slider-img" />
-                <div class="stay-rating-badge">⭐ 4.8</div>
-                <div class="stay-dots-indicator">
-                  <span class="stay-dot active"></span>
-                  <span class="stay-dot"></span>
-                  <span class="stay-dot"></span>
-                  <span class="stay-dot"></span>
-                </div>
-              </div>
-              <h2 class="stay-name-title">Taj Falaknuma Palace</h2>
-              <div class="stay-location-sub">📍 Falaknuma • 7.1 km from Charminar</div>
-              <div class="stay-amenities-chips-row">
-                <span class="amenity-chip">👑 Luxury Stay</span>
-                <span class="amenity-chip">🏛️ Heritage Property</span>
-                <span class="amenity-chip">🍴 Fine Dining</span>
-                <span class="amenity-chip">💆 Spa &amp; Wellness</span>
-              </div>
-              <div class="stay-footer-row">
-                <div>
-                  <span class="stay-price-bold">₹12,999</span>
-                  <span class="stay-price-sub"> / night</span>
-                </div>
-                <button class="btn-stay-details-cta" onclick="alert('Redirecting to official booking partner for Taj Falaknuma Palace.')">
-                  View Details →
-                </button>
-              </div>
-            </div>
-
+            <!-- Rendered dynamically by renderCuratedStays() -->
           </div>
 
           <!-- Bottom Custom Stay Banner -->

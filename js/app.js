@@ -1337,6 +1337,24 @@ const DYNAMIC_STAYS_CATALOG = {
         price: "₹699",
         image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
         tier: "budget"
+      },
+      {
+        name: "The Heritage Bunk Abids",
+        location: "Abids Heritage Core • 1.5 km from Charminar",
+        rating: "4.4",
+        amenities: ["🛏️ Single Bunk", "📶 Free Wi-Fi", "🔒 Luggage Storage", "☕ Tea Station"],
+        price: "₹549",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        tier: "budget"
+      },
+      {
+        name: "Koti Travelers Backpackers Inn",
+        location: "Koti • Close to Old City & Metro",
+        rating: "4.3",
+        amenities: ["🛏️ Pod Dorm", "❄️ AC Rooms", "📶 Free Wi-Fi", "🚕 Tour Desk"],
+        price: "₹520",
+        image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80",
+        tier: "budget"
       }
     ],
     "Duo": [
@@ -1366,6 +1384,24 @@ const DYNAMIC_STAYS_CATALOG = {
         price: "₹1,199",
         image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80",
         tier: "budget"
+      },
+      {
+        name: "Nampally Comfort Double Room",
+        location: "Station Road • Central Connectivity",
+        rating: "4.4",
+        amenities: ["🛏️ King Bed", "❄️ Split AC", "📶 Free Wi-Fi", "🚿 Geyser Hot Water"],
+        price: "₹849",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        tier: "budget"
+      },
+      {
+        name: "Charminar Heritage Homestay (Twin)",
+        location: "Pathergatti • Walking Distance to Charminar",
+        rating: "4.5",
+        amenities: ["🛏️ Twin Beds", "📶 Free Wi-Fi", "☕ Hyderabadi Chai", "🏛️ Heritage Courtyard"],
+        price: "₹1,050",
+        image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+        tier: "budget"
       }
     ],
     "Family": [
@@ -1394,6 +1430,24 @@ const DYNAMIC_STAYS_CATALOG = {
         amenities: ["👨‍👩‍👧 Family Unit", "❄️ AC Rooms", "🚿 24hr Hot Water", "📶 Free Wi-Fi"],
         price: "₹1,499",
         image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80",
+        tier: "budget"
+      },
+      {
+        name: "Lakdikapool Family Guest House",
+        location: "Lakdikapool • Quiet Residential Lane",
+        rating: "4.3",
+        amenities: ["🛏️ 3 Double Beds", "❄️ AC", "🚗 Car Parking", "🍳 Home-style Kitchen"],
+        price: "₹1,299",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        tier: "budget"
+      },
+      {
+        name: "Charminar View Family Apartment",
+        location: "Old City Core • Rooftop Monument Vista",
+        rating: "4.5",
+        amenities: ["👨‍👩‍👧‍👦 4-Person Suite", "❄️ AC Rooms", "📶 High-Speed Wi-Fi", "☕ Welcome Chai"],
+        price: "₹1,599",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
         tier: "budget"
       }
     ]
@@ -1426,6 +1480,15 @@ const DYNAMIC_STAYS_CATALOG = {
         price: "₹2,499",
         image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80",
         tier: "premium"
+      },
+      {
+        name: "Lemon Tree Premier Hitec City",
+        location: "Madhapur • Tech Corridor",
+        rating: "4.6",
+        amenities: ["🛏️ King Bed", "🏊 Pool", "🍴 Citrus Cafe", "📶 High-Speed Wi-Fi"],
+        price: "₹2,199",
+        image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+        tier: "premium"
       }
     ],
     "Duo": [
@@ -1455,6 +1518,15 @@ const DYNAMIC_STAYS_CATALOG = {
         price: "₹2,899",
         image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
         tier: "premium"
+      },
+      {
+        name: "Avasa Hotel - Club Deluxe",
+        location: "Hitec City Metro Station",
+        rating: "4.7",
+        amenities: ["🛏️ Luxury Club Room", "🍸 Sky Lounge Access", "🏊 Rooftop Pool", "🍳 Buffet"],
+        price: "₹3,499",
+        image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80",
+        tier: "premium"
       }
     ],
     "Family": [
@@ -1483,6 +1555,15 @@ const DYNAMIC_STAYS_CATALOG = {
         amenities: ["👨‍👩‍👦 Spacious Family Suite", "🌿 Garden Lawns", "🏊 Large Pool", "🍴 Family Brunch"],
         price: "₹4,199",
         image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+        tier: "premium"
+      },
+      {
+        name: "Lemon Tree Family Connected Rooms",
+        location: "Gachibowli Hub • Near ORR",
+        rating: "4.6",
+        amenities: ["👨‍👩‍👧‍👦 Dual Interconnected Units", "🏊 Outdoor Pool", "🍳 Breakfast Included", "🚗 Parking"],
+        price: "₹3,999",
+        image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80",
         tier: "premium"
       }
     ]
@@ -1514,6 +1595,15 @@ const DYNAMIC_STAYS_CATALOG = {
         amenities: ["👑 Heritage Club Access", "🌿 Private Garden View", "🏊 Poolside Dining", "🚗 Chauffeur Service"],
         price: "₹11,999",
         image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80",
+        tier: "exclusive"
+      },
+      {
+        name: "Park Hyatt Hyderabad - Presidential Studio",
+        location: "Banjara Hills Road 2",
+        rating: "4.8",
+        amenities: ["💎 Resident Butler", "💆 Spa & Thermal Suites", "🍴 The Flying Elephant", "🏊 Heated Pool"],
+        price: "₹13,500",
+        image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
         tier: "exclusive"
       }
     ],
@@ -1573,26 +1663,40 @@ const DYNAMIC_STAYS_CATALOG = {
         price: "₹18,500",
         image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80",
         tier: "exclusive"
+      },
+      {
+        name: "ITC Kohenur - Presidential 2-Bedroom Suite",
+        location: "Knowledge City, Raidurg • Lakefront",
+        rating: "4.9",
+        amenities: ["💎 2 Master Bedrooms", "🤵 24hr Butler Team", "🏊 Private Terrace Pool", "🍴 Private Chef Table"],
+        price: "₹32,000",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+        tier: "exclusive"
       }
     ]
   }
 };
 
-window.renderCuratedStays = function(travelDynamic = "Solo", budgetTier = "budget-friendly", activeFilter = "all") {
+window.renderCuratedStays = function(travelDynamic = "Solo", budgetTier = "budget-friendly") {
   const container = document.getElementById("stays-feed-container");
   if (!container) return;
   container.innerHTML = "";
 
-  let staysToShow = [];
+  // Retrieve ALL verified stays that strictly match the user's travel dynamic & budget tier
+  const staysToShow = (DYNAMIC_STAYS_CATALOG[budgetTier] && DYNAMIC_STAYS_CATALOG[budgetTier][travelDynamic]) || DYNAMIC_STAYS_CATALOG["budget-friendly"]["Solo"];
 
-  if (activeFilter === "all") {
-    // Show the customized stays matching the user's travel dynamic and budget tier
-    const tierStays = (DYNAMIC_STAYS_CATALOG[budgetTier] && DYNAMIC_STAYS_CATALOG[budgetTier][travelDynamic]) || DYNAMIC_STAYS_CATALOG["budget-friendly"]["Solo"];
-    staysToShow = [...tierStays];
-  } else {
-    const tierKey = activeFilter === "budget" ? "budget-friendly" : (activeFilter === "premium" ? "premium" : "luxury");
-    const tierStays = (DYNAMIC_STAYS_CATALOG[tierKey] && DYNAMIC_STAYS_CATALOG[tierKey][travelDynamic]) || (DYNAMIC_STAYS_CATALOG[tierKey] && DYNAMIC_STAYS_CATALOG[tierKey]["Solo"]) || [];
-    staysToShow = [...tierStays];
+  // Calculate nights from trip duration
+  const nights = Math.max(1, activePlanDuration - 1);
+  const durationDays = activePlanDuration || 4;
+
+  // Update budget summary pill at the top of Screen 4.0
+  const summaryPillText = document.getElementById("stays-budget-pill-text");
+  const summaryNightsTag = document.getElementById("stays-budget-nights-tag");
+  if (summaryPillText) {
+    summaryPillText.textContent = `✨ All verified stays matching your ${durationDays}-day ${travelDynamic} budget`;
+  }
+  if (summaryNightsTag) {
+    summaryNightsTag.textContent = `${nights} ${nights === 1 ? 'Night' : 'Nights'} Stay`;
   }
 
   staysToShow.forEach(stay => {
@@ -1601,6 +1705,8 @@ window.renderCuratedStays = function(travelDynamic = "Solo", budgetTier = "budge
     card.dataset.stayTier = stay.tier;
 
     const chipsHtml = stay.amenities.map(a => `<span class="amenity-chip">${a}</span>`).join("");
+    const numericPrice = parseInt(stay.price.replace(/[^\d]/g, ""), 10);
+    const totalPrice = numericPrice * nights;
 
     card.innerHTML = `
       <div class="stay-photo-slider-box">
@@ -1622,8 +1728,11 @@ window.renderCuratedStays = function(travelDynamic = "Solo", budgetTier = "budge
         <div>
           <span class="stay-price-bold">${stay.price}</span>
           <span class="stay-price-sub"> / night</span>
+          <div style="font-size:11px; color:var(--color-slate); font-weight:600; margin-top:2px;">
+            Total: ₹${totalPrice.toLocaleString('en-IN')} for ${nights} ${nights === 1 ? 'night' : 'nights'}
+          </div>
         </div>
-        <button class="btn-stay-details-cta" onclick="alert('Viewing verified booking details for ${stay.name} (${stay.price}/night). Zero commission booking.')">
+        <button class="btn-stay-details-cta" onclick="alert('Viewing verified booking details for ${stay.name} (${stay.price}/night). Total stay: ₹${totalPrice.toLocaleString('en-IN')} for ${nights} nights.')">
           View Details →
         </button>
       </div>
@@ -1633,14 +1742,7 @@ window.renderCuratedStays = function(travelDynamic = "Solo", budgetTier = "budge
 };
 
 function setupStaysScreen() {
-  document.querySelectorAll(".stay-filter-chip").forEach(chip => {
-    chip.addEventListener("click", () => {
-      document.querySelectorAll(".stay-filter-chip").forEach(c => c.classList.remove("active"));
-      chip.classList.add("active");
-      const tierFilter = chip.dataset.stayTier;
-      renderCuratedStays(currentPlanDynamic, currentPlanBudgetTier, tierFilter);
-    });
-  });
+  // Screen 4.0 Stays are auto-rendered dynamically based on user budget and dynamic.
 }
 
 // --------------------------------------------------------------------------
