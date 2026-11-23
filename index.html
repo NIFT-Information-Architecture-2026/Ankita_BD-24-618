@@ -48,47 +48,59 @@
         </header>
 
         <!-- Hero Title with Watercolor Charminar Backdrop -->
-        <div class="plan-hero-header" style="padding-bottom:10px;">
-          <h1 class="plan-hero-main-title" style="font-size:26px;">Explore Hyderabad</h1>
-          <div class="plan-hero-cursive-sub" style="font-size:18px;">at your pace ✨</div>
-          <div class="plan-hero-landmark-bg"></div>
+        <div class="plan-hero-header">
+          <div class="plan-hero-text-col">
+            <h1 class="plan-hero-main-title">Explore Hyderabad</h1>
+            <div class="plan-hero-cursive-sub">at your pace <span class="hero-sparkle">✨</span></div>
+            <div class="hero-brushstroke-curve"></div>
+          </div>
+          <div class="plan-hero-landmark-bg" aria-label="Charminar Watercolor Backdrop"></div>
         </div>
 
         <!-- 1st Section: Ongoing Trip / Active Trip Card with Stepper -->
         <div class="home-ongoing-trip-card">
           <div class="ongoing-trip-thumb-box">
-            <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=300&q=80" alt="Heritage Gate" class="ongoing-trip-thumb-img" />
+            <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=400&q=80" alt="Chowmahalla Palace Gateway" class="ongoing-trip-thumb-img" />
           </div>
           <div class="ongoing-trip-body">
             <div class="ongoing-trip-top-row">
-              <span class="tag-active-trip">🧳 Your Active Trip</span>
-              <span class="postit-note-badge">Let's keep going! ↗</span>
+              <span class="tag-active-trip">💼 Your Active Trip</span>
+              <div class="sticky-sketch-note">
+                <span class="sketch-burst-top">╲ │ ╱</span>
+                <span class="sketch-text">Let's<br>keep going!</span>
+                <span class="sketch-arrow-curve">⤹</span>
+              </div>
             </div>
             <h2 class="ongoing-trip-title">Day 1: Old City Heritage Cluster</h2>
-            <div class="ongoing-trip-next-label">📍 Next Stop: Chowmahalla Palace • 11:30 AM</div>
+            <div class="ongoing-trip-next-label">
+              <span class="pin-dot-orange">📍</span> Next Stop: Chowmahalla Palace • 11:30 AM
+            </div>
 
             <!-- Stepper Progress Track -->
             <div class="stepper-progress-wrap">
               <div class="stepper-dots-row">
-                <div class="stepper-dot-circle done">✓</div>
+                <div class="stepper-dot-circle done" title="Charminar: Completed">✓</div>
                 <div class="stepper-line-bar active"></div>
-                <div class="stepper-dot-circle done">✓</div>
-                <div class="stepper-line-bar active"></div>
-                <div class="stepper-dot-circle current" style="background:var(--color-terracotta);">●</div>
+                <div class="stepper-dot-circle done" title="Laad Bazaar: Completed">✓</div>
                 <div class="stepper-line-bar"></div>
-                <div class="stepper-dot-circle">○</div>
+                <div class="stepper-dot-circle pending" title="Chowmahalla Palace: Upcoming"></div>
+                <div class="stepper-line-bar"></div>
+                <div class="stepper-dot-circle pending" title="Evening Spot: Upcoming"></div>
               </div>
               <div class="stepper-labels-row">
                 <span>Charminar</span>
                 <span>Laad Bazaar</span>
-                <span>Chowmahalla</span>
-                <span>Evening</span>
+                <span>Chowmahalla<br>Palace</span>
+                <span>Evening Spot</span>
               </div>
             </div>
 
             <!-- Primary Action: Open Itinerary -->
             <button id="btn-open-itinerary-home" class="btn-open-itinerary-cta">
-              <span>✈️</span> Open Itinerary ➔
+              <svg class="cta-paper-plane-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+              <span>Open Itinerary ➔</span>
             </button>
           </div>
         </div>
@@ -100,34 +112,48 @@
             <h2 class="promo-banner-title">Plan a<br>New Trip</h2>
             <div class="promo-arrow-circle-btn">›</div>
           </div>
-          <div class="promo-banner-right-art"></div>
+          <div class="promo-banner-middle-flight">
+            <svg class="flight-dashed-trail" viewBox="0 0 120 60" fill="none">
+              <path d="M10 45 C 40 10, 80 50, 105 20" stroke="#C49B76" stroke-width="1.8" stroke-dasharray="4 4" stroke-linecap="round"/>
+              <polygon points="105,20 95,21 100,28" fill="#C49B76" />
+            </svg>
+          </div>
+          <div class="promo-banner-right-art">
+            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=400&q=80" alt="Travel Luggage & Suitcase" class="promo-luggage-img" />
+          </div>
         </div>
 
         <!-- 3rd Section: Explore More Horizontal Carousel -->
         <div class="explore-more-section">
           <div class="explore-more-header-row">
             <h3 class="explore-more-title">
-              <span style="color:var(--color-terracotta);">🧭</span> Explore More
+              <span class="explore-compass-badge">🧭</span> Explore More
             </h3>
             <span class="explore-more-view-all" onclick="alert('Viewing all curated Indian destinations')">View All ➔</span>
           </div>
           <div class="explore-cities-scroll-row">
             <div class="explore-city-card" onclick="selectDestinationQuick('Ranchi')">
-              <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=300&q=80" alt="Ranchi" />
+              <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=400&q=80" alt="Ranchi Heritage Monument" />
               <div class="explore-city-label-overlay">
-                <span>📍</span> Ranchi
+                <span class="white-pin">📍</span> Ranchi
               </div>
             </div>
             <div class="explore-city-card" onclick="selectDestinationQuick('Lucknow')">
-              <img src="https://images.unsplash.com/photo-1600100397608-f010f4438317?auto=format&fit=crop&w=300&q=80" alt="Lucknow" />
+              <img src="https://images.unsplash.com/photo-1600100397608-f010f4438317?auto=format&fit=crop&w=400&q=80" alt="Lucknow Rumi Darwaza" />
               <div class="explore-city-label-overlay">
-                <span>📍</span> Lucknow
+                <span class="white-pin">📍</span> Lucknow
               </div>
             </div>
             <div class="explore-city-card" onclick="selectDestinationQuick('Mumbai')">
-              <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=300&q=80" alt="Mumbai" />
+              <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=400&q=80" alt="Gateway of India Mumbai" />
               <div class="explore-city-label-overlay">
-                <span>📍</span> Mumbai
+                <span class="white-pin">📍</span> Mumbai
+              </div>
+            </div>
+            <div class="explore-city-card" onclick="selectDestinationQuick('Varanasi')">
+              <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=400&q=80" alt="Varanasi Ghats" />
+              <div class="explore-city-label-overlay">
+                <span class="white-pin">📍</span> Varanasi
               </div>
             </div>
           </div>
@@ -912,23 +938,29 @@
          FIXED BOTTOM DOCK NAVIGATION (4 TABS)
          ==================================================================== -->
     <nav class="bottom-tab-bar">
+      <div class="botanical-corner-leaf left" aria-hidden="true"></div>
       <button class="tab-btn active" data-nav="home">
         <span class="tab-icon">🏠</span>
         <span>Home</span>
       </button>
+      <div class="tab-divider-line"></div>
       <button class="tab-btn" data-nav="itinerary">
         <span class="tab-icon">📅</span>
         <span>Itinerary</span>
       </button>
+      <div class="tab-divider-line"></div>
       <button class="tab-btn" data-nav="explore">
         <span class="tab-icon">🔍</span>
         <span>Explore</span>
       </button>
+      <div class="tab-divider-line"></div>
       <button class="tab-btn" data-nav="saved">
         <span class="tab-icon">🔖</span>
         <span>Saved</span>
       </button>
+      <div class="botanical-corner-leaf right" aria-hidden="true"></div>
     </nav>
+    <div class="ios-home-indicator-bar" aria-hidden="true"></div>
 
   </div>
 
