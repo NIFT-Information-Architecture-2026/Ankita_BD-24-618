@@ -2224,3 +2224,239 @@ body {
   z-index: 50;
 }
 
+/* ==========================================================================
+   SCENIC BACKGROUND SLIDESHOW (SCREEN 2.0 HERO BACKGROUND)
+   ========================================================================== */
+.plan-hero-header.has-bg-slideshow {
+  position: relative;
+  min-height: 125px;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  padding: 20px 16px 16px;
+  display: flex;
+  align-items: flex-end;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.plan-hero-slideshow-track {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.plan-bg-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.plan-bg-slide.active {
+  opacity: 1;
+}
+
+.plan-bg-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(253, 248, 243, 0.96) 25%, rgba(253, 248, 243, 0.6) 65%, rgba(253, 248, 243, 0.25) 100%);
+  pointer-events: none;
+}
+
+.slide-city-badge {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(189, 83, 56, 0.3);
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.plan-hero-foreground {
+  position: relative;
+  z-index: 3;
+}
+
+/* ==========================================================================
+   POP-UP CALENDAR COMPONENT (MONTH / YEAR / DATES PICKER)
+   ========================================================================== */
+.calendar-target-tabs-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.cal-target-tab {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1.5px solid var(--color-border);
+  background: var(--bg-card);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cal-target-tab.active {
+  border-color: var(--color-terracotta);
+  background: #FAF0EC;
+}
+
+.cal-target-tab strong {
+  font-size: 13px;
+  color: var(--color-charcoal);
+  display: block;
+  margin-top: 2px;
+}
+
+.cal-target-tab.active strong {
+  color: var(--color-terracotta);
+}
+
+.calendar-controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  background: #F8F4EE;
+  padding: 6px 10px;
+  border-radius: 12px;
+}
+
+.cal-nav-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: #FFF;
+  color: var(--color-charcoal);
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cal-nav-btn:hover {
+  background: var(--color-terracotta);
+  color: #FFF;
+  border-color: var(--color-terracotta);
+}
+
+.cal-select-dropdown {
+  padding: 5px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: #FFF;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  cursor: pointer;
+}
+
+.calendar-weekdays-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-slate);
+  margin-bottom: 8px;
+}
+
+.calendar-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.cal-day-cell {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  transition: all 0.12s ease;
+}
+
+.cal-day-cell:hover:not(.other-month) {
+  background: #EAE3D6;
+}
+
+.cal-day-cell.other-month {
+  color: #C5C2BA;
+  cursor: default;
+}
+
+.cal-day-cell.selected-arrival,
+.cal-day-cell.selected-return {
+  background: var(--color-terracotta) !important;
+  color: #FFF !important;
+  font-weight: 700;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(189, 83, 56, 0.4);
+}
+
+.cal-day-cell.in-range {
+  background: #F8D7CD !important;
+  color: var(--color-terracotta);
+  border-radius: 4px;
+}
+
+.calendar-footer-summary {
+  border-top: 1px solid var(--color-border);
+  padding-top: 10px;
+  text-align: center;
+}
+
+/* Dynamic Itinerary User Preference Header Pill */
+.itin-user-prefs-banner {
+  margin: 6px 0 10px;
+  padding: 8px 12px;
+  background: #FAF0EC;
+  border: 1px solid rgba(189, 83, 56, 0.25);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.itin-user-prefs-text {
+  font-weight: 700;
+  color: var(--color-terracotta);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.itin-user-prefs-dates {
+  color: var(--color-slate);
+  font-weight: 500;
+}
+
+

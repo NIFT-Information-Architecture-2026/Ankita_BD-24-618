@@ -159,37 +159,27 @@
           </div>
         </header>
 
-        <!-- Hero Title with Charminar Backdrop Art -->
-        <div class="plan-hero-header">
-          <h1 class="plan-hero-main-title">Plan a New Trip</h1>
-          <div class="plan-hero-cursive-sub">Let's explore more ✨</div>
-          <div class="plan-hero-landmark-bg"></div>
-        </div>
-
-        <!-- Scenic Slideshow Carousel: Ranchi, Maharashtra, Guwahati -->
-        <div class="slideshow-carousel-wrap">
-          <div class="slideshow-scroll-row">
-            <div class="slideshow-card-pill" onclick="selectDestinationQuick('Ranchi')">
-              <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=300&q=80" alt="Ranchi" class="slideshow-card-img" />
-              <div class="slideshow-card-body">
-                <div class="slideshow-card-name">Trip to Ranchi</div>
-                <div class="slideshow-card-tag">Waterfalls & Hills</div>
-              </div>
+        <!-- Hero Title with Scenic Background Slideshow running in background -->
+        <div class="plan-hero-header has-bg-slideshow" id="plan-hero-slideshow-container">
+          <!-- Background Cross-Fading Scenic Slideshow -->
+          <div class="plan-hero-slideshow-track" id="plan-bg-slideshow">
+            <div class="plan-bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=600&q=80');">
+              <span class="slide-city-badge">📍 Hyderabad, Telangana</span>
             </div>
-            <div class="slideshow-card-pill" onclick="selectDestinationQuick('Maharashtra')">
-              <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=300&q=80" alt="Maharashtra" class="slideshow-card-img" />
-              <div class="slideshow-card-body">
-                <div class="slideshow-card-name">Trip to Maharashtra</div>
-                <div class="slideshow-card-tag">Forts & Coastline</div>
-              </div>
+            <div class="plan-bg-slide" style="background-image: url('https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80');">
+              <span class="slide-city-badge">📍 Ranchi (Hills & Falls)</span>
             </div>
-            <div class="slideshow-card-pill" onclick="selectDestinationQuick('Guwahati')">
-              <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=300&q=80" alt="Guwahati" class="slideshow-card-img" />
-              <div class="slideshow-card-body">
-                <div class="slideshow-card-name">Trip to Guwahati</div>
-                <div class="slideshow-card-tag">Brahmaputra Heritage</div>
-              </div>
+            <div class="plan-bg-slide" style="background-image: url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=600&q=80');">
+              <span class="slide-city-badge">📍 Maharashtra Trails</span>
             </div>
+            <div class="plan-bg-slide" style="background-image: url('https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=600&q=80');">
+              <span class="slide-city-badge">📍 Guwahati Riverfront</span>
+            </div>
+          </div>
+          <!-- Hero Foreground Typography -->
+          <div class="plan-hero-foreground">
+            <h1 class="plan-hero-main-title">Plan a New Trip</h1>
+            <div class="plan-hero-cursive-sub">Let's explore more ✨</div>
           </div>
         </div>
 
@@ -408,6 +398,12 @@
             <div class="itinerary-brush-stroke"></div>
           </div>
 
+          <!-- Dynamic User Plan Summary Pill (Auto-generated from user inputs) -->
+          <div id="itin-user-prefs-container" class="itin-user-prefs-banner">
+            <span class="itin-user-prefs-text" id="itin-user-prefs-label">👤 Solo Explorer • Budget-Friendly</span>
+            <span class="itin-user-prefs-dates" id="itin-user-prefs-dates">18 Oct – 21 Oct 2026 (4 Days)</span>
+          </div>
+
           <!-- Top Banner: View Stays in Hyderabad (Tapping opens Screen 4.0) -->
           <div id="banner-view-stays-card" class="view-stays-top-banner" title="Tap to explore curated stays in Hyderabad">
             <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=150&q=80" alt="Stays" class="view-stays-thumb-img" />
@@ -415,7 +411,7 @@
               <div class="view-stays-title-row">
                 <span>🛏️</span> View Stays
               </div>
-              <div class="view-stays-subtitle">Find the best stays nearby</div>
+              <div class="view-stays-subtitle" id="view-stays-banner-subtitle">Find the best stays nearby</div>
             </div>
             <span class="view-stays-arrow">›</span>
           </div>
@@ -881,27 +877,71 @@
     </div>
   </div>
 
-  <!-- Modal 4: Interactive Date Picker -->
+  <!-- Modal 4: Interactive Pop-up Calendar Feature (Month, Year, Dates) -->
   <div id="modal-date-picker" class="modal-overlay" onclick="closeModal('modal-date-picker')">
     <div class="modal-bottom-sheet" onclick="event.stopPropagation()">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-        <h3 style="font-family:var(--font-serif); font-size:17px; font-weight:700;" id="modal-date-title">Select Trip Date</h3>
+        <h3 style="font-family:var(--font-serif); font-size:18px; font-weight:700;" id="modal-date-title">Select Trip Dates</h3>
         <button onclick="closeModal('modal-date-picker')" style="background:none; border:none; font-size:18px; cursor:pointer;">✕</button>
       </div>
-      <div style="display:grid; grid-template-columns:repeat(7, 1fr); gap:6px; text-align:center; font-size:11px; font-weight:600; margin-bottom:8px;">
-        <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+
+      <!-- Target Switcher Tabs: Arrival Date vs Return Date -->
+      <div class="calendar-target-tabs-row">
+        <button type="button" class="cal-target-tab active" id="tab-cal-arrival" onclick="switchCalendarTarget('arrival')">
+          <span style="font-size:10px; color:var(--color-slate); display:block;">ARRIVAL DATE</span>
+          <strong id="cal-tab-arrival-val">18 Oct 2026</strong>
+        </button>
+        <button type="button" class="cal-target-tab" id="tab-cal-return" onclick="switchCalendarTarget('return')">
+          <span style="font-size:10px; color:var(--color-slate); display:block;">RETURN DATE</span>
+          <strong id="cal-tab-return-val">21 Oct 2026</strong>
+        </button>
       </div>
-      <div style="display:grid; grid-template-columns:repeat(7, 1fr); gap:6px; text-align:center; font-size:11px;" id="calendar-days-grid">
-        <span style="color:#C5C2BA;">15</span>
-        <span style="color:#C5C2BA;">16</span>
-        <span style="color:#C5C2BA;">17</span>
-        <button class="state-toggle-btn" style="padding:6px; background:var(--color-terracotta); color:#FFF;" onclick="selectDateVal('18 Oct 2026')">18</button>
-        <button class="state-toggle-btn" style="padding:6px;" onclick="selectDateVal('19 Oct 2026')">19</button>
-        <button class="state-toggle-btn" style="padding:6px;" onclick="selectDateVal('20 Oct 2026')">20</button>
-        <button class="state-toggle-btn" style="padding:6px; background:#F8D7CD; color:var(--color-terracotta);" onclick="selectDateVal('21 Oct 2026')">21</button>
-        <button class="state-toggle-btn" style="padding:6px;" onclick="selectDateVal('22 Oct 2026')">22</button>
-        <button class="state-toggle-btn" style="padding:6px;" onclick="selectDateVal('23 Oct 2026')">23</button>
-        <button class="state-toggle-btn" style="padding:6px;" onclick="selectDateVal('24 Oct 2026')">24</button>
+
+      <!-- Month & Year Selector Controls -->
+      <div class="calendar-controls-bar">
+        <button type="button" class="cal-nav-btn" onclick="navCalendarMonth(-1)" title="Previous Month">‹</button>
+        <div style="display:flex; align-items:center; gap:6px;">
+          <select id="cal-month-select" class="cal-select-dropdown" onchange="onCalendarDropdownChange()">
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9" selected>October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+          </select>
+          <select id="cal-year-select" class="cal-select-dropdown" onchange="onCalendarDropdownChange()">
+            <option value="2026" selected>2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+          </select>
+        </div>
+        <button type="button" class="cal-nav-btn" onclick="navCalendarMonth(1)" title="Next Month">›</button>
+      </div>
+
+      <!-- Day Headers -->
+      <div class="calendar-weekdays-row">
+        <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+      </div>
+
+      <!-- Days Grid (Dynamically Populated) -->
+      <div class="calendar-days-grid" id="calendar-days-grid">
+        <!-- Rendered by renderCalendarDays() -->
+      </div>
+
+      <!-- Trip Duration & Confirm Footer -->
+      <div class="calendar-footer-summary">
+        <div id="cal-duration-preview-text" style="font-size:12px; font-weight:700; color:var(--color-terracotta);">
+          🗓️ Trip Duration: 4 Days (3 Nights)
+        </div>
+        <button type="button" class="btn-generate-itinerary-hero" style="margin-top:10px; padding:11px;" onclick="confirmCalendarDates()">
+          Confirm Dates ✓
+        </button>
       </div>
     </div>
   </div>

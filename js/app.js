@@ -16,6 +16,14 @@ let currentActiveDay = 1;
 let swappingStopIndex = null;
 let draggedStopIndex = null;
 
+// Calendar & Dynamic Planning Global State
+let calArrivalDate = new Date(2026, 9, 18); // 18 Oct 2026
+let calReturnDate = new Date(2026, 9, 21);  // 21 Oct 2026
+let calViewMonth = 9; // October (0-11)
+let calViewYear = 2026;
+let activeCalTarget = "arrival"; // "arrival" | "return"
+let activePlanDuration = 4; // Days calculated from Arrival and Return
+
 // Master Dynamic Itinerary Data by Day (Predefined Cluster Data)
 const ITINERARY_DAYS_DATA = {
   1: {
@@ -216,6 +224,72 @@ const ITINERARY_DAYS_DATA = {
       { name: "Inorbit Mall Lake Terrace", meta: "Retail & Overlook Boardwalk • 800m away", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.5 hrs", hours: "🟢 Open Now • Closes 10:00 PM", image: "https://images.unsplash.com/photo-1567449303078-57ad995bd301?auto=format&fit=crop&w=400&q=80" },
       { name: "Cyber Gateway Tech Plaza", meta: "Iconic Tech Hub Gateway • 600m away", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 30 mins", hours: "🟢 Open Now • Open 24 Hours", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80" }
     ]
+  },
+  4: {
+    dayNum: 4,
+    name: "Hussainsagar Cultural Loop",
+    clusterName: "Hussainsagar Cultural Belt",
+    subtitle: "Hussainsagar & Cultural Belt • 2.0 km Cluster",
+    stops: [
+      {
+        id: "day4-stop1",
+        name: "Hussain Sagar Lake & Buddha Statue",
+        image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=400&q=80",
+        entry: "🎫 ₹20 Boat Ride",
+        dwell: "🕒 Dwell: 1.5 hrs",
+        status: "🟢 Open Now • Closes 8:30 PM",
+        skipped: false,
+        foodBreak: {
+          title: "Feeling Hungry? (Within 500m)",
+          options: [
+            { name: "Eat Street Tank Bund", price: "₹80 – ₹160", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "Lakefront Street Snacks & Pav Bhaji" },
+            { name: "Paradise Secunderabad", price: "₹140 – ₹250", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Flagship Hyderabadi Dum Biryani" }
+          ]
+        }
+      },
+      {
+        id: "day4-stop2",
+        name: "Birla Mandir & Planetarium",
+        image: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?auto=format&fit=crop&w=400&q=80",
+        entry: "🎫 Free Entry",
+        dwell: "🕒 Dwell: 1.5 hrs",
+        status: "🟢 Open Now • Closes 9:00 PM",
+        skipped: false,
+        foodBreak: {
+          title: "Feeling Hungry? (Within 500m)",
+          options: [
+            { name: "Minerva Coffee Shop", price: "₹100 – ₹200", img: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=150&q=80", desc: "Crispy Medu Vada & Filter Coffee" },
+            { name: "Taj Mahal Hotel Abids", price: "₹90 – ₹180", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=150&q=80", desc: "Classic South Indian Thali & Sweets" }
+          ]
+        }
+      },
+      {
+        id: "day4-stop3",
+        name: "Lumbini Park & Musical Fountain",
+        image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80",
+        entry: "🎫 ₹20 Entry",
+        dwell: "🕒 Dwell: 1.5 hrs",
+        status: "🟢 Open Now • Closes 9:00 PM",
+        skipped: false,
+        foodBreak: {
+          title: "Feeling Hungry? (Within 500m)",
+          options: [
+            { name: "Waterfront Lake Lounge", price: "₹250 – ₹500", img: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=150&q=80", desc: "Scenic Lakeside Indian & Continental" },
+            { name: "Ohri's Gufaa", price: "₹220 – ₹450", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Themed Cave Dining & Mughlai Delicacies" }
+          ]
+        }
+      }
+    ],
+    nextStop: {
+      name: "Tank Bund Heritage Walkway",
+      eta: "~ 5 min away",
+      image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=200&q=80"
+    },
+    swappables: [
+      { name: "Sanjeevaiah Park", meta: "Lakeside Rose & Rock Gardens • 1 km away", entry: "🎫 ₹20 Entry", dwell: "🕒 Dwell: 1.0 hr", hours: "🟢 Open Now • Closes 7:00 PM", image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80" },
+      { name: "B.M. Birla Science Museum", meta: "Interactive Science & Dinosaur Fossils", entry: "🎫 ₹50 Entry", dwell: "🕒 Dwell: 2.0 hrs", hours: "🟢 Open Now • Closes 8:00 PM", image: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?auto=format&fit=crop&w=400&q=80" },
+      { name: "Necklace Road Promenade", meta: "Open Waterfront Boulevard • 500m away", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.0 hr", hours: "🟢 Open Now • Open 24 Hours", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80" }
+    ]
   }
 };
 
@@ -232,6 +306,8 @@ document.addEventListener("DOMContentLoaded", () => {
   setupItineraryInteractions();
   setupStaysScreen();
   setupExperienceExplorer();
+  startHeroBgSlideshow();
+  initCalendar();
 
   // Render Day 1 by default
   renderItineraryDay(1);
@@ -258,12 +334,10 @@ function setupScreenNavigation() {
     setActiveBottomTab("home");
   });
 
-  // Screen 2.0 Generate CTA
+  // Screen 2.0 Generate CTA (Intelligent Dynamic Generator)
   document.getElementById("btn-generate-plan-submit")?.addEventListener("click", () => {
     if (activeExperienceChoice === "1st-timer") {
-      switchAppScreen("screen-itinerary");
-      setActiveBottomTab("itinerary");
-      renderItineraryDay(1);
+      generateIntelligentItinerary();
     } else {
       switchAppScreen("screen-experience-explorer");
       setActiveBottomTab("explore");
@@ -344,25 +418,187 @@ window.selectDestinationQuick = function(cityName) {
 };
 
 // --------------------------------------------------------------------------
-// 3. Section 2: Trip Dates Modal Handling
+// 3. Section 2: Interactive Pop-up Calendar Engine (Date, Month, Year)
 // --------------------------------------------------------------------------
-window.openDateModal = function(targetType) {
-  activeDateTarget = targetType;
-  const title = document.getElementById("modal-date-title");
-  if (title) {
-    title.textContent = targetType === "arrival" ? "Select Arrival Date" : "Select Return Date";
+const MONTH_NAMES_SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function formatDateDisplay(d) {
+  if (!d) return "";
+  const day = d.getDate();
+  const month = MONTH_NAMES_SHORT[d.getMonth()];
+  const year = d.getFullYear();
+  return `${day} ${month} ${year}`;
+}
+
+function initCalendar() {
+  const mSelect = document.getElementById("cal-month-select");
+  const ySelect = document.getElementById("cal-year-select");
+  if (mSelect) mSelect.value = calViewMonth;
+  if (ySelect) ySelect.value = calViewYear;
+  updateCalendarTabLabels();
+  renderCalendarDays();
+}
+
+function updateCalendarTabLabels() {
+  const arrVal = document.getElementById("cal-tab-arrival-val");
+  const retVal = document.getElementById("cal-tab-return-val");
+  if (arrVal) arrVal.textContent = formatDateDisplay(calArrivalDate);
+  if (retVal) retVal.textContent = formatDateDisplay(calReturnDate);
+  
+  const diffDays = Math.max(1, Math.round((calReturnDate - calArrivalDate) / (1000 * 60 * 60 * 24)) + 1);
+  const nights = Math.max(0, diffDays - 1);
+  const durPreview = document.getElementById("cal-duration-preview-text");
+  if (durPreview) {
+    durPreview.textContent = `🗓️ Trip Duration: ${diffDays} Days (${nights} ${nights === 1 ? 'Night' : 'Nights'})`;
   }
+}
+
+window.openDateModal = function(targetType) {
+  activeCalTarget = targetType;
+  const targetDate = targetType === "arrival" ? calArrivalDate : calReturnDate;
+  calViewMonth = targetDate.getMonth();
+  calViewYear = targetDate.getFullYear();
+  
+  const mSelect = document.getElementById("cal-month-select");
+  const ySelect = document.getElementById("cal-year-select");
+  if (mSelect) mSelect.value = calViewMonth;
+  if (ySelect) ySelect.value = calViewYear;
+  
+  switchCalendarTarget(targetType);
   openModal("modal-date-picker");
 };
 
-window.selectDateVal = function(dateStr) {
-  if (activeDateTarget === "arrival") {
-    document.getElementById("label-arrival-date").textContent = dateStr;
-  } else {
-    document.getElementById("label-return-date").textContent = dateStr;
+window.switchCalendarTarget = function(targetType) {
+  activeCalTarget = targetType;
+  document.getElementById("tab-cal-arrival")?.classList.toggle("active", targetType === "arrival");
+  document.getElementById("tab-cal-return")?.classList.toggle("active", targetType === "return");
+  const modalTitle = document.getElementById("modal-date-title");
+  if (modalTitle) {
+    modalTitle.textContent = targetType === "arrival" ? "Select Arrival Date" : "Select Return Date";
   }
+  renderCalendarDays();
+};
+
+window.navCalendarMonth = function(delta) {
+  calViewMonth += delta;
+  if (calViewMonth > 11) {
+    calViewMonth = 0;
+    calViewYear++;
+  } else if (calViewMonth < 0) {
+    calViewMonth = 11;
+    calViewYear--;
+  }
+  const mSelect = document.getElementById("cal-month-select");
+  const ySelect = document.getElementById("cal-year-select");
+  if (mSelect) mSelect.value = calViewMonth;
+  if (ySelect) ySelect.value = calViewYear;
+  renderCalendarDays();
+};
+
+window.onCalendarDropdownChange = function() {
+  const mSelect = document.getElementById("cal-month-select");
+  const ySelect = document.getElementById("cal-year-select");
+  if (mSelect) calViewMonth = parseInt(mSelect.value, 10);
+  if (ySelect) calViewYear = parseInt(ySelect.value, 10);
+  renderCalendarDays();
+};
+
+function renderCalendarDays() {
+  const grid = document.getElementById("calendar-days-grid");
+  if (!grid) return;
+  grid.innerHTML = "";
+
+  const firstDayIndex = new Date(calViewYear, calViewMonth, 1).getDay();
+  const totalDaysInMonth = new Date(calViewYear, calViewMonth + 1, 0).getDate();
+  const prevMonthDays = new Date(calViewYear, calViewMonth, 0).getDate();
+
+  // Previous month padding days
+  for (let i = firstDayIndex - 1; i >= 0; i--) {
+    const dayNum = prevMonthDays - i;
+    const cell = document.createElement("button");
+    cell.type = "button";
+    cell.className = "cal-day-cell other-month";
+    cell.textContent = dayNum;
+    grid.appendChild(cell);
+  }
+
+  // Current month days
+  const arrTime = new Date(calArrivalDate.getFullYear(), calArrivalDate.getMonth(), calArrivalDate.getDate()).getTime();
+  const retTime = new Date(calReturnDate.getFullYear(), calReturnDate.getMonth(), calReturnDate.getDate()).getTime();
+
+  for (let day = 1; day <= totalDaysInMonth; day++) {
+    const currentCellDate = new Date(calViewYear, calViewMonth, day);
+    const cellTime = currentCellDate.getTime();
+    const cell = document.createElement("button");
+    cell.type = "button";
+    cell.className = "cal-day-cell";
+    cell.textContent = day;
+
+    const isArrival = cellTime === arrTime;
+    const isReturn = cellTime === retTime;
+    const inRange = cellTime > arrTime && cellTime < retTime;
+
+    if (isArrival) cell.classList.add("selected-arrival");
+    if (isReturn) cell.classList.add("selected-return");
+    if (inRange) cell.classList.add("in-range");
+
+    cell.addEventListener("click", () => {
+      if (activeCalTarget === "arrival") {
+        calArrivalDate = currentCellDate;
+        if (calReturnDate.getTime() <= calArrivalDate.getTime()) {
+          calReturnDate = new Date(calArrivalDate.getTime() + 86400000 * 3); // 4 days trip
+        }
+        // Auto-switch to Return tab for smooth workflow
+        switchCalendarTarget("return");
+      } else {
+        if (currentCellDate.getTime() < calArrivalDate.getTime()) {
+          calArrivalDate = currentCellDate;
+          switchCalendarTarget("return");
+        } else {
+          calReturnDate = currentCellDate;
+        }
+      }
+      updateCalendarTabLabels();
+      renderCalendarDays();
+    });
+
+    grid.appendChild(cell);
+  }
+
+  // Next month padding days to fill grid row
+  const totalRendered = firstDayIndex + totalDaysInMonth;
+  const nextMonthPadding = (7 - (totalRendered % 7)) % 7;
+  for (let n = 1; n <= nextMonthPadding; n++) {
+    const cell = document.createElement("button");
+    cell.type = "button";
+    cell.className = "cal-day-cell other-month";
+    cell.textContent = n;
+    grid.appendChild(cell);
+  }
+
+  updateCalendarTabLabels();
+}
+
+window.confirmCalendarDates = function() {
+  document.getElementById("label-arrival-date").textContent = formatDateDisplay(calArrivalDate);
+  document.getElementById("label-return-date").textContent = formatDateDisplay(calReturnDate);
+  activePlanDuration = Math.min(4, Math.max(1, Math.round((calReturnDate - calArrivalDate) / (1000 * 60 * 60 * 24)) + 1));
   closeModal("modal-date-picker");
 };
+
+// --------------------------------------------------------------------------
+// 3b. Background Slideshow Controller (Screen 2.0 Hero)
+// --------------------------------------------------------------------------
+function startHeroBgSlideshow() {
+  const slides = document.querySelectorAll("#plan-bg-slideshow .plan-bg-slide");
+  if (!slides || slides.length === 0) return;
+  let currentSlide = 0;
+  setInterval(() => {
+    slides[currentSlide].classList.remove("active");
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add("active");
+  }, 4000);
+}
 
 // --------------------------------------------------------------------------
 // 4. Section 3 & 5: Dynamic and Experience Selection
@@ -457,6 +693,278 @@ window.closeModal = function(id) {
 };
 
 // --------------------------------------------------------------------------
+// 7b. Dynamic Itinerary & Stays Intelligent Synthesizer
+// --------------------------------------------------------------------------
+function generateIntelligentItinerary() {
+  const dynamicCard = document.querySelector(".dynamic-option-card.active");
+  const travelDynamic = dynamicCard ? dynamicCard.dataset.dyn : "Solo";
+
+  const openBudgetCard = document.querySelector(".budget-tier-expand-card.open") || document.querySelector(".budget-tier-expand-card");
+  const budgetTier = openBudgetCard ? openBudgetCard.dataset.tier : "budget-friendly";
+  const selectedSub = openBudgetCard?.querySelector(".subrange-tier-item.selected")?.dataset.range || "₹1,500 – ₹2,000 / day";
+
+  const durationDays = Math.min(4, Math.max(1, Math.round((calReturnDate - calArrivalDate) / (1000 * 60 * 60 * 24)) + 1));
+  activePlanDuration = durationDays;
+
+  // Build tailor-made days data based on travelDynamic and budgetTier
+  activeItineraryState = buildCustomItinerary(travelDynamic, budgetTier, durationDays);
+
+  // Update Screen 3.0 Header metadata pill
+  const prefsLabel = document.getElementById("itin-user-prefs-label");
+  const prefsDates = document.getElementById("itin-user-prefs-dates");
+  const dynamicIcon = travelDynamic === "Solo" ? "👤" : (travelDynamic === "Duo" ? "👥" : "👨‍👩‍👧‍👦");
+  const tierName = budgetTier === "budget-friendly" ? "Budget Friendly" : (budgetTier === "premium" ? "Premium" : "Luxury");
+
+  if (prefsLabel) prefsLabel.innerHTML = `${dynamicIcon} ${travelDynamic} • ${tierName} (${selectedSub})`;
+  if (prefsDates) prefsDates.textContent = `${formatDateDisplay(calArrivalDate)} – ${formatDateDisplay(calReturnDate)} (${durationDays} Days)`;
+
+  // Update Screen 3.0 View Stays Banner subtitle based on budget
+  const staysSub = document.getElementById("view-stays-banner-subtitle");
+  if (staysSub) {
+    if (budgetTier === "budget-friendly") {
+      staysSub.textContent = "Budget hostels & verified stays from ₹799/night";
+    } else if (budgetTier === "premium") {
+      staysSub.textContent = "Curated boutique heritage stays from ₹1,999/night";
+    } else {
+      staysSub.textContent = "Royal heritage suites & palaces from ₹12,999/night";
+    }
+  }
+
+  // Pre-filter Screen 4.0 Stays to match user's budget tier
+  applyStaysTierFilter(budgetTier === "budget-friendly" ? "budget" : (budgetTier === "premium" ? "premium" : "exclusive"));
+
+  // Update Screen 1.0 (Dashboard Ongoing Trip)
+  const homeOngoingTitle = document.querySelector(".ongoing-trip-title");
+  if (homeOngoingTitle) {
+    homeOngoingTitle.textContent = `Day 1: ${activeItineraryState[1].clusterName} (${travelDynamic})`;
+  }
+
+  // Switch to Screen 3.0 and render Day 1
+  switchAppScreen("screen-itinerary");
+  setActiveBottomTab("itinerary");
+  renderItineraryDay(1);
+}
+
+function applyStaysTierFilter(tier) {
+  document.querySelectorAll(".stay-filter-chip").forEach(chip => {
+    chip.classList.toggle("active", chip.dataset.stayTier === tier);
+  });
+  document.querySelectorAll(".stay-listing-card").forEach(card => {
+    if (tier === "all" || card.dataset.stayTier === tier) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
+
+function buildCustomItinerary(travelDynamic, budgetTier, durationDays) {
+  const result = {};
+
+  // Dining catalog segmented by budget tier
+  const diningCatalog = {
+    "budget-friendly": {
+      d1: [
+        { name: "Nimrah Cafe", price: "₹50 – ₹100", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "Legendary Irani Chai & Osmania Biscuits" },
+        { name: "Hotel Shadab", price: "₹100 – ₹200", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Authentic Hyderabadi Dum Biryani" },
+        { name: "Govind Dosa Bandi", price: "₹40 – ₹90", img: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=150&q=80", desc: "Butter Tawa Dosa with Podi Chutney" }
+      ],
+      d2: [
+        { name: "Shah Ghouse Golconda", price: "₹120 – ₹220", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "Dum Biryani, Mutton Haleem & Chai" },
+        { name: "Pista House Tolichowki", price: "₹100 – ₹200", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=150&q=80", desc: "Zafrani Chai, Osmania Biscuits & Snacks" },
+        { name: "Baradari Tea Stall", price: "₹40 – ₹80", img: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=150&q=80", desc: "Hot Cutting Chai & Mirchi Bajji" }
+      ],
+      d3: [
+        { name: "Chutneys Cyber Towers", price: "₹120 – ₹240", img: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=150&q=80", desc: "Steamed Guntur Idli with 6 Chutneys" },
+        { name: "Rayalaseema Ruchulu", price: "₹180 – ₹320", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Traditional Andhra Thali & Ragi Sankati" },
+        { name: "Cyber Cafe Bandi", price: "₹50 – ₹100", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "Filter Coffee & Bun Maska" }
+      ],
+      d4: [
+        { name: "Eat Street Tank Bund", price: "₹80 – ₹160", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "Lakefront Street Snacks & Pav Bhaji" },
+        { name: "Paradise Secunderabad", price: "₹140 – ₹250", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Flagship Hyderabadi Dum Biryani" },
+        { name: "Minerva Coffee Shop", price: "₹100 – ₹200", img: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=150&q=80", desc: "Crispy Medu Vada & Filter Coffee" }
+      ]
+    },
+    "premium": {
+      d1: [
+        { name: "Cafe Niloufer Lounge", price: "₹180 – ₹350", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "Special Malai Chai & Mawa Cake" },
+        { name: "Jewel of Nizam - The Minar", price: "₹900 – ₹1,800", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Royal Nizami Kebabs & Dum Biryani" },
+        { name: "Hameedi Confectioners Heritage", price: "₹150 – ₹300", img: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=150&q=80", desc: "Nizam-favored Jouzi Halwa & Pistachio Sweets" }
+      ],
+      d2: [
+        { name: "4 Seasons Tolichowki", price: "₹350 – ₹650", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Lebanese Kebabs & Mutton Mandi Platter" },
+        { name: "Concu Jubilee Hills", price: "₹300 – ₹600", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=150&q=80", desc: "Specialty Coffee & Artisanal French Pastries" },
+        { name: "Baradari Heritage Open-Air Cafe", price: "₹200 – ₹450", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "Sunset Refreshments & Nizam Appetizers" }
+      ],
+      d3: [
+        { name: "Olive Bistro Lakefront", price: "₹600 – ₹1,200", img: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=150&q=80", desc: "White-walled Mediterranean Lakeside Dining" },
+        { name: "Roastery Coffee House", price: "₹250 – ₹550", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "Specialty Cold Brews & Gourmet Bagels" },
+        { name: "Farzi Cafe Cyber Hub", price: "₹500 – ₹1,100", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Modern Molecular Indian Gastronomy" }
+      ],
+      d4: [
+        { name: "Waterfront Lake Lounge", price: "₹600 – ₹1,100", img: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=150&q=80", desc: "Scenic Lakeside Indian & Continental" },
+        { name: "Ohri's Gufaa", price: "₹450 – ₹900", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Themed Cave Dining & Mughlai Delicacies" },
+        { name: "Sanctuary Bar & Kitchen", price: "₹550 – ₹1,200", img: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=150&q=80", desc: "Artisan Mocktails & Modern Heritage Plates" }
+      ]
+    },
+    "luxury": {
+      d1: [
+        { name: "Adaa at Taj Falaknuma", price: "₹4,500 – ₹8,000", img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=150&q=80", desc: "Royal Nizam 6-Course Degustation" },
+        { name: "The Jade Room Afternoon Tea", price: "₹3,000 – ₹6,000", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "High Tea Served on Nizam Silverware" },
+        { name: "The Golconda Pavilion (ITC)", price: "₹2,500 – ₹5,000", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Handcrafted Deccani Luxury Feast" }
+      ],
+      d2: [
+        { name: "Private Nizam Verandah Dining", price: "₹3,500 – ₹7,000", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Slow-cooked Dum Pukht Biryani by Master Chefs" },
+        { name: "Ottimo at ITC Kohenur", price: "₹3,000 – ₹6,000", img: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=150&q=80", desc: "Pan-Italian Fine Dining & Truffle Risotto" },
+        { name: "Skyline Heritage Lounge", price: "₹2,500 – ₹5,500", img: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=150&q=80", desc: "Handcrafted Heritage Elixirs & Sunset View" }
+      ],
+      d3: [
+        { name: "Yi Jing at ITC Kohenur", price: "₹3,500 – ₹6,500", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Contemporary Chinese Tasting Experience" },
+        { name: "Falaknuma Champagne Terrace", price: "₹5,000 – ₹10,000", img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=150&q=80", desc: "Sunset Reserve Champagne & Nizam Caviar" },
+        { name: "Tre-Forni at Park Hyatt", price: "₹3,500 – ₹6,500", img: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=150&q=80", desc: "Authentic Wood-fired Italian Grills" }
+      ],
+      d4: [
+        { name: "Dakshin at ITC Kakatiya", price: "₹3,500 – ₹7,000", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Grand South Indian Royal Thali Experience" },
+        { name: "Aish Fine Dining", price: "₹3,000 – ₹6,000", img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=150&q=80", desc: "Historic Nizami Recipes in Palatial Silver Interior" },
+        { name: "Glasshouse at Sheraton", price: "₹2,500 – ₹5,000", img: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=150&q=80", desc: "Panoramic Sky Dining & Chef's Special Table" }
+      ]
+    }
+  };
+
+  const diningTier = diningCatalog[budgetTier] || diningCatalog["budget-friendly"];
+
+  // Base day templates customized by travel dynamic
+  for (let d = 1; d <= durationDays; d++) {
+    const dKey = `d${d}`;
+    const foods = diningTier[dKey] || diningTier.d1;
+
+    if (d === 1) {
+      let stops = [];
+      if (travelDynamic === "Solo") {
+        stops = [
+          { id: "day1-stop1", name: "Charminar & Laad Bazaar", image: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹25 Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 5:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
+          { id: "day1-stop2", name: "Chowmahalla Palace", image: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹100 Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 5:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
+          { id: "day1-stop3", name: "Mecca Masjid", image: "https://images.unsplash.com/photo-1585123388867-3bfe6dd4bdbf?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 45 mins", status: "🟢 Open Now • Closes 9:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
+        ];
+      } else if (travelDynamic === "Duo") {
+        stops = [
+          { id: "day1-stop1", name: "Charminar & Clock Tower", image: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹25 Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 5:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
+          { id: "day1-stop2", name: "Chowmahalla Palace Gardens", image: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹100 Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 5:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
+          { id: "day1-stop3", name: "Laad Bazaar Sunset Stroll", image: "https://images.unsplash.com/photo-1600100397608-f010f4438317?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 10:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
+        ];
+      } else {
+        stops = [
+          { id: "day1-stop1", name: "Chowmahalla Palace & Vintage Cars", image: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹100 Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 5:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
+          { id: "day1-stop2", name: "Salar Jung Museum", image: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹50 Entry", dwell: "🕒 Dwell: 2.5 hrs", status: "🟢 Open Now • Closes 5:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
+          { id: "day1-stop3", name: "Charminar Monument", image: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹25 Entry", dwell: "🕒 Dwell: 1.0 hr", status: "🟢 Open Now • Closes 5:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
+        ];
+      }
+      result[1] = {
+        dayNum: 1,
+        name: "Old City Heritage Day",
+        clusterName: "Old City Heritage Core",
+        subtitle: "Old City Heritage Cluster • 1.8 km Cluster",
+        stops: stops,
+        nextStop: { name: "Golconda Fort", eta: "~ 20 min away", image: "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=200&q=80" },
+        swappables: ITINERARY_DAYS_DATA[1].swappables
+      };
+    } else if (d === 2) {
+      let stops = [];
+      if (travelDynamic === "Solo") {
+        stops = [
+          { id: "day2-stop1", name: "Golconda Fort Citadel Trek", image: "https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹25 Entry", dwell: "🕒 Dwell: 3.0 hrs", status: "🟢 Open Now • Closes 5:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
+          { id: "day2-stop2", name: "Qutb Shahi Tombs", image: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹25 Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 6:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
+          { id: "day2-stop3", name: "Taramati Baradari", image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 6:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
+        ];
+      } else if (travelDynamic === "Duo") {
+        stops = [
+          { id: "day2-stop1", name: "Taramati Baradari Sunset Pavilion", image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 6:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
+          { id: "day2-stop2", name: "Qutb Shahi Tombs Heritage Garden", image: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹25 Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 6:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
+          { id: "day2-stop3", name: "Golconda Fort Scenic Outlook", image: "https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹25 Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 5:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
+        ];
+      } else {
+        stops = [
+          { id: "day2-stop1", name: "Golconda Fort & Royal Tombs", image: "https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹25 Entry", dwell: "🕒 Dwell: 2.5 hrs", status: "🟢 Open Now • Closes 5:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
+          { id: "day2-stop2", name: "Qutb Shahi Tombs Serene Grounds", image: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹25 Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 6:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
+          { id: "day2-stop3", name: "Taramati Baradari", image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 6:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
+        ];
+      }
+      result[2] = {
+        dayNum: 2,
+        name: "Western Forts & Royal Tombs",
+        clusterName: "Western Fort & Royal Tombs",
+        subtitle: "Western Fort & Royal Tombs • 3.2 km Cluster",
+        stops: stops,
+        nextStop: { name: "Durgam Cheruvu & Cable Bridge", eta: "~ 15 min away", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=200&q=80" },
+        swappables: ITINERARY_DAYS_DATA[2].swappables
+      };
+    } else if (d === 3) {
+      let stops = [];
+      if (travelDynamic === "Solo") {
+        stops = [
+          { id: "day3-stop1", name: "Durgam Cheruvu Walkway & Cable Bridge", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 8:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
+          { id: "day3-stop2", name: "Shilparamam Craft Village", image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹60 Entry", dwell: "🕒 Dwell: 2.5 hrs", status: "🟢 Open Now • Closes 8:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
+          { id: "day3-stop3", name: "Raidurg Skywalk & Knowledge City", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.0 hr", status: "🟢 Open Now • Open 24 Hours", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
+        ];
+      } else if (travelDynamic === "Duo") {
+        stops = [
+          { id: "day3-stop1", name: "Durgam Cheruvu Lake Promenade", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 8:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
+          { id: "day3-stop2", name: "Inorbit Lake Terrace", image: "https://images.unsplash.com/photo-1567449303078-57ad995bd301?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 10:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
+          { id: "day3-stop3", name: "Raidurg Skywalk Illumination", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.0 hr", status: "🟢 Open Now • Open 24 Hours", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
+        ];
+      } else {
+        stops = [
+          { id: "day3-stop1", name: "Shilparamam Arts & Crafts Village", image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹60 Entry", dwell: "🕒 Dwell: 2.5 hrs", status: "🟢 Open Now • Closes 8:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
+          { id: "day3-stop2", name: "Durgam Cheruvu Family Park", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 8:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
+          { id: "day3-stop3", name: "Raidurg Skywalk & Knowledge City", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.0 hr", status: "🟢 Open Now • Open 24 Hours", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
+        ];
+      }
+      result[3] = {
+        dayNum: 3,
+        name: "Cyberabad Modern Corridor",
+        clusterName: "Hitec City Corridor",
+        subtitle: "Hitec City & Modern Cyberabad • 2.5 km Cluster",
+        stops: stops,
+        nextStop: { name: "Khajaguda Boulders (Sunset Point)", eta: "~ 10 min away", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=200&q=80" },
+        swappables: ITINERARY_DAYS_DATA[3].swappables
+      };
+    } else if (d === 4) {
+      let stops = [];
+      if (travelDynamic === "Solo") {
+        stops = [
+          { id: "day4-stop1", name: "Hussain Sagar Lake & Buddha Statue", image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹20 Boat Ride", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 8:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
+          { id: "day4-stop2", name: "Birla Mandir & Planetarium", image: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 9:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
+          { id: "day4-stop3", name: "Tank Bund Promenade", image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.0 hr", status: "🟢 Open Now • Open 24 Hours", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
+        ];
+      } else if (travelDynamic === "Duo") {
+        stops = [
+          { id: "day4-stop1", name: "Hussainsagar Sunset Boat Cruise", image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹50 Speedboat", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 8:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
+          { id: "day4-stop2", name: "Lumbini Park Musical Fountain", image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹20 Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 9:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
+          { id: "day4-stop3", name: "Birla Mandir Hilltop View", image: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 9:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
+        ];
+      } else {
+        stops = [
+          { id: "day4-stop1", name: "Birla Science Museum & Planetarium", image: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹50 Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 8:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
+          { id: "day4-stop2", name: "Buddha Statue Lake Boat Ride", image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹20 Boat Ride", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 8:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
+          { id: "day4-stop3", name: "Lumbini Park & Laser Show", image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹20 Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 9:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
+        ];
+      }
+      result[4] = {
+        dayNum: 4,
+        name: "Hussainsagar Cultural Loop",
+        clusterName: "Hussainsagar Cultural Belt",
+        subtitle: "Hussainsagar & Cultural Belt • 2.0 km Cluster",
+        stops: stops,
+        nextStop: { name: "Tank Bund Heritage Walkway", eta: "~ 5 min away", image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=200&q=80" },
+        swappables: ITINERARY_DAYS_DATA[4].swappables
+      };
+    }
+  }
+
+  return result;
+}
+
+// --------------------------------------------------------------------------
 // 8. Screen 3.0: Dynamic Itinerary Engine (Day Switch, Reorder, Swap, Skip)
 // --------------------------------------------------------------------------
 function setupItineraryInteractions() {
@@ -486,18 +994,27 @@ window.renderItineraryDay = function(dayNumber) {
   const dayData = activeItineraryState[dayNumber];
   if (!dayData) return;
 
-  // 1. Update Day switcher pills active state and titles
-  document.querySelectorAll(".itin-day-pill").forEach(p => {
-    const dNum = parseInt(p.dataset.day, 10);
-    p.classList.toggle("active", dNum === dayNumber);
-    if (dNum === 1) {
-      p.innerHTML = dNum === dayNumber ? "📍 Day 1: Old City (Active)" : "Day 1: Old City";
-    } else if (dNum === 2) {
-      p.innerHTML = dNum === dayNumber ? "📍 Day 2: Western Forts (Active)" : "Day 2: Western Forts";
-    } else if (dNum === 3) {
-      p.innerHTML = dNum === dayNumber ? "📍 Day 3: Cyberabad (Active)" : "Day 3: Cyberabad";
+  // 1. Update Day switcher pills active state and render buttons matching activePlanDuration
+  const pillsContainer = document.querySelector(".itinerary-days-pill-row");
+  if (pillsContainer) {
+    pillsContainer.innerHTML = "";
+    const totalDays = Math.min(4, Math.max(1, activePlanDuration || 3));
+    for (let d = 1; d <= totalDays; d++) {
+      const btn = document.createElement("button");
+      btn.className = `itin-day-pill ${d === dayNumber ? "active" : ""}`;
+      btn.dataset.day = d;
+      btn.id = `day-pill-${d}`;
+      let dayTitle = `Day ${d}`;
+      if (d === 1) dayTitle = "Old City";
+      else if (d === 2) dayTitle = "Western Forts";
+      else if (d === 3) dayTitle = "Cyberabad";
+      else if (d === 4) dayTitle = "Hussainsagar";
+
+      btn.innerHTML = d === dayNumber ? `📍 Day ${d}: ${dayTitle} (Active)` : `Day ${d}: ${dayTitle}`;
+      btn.addEventListener("click", () => renderItineraryDay(d));
+      pillsContainer.appendChild(btn);
     }
-  });
+  }
 
   // 2. Render stops and contextual food breaks
   const container = document.getElementById("itinerary-stops-list");
@@ -862,8 +1379,50 @@ function setupExperienceExplorer() {
       alert("Please select at least 1 place using 'Add Plan +' before generating your custom itinerary.");
       return;
     }
-    const chosenList = Array.from(selectedCustomPlaces).join(", ");
-    alert(`✨ Custom Itinerary Generated!\nStops included: ${chosenList}\nOpening your Live Itinerary layout...`);
+    const chosenList = Array.from(selectedCustomPlaces);
+    
+    // Build Day 1 from user's custom chosen places
+    const customStops = [];
+    chosenList.forEach((pName, idx) => {
+      const card = Array.from(document.querySelectorAll(".exp-place-card")).find(c => {
+        const text = c.querySelector(".exp-place-name")?.textContent.trim() || "";
+        return text === pName || pName.includes(text) || text.includes(pName);
+      });
+      const img = card?.querySelector(".exp-place-photo")?.src || "https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=400&q=80";
+      const cost = card?.dataset.cost || "50";
+      const dwell = card?.dataset.dwell || "1.5";
+
+      customStops.push({
+        id: `custom-stop-${idx + 1}`,
+        name: pName,
+        image: img,
+        entry: `🎫 ₹${cost} Entry`,
+        dwell: `🕒 Dwell: ${dwell} hrs`,
+        status: "🟢 Open Now • Closes 6:00 PM",
+        skipped: false,
+        foodBreak: {
+          title: "Feeling Hungry? (Within 500m)",
+          options: [
+            { name: "Nimrah Cafe", price: "₹50 – ₹100", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=150&q=80", desc: "Legendary Irani Chai & Osmania Biscuits" },
+            { name: "Hotel Shadab", price: "₹100 – ₹200", img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=150&q=80", desc: "Authentic Hyderabadi Dum Biryani" }
+          ]
+        }
+      });
+    });
+
+    activeItineraryState[1] = {
+      dayNum: 1,
+      name: "Custom Explorer Plan",
+      clusterName: "Self-Curated Explorer Loop",
+      subtitle: `Custom Explorer Plan • ${customStops.length} Selected Stops`,
+      stops: customStops,
+      nextStop: { name: "Evening Scenic Walk", eta: "~ 15 min away", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=200&q=80" },
+      swappables: ITINERARY_DAYS_DATA[1].swappables
+    };
+
+    const prefsLabel = document.getElementById("itin-user-prefs-label");
+    if (prefsLabel) prefsLabel.innerHTML = `🔭 Experience Explorer • Self-Curated Plan (${customStops.length} Spots)`;
+
     switchAppScreen("screen-itinerary");
     setActiveBottomTab("itinerary");
     renderItineraryDay(1);
