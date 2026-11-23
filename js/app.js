@@ -1012,6 +1012,17 @@ window.renderItineraryDay = function(dayNumber) {
   if (!container) return;
   container.innerHTML = "";
 
+  if (dayData.stops.length === 0) {
+    container.innerHTML = `
+      <div style="padding:28px 18px; text-align:center; background:#FAF0EC; border-radius:18px; margin:16px 0; border:1px solid rgba(189, 83, 56, 0.2);">
+        <div style="font-size:32px; margin-bottom:8px;">☕ 🌿</div>
+        <div style="font-family:var(--font-serif); font-size:16px; font-weight:700; color:#222;">Leisure &amp; Free Exploration Day</div>
+        <div style="font-size:12px; color:var(--color-slate); margin-top:4px;">No fixed stops scheduled for today. Relax at your stay, savor authentic cuisine, or wander the local neighborhood at your own pace.</div>
+      </div>
+    `;
+    return;
+  }
+
   dayData.stops.forEach((stop, idx) => {
     const isSkipped = stop.skipped;
 
@@ -2088,40 +2099,83 @@ function setupExperienceExplorer() {
     const canonicalOrder = ["old-city", "western-forts", "cyberabad", "central-lakes", "outskirts"];
     const chosenClusters = canonicalOrder.filter(c => clusterBuckets[c] && clusterBuckets[c].length > 0);
 
-    // 3. Allocate clusters to days based on user trip duration
+    // 3. Allocate ONLY the user's chosen places across totalDays, strictly clubbed by location
     const daysPlan = [];
 
-    if (chosenClusters.length <= totalDays) {
-      // Each cluster gets its own day
+    if (chosenClusters.length === totalDays) {
+      // Exactly 1 cluster per day
       chosenClusters.forEach(cKey => {
-        daysPlan.push({ clusterKey: cKey, places: clusterBuckets[cKey] });
+        daysPlan.push({ clusterKey: cKey, places: [...clusterBuckets[cKey]] });
       });
+    } else if (chosenClusters.length > totalDays) {
+      // More clusters chosen than totalDays: distribute clusters into totalDays, merging adjacent ones
+      for (let d = 0; d < totalDays; d++) {
+        daysPlan.push({ clusterKey: null, places: [] });
+      }
+      chosenClusters.forEach((cKey, idx) => {
+        const dayIdx = Math.min(idx, totalDays - 1);
+        if (!daysPlan[dayIdx].clusterKey) daysPlan[dayIdx].clusterKey = cKey;
+        daysPlan[dayIdx].places.push(...clusterBuckets[cKey]);
+      });
+    } else {
+      // Fewer clusters than totalDays (e.g. 2 clusters for 3 days):
+      // Keep each cluster pure! Allocate extra days to the clusters with the most places.
+      const daysPerCluster = {};
+      chosenClusters.forEach(cKey => { daysPerCluster[cKey] = 1; });
+      let extraDays = totalDays - chosenClusters.length;
 
-      // Fill remaining days with complementary unchosen clusters so traveler has a complete trip
-      for (const unchosen of canonicalOrder) {
-        if (daysPlan.length >= totalDays) break;
-        if (!chosenClusters.includes(unchosen)) {
-          const cfg = CLUSTER_CONFIG[unchosen];
-          const fallbackMetas = cfg.fallbackPlaces.map(p => MASTER_PLACES_METADATA[p]).filter(Boolean);
-          daysPlan.push({ clusterKey: unchosen, places: fallbackMetas });
+      while (extraDays > 0) {
+        // Find cluster with highest places-to-days ratio that has more places than days
+        let bestCluster = null;
+        let maxRatio = -1;
+        chosenClusters.forEach(cKey => {
+          const numPlaces = clusterBuckets[cKey].length;
+          if (numPlaces > daysPerCluster[cKey]) {
+            const ratio = numPlaces / daysPerCluster[cKey];
+            if (ratio > maxRatio) {
+              maxRatio = ratio;
+              bestCluster = cKey;
+            }
+          }
+        });
+
+        if (bestCluster) {
+          daysPerCluster[bestCluster]++;
+          extraDays--;
+        } else {
+          // If no cluster has surplus places (e.g. 1 place per cluster, total places < totalDays)
+          break;
         }
       }
-    } else {
-      // More clusters chosen than available days -> merge adjacent clusters cleanly into totalDays
-      for (let i = 0; i < totalDays; i++) {
-        daysPlan.push({ clusterKey: chosenClusters[i], places: [...clusterBuckets[chosenClusters[i]]] });
-      }
-      // Distribute overflow clusters to closest day
-      for (let i = totalDays; i < chosenClusters.length; i++) {
-        const targetDayIdx = Math.min(i % totalDays, totalDays - 1);
-        daysPlan[targetDayIdx].places.push(...clusterBuckets[chosenClusters[i]]);
+
+      // Split each cluster across its allocated days so locations are never mixed
+      chosenClusters.forEach(cKey => {
+        const clusterPlaces = clusterBuckets[cKey];
+        const numDays = daysPerCluster[cKey];
+        const baseCount = Math.floor(clusterPlaces.length / numDays);
+        let remainder = clusterPlaces.length % numDays;
+        let cursor = 0;
+
+        for (let d = 0; d < numDays; d++) {
+          const count = baseCount + (remainder > 0 ? 1 : 0);
+          if (remainder > 0) remainder--;
+          const slice = clusterPlaces.slice(cursor, cursor + count);
+          cursor += count;
+          daysPlan.push({ clusterKey: cKey, places: slice });
+        }
+      });
+
+      // If totalPlaces was less than totalDays, add leisure days at the end
+      while (daysPlan.length < totalDays) {
+        const lastCluster = chosenClusters[chosenClusters.length - 1] || "old-city";
+        daysPlan.push({ clusterKey: lastCluster, places: [] });
       }
     }
 
-    // 4. Build activeItineraryState for each day with authentic stops, food radar, and swappables
+    // 4. Build activeItineraryState for each day with STRICTLY the user's chosen places
     for (let d = 1; d <= totalDays; d++) {
-      const dayConfig = daysPlan[d - 1] || daysPlan[0];
-      const cKey = dayConfig.clusterKey;
+      const dayConfig = daysPlan[d - 1] || { clusterKey: "old-city", places: [] };
+      const cKey = dayConfig.clusterKey || "old-city";
       const cfg = CLUSTER_CONFIG[cKey] || CLUSTER_CONFIG["old-city"];
       const diningTier = (CLUSTER_DINING_CATALOG[cKey] && CLUSTER_DINING_CATALOG[cKey][budgetTier]) || CLUSTER_DINING_CATALOG["old-city"]["budget-friendly"];
 
@@ -2143,36 +2197,18 @@ function setupExperienceExplorer() {
         };
       });
 
-      // Ensure at least 2 stops per day
-      if (stops.length < 2 && cfg.fallbackPlaces) {
-        for (const fp of cfg.fallbackPlaces) {
-          if (stops.length >= 2) break;
-          if (!stops.some(s => s.name === fp)) {
-            const fallbackMeta = MASTER_PLACES_METADATA[fp];
-            if (fallbackMeta) {
-              stops.push({
-                id: `exp-d${d}-stop${stops.length + 1}`,
-                name: fallbackMeta.name,
-                image: fallbackMeta.image,
-                entry: fallbackMeta.entry,
-                dwell: fallbackMeta.dwell,
-                status: fallbackMeta.status,
-                skipped: false,
-                foodBreak: {
-                  title: "Feeling Hungry? (Within 500m)",
-                  options: [diningTier[0], diningTier[1]]
-                }
-              });
-            }
-          }
-        }
-      }
+      // No fallback or unselected places injected!
+      const hasStops = stops.length > 0;
+      const dayTitle = hasStops ? cfg.dayTitle : "Leisure Day";
+      const daySubtitle = hasStops
+        ? `${cfg.dayTitle} • ${stops.length} Selected ${stops.length === 1 ? 'Stop' : 'Stops'}`
+        : "Free Exploration & Leisure Day";
 
       activeItineraryState[d] = {
         dayNum: d,
-        name: cfg.dayTitle,
+        name: dayTitle,
         clusterName: cfg.name,
-        subtitle: `${cfg.dayTitle} • ${stops.length} Self-Curated Stops`,
+        subtitle: daySubtitle,
         stops: stops,
         nextStop: cfg.nextStop,
         swappables: cfg.swappables
