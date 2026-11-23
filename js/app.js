@@ -27,6 +27,26 @@ let activePlanDuration = 4; // Days calculated from Arrival and Return
 let currentPlanDynamic = "Solo";
 let currentPlanBudgetTier = "budget-friendly";
 
+function normalizeBudgetTier(tier) {
+  if (!tier) return "budget-friendly";
+  const t = String(tier).toLowerCase().trim();
+  if (t === "exclusive" || t === "luxury" || t.includes("lux") || t.includes("exclus") || t.includes("palatial")) {
+    return "luxury";
+  }
+  if (t === "premium" || t.includes("prem") || t.includes("boutique")) {
+    return "premium";
+  }
+  return "budget-friendly";
+}
+
+function normalizeTravelDynamic(dyn) {
+  if (!dyn) return "Solo";
+  const d = String(dyn).trim();
+  if (d.toLowerCase().includes("duo") || d.toLowerCase().includes("couple")) return "Duo";
+  if (d.toLowerCase().includes("fam") || d.toLowerCase().includes("group")) return "Family";
+  return "Solo";
+}
+
 // Master Dynamic Itinerary Data by Day (Predefined Cluster Data)
 const ITINERARY_DAYS_DATA = {
   1: {
@@ -340,6 +360,20 @@ function setupScreenNavigation() {
 
   // Screen 2.0 Generate CTA (Intelligent Dynamic Generator)
   document.getElementById("btn-generate-plan-submit")?.addEventListener("click", () => {
+    // 1. Synchronize live user selections from Screen 2.0
+    const dynamicCard = document.querySelector(".dynamic-option-card.active");
+    if (dynamicCard) currentPlanDynamic = normalizeTravelDynamic(dynamicCard.dataset.dyn);
+
+    const selectedSub = document.querySelector(".subrange-tier-item.selected");
+    const openBudgetCard = selectedSub ? selectedSub.closest(".budget-tier-expand-card") : (document.querySelector(".budget-tier-expand-card.open") || document.querySelector(".budget-tier-expand-card"));
+    if (openBudgetCard) currentPlanBudgetTier = normalizeBudgetTier(openBudgetCard.dataset.tier);
+
+    const durationDays = Math.min(4, Math.max(1, Math.round((calReturnDate - calArrivalDate) / (1000 * 60 * 60 * 24)) + 1));
+    activePlanDuration = durationDays;
+
+    // Immediately pre-render Curated Stays to reflect dynamic & budget
+    renderCuratedStays(currentPlanDynamic, currentPlanBudgetTier);
+
     if (activeExperienceChoice === "1st-timer") {
       generateIntelligentItinerary();
     } else {
@@ -350,6 +384,7 @@ function setupScreenNavigation() {
 
   // Screen 3.0 View Stays Banner (leads into Screen 4.0)
   document.getElementById("banner-view-stays-card")?.addEventListener("click", () => {
+    renderCuratedStays(currentPlanDynamic, currentPlanBudgetTier);
     switchAppScreen("screen-stays");
   });
 
@@ -587,6 +622,7 @@ window.confirmCalendarDates = function() {
   document.getElementById("label-arrival-date").textContent = formatDateDisplay(calArrivalDate);
   document.getElementById("label-return-date").textContent = formatDateDisplay(calReturnDate);
   activePlanDuration = Math.min(4, Math.max(1, Math.round((calReturnDate - calArrivalDate) / (1000 * 60 * 60 * 24)) + 1));
+  renderCuratedStays(currentPlanDynamic, currentPlanBudgetTier);
   closeModal("modal-date-picker");
 };
 
@@ -613,6 +649,8 @@ function setupDynamicAndExperience() {
     card.addEventListener("click", () => {
       document.querySelectorAll(".dynamic-option-card").forEach(c => c.classList.remove("active"));
       card.classList.add("active");
+      currentPlanDynamic = normalizeTravelDynamic(card.dataset.dyn);
+      renderCuratedStays(currentPlanDynamic, currentPlanBudgetTier);
     });
   });
 
@@ -635,7 +673,17 @@ function setupBudgetAccordions() {
     bar?.addEventListener("click", () => {
       const isOpen = card.classList.contains("open");
       document.querySelectorAll(".budget-tier-expand-card").forEach(c => c.classList.remove("open"));
-      if (!isOpen) card.classList.add("open");
+      if (!isOpen) {
+        card.classList.add("open");
+        currentPlanBudgetTier = normalizeBudgetTier(card.dataset.tier);
+        // Auto-select first subrange in this card if none selected
+        if (!card.querySelector(".subrange-tier-item.selected")) {
+          document.querySelectorAll(".subrange-tier-item").forEach(i => i.classList.remove("selected"));
+          const firstSub = card.querySelector(".subrange-tier-item");
+          if (firstSub) firstSub.classList.add("selected");
+        }
+        renderCuratedStays(currentPlanDynamic, currentPlanBudgetTier);
+      }
     });
 
     card.querySelectorAll(".subrange-tier-item").forEach(item => {
@@ -643,6 +691,10 @@ function setupBudgetAccordions() {
         e.stopPropagation();
         document.querySelectorAll(".subrange-tier-item").forEach(i => i.classList.remove("selected"));
         item.classList.add("selected");
+        document.querySelectorAll(".budget-tier-expand-card").forEach(c => c.classList.remove("open"));
+        card.classList.add("open");
+        currentPlanBudgetTier = normalizeBudgetTier(card.dataset.tier);
+        renderCuratedStays(currentPlanDynamic, currentPlanBudgetTier);
       });
     });
   });
@@ -701,10 +753,11 @@ window.closeModal = function(id) {
 // --------------------------------------------------------------------------
 function generateIntelligentItinerary() {
   const dynamicCard = document.querySelector(".dynamic-option-card.active");
-  const travelDynamic = dynamicCard ? dynamicCard.dataset.dyn : "Solo";
+  const travelDynamic = normalizeTravelDynamic(dynamicCard ? dynamicCard.dataset.dyn : currentPlanDynamic);
 
-  const openBudgetCard = document.querySelector(".budget-tier-expand-card.open") || document.querySelector(".budget-tier-expand-card");
-  const budgetTier = openBudgetCard ? openBudgetCard.dataset.tier : "budget-friendly";
+  const selectedSub = document.querySelector(".subrange-tier-item.selected");
+  const openBudgetCard = selectedSub ? selectedSub.closest(".budget-tier-expand-card") : (document.querySelector(".budget-tier-expand-card.open") || document.querySelector(".budget-tier-expand-card"));
+  const budgetTier = normalizeBudgetTier(openBudgetCard ? openBudgetCard.dataset.tier : currentPlanBudgetTier);
 
   const durationDays = Math.min(4, Math.max(1, Math.round((calReturnDate - calArrivalDate) / (1000 * 60 * 60 * 24)) + 1));
   activePlanDuration = durationDays;
@@ -750,6 +803,8 @@ function applyStaysTierFilter(tier) {
 }
 
 function buildCustomItinerary(travelDynamic, budgetTier, durationDays) {
+  const normDyn = normalizeTravelDynamic(travelDynamic);
+  const normTier = normalizeBudgetTier(budgetTier);
   const result = {};
 
   // Dining catalog segmented by budget tier
@@ -822,7 +877,8 @@ function buildCustomItinerary(travelDynamic, budgetTier, durationDays) {
     }
   };
 
-  const diningTier = diningCatalog[budgetTier] || diningCatalog["budget-friendly"];
+  diningCatalog["exclusive"] = diningCatalog["luxury"];
+  const diningTier = diningCatalog[normTier] || diningCatalog["budget-friendly"];
 
   // Base day templates customized by travel dynamic
   for (let d = 1; d <= durationDays; d++) {
@@ -831,13 +887,13 @@ function buildCustomItinerary(travelDynamic, budgetTier, durationDays) {
 
     if (d === 1) {
       let stops = [];
-      if (travelDynamic === "Solo") {
+      if (normDyn === "Solo") {
         stops = [
           { id: "day1-stop1", name: "Charminar & Laad Bazaar", image: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹25 Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 5:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
           { id: "day1-stop2", name: "Chowmahalla Palace", image: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹100 Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 5:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
           { id: "day1-stop3", name: "Mecca Masjid", image: "https://images.unsplash.com/photo-1585123388867-3bfe6dd4bdbf?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 45 mins", status: "🟢 Open Now • Closes 9:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
         ];
-      } else if (travelDynamic === "Duo") {
+      } else if (normDyn === "Duo") {
         stops = [
           { id: "day1-stop1", name: "Charminar & Clock Tower", image: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹25 Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 5:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
           { id: "day1-stop2", name: "Chowmahalla Palace Gardens", image: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹100 Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 5:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
@@ -861,13 +917,13 @@ function buildCustomItinerary(travelDynamic, budgetTier, durationDays) {
       };
     } else if (d === 2) {
       let stops = [];
-      if (travelDynamic === "Solo") {
+      if (normDyn === "Solo") {
         stops = [
           { id: "day2-stop1", name: "Golconda Fort Citadel Trek", image: "https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹25 Entry", dwell: "🕒 Dwell: 3.0 hrs", status: "🟢 Open Now • Closes 5:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
           { id: "day2-stop2", name: "Qutb Shahi Tombs", image: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹25 Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 6:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
           { id: "day2-stop3", name: "Taramati Baradari", image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 6:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
         ];
-      } else if (travelDynamic === "Duo") {
+      } else if (normDyn === "Duo") {
         stops = [
           { id: "day2-stop1", name: "Taramati Baradari Sunset Pavilion", image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 6:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
           { id: "day2-stop2", name: "Qutb Shahi Tombs Heritage Garden", image: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹25 Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 6:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
@@ -891,13 +947,13 @@ function buildCustomItinerary(travelDynamic, budgetTier, durationDays) {
       };
     } else if (d === 3) {
       let stops = [];
-      if (travelDynamic === "Solo") {
+      if (normDyn === "Solo") {
         stops = [
           { id: "day3-stop1", name: "Durgam Cheruvu Walkway & Cable Bridge", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 8:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
           { id: "day3-stop2", name: "Shilparamam Craft Village", image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹60 Entry", dwell: "🕒 Dwell: 2.5 hrs", status: "🟢 Open Now • Closes 8:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
           { id: "day3-stop3", name: "Raidurg Skywalk & Knowledge City", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.0 hr", status: "🟢 Open Now • Open 24 Hours", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
         ];
-      } else if (travelDynamic === "Duo") {
+      } else if (normDyn === "Duo") {
         stops = [
           { id: "day3-stop1", name: "Durgam Cheruvu Lake Promenade", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 2.0 hrs", status: "🟢 Open Now • Closes 8:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
           { id: "day3-stop2", name: "Inorbit Lake Terrace", image: "https://images.unsplash.com/photo-1567449303078-57ad995bd301?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 10:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
@@ -921,13 +977,13 @@ function buildCustomItinerary(travelDynamic, budgetTier, durationDays) {
       };
     } else if (d === 4) {
       let stops = [];
-      if (travelDynamic === "Solo") {
+      if (normDyn === "Solo") {
         stops = [
           { id: "day4-stop1", name: "Hussain Sagar Lake & Buddha Statue", image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹20 Boat Ride", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 8:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
           { id: "day4-stop2", name: "Birla Mandir & Planetarium", image: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 9:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
           { id: "day4-stop3", name: "Tank Bund Promenade", image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.0 hr", status: "🟢 Open Now • Open 24 Hours", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[2]] } }
         ];
-      } else if (travelDynamic === "Duo") {
+      } else if (normDyn === "Duo") {
         stops = [
           { id: "day4-stop1", name: "Hussainsagar Sunset Boat Cruise", image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹50 Speedboat", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 8:30 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[0], foods[1]] } },
           { id: "day4-stop2", name: "Lumbini Park Musical Fountain", image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80", entry: "🎫 ₹20 Entry", dwell: "🕒 Dwell: 1.5 hrs", status: "🟢 Open Now • Closes 9:00 PM", skipped: false, foodBreak: { title: "Feeling Hungry? (Within 500m)", options: [foods[1], foods[2]] } },
@@ -1094,7 +1150,7 @@ window.renderItineraryDay = function(dayNumber) {
                 <div class="food-radar-dist-sub">(Near ${stop.name.split('&')[0].trim()})</div>
               </div>
             </div>
-            <div class="food-radar-view-link" onclick="openFoodOptionsModalForStop('${stop.name.replace(/'/g, "\\'")}')">
+            <div class="food-radar-view-link" onclick="openFoodOptionsModalForStop(${idx})">
               View Options ›
             </div>
           </div>
@@ -1313,8 +1369,13 @@ window.confirmSpatialOverride = function() {
   alert("⚠️ Cross-cluster swap applied with +45 min transit buffer added.");
 };
 
-window.openFoodOptionsModalForStop = function(stopName) {
-  alert(`🍴 Nearby Dining Radar (< 500m of ${stopName}):\n• Spot 1: Irani Chai & Osmania Biscuits / Light Snack\n• Spot 2: Authentic Regional Biryani & Local Specialties\n• Spot 3: Fresh Lassi, Falooda & Desserts\nAll options verified within your chosen budget!`);
+window.openFoodOptionsModalForStop = function(stopIndex) {
+  const dayData = activeItineraryState[currentActiveDay];
+  if (!dayData || !dayData.stops || !dayData.stops[stopIndex]) return;
+  const stop = dayData.stops[stopIndex];
+  if (!stop.foodBreak || !stop.foodBreak.options) return;
+  const opts = stop.foodBreak.options.map((o, i) => `• Spot ${i + 1}: ${o.name} (${o.price})\n  ${o.desc}`).join("\n\n");
+  alert(`🍴 Nearby Dining Radar (< 500m of ${stop.name.split('&')[0].trim()}):\n\n${opts}\n\nAll recommendations verified for your ${currentPlanDynamic} trip & ${currentPlanBudgetTier} budget.`);
 };
 
 // --------------------------------------------------------------------------
@@ -1689,16 +1750,23 @@ const DYNAMIC_STAYS_CATALOG = {
   }
 };
 
-window.renderCuratedStays = function(travelDynamic = "Solo", budgetTier = "budget-friendly") {
+DYNAMIC_STAYS_CATALOG["exclusive"] = DYNAMIC_STAYS_CATALOG["luxury"];
+
+window.renderCuratedStays = function(travelDynamic = currentPlanDynamic, budgetTier = currentPlanBudgetTier) {
+  const normDyn = normalizeTravelDynamic(travelDynamic);
+  const normTier = normalizeBudgetTier(budgetTier);
+
   const container = document.getElementById("stays-feed-container");
   if (!container) return;
   container.innerHTML = "";
 
   // Retrieve ALL verified stays that strictly match the user's travel dynamic & budget tier
-  const staysToShow = (DYNAMIC_STAYS_CATALOG[budgetTier] && DYNAMIC_STAYS_CATALOG[budgetTier][travelDynamic]) || DYNAMIC_STAYS_CATALOG["budget-friendly"]["Solo"];
+  const tierCatalog = DYNAMIC_STAYS_CATALOG[normTier] || DYNAMIC_STAYS_CATALOG["budget-friendly"];
+  const staysToShow = tierCatalog[normDyn] || tierCatalog["Solo"] || DYNAMIC_STAYS_CATALOG["budget-friendly"]["Solo"];
 
-  // Calculate nights from trip duration
-  const nights = Math.max(1, activePlanDuration - 1);
+  // Calculate nights from trip duration (nights = days - 1, min 1)
+  const durationDays = activePlanDuration || 4;
+  const nights = Math.max(1, durationDays - 1);
 
   staysToShow.forEach(stay => {
     const card = document.createElement("div");
@@ -2004,6 +2072,11 @@ function setupExperienceExplorer() {
     }
   };
 
+  // Alias exclusive to luxury across all clusters
+  Object.keys(CLUSTER_DINING_CATALOG).forEach(k => {
+    CLUSTER_DINING_CATALOG[k]["exclusive"] = CLUSTER_DINING_CATALOG[k]["luxury"];
+  });
+
   const CLUSTER_CONFIG = {
     "old-city": {
       name: "Old City Heritage Core",
@@ -2077,8 +2150,8 @@ function setupExperienceExplorer() {
 
     const chosenList = Array.from(selectedCustomPlaces);
     const totalDays = activePlanDuration || 3;
-    const budgetTier = currentPlanBudgetTier || "budget-friendly";
-    const travelDynamic = currentPlanDynamic || "Solo";
+    const budgetTier = normalizeBudgetTier(currentPlanBudgetTier);
+    const travelDynamic = normalizeTravelDynamic(currentPlanDynamic);
 
     // 1. Group chosen places by micro-cluster
     const clusterBuckets = {};
@@ -2177,7 +2250,7 @@ function setupExperienceExplorer() {
       const dayConfig = daysPlan[d - 1] || { clusterKey: "old-city", places: [] };
       const cKey = dayConfig.clusterKey || "old-city";
       const cfg = CLUSTER_CONFIG[cKey] || CLUSTER_CONFIG["old-city"];
-      const diningTier = (CLUSTER_DINING_CATALOG[cKey] && CLUSTER_DINING_CATALOG[cKey][budgetTier]) || CLUSTER_DINING_CATALOG["old-city"]["budget-friendly"];
+      const diningTier = (CLUSTER_DINING_CATALOG[cKey] && (CLUSTER_DINING_CATALOG[cKey][budgetTier] || CLUSTER_DINING_CATALOG[cKey]["luxury"])) || CLUSTER_DINING_CATALOG["old-city"][budgetTier] || CLUSTER_DINING_CATALOG["old-city"]["budget-friendly"];
 
       const stops = dayConfig.places.map((placeMeta, pIdx) => {
         const foodIdx1 = pIdx % diningTier.length;
