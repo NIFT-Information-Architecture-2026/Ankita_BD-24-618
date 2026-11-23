@@ -23,43 +23,142 @@
       </div>
     </div>
 
-    <!-- Top App Header Row: Location Pill + SOS + Profile -->
-    <header class="top-header-row">
-      <div class="location-dropdown-pill" id="btn-location-dropdown" title="Select City">
-        <span class="pin-icon">📍</span>
-        <span id="current-location-label">Hyderabad, Telangana</span>
-        <span class="dropdown-arrow">∨</span>
-      </div>
-      <div class="header-right-actions">
-        <button id="btn-top-sos" class="btn-sos-top">
-          <span>🛡️</span> SOS
-        </button>
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="User Profile" class="user-avatar-small" />
-      </div>
-    </header>
-
-    <!-- State Switcher Bar: Demonstrating Dual-State Dashboard Behavior -->
-    <div class="dashboard-state-switcher">
-      <span>Dashboard Mode:</span>
-      <div style="display:flex; gap:6px;">
-        <button id="btn-state-no-trip" class="state-toggle-btn" style="background:var(--color-terracotta); color:#FFF;">
-          No Active Trip (Left Ref)
-        </button>
-        <button id="btn-state-has-trip" class="state-toggle-btn">
-          Has Active Trip (Right Ref)
-        </button>
-      </div>
-    </div>
-
     <!-- Scrollable Screen Viewport -->
     <main id="app-viewport" class="app-viewport">
 
       <!-- ====================================================================
-           SCREEN 1A: DASHBOARD STATE A (FOR USERS WITHOUT ACTIVE TRIP)
-           Direct 6-Section Planning Integration + Top Recommendation Slideshow
+           SCREEN 1.0: DASHBOARD (HOME SCREEN)
+           Reference: media_1795432344239_b5db47b1.jpg
            ==================================================================== -->
-      <section id="screen-dashboard-no-trip" class="app-screen active">
+      <section id="screen-dashboard" class="app-screen active">
         
+        <!-- Top App Header Row: Location Pill + SOS + Profile -->
+        <header class="top-header-row" style="margin-bottom:6px;">
+          <div class="location-dropdown-pill" id="btn-location-dropdown" title="Select City">
+            <span class="pin-icon">📍</span>
+            <span id="current-location-label">Hyderabad, Telangana</span>
+            <span class="dropdown-arrow">∨</span>
+          </div>
+          <div class="header-right-actions">
+            <button id="btn-top-sos" class="btn-sos-top">
+              <span>🛡️</span> SOS
+            </button>
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="User Profile" class="user-avatar-small" />
+          </div>
+        </header>
+
+        <!-- Hero Title with Watercolor Charminar Backdrop -->
+        <div class="plan-hero-header" style="padding-bottom:10px;">
+          <h1 class="plan-hero-main-title" style="font-size:26px;">Explore Hyderabad</h1>
+          <div class="plan-hero-cursive-sub" style="font-size:18px;">at your pace ✨</div>
+          <div class="plan-hero-landmark-bg"></div>
+        </div>
+
+        <!-- 1st Section: Ongoing Trip / Active Trip Card with Stepper -->
+        <div class="home-ongoing-trip-card">
+          <div class="ongoing-trip-thumb-box">
+            <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=300&q=80" alt="Heritage Gate" class="ongoing-trip-thumb-img" />
+          </div>
+          <div class="ongoing-trip-body">
+            <div class="ongoing-trip-top-row">
+              <span class="tag-active-trip">🧳 Your Active Trip</span>
+              <span class="postit-note-badge">Let's keep going! ↗</span>
+            </div>
+            <h2 class="ongoing-trip-title">Day 1: Old City Heritage Cluster</h2>
+            <div class="ongoing-trip-next-label">📍 Next Stop: Chowmahalla Palace • 11:30 AM</div>
+
+            <!-- Stepper Progress Track -->
+            <div class="stepper-progress-wrap">
+              <div class="stepper-dots-row">
+                <div class="stepper-dot-circle done">✓</div>
+                <div class="stepper-line-bar active"></div>
+                <div class="stepper-dot-circle done">✓</div>
+                <div class="stepper-line-bar active"></div>
+                <div class="stepper-dot-circle current" style="background:var(--color-terracotta);">●</div>
+                <div class="stepper-line-bar"></div>
+                <div class="stepper-dot-circle">○</div>
+              </div>
+              <div class="stepper-labels-row">
+                <span>Charminar</span>
+                <span>Laad Bazaar</span>
+                <span>Chowmahalla</span>
+                <span>Evening</span>
+              </div>
+            </div>
+
+            <!-- Primary Action: Open Itinerary -->
+            <button id="btn-open-itinerary-home" class="btn-open-itinerary-cta">
+              <span>✈️</span> Open Itinerary ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- 2nd Section: Plan a New Trip Promo Banner -->
+        <div id="banner-plan-new-trip-promo" class="plan-new-trip-promo-banner" title="Tap to Plan a New Trip">
+          <div class="promo-banner-left">
+            <span class="promo-sparkle-icon">✨</span>
+            <h2 class="promo-banner-title">Plan a<br>New Trip</h2>
+            <div class="promo-arrow-circle-btn">›</div>
+          </div>
+          <div class="promo-banner-right-art"></div>
+        </div>
+
+        <!-- 3rd Section: Explore More Horizontal Carousel -->
+        <div class="explore-more-section">
+          <div class="explore-more-header-row">
+            <h3 class="explore-more-title">
+              <span style="color:var(--color-terracotta);">🧭</span> Explore More
+            </h3>
+            <span class="explore-more-view-all" onclick="alert('Viewing all curated Indian destinations')">View All ➔</span>
+          </div>
+          <div class="explore-cities-scroll-row">
+            <div class="explore-city-card" onclick="selectDestinationQuick('Ranchi')">
+              <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=300&q=80" alt="Ranchi" />
+              <div class="explore-city-label-overlay">
+                <span>📍</span> Ranchi
+              </div>
+            </div>
+            <div class="explore-city-card" onclick="selectDestinationQuick('Lucknow')">
+              <img src="https://images.unsplash.com/photo-1600100397608-f010f4438317?auto=format&fit=crop&w=300&q=80" alt="Lucknow" />
+              <div class="explore-city-label-overlay">
+                <span>📍</span> Lucknow
+              </div>
+            </div>
+            <div class="explore-city-card" onclick="selectDestinationQuick('Mumbai')">
+              <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=300&q=80" alt="Mumbai" />
+              <div class="explore-city-label-overlay">
+                <span>📍</span> Mumbai
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           SCREEN 2.0: PLAN A NEW TRIP SCREEN (SINGLE-PAGE SETUP)
+           Reference: media_1795432829635_4381baac.jpg
+           ==================================================================== -->
+      <section id="screen-plan-trip" class="app-screen">
+        
+        <!-- Header with Back Arrow & Location -->
+        <header class="top-header-row" style="margin-bottom:4px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button id="btn-back-plan-to-home" class="itinerary-back-btn" title="Back to Dashboard">←</button>
+            <div class="location-dropdown-pill">
+              <span class="pin-icon">📍</span>
+              <span>Hyderabad, Telangana</span>
+              <span class="dropdown-arrow">∨</span>
+            </div>
+          </div>
+          <div class="header-right-actions">
+            <button class="btn-sos-top" onclick="openModal('modal-sos-overlay')">
+              <span>🛡️</span> SOS
+            </button>
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="User Profile" class="user-avatar-small" />
+          </div>
+        </header>
+
         <!-- Hero Title with Charminar Backdrop Art -->
         <div class="plan-hero-header">
           <h1 class="plan-hero-main-title">Plan a New Trip</h1>
@@ -67,46 +166,30 @@
           <div class="plan-hero-landmark-bg"></div>
         </div>
 
-        <!-- 6th Section: Top Places Recommended Slideshow Carousel -->
+        <!-- Scenic Slideshow Carousel: Ranchi, Maharashtra, Guwahati -->
         <div class="slideshow-carousel-wrap">
-          <div class="slideshow-label-title">
-            <span>✨ Popular Places Recommendation</span>
-            <span style="font-size:9px; color:var(--color-terracotta); cursor:pointer;">View All ›</span>
-          </div>
           <div class="slideshow-scroll-row">
-            
-            <div class="slideshow-card-pill" onclick="selectDestinationQuick('Goa')">
-              <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=300&q=80" alt="Goa" class="slideshow-card-img" />
+            <div class="slideshow-card-pill" onclick="selectDestinationQuick('Ranchi')">
+              <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=300&q=80" alt="Ranchi" class="slideshow-card-img" />
               <div class="slideshow-card-body">
-                <div class="slideshow-card-name">Trip to Goa</div>
-                <div class="slideshow-card-tag">Coastal & Forts</div>
+                <div class="slideshow-card-name">Trip to Ranchi</div>
+                <div class="slideshow-card-tag">Waterfalls & Hills</div>
               </div>
             </div>
-
-            <div class="slideshow-card-pill" onclick="selectDestinationQuick('Bali')">
-              <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=300&q=80" alt="Bali" class="slideshow-card-img" />
+            <div class="slideshow-card-pill" onclick="selectDestinationQuick('Maharashtra')">
+              <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=300&q=80" alt="Maharashtra" class="slideshow-card-img" />
               <div class="slideshow-card-body">
-                <div class="slideshow-card-name">Trip to Bali</div>
-                <div class="slideshow-card-tag">Culture & Trails</div>
+                <div class="slideshow-card-name">Trip to Maharashtra</div>
+                <div class="slideshow-card-tag">Forts & Coastline</div>
               </div>
             </div>
-
-            <div class="slideshow-card-pill" onclick="selectDestinationQuick('Hampi')">
-              <img src="https://images.unsplash.com/photo-1600100397608-f010f4438317?auto=format&fit=crop&w=300&q=80" alt="Hampi" class="slideshow-card-img" />
+            <div class="slideshow-card-pill" onclick="selectDestinationQuick('Guwahati')">
+              <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=300&q=80" alt="Guwahati" class="slideshow-card-img" />
               <div class="slideshow-card-body">
-                <div class="slideshow-card-name">Trip to Hampi</div>
-                <div class="slideshow-card-tag">Ancient Boulders</div>
+                <div class="slideshow-card-name">Trip to Guwahati</div>
+                <div class="slideshow-card-tag">Brahmaputra Heritage</div>
               </div>
             </div>
-
-            <div class="slideshow-card-pill" onclick="selectDestinationQuick('Benares')">
-              <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=300&q=80" alt="Benares" class="slideshow-card-img" />
-              <div class="slideshow-card-body">
-                <div class="slideshow-card-name">Trip to Benares</div>
-                <div class="slideshow-card-tag">Sacred Ghats</div>
-              </div>
-            </div>
-
           </div>
         </div>
 
@@ -178,63 +261,72 @@
           <div class="budget-tier-container-stack">
             
             <!-- Tier 1: Budget Friendly -->
-            <div class="budget-tier-expand-card open" data-tier="Budget-Friendly">
+            <div class="budget-tier-expand-card open" data-tier="budget-friendly">
               <div class="budget-tier-bar">
-                <div class="budget-tier-left">
-                  <span>👛</span>
-                  <span>Budget Friendly</span>
+                <div class="tier-bar-left">
+                  <span class="tier-symbol">👛</span>
+                  <div>
+                    <div class="tier-name">Budget Friendly</div>
+                    <div class="tier-summary-text">Comfortable travel on a smart daily budget</div>
+                  </div>
                 </div>
-                <span class="budget-chevron-arrow">›</span>
+                <span class="tier-arrow">›</span>
               </div>
               <div class="budget-subranges-container">
-                <div class="subrange-tier-item selected" data-range="₹500 – ₹1,000 / day">
+                <div class="subrange-tier-item selected" data-range="₹1,500 – ₹2,000 / day">
                   <span>Range 1: Baseline Saver</span>
-                  <strong>₹500 – ₹1,000 / day</strong>
+                  <strong>₹1,500 – ₹2,000 / day</strong>
                 </div>
-                <div class="subrange-tier-item" data-range="₹1,000 – ₹1,800 / day">
+                <div class="subrange-tier-item" data-range="₹2,000 – ₹2,800 / day">
                   <span>Range 2: Mid Comfort</span>
-                  <strong>₹1,000 – ₹1,800 / day</strong>
+                  <strong>₹2,000 – ₹2,800 / day</strong>
                 </div>
-                <div class="subrange-tier-item" data-range="₹1,800 – ₹2,500 / day">
+                <div class="subrange-tier-item" data-range="₹2,800 – ₹3,500 / day">
                   <span>Range 3: Plus Deluxe</span>
-                  <strong>₹1,800 – ₹2,500 / day</strong>
+                  <strong>₹2,800 – ₹3,500 / day</strong>
                 </div>
               </div>
             </div>
 
             <!-- Tier 2: Premium -->
-            <div class="budget-tier-expand-card" data-tier="Premium">
+            <div class="budget-tier-expand-card" data-tier="premium">
               <div class="budget-tier-bar">
-                <div class="budget-tier-left">
-                  <span>👑</span>
-                  <span>Premium</span>
+                <div class="tier-bar-left">
+                  <span class="tier-symbol">👑</span>
+                  <div>
+                    <div class="tier-name">Premium</div>
+                    <div class="tier-summary-text">Curated boutique stays & experiential heritage dining</div>
+                  </div>
                 </div>
-                <span class="budget-chevron-arrow">›</span>
+                <span class="tier-arrow">›</span>
               </div>
               <div class="budget-subranges-container">
-                <div class="subrange-tier-item" data-range="₹3,000 – ₹5,000 / day">
+                <div class="subrange-tier-item" data-range="₹4,500 – ₹6,000 / day">
                   <span>Range 1: Baseline Saver</span>
-                  <strong>₹3,000 – ₹5,000 / day</strong>
+                  <strong>₹4,500 – ₹6,000 / day</strong>
                 </div>
-                <div class="subrange-tier-item" data-range="₹5,000 – ₹8,000 / day">
+                <div class="subrange-tier-item" data-range="₹6,000 – ₹8,500 / day">
                   <span>Range 2: Mid Comfort</span>
-                  <strong>₹5,000 – ₹8,000 / day</strong>
+                  <strong>₹6,000 – ₹8,500 / day</strong>
                 </div>
-                <div class="subrange-tier-item" data-range="₹8,000 – ₹12,000 / day">
+                <div class="subrange-tier-item" data-range="₹8,500 – ₹12,000 / day">
                   <span>Range 3: Plus Deluxe</span>
-                  <strong>₹8,000 – ₹12,000 / day</strong>
+                  <strong>₹8,500 – ₹12,000 / day</strong>
                 </div>
               </div>
             </div>
 
-            <!-- Tier 3: Exclusive Luxury -->
-            <div class="budget-tier-expand-card" data-tier="Exclusive">
+            <!-- Tier 3: Luxury -->
+            <div class="budget-tier-expand-card" data-tier="luxury">
               <div class="budget-tier-bar">
-                <div class="budget-tier-left">
-                  <span>💎</span>
-                  <span>Luxury / Exclusive</span>
+                <div class="tier-bar-left">
+                  <span class="tier-symbol">💎</span>
+                  <div>
+                    <div class="tier-name">Luxury</div>
+                    <div class="tier-summary-text">Palatial heritage suites, private chauffeurs & royal tea tastings</div>
+                  </div>
                 </div>
-                <span class="budget-chevron-arrow">›</span>
+                <span class="tier-arrow">›</span>
               </div>
               <div class="budget-subranges-container">
                 <div class="subrange-tier-item" data-range="₹15,000 – ₹25,000 / day">
@@ -286,75 +378,8 @@
       </section>
 
       <!-- ====================================================================
-           SCREEN 1B: DASHBOARD STATE B (FOR USERS WITH ACTIVE/ONGOING TRIP)
-           Features Active Trip Pass + "Build a New Trip" leading into State A
-           ==================================================================== -->
-      <section id="screen-dashboard-has-trip" class="app-screen">
-        
-        <div class="plan-hero-header" style="padding-bottom:10px;">
-          <h1 class="plan-hero-main-title" style="font-size:24px;">Where would you like to explore today?</h1>
-          <div class="plan-hero-landmark-bg"></div>
-        </div>
-
-        <!-- Active Trip Pass Card -->
-        <div id="card-active-trip-pass" class="active-trip-pass-card" title="Tap to open your live itinerary">
-          <div class="pass-card-left">
-            <span class="pass-badge">Active Trip Pass</span>
-            <h2 class="pass-title">Old City Heritage Day</h2>
-            <p class="pass-subtitle">Next: Chowmahalla Palace • 11:30 AM</p>
-          </div>
-          <div class="pass-card-right">
-            <img src="https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=500&q=80" alt="Charminar & Bazaar" class="pass-img" />
-          </div>
-        </div>
-
-        <!-- "Build a New Trip (1–3 Days)" Card (Tapping opens State A Dashboard) -->
-        <div id="card-trigger-new-trip-flow" class="nav-action-card" title="Tap to open Plan a New Trip view">
-          <div class="action-card-header">
-            <div class="action-card-icon">📖</div>
-            <div class="action-card-title-group">
-              <div class="action-card-title">
-                <div>Build a New Trip <span style="font-size:12px; font-weight:500; color:var(--color-slate);">(1–3 Days)</span></div>
-                <span style="font-size:16px; color:#B5B0A8;">›</span>
-              </div>
-              <p class="action-card-desc">Choose your budget, interests & we'll curate the perfect plan for you.</p>
-            </div>
-          </div>
-          <div class="budget-preview-row">
-            <div class="budget-chip-box easy">
-              <span class="chip-tier">Easy</span>
-              <span class="chip-val">₹1.7k</span>
-            </div>
-            <div class="budget-chip-box premium">
-              <span class="chip-tier">Premium</span>
-              <span class="chip-val">₹5k</span>
-            </div>
-            <div class="budget-chip-box luxury">
-              <span class="chip-tier">Luxury</span>
-              <span class="chip-val">₹25k</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- "Explore 45 Curated Spots" Card -->
-        <div id="card-trigger-explore-catalog" class="nav-action-card">
-          <div class="action-card-header">
-            <div class="action-card-icon" style="color:var(--color-terracotta);">📍</div>
-            <div class="action-card-title-group">
-              <div class="action-card-title">
-                <div>Explore 45 Curated Spots</div>
-                <span style="font-size:16px; color:#B5B0A8;">›</span>
-              </div>
-              <p class="action-card-desc">Monuments, food, culture, nature & more</p>
-            </div>
-          </div>
-        </div>
-
-      </section>
-
-      <!-- ====================================================================
-           SCREEN 2: "YOUR ITINERARY" (LIVE DAY EXECUTION)
-           Matching Reference media_1795249816175.png
+           SCREEN 3.0: "YOUR ITINERARY" (LIVE DAY EXECUTION)
+           Reference: media_1795433517094_a6ae0db1.jpg
            ==================================================================== -->
       <section id="screen-itinerary" class="app-screen" style="padding:0 0 70px;">
         
@@ -381,6 +406,18 @@
               Your trip,<br>well planned <span class="quote-spark">✨</span>
             </div>
             <div class="itinerary-brush-stroke"></div>
+          </div>
+
+          <!-- Top Banner: View Stays in Hyderabad (Tapping opens Screen 4.0) -->
+          <div id="banner-view-stays-card" class="view-stays-top-banner" title="Tap to explore curated stays in Hyderabad">
+            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=150&q=80" alt="Stays" class="view-stays-thumb-img" />
+            <div class="view-stays-meta">
+              <div class="view-stays-title-row">
+                <span>🛏️</span> View Stays
+              </div>
+              <div class="view-stays-subtitle">Find the best stays nearby</div>
+            </div>
+            <span class="view-stays-arrow">›</span>
           </div>
 
           <!-- Floating Day Switcher Segmented Pills -->
@@ -496,6 +533,35 @@
               </div>
             </div>
 
+            <!-- Stop 3: Laad Bazaar -->
+            <div class="timeline-stop-block">
+              <div class="timeline-node-badge">3</div>
+              <div class="itinerary-stop-card">
+                <div class="stop-card-main-row">
+                  <img src="https://images.unsplash.com/photo-1600100397608-f010f4438317?auto=format&fit=crop&w=300&q=80" alt="Laad Bazaar" class="stop-card-thumb" />
+                  <div class="stop-card-meta">
+                    <h2 class="stop-card-name">Laad Bazaar</h2>
+                    <div class="stop-card-badges-row">
+                      <span class="itin-badge-entry">🎫 Free Entry</span>
+                      <span class="itin-badge-dwell">🕒 Dwell: 1 hr</span>
+                    </div>
+                    <span class="itin-badge-status"><span class="status-dot"></span> Open Now • Vibrant Night Market</span>
+                  </div>
+                </div>
+                <div class="stop-card-actions-grid">
+                  <button class="itin-action-pill-btn" onclick="handleReorderTimeline()">
+                    <span>⇅</span> Reorder
+                  </button>
+                  <button class="itin-action-pill-btn" onclick="openSwapDialog()">
+                    <span>⇄</span> Swap
+                  </button>
+                  <button class="itin-action-pill-btn" onclick="handleSkipTimeline()">
+                    <span>✕</span> Skip Stop
+                  </button>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           <!-- Elevated Floating Next Stop Banner -->
@@ -515,58 +581,340 @@
       </section>
 
       <!-- ====================================================================
-           SCREEN 3: "EXPLORE HYDERABAD" (MANUAL CATALOG)
+           SCREEN 4.0: CURATED STAYS SCREEN
+           Reference: media_1795435632279_6cd129b7.jpg
            ==================================================================== -->
-      <section id="screen-explore" class="app-screen">
+      <section id="screen-stays" class="app-screen" style="padding:0 0 70px;">
         
-        <div class="plan-hero-header" style="padding-bottom:10px;">
-          <h1 class="plan-hero-main-title" style="font-size:24px;">Explore Hyderabad</h1>
-          <div style="font-size:12px; color:var(--color-slate);">Discover more. Plan better.</div>
-        </div>
-
-        <div class="destination-search-box" style="margin-bottom:12px;">
-          <span class="search-magnifier-icon">🔍</span>
-          <input type="text" id="input-search-explore" class="destination-input-bar" placeholder="Search monuments, cafes, gardens..." />
-          <span class="paper-plane-icon" style="color:var(--color-charcoal); cursor:pointer;">🎛️</span>
-        </div>
-
-        <!-- Filter Pills -->
-        <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:12px;">
-          <button class="state-toggle-btn" style="background:var(--color-terracotta); color:#FFF; flex-shrink:0;">Old City Zone</button>
-          <button class="state-toggle-btn" style="flex-shrink:0;">Hitec City</button>
-          <button class="state-toggle-btn" style="flex-shrink:0;">Under ₹100</button>
-          <button class="state-toggle-btn" style="flex-shrink:0;">Dwell &lt; 2 hrs</button>
-          <button class="state-toggle-btn" style="flex-shrink:0;">Open Today</button>
-        </div>
-
-        <!-- 2-Column Grid -->
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; padding-bottom:60px;">
+        <div class="stays-screen-wrapper">
           
-          <div style="background:#FFF; border-radius:16px; border:1px solid var(--color-border); overflow:hidden; box-shadow:var(--shadow-ambient);">
-            <img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=300&q=80" style="width:100%; height:90px; object-fit:cover;" />
-            <div style="padding:8px;">
-              <h4 style="font-family:var(--font-serif); font-size:13px; font-weight:700;">Qutb Shahi Tombs</h4>
-              <div style="font-size:9px; color:var(--color-slate);">Heritage • History</div>
-              <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:600; margin:4px 0;">
-                <span>🎟️ ₹25</span>
-                <span>🚶 18m walk</span>
-              </div>
-              <button class="state-toggle-btn" style="width:100%;" onclick="this.textContent = '✓ Added'; this.style.background='var(--color-green-open)'; this.style.color='#FFF';">+ Add to Plan</button>
+          <!-- Top Navigation Header -->
+          <div class="itinerary-top-nav">
+            <button id="btn-stays-back" class="itinerary-back-btn" title="Back to Itinerary">←</button>
+            <h1 class="itinerary-page-title">Curated Stays</h1>
+            <div class="itinerary-nav-actions">
+              <button class="itinerary-map-icon-btn" title="View Map" onclick="alert('🗺️ Map View: Verified accommodations in Hyderabad')">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+              </button>
+              <button class="itinerary-sos-pill" onclick="openModal('modal-sos-overlay')">
+                <span>🛡️</span> SOS
+              </button>
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="User Profile" class="itinerary-user-avatar" />
             </div>
           </div>
 
-          <div style="background:#FFF; border-radius:16px; border:1px solid var(--color-border); overflow:hidden; box-shadow:var(--shadow-ambient);">
-            <img src="https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=300&q=80" style="width:100%; height:90px; object-fit:cover;" />
-            <div style="padding:8px;">
-              <h4 style="font-family:var(--font-serif); font-size:13px; font-weight:700;">Golconda Fort</h4>
-              <div style="font-size:9px; color:var(--color-slate);">Heritage • History</div>
-              <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:600; margin:4px 0;">
-                <span>🎟️ ₹75</span>
-                <span>🚗 20m drive</span>
-              </div>
-              <button class="state-toggle-btn" style="width:100%;" onclick="this.textContent = '✓ Added'; this.style.background='var(--color-green-open)'; this.style.color='#FFF';">+ Add to Plan</button>
+          <!-- Hero Backdrop with Watercolor Art & Cursive Headline -->
+          <div class="itinerary-hero-banner" style="height:140px;">
+            <div class="itinerary-cursive-quote" style="font-size:24px;">
+              Stay your way<br>in Hyderabad <span class="quote-spark">✨</span>
             </div>
+            <div style="font-size:12px; color:var(--color-terracotta); margin-top:2px;">📍</div>
           </div>
+
+          <!-- Filter Pills Row -->
+          <div class="stays-filter-pill-row">
+            <button class="stay-filter-chip active" data-stay-tier="all">
+              <span>🛏️</span> All Stays
+            </button>
+            <button class="stay-filter-chip" data-stay-tier="budget">
+              <span>💼</span> Budget-Friendly
+            </button>
+            <button class="stay-filter-chip" data-stay-tier="premium">
+              <span>💎</span> Premium
+            </button>
+            <button class="stay-filter-chip" data-stay-tier="exclusive">
+              <span>⭐</span> Exclusive
+            </button>
+          </div>
+
+          <!-- Stays Feed Container -->
+          <div class="stays-feed-container">
+            
+            <!-- Stay Card 1: Zostel Hyderabad -->
+            <div class="stay-listing-card" data-stay-tier="budget">
+              <div class="stay-photo-slider-box">
+                <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80" alt="Zostel Hyderabad" class="stay-photo-slider-img" />
+                <div class="stay-rating-badge">⭐ 4.6</div>
+                <div class="stay-dots-indicator">
+                  <span class="stay-dot active"></span>
+                  <span class="stay-dot"></span>
+                  <span class="stay-dot"></span>
+                  <span class="stay-dot"></span>
+                </div>
+              </div>
+              <h2 class="stay-name-title">Zostel Hyderabad</h2>
+              <div class="stay-location-sub">📍 Old City, Abids • 2.2 km from Charminar</div>
+              <div class="stay-amenities-chips-row">
+                <span class="amenity-chip">🛏️ Dorms &amp; Rooms</span>
+                <span class="amenity-chip">📶 Free Wi-Fi</span>
+                <span class="amenity-chip">🍴 Cafe On-Site</span>
+                <span class="amenity-chip">🍃 Eco-Friendly</span>
+              </div>
+              <div class="stay-footer-row">
+                <div>
+                  <span class="stay-price-bold">₹799</span>
+                  <span class="stay-price-sub"> / night</span>
+                </div>
+                <button class="btn-stay-details-cta" onclick="alert('Redirecting to official booking partner for Zostel Hyderabad (Zero Commission).')">
+                  View Details →
+                </button>
+              </div>
+            </div>
+
+            <!-- Stay Card 2: Hotel Name (Courtyard Hub) -->
+            <div class="stay-listing-card" data-stay-tier="premium">
+              <div class="stay-photo-slider-box">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80" alt="Courtyard Hub Hotel" class="stay-photo-slider-img" />
+                <div class="stay-rating-badge">⭐ 4.4</div>
+                <div class="stay-dots-indicator">
+                  <span class="stay-dot active"></span>
+                  <span class="stay-dot"></span>
+                  <span class="stay-dot"></span>
+                </div>
+              </div>
+              <h2 class="stay-name-title">Courtyard Hotel Hub</h2>
+              <div class="stay-location-sub">📍 Hitech City • 4.4 km from Charminar</div>
+              <div class="stay-amenities-chips-row">
+                <span class="amenity-chip">❄️ AC Rooms</span>
+                <span class="amenity-chip">🏊 Swimming Pool</span>
+                <span class="amenity-chip">🍴 In-Room Dining</span>
+                <span class="amenity-chip">📶 Free Wi-Fi</span>
+              </div>
+              <div class="stay-footer-row">
+                <div>
+                  <span class="stay-price-bold">₹1,999</span>
+                  <span class="stay-price-sub"> / night</span>
+                </div>
+                <button class="btn-stay-details-cta" onclick="alert('Redirecting to official booking partner for Courtyard Hotel Hub.')">
+                  View Details →
+                </button>
+              </div>
+            </div>
+
+            <!-- Stay Card 3: Taj Falaknuma Palace -->
+            <div class="stay-listing-card" data-stay-tier="exclusive">
+              <div class="stay-photo-slider-box">
+                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80" alt="Taj Falaknuma Palace" class="stay-photo-slider-img" />
+                <div class="stay-rating-badge">⭐ 4.8</div>
+                <div class="stay-dots-indicator">
+                  <span class="stay-dot active"></span>
+                  <span class="stay-dot"></span>
+                  <span class="stay-dot"></span>
+                  <span class="stay-dot"></span>
+                </div>
+              </div>
+              <h2 class="stay-name-title">Taj Falaknuma Palace</h2>
+              <div class="stay-location-sub">📍 Falaknuma • 7.1 km from Charminar</div>
+              <div class="stay-amenities-chips-row">
+                <span class="amenity-chip">👑 Luxury Stay</span>
+                <span class="amenity-chip">🏛️ Heritage Property</span>
+                <span class="amenity-chip">🍴 Fine Dining</span>
+                <span class="amenity-chip">💆 Spa &amp; Wellness</span>
+              </div>
+              <div class="stay-footer-row">
+                <div>
+                  <span class="stay-price-bold">₹12,999</span>
+                  <span class="stay-price-sub"> / night</span>
+                </div>
+                <button class="btn-stay-details-cta" onclick="alert('Redirecting to official booking partner for Taj Falaknuma Palace.')">
+                  View Details →
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Custom Stay Banner -->
+          <div class="custom-stays-bottom-banner" onclick="alert('Need specific arrangements? Contact our local concierge for bespoke accommodation.')">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span style="font-size:20px;">🛏️</span>
+              <div>
+                <div style="font-family:var(--font-serif); font-size:14px; font-weight:700; color:#222;">Looking for something specific?</div>
+                <div style="font-size:11px; color:var(--color-slate);">Explore more stay options for your trip.</div>
+              </div>
+            </div>
+            <span style="font-size:16px; color:var(--color-terracotta);">›</span>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           SCREEN 5.0: EXPERIENCE EXPLORER SCREEN (SELF-PLANNER)
+           Reference: media_1795436112703_bbb3352d.jpg
+           ==================================================================== -->
+      <section id="screen-experience-explorer" class="app-screen" style="padding:0 0 70px;">
+        
+        <div class="exp-screen-wrapper">
+          
+          <!-- Top Header Row -->
+          <header class="exp-top-header-banner">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <button id="btn-back-exp-to-plan" class="itinerary-back-btn" title="Back to Planning Setup">←</button>
+              <div class="location-dropdown-pill">
+                <span class="pin-icon">📍</span>
+                <span>Hyderabad ∨</span>
+              </div>
+            </div>
+            <div class="header-right-actions">
+              <button class="btn-sos-top" onclick="openModal('modal-sos-overlay')">
+                <span>🛡️</span> SOS
+              </button>
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="User Profile" class="user-avatar-small" />
+            </div>
+          </header>
+
+          <!-- Headline with Charminar Backdrop & Paper Plane Trail -->
+          <div style="padding: 10px 18px 4px; position:relative;">
+            <h1 class="exp-title-headline">Experience Explorer</h1>
+            <div class="exp-title-script">Plan by Yourself ✍️ ✈️</div>
+          </div>
+
+          <!-- Search Bar with Filter Icon -->
+          <div class="exp-search-bar-wrap">
+            <div class="exp-search-input-box">
+              <span>🔍</span>
+              <input type="text" id="input-exp-search" class="exp-search-input" placeholder="Search for places..." />
+            </div>
+            <button class="exp-filter-modal-btn" onclick="alert('4-D Filters: Micro-Cluster, Max Dwell Time, Free vs Ticketed Entry')">
+              🎛️
+            </button>
+          </div>
+
+          <!-- Filter Pills Row -->
+          <div class="exp-filter-scroll-row">
+            <button class="exp-chip-btn active" data-exp-filter="all">✨ All</button>
+            <button class="exp-chip-btn" data-exp-filter="100">Under ₹100</button>
+            <button class="exp-chip-btn" data-exp-filter="200">Under ₹200</button>
+            <button class="exp-chip-btn" data-exp-filter="dwell-1.5">Dwell &lt; 1.5hr</button>
+            <button class="exp-chip-btn" data-exp-filter="dwell-2">Dwell &lt; 2hr</button>
+            <button class="exp-chip-btn" data-exp-filter="dwell-3">Dwell &lt; 3hr</button>
+          </div>
+
+          <!-- 2-Column Places Grid -->
+          <div class="exp-places-2col-grid" id="exp-places-grid">
+            
+            <!-- Place 1: Charminar -->
+            <div class="exp-place-card" data-cost="50" data-dwell="1.0">
+              <div class="exp-place-photo-box">
+                <img src="https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=300&q=80" alt="Charminar" class="exp-place-photo" />
+              </div>
+              <div class="exp-place-body">
+                <div class="exp-place-name-row">
+                  <h3 class="exp-place-name">Charminar</h3>
+                  <span class="exp-place-rating">⭐ 4.7</span>
+                </div>
+                <div class="exp-place-meta-pills">
+                  <span>🏷️ ₹50</span> • <span>🕒 ~1 hr</span>
+                </div>
+                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Charminar')">
+                  Add Plan +
+                </button>
+              </div>
+            </div>
+
+            <!-- Place 2: Golconda Fort -->
+            <div class="exp-place-card" data-cost="25" data-dwell="1.5">
+              <div class="exp-place-photo-box">
+                <img src="https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=300&q=80" alt="Golconda Fort" class="exp-place-photo" />
+              </div>
+              <div class="exp-place-body">
+                <div class="exp-place-name-row">
+                  <h3 class="exp-place-name">Golconda Fort</h3>
+                  <span class="exp-place-rating">⭐ 4.6</span>
+                </div>
+                <div class="exp-place-meta-pills">
+                  <span>🏷️ ₹25</span> • <span>🕒 ~1.5 hrs</span>
+                </div>
+                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Golconda Fort')">
+                  Add Plan +
+                </button>
+              </div>
+            </div>
+
+            <!-- Place 3: Laad Bazaar -->
+            <div class="exp-place-card" data-cost="50" data-dwell="2.0">
+              <div class="exp-place-photo-box">
+                <img src="https://images.unsplash.com/photo-1600100397608-f010f4438317?auto=format&fit=crop&w=300&q=80" alt="Laad Bazaar" class="exp-place-photo" />
+              </div>
+              <div class="exp-place-body">
+                <div class="exp-place-name-row">
+                  <h3 class="exp-place-name">Laad Bazaar</h3>
+                  <span class="exp-place-rating">⭐ 4.5</span>
+                </div>
+                <div class="exp-place-meta-pills">
+                  <span>🏷️ ₹50</span> • <span>🕒 ~2 hrs</span>
+                </div>
+                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Laad Bazaar')">
+                  Add Plan +
+                </button>
+              </div>
+            </div>
+
+            <!-- Place 4: Hussain Sagar Lake -->
+            <div class="exp-place-card" data-cost="20" data-dwell="1.5">
+              <div class="exp-place-photo-box">
+                <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=300&q=80" alt="Hussain Sagar Lake" class="exp-place-photo" />
+              </div>
+              <div class="exp-place-body">
+                <div class="exp-place-name-row">
+                  <h3 class="exp-place-name">Hussain Sagar</h3>
+                  <span class="exp-place-rating">⭐ 4.6</span>
+                </div>
+                <div class="exp-place-meta-pills">
+                  <span>🏷️ ₹20</span> • <span>🕒 ~1.5 hrs</span>
+                </div>
+                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Hussain Sagar Lake')">
+                  Add Plan +
+                </button>
+              </div>
+            </div>
+
+            <!-- Place 5: Chowmahalla Palace -->
+            <div class="exp-place-card" data-cost="100" data-dwell="1.5">
+              <div class="exp-place-photo-box">
+                <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=300&q=80" alt="Chowmahalla Palace" class="exp-place-photo" />
+              </div>
+              <div class="exp-place-body">
+                <div class="exp-place-name-row">
+                  <h3 class="exp-place-name">Chowmahalla</h3>
+                  <span class="exp-place-rating">⭐ 4.7</span>
+                </div>
+                <div class="exp-place-meta-pills">
+                  <span>🏷️ ₹100</span> • <span>🕒 ~1.5 hrs</span>
+                </div>
+                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Chowmahalla Palace')">
+                  Add Plan +
+                </button>
+              </div>
+            </div>
+
+            <!-- Place 6: Qutb Shahi Tombs -->
+            <div class="exp-place-card" data-cost="30" data-dwell="1.5">
+              <div class="exp-place-photo-box">
+                <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=300&q=80" alt="Qutb Shahi Tombs" class="exp-place-photo" />
+              </div>
+              <div class="exp-place-body">
+                <div class="exp-place-name-row">
+                  <h3 class="exp-place-name">Qutb Shahi</h3>
+                  <span class="exp-place-rating">⭐ 4.5</span>
+                </div>
+                <div class="exp-place-meta-pills">
+                  <span>🏷️ ₹30</span> • <span>🕒 ~1.5 hrs</span>
+                </div>
+                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Qutb Shahi Tombs')">
+                  Add Plan +
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Sticky Itinerary Generator Button -->
+          <button id="btn-generate-from-experience" class="exp-sticky-itinerary-cta">
+            <span>🧭</span> Generate My Itinerary (<span id="count-selected-places">0</span> Chosen) ➔
+          </button>
 
         </div>
 
@@ -574,18 +922,20 @@
 
     </main>
 
-    <!-- Bottom Navigation Bar: [ Home ] [ Itinerary ] [ Explore ] [ Saved ] -->
+    <!-- ====================================================================
+         FIXED BOTTOM DOCK NAVIGATION (4 TABS)
+         ==================================================================== -->
     <nav class="bottom-tab-bar">
       <button class="tab-btn active" data-nav="home">
         <span class="tab-icon">🏠</span>
         <span>Home</span>
       </button>
       <button class="tab-btn" data-nav="itinerary">
-        <span class="tab-icon">🗺️</span>
+        <span class="tab-icon">📅</span>
         <span>Itinerary</span>
       </button>
       <button class="tab-btn" data-nav="explore">
-        <span class="tab-icon">🧭</span>
+        <span class="tab-icon">🔍</span>
         <span>Explore</span>
       </button>
       <button class="tab-btn" data-nav="saved">
@@ -594,83 +944,114 @@
       </button>
     </nav>
 
-    <!-- ====================================================================
-         MODALS & OVERLAYS
-         ==================================================================== -->
-
-    <!-- Swap Spot Bottom Sheet -->
-    <div id="modal-swap-sheet" class="modal-overlay">
-      <div class="modal-bottom-sheet">
-        <div style="width:36px; height:4px; background:#D4CEBF; border-radius:2px; margin:0 auto 12px;"></div>
-        <h3 style="font-family:var(--font-serif); font-size:18px; font-weight:700; margin-bottom:4px;">⇄ Swap Destination</h3>
-        <p style="font-size:11px; color:var(--color-slate); margin-bottom:12px;">
-          Choose an alternative in the same geographic cluster to prevent transit delay:
-        </p>
-        <div style="display:flex; flex-direction:column; gap:8px;">
-          <div style="background:#FFF; padding:12px; border-radius:12px; border:1px solid var(--color-border); cursor:pointer;" onclick="closeModal('modal-swap-sheet'); alert('✓ Swapped with Salar Jung Museum.');">
-            <div style="font-weight:700; font-size:13px;">Salar Jung Museum</div>
-            <div style="font-size:11px; color:var(--color-green-open); font-weight:600;">⚡ Same Cluster • 1.2 km away</div>
-          </div>
-          <div style="background:#FFF; padding:12px; border-radius:12px; border:1px solid #F59E0B; cursor:pointer;" onclick="closeModal('modal-swap-sheet'); openModal('modal-spatial-alert');">
-            <div style="font-weight:700; font-size:13px; color:#B45309;">⚠️ Golconda Fort (Cross-City)</div>
-            <div style="font-size:11px; color:var(--color-slate);">14 km away • ~45 min travel time</div>
-          </div>
-        </div>
-        <button onclick="closeModal('modal-swap-sheet')" style="width:100%; margin-top:14px; padding:10px; background:#EFE9E0; border:none; border-radius:var(--radius-pill); font-size:12px; font-weight:700; cursor:pointer;">Cancel</button>
-      </div>
-    </div>
-
-    <!-- Spatial Travel Alert Modal -->
-    <div id="modal-spatial-alert" class="modal-overlay">
-      <div class="modal-dialog-box">
-        <div style="font-size:32px; margin-bottom:8px;">⚠️</div>
-        <h3 style="font-family:var(--font-serif); font-size:18px; font-weight:700; margin-bottom:6px;">Spatial Travel Warning</h3>
-        <p style="font-size:12px; color:var(--color-slate); line-height:1.45; margin-bottom:16px;">
-          Golconda Fort is located 14 km away. Transit will take ~45 minutes across city traffic. Proceed anyway?
-        </p>
-        <div style="display:flex; gap:8px;">
-          <button onclick="closeModal('modal-spatial-alert')" style="flex:1; padding:10px; background:#F4EFEA; border:1px solid var(--color-border); border-radius:var(--radius-pill); font-size:12px; font-weight:700; cursor:pointer;">Stay in Cluster</button>
-          <button onclick="closeModal('modal-spatial-alert'); alert('Proceeding with swap.');" style="flex:1; padding:10px; background:var(--color-terracotta); color:#FFF; border:none; border-radius:var(--radius-pill); font-size:12px; font-weight:700; cursor:pointer;">Proceed Anyway</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Emergency SOS Modal -->
-    <div id="modal-sos-overlay" class="modal-overlay">
-      <div class="modal-dialog-box">
-        <div style="font-size:32px; margin-bottom:8px;">🚨</div>
-        <h3 style="font-family:var(--font-serif); font-size:18px; font-weight:700; margin-bottom:4px;">Emergency SOS</h3>
-        <p style="font-size:12px; color:var(--color-slate); margin-bottom:14px;">
-          Instant dispatch to local emergency responders and trusted contacts with live GPS coordinates.
-        </p>
-        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
-          <a href="tel:112" style="padding:12px; background:var(--color-terracotta); color:#FFF; border-radius:var(--radius-pill); font-size:13px; font-weight:700; text-decoration:none;">
-            📞 Call Police Emergency (112)
-          </a>
-          <a href="tel:1091" style="padding:12px; background:#4B5563; color:#FFF; border-radius:var(--radius-pill); font-size:13px; font-weight:700; text-decoration:none;">
-            📞 Call Women Helpline (1091)
-          </a>
-        </div>
-        <button onclick="closeModal('modal-sos-overlay')" style="width:100%; padding:8px; background:none; border:none; color:var(--color-slate); font-size:12px; font-weight:600; cursor:pointer;">Dismiss</button>
-      </div>
-    </div>
-
-    <!-- Date Picker Modal -->
-    <div id="modal-date-picker" class="modal-overlay">
-      <div class="modal-dialog-box">
-        <div style="font-size:28px; margin-bottom:6px;">📅</div>
-        <h3 id="date-picker-modal-title" style="font-family:var(--font-serif); font-size:17px; font-weight:700; margin-bottom:8px;">Select Date</h3>
-        <input type="date" id="date-picker-input-native" style="width:100%; padding:10px; border-radius:10px; border:1px solid var(--color-border); font-size:13px; margin-bottom:14px;" value="2026-10-18" />
-        <div style="display:flex; gap:8px;">
-          <button onclick="closeModal('modal-date-picker')" style="flex:1; padding:9px; background:#F4EFEA; border:1px solid var(--color-border); border-radius:var(--radius-pill); font-size:12px; font-weight:700; cursor:pointer;">Cancel</button>
-          <button onclick="applyDateSelection()" style="flex:1; padding:9px; background:var(--color-terracotta); color:#FFF; border:none; border-radius:var(--radius-pill); font-size:12px; font-weight:700; cursor:pointer;">Confirm Date</button>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- Master Scripts -->
+  <!-- ====================================================================
+       INTERACTIVE MODALS & BOTTOM SHEETS
+       ==================================================================== -->
+
+  <!-- Modal 1: Swap Sheet -->
+  <div id="modal-swap-sheet" class="modal-overlay" onclick="closeModal('modal-swap-sheet')">
+    <div class="modal-bottom-sheet" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <h3 style="font-family:var(--font-serif); font-size:17px; font-weight:700;">⇄ Swap Itinerary Spot</h3>
+        <button onclick="closeModal('modal-swap-sheet')" style="background:none; border:none; font-size:18px; cursor:pointer;">✕</button>
+      </div>
+      <p style="font-size:11px; color:var(--color-slate); margin-bottom:12px;">
+        Recommended alternatives within the <strong>Old City Cluster (&lt; 1.5 km)</strong>:
+      </p>
+      
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="background:#FFF; padding:10px; border-radius:12px; border:1px solid var(--color-border); cursor:pointer; display:flex; justify-content:space-between; align-items:center;" onclick="applySwap('Mecca Masjid')">
+          <div>
+            <strong>Mecca Masjid</strong>
+            <div style="font-size:10px; color:var(--color-slate);">Heritage • Faith • 300m away • Free Entry</div>
+          </div>
+          <span style="color:var(--color-terracotta); font-weight:700; font-size:11px;">Select ›</span>
+        </div>
+
+        <div style="background:#FFF; padding:10px; border-radius:12px; border:1px solid var(--color-border); cursor:pointer; display:flex; justify-content:space-between; align-items:center;" onclick="applySwap('Badshahi Ashurkhana')">
+          <div>
+            <strong>Badshahi Ashurkhana</strong>
+            <div style="font-size:10px; color:var(--color-slate);">Enamel Tilework • 800m away • Free Entry</div>
+          </div>
+          <span style="color:var(--color-terracotta); font-weight:700; font-size:11px;">Select ›</span>
+        </div>
+
+        <div style="background:#FFF5F5; padding:10px; border-radius:12px; border:1px solid #FFD6D6; cursor:pointer; display:flex; justify-content:space-between; align-items:center;" onclick="triggerSpatialWarning('Golconda Fort (14 km away)')">
+          <div>
+            <strong style="color:#C53030;">Golconda Fort (Western Forts)</strong>
+            <div style="font-size:10px; color:#A00;">⚠️ Cross-City: 14 km away (~45m transit penalty)</div>
+          </div>
+          <span style="color:#C53030; font-weight:700; font-size:11px;">Inspect ›</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Spatial Warning Pop-up Dialog -->
+  <div id="modal-spatial-warning" class="modal-overlay" onclick="closeModal('modal-spatial-warning')">
+    <div class="modal-dialog-box" onclick="event.stopPropagation()">
+      <div style="font-size:36px; margin-bottom:8px;">⚠️</div>
+      <h3 style="font-family:var(--font-serif); font-size:17px; font-weight:700; margin-bottom:6px;">Spatial Advisory Warning</h3>
+      <p id="spatial-warning-text" style="font-size:12px; color:var(--color-slate); line-height:1.4; margin-bottom:18px;">
+        Golconda Fort is located in the Western Forts Cluster (14 km away). Adding this stop will add ~45 minutes of transit time and disrupt your Old City cluster flow.
+      </p>
+      <div style="display:flex; gap:10px;">
+        <button class="state-toggle-btn" style="flex:1; padding:8px;" onclick="closeModal('modal-spatial-warning')">Keep Cluster Plan</button>
+        <button class="state-toggle-btn" style="flex:1; padding:8px; background:var(--color-terracotta); color:#FFF;" onclick="confirmSpatialOverride()">Proceed Anyway</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: SOS Emergency Overlay -->
+  <div id="modal-sos-overlay" class="modal-overlay" onclick="closeModal('modal-sos-overlay')">
+    <div class="modal-dialog-box" onclick="event.stopPropagation()" style="border-top:4px solid #BD5338;">
+      <div style="font-size:34px; margin-bottom:6px;">🛡️</div>
+      <h3 style="font-family:var(--font-serif); font-size:17px; font-weight:700; color:#BD5338; margin-bottom:4px;">1-Tap Emergency SOS</h3>
+      <p style="font-size:11px; color:var(--color-slate); margin-bottom:14px;">
+        Immediate emergency assistance for Hyderabad travelers.
+      </p>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button class="btn-generate-itinerary-hero" style="background:#C53030; padding:10px;" onclick="alert('Calling Telangana Police 112...')">
+          🚨 Dial Police Helpline (112)
+        </button>
+        <button class="btn-generate-itinerary-hero" style="background:#BD5338; padding:10px;" onclick="alert('Calling Women Safety Helpline (1091 / SHE Teams)...')">
+          🌸 Women Safety (SHE Teams: 1091)
+        </button>
+        <button class="btn-generate-itinerary-hero" style="background:#555; padding:10px;" onclick="alert('Real-time GPS coordinates dispatched to emergency contacts.')">
+          📍 Share GPS Live Location
+        </button>
+        <button class="state-toggle-btn" style="margin-top:4px; padding:6px;" onclick="closeModal('modal-sos-overlay')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Interactive Date Picker -->
+  <div id="modal-date-picker" class="modal-overlay" onclick="closeModal('modal-date-picker')">
+    <div class="modal-bottom-sheet" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h3 style="font-family:var(--font-serif); font-size:17px; font-weight:700;" id="modal-date-title">Select Trip Date</h3>
+        <button onclick="closeModal('modal-date-picker')" style="background:none; border:none; font-size:18px; cursor:pointer;">✕</button>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(7, 1fr); gap:6px; text-align:center; font-size:11px; font-weight:600; margin-bottom:8px;">
+        <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(7, 1fr); gap:6px; text-align:center; font-size:11px;" id="calendar-days-grid">
+        <span style="color:#C5C2BA;">15</span>
+        <span style="color:#C5C2BA;">16</span>
+        <span style="color:#C5C2BA;">17</span>
+        <button class="state-toggle-btn" style="padding:6px; background:var(--color-terracotta); color:#FFF;" onclick="selectDateVal('18 Oct 2026')">18</button>
+        <button class="state-toggle-btn" style="padding:6px;" onclick="selectDateVal('19 Oct 2026')">19</button>
+        <button class="state-toggle-btn" style="padding:6px;" onclick="selectDateVal('20 Oct 2026')">20</button>
+        <button class="state-toggle-btn" style="padding:6px; background:#F8D7CD; color:var(--color-terracotta);" onclick="selectDateVal('21 Oct 2026')">21</button>
+        <button class="state-toggle-btn" style="padding:6px;" onclick="selectDateVal('22 Oct 2026')">22</button>
+        <button class="state-toggle-btn" style="padding:6px;" onclick="selectDateVal('23 Oct 2026')">23</button>
+        <button class="state-toggle-btn" style="padding:6px;" onclick="selectDateVal('24 Oct 2026')">24</button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
 </body>

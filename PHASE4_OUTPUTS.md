@@ -4,157 +4,173 @@
 **Creative Director & Product Lead:** NIFT Hyderabad  
 **Technical Project Architect:** AGY  
 **Lifecycle Stage:** Phase 4 — User Flows & Low-Fidelity Wireframes (Master Outputs)  
-**Document Purpose:** Central master reference for all low-fidelity structural wireframes, user task flows, interaction states, and screen architectures established during Phase 4.
+**Document Purpose:** Central master reference for the locked 5-Screen Inventory, structural wireframes, user task flows, interaction states, and screen architectures established during Phase 4, directly corresponding to the 5 official design references (`media_1795432344239_b5db47b1.jpg` through `media_1795436112703_bbb3352d.jpg`).
 
 ---
 
 ## 1. Executive Summary & Phase 4 Milestone Achievements
 
-In Phase 4, the Information Architecture from Phase 3 was translated into **concrete, low-fidelity structural screen layouts and task flows**. Every screen has been directly designed from the Creative Director’s hand-drawn sketches and real-time design steering.
+In Phase 4, the Information Architecture from Phase 3 has been converted into **5 fully specified, structural screen layouts and cohesive user task flows**. Every screen is derived directly from the Creative Director’s official high-fidelity references and design steering.
 
-### Key Accomplishments:
-1. **Official Nomenclature Unification:** Formally locked the active execution screen name to **"Live Itinerary"** (replacing "Active Day Pass").
-2. **Single-Page Planning Architecture (Screen 2.0):** Eliminated multi-step friction by consolidating Destination, Dates, Traveler Dynamic, Expandable Two-Tier Budget Selection, and Experience Choice into a single, intuitive setup screen.
-3. **Streamlined Intra-Day Interaction (Screen 3.0):** Integrated modification controls (`Reorder`, `Skip`, `Swap Spot` with Spatial Advisory Warning) as lightweight **inline bottom sheets and overlays** directly over the Live Itinerary thread, avoiding fragmented navigation.
-4. **Return Explorer Manual Workspace (Screen 4.0):** Built a dedicated catalog with 4-D filter pills, search bar, 2-column destination cards, and an itinerary assembly drawer for returning travelers.
-5. **Dedicated Curated Stays Screen (Screen 5.0):** Created a standalone accommodations finder categorized by Budget Range and Traveler Dynamic, featuring direct 1-tap links to official hotel booking sites (zero commissions).
-6. **End-to-End User Task Flows:** Mapped out 5 complete decision trees covering 1st-timers, return explorers, live on-ground adjustments, safety SOS, and stay booking.
+### Key Architectural Pillars:
+1. **5-Screen Master Architecture:** 
+   - **Screen 1.0:** Dashboard (Home Screen) with Ongoing Trip progress stepper & Plan a New Trip entry.
+   - **Screen 2.0:** Plan A New Trip (Single-Page Setup) with destination autocomplete, date pickers, dynamic selection, 3-tier budget ranges, and dual experience pathways.
+   - **Screen 3.0:** Live Itinerary (Timeline Execution) with top "View Stays" banner, day switcher pills, vertical timeline rail, intra-day modification tools (`Reorder`, `Swap`, `Skip Stop`), and nearby food radar.
+   - **Screen 4.0:** Curated Stays (Accommodations Finder) with budget tier filters, amenity chips, pricing per night, and direct official booking links.
+   - **Screen 5.0:** Experience Explorer (Self-Planning Catalog) with search bar, 4-D filter pills, 2-column place cards with `Add Plan +` buttons, and itinerary generation into the Screen 3.0 layout.
+2. **Zero Transit-Waste Spatial Clustering:** Seamless intra-day execution where 1st timers receive pre-clustered routes and return explorers assemble custom itineraries with spatial sanity checks.
+3. **Dedicated Stays Decoupling:** Accommodations are housed in their own dedicated discovery space (Screen 4.0) accessible directly from the Live Itinerary.
+4. **Contextual Food Break Radars:** Integrated within-500m dining recommendations directly into the timeline after key visits.
 
 ---
 
 ## 2. Master Screen Inventory
 
-| Screen ID | Screen Name | Core Functionality | Primary Actions |
-| :--- | :--- | :--- | :--- |
-| **Screen 1.0** | **Open Dashboard (Home Screen)** | Unhurried landing hub with trip hero, live status, and recommendation grid | • Tap `PLAN A NEW TRIP >`<br>• Tap `🔴 LIVE ITINERARY` status tile<br>• 1-Tap `SOS`<br>• Browse recommendation cards |
-| **Screen 2.0** | **Plan a New Trip (Single-Page Setup)** | Unified trip configuration wizard with expandable budget tiers | • Search City<br>• Select Departure & Return Dates<br>• Select Dynamic (`Solo`, `Duo`, `Family`)<br>• Expand Budget Range (`Budget-Friendly`, `Premium`, `Exclusive`)<br>• Choose Experience (`1st Timer` vs. `Return Explorer`)<br>• Tap `GENERATE ITINERARY` |
-| **Screen 3.0** | **Your Itinerary (Timeline Execution)** | Step-by-step ground navigation companion with heritage hero banner, segmented day switcher, vertical rail, inline food radar & floating next stop bar | • View timeline nodes, dwell times & fees<br>• `[⇅ Reorder]` stops<br>• `[⇄ Swap]` stop<br>• `[✕ Skip Stop]` stop<br>• `Feeling Hungry?` food radar (Nimrah, Shadab)<br>• Tap `Next Stop Golconda Fort`<br>• Top `←` Back to Dashboard |
-| **Screen 4.0** | **Explore Hyderabad (Manual Self-Planner)** | Freeform discovery catalog for returning visitors | • Search & 4-D filter pills (Zone, Cost, Dwell, Hours)<br>• 2-column place cards with photo, rating & dwell tags<br>• Bookmark & `[ + Add to My Plan ]`<br>• Sticky Bottom Bar: `ORGANISE ITINERARY (X Chosen) ➔ FINALISED` |
-| **Screen 5.0** | **Curated Stays (Accommodations Finder)** | Dedicated verified lodging discovery filtered strictly by budget and party size | • Filter by Budget Tier (`Budget-Friendly`, `Premium`, `Exclusive`)<br>• Filter by Traveler Dynamic (`Solo Hostels`, `Duo Rooms`, `Family Suites`)<br>• Verified listings with distance from core cluster<br>• `[ Book on Official Site / Agoda ➔ ]` (Direct booking handoff) |
+| Screen ID | Screen Name | Reference Image | Core Functionality | Primary Actions |
+| :--- | :--- | :--- | :--- | :--- |
+| **Screen 1.0** | **Dashboard (Home Screen)** | `media_1795432344239_b5db47b1.jpg` | Landing hub with active trip progress, new trip launcher & horizontal destination recommendations | • Tap `✈️ Open Itinerary →`<br>• Tap `Plan a New Trip >`<br>• Browse `Explore More` horizontal carousel (Ranchi, Lucknow, Mumbai)<br>• 1-Tap `SOS` & location dropdown |
+| **Screen 2.0** | **Plan A New Trip Screen** | `media_1795432829635_4381baac.jpg` | Single-page scrollable trip configuration wizard with slideshow and tiered preferences | • Search City with Autocomplete<br>• Pick Arrival Date & Return Date<br>• Select Dynamic (`Solo`, `Duo`, `Family`)<br>• Select Budget Tier (`Budget Friendly`, `Premium`, `Luxury`) with 3 sub-ranges each<br>• Choose Experience (`1st Timer` vs `Experience Explorer`)<br>• Tap `✈️ Generate Itinerary →` |
+| **Screen 3.0** | **Live Itinerary Screen** | `media_1795433517094_a6ae0db1.jpg` | Step-by-step active navigation companion with heritage watercolor banner, timeline rail & food radar | • Tap `🛏️ View Stays` banner ➔ opens Screen 4.0<br>• Switch Days (`Day 1: Old City`, `Day 2`, `Day 3`)<br>• `[⇅ Reorder]` stops<br>• `[⇄ Swap]` stop (opens same-cluster recommendations)<br>• `[✕ Skip Stop]`<br>• View nearby dining (`Nimrah Cafe`, `Shadab`)<br>• View floating `Next Stop Golconda Fort` banner<br>• Back button `←` returns to Dashboard |
+| **Screen 4.0** | **Curated Stays Screen** | `media_1795435632279_6cd129b7.jpg` | Dedicated accommodations finder categorized by budget tier with verified hygiene & cluster distance | • Filter by Tier (`All Stays`, `Budget-Friendly`, `Premium`, `Exclusive`)<br>• Browse verified listings with photo carousels & amenity badges<br>• Tap `View Details →` (Official hotel booking link)<br>• Tap bottom banner `Looking for something specific?`<br>• Back button `←` returns to Screen 3.0 |
+| **Screen 5.0** | **Experience Explorer Screen** | `media_1795436112703_bbb3352d.jpg` | Self-curated planning workspace for experienced travelers to choose specific spots | • Search places with live keyword filter<br>• Filter by cost & dwell pills (`Under ₹100`, `Dwell < 1.5hr`)<br>• Tap `Add Plan +` on 2-column place cards<br>• Tap sticky `Generate My Itinerary →` ➔ builds custom itinerary in Screen 3.0 layout |
 
 ---
 
-## 3. Structural Wireframe Layouts
+## 3. Structural Wireframe Layouts & ASCII Schematics
 
-### Screen 1A: Open Dashboard (No Active/Ongoing Trip)
-*Default landing hub for new visitors or users between trips. Directly integrates the 6-section planning flow and top recommendation slideshow.*
+### Screen 1.0: Dashboard (Home Screen)
+*Reference: `media_1795432344239_b5db47b1.jpg`*
 
 ```
 ┌────────────────────────────────────────────────────────┐
-│  📍 Hyderabad, Telangana ∨             [+ SOS]   (👤)  │
+│ 9:41                             📶 ⚡ 🔋              │
+│ 📍 Hyderabad, Telangana ∨              [+ SOS]   (👤)  │
 ├────────────────────────────────────────────────────────┤
+│ [HERO WATERCOLOR BACKDROP: CHARMINAR & BIRDS IN SKY]   │
 │                                                        │
-│   Plan a New Trip                                      │
-│   Let's explore more ✨                                │
+│ Explore Hyderabad                                      │
+│ at your pace ✨                                        │
 │                                                        │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │ 🖼️ [RECOMMENDED DESTINATIONS SLIDESHOW CAROUSEL]  │  │
-│  │ « Trip to Goa  •  Trip to Bali  •  Trip to Hampi »│  │
-│  └──────────────────────────────────────────────────┘  │
+│ ┌─ ONGOING TRIP CARD ────────────────────────────────┐ │
+│ │ ┌──────────┐ 🧳 Your Active Trip    [Let's keep     │ │
+│ │ │ [Image]  │                         going! ↗]     │ │
+│ │ │ Charminar│ Day 1: Old City Heritage Cluster      │ │
+│ │ │ Gateway  │ 📍 Next: Chowmahalla Palace • 11:30 AM│ │
+│ │ │          │                                       │ │
+│ │ │          │ (✓)─────(✓)─────(●)─────(○)           │ │
+│ │ │          │ Char.   Laad    Chow.   Evening       │ │
+│ │ │          │                                       │ │
+│ │ └──────────┘ ┌───────────────────────────────────┐ │ │
+│ │              │      ✈️ Open Itinerary ➔          │ │ │
+│ │              └───────────────────────────────────┘ │ │
+│ └────────────────────────────────────────────────────┘ │
 │                                                        │
-│  SECTION 1: YOUR DESTINATION                           │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │ 🔍 Where do you want to go?                   ✈️ │  │
-│  └──────────────────────────────────────────────────┘  │
-│    └─► [AUTOCOMPLETE DROPDOWN: "H" ➔ Hyderabad,        │
-│                                      Himachal Pradesh] │
+│ ┌─ PLAN A NEW TRIP CARD ─────────────────────────────┐ │
+│ │ ✨                                     [🧳 Luggage,│ │
+│ │ Plan a                                   Map, Hat, │ │
+│ │ New Trip             (✈️ dashed trail)   Plane Art]│ │
+│ │ ( > )                                              │ │
+│ └────────────────────────────────────────────────────┘ │
 │                                                        │
-│  SECTION 2: TRIP DATES                                 │
-│  ┌───────────────────────┐   ┌───────────────────────┐ │
-│  │ 📅 Arrival Date     > │   │ 📅 Return Date      > │ │
-│  └───────────────────────┘   └───────────────────────┘ │
-│                                                        │
-│  SECTION 3: TRAVEL DYNAMIC                             │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
-│  │   👤 Solo    │  │   👥 Duo     │  │  👨‍👩‍👧‍👦 Family   │  │
-│  └──────────────┘  └──────────────┘  └──────────────┘  │
-│                                                        │
-│  SECTION 4: BUDGET RANGE (3 Tiers with 3 Sub-Ranges)   │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │ 👛 Budget Friendly                               > │  │
-│  │   • Baseline Saver   • Mid Comfort   • Plus Day  │  │
-│  └──────────────────────────────────────────────────┘  │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │ 👑 Premium                                       > │  │
-│  │   • Baseline Saver   • Mid Comfort   • Plus Day  │  │
-│  └──────────────────────────────────────────────────┘  │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │ 💎 Luxury / Exclusive                            > │  │
-│  │   • Baseline Saver   • Mid Comfort   • Plus Day  │  │
-│  └──────────────────────────────────────────────────┘  │
-│                                                        │
-│  SECTION 5: EXPERIENCE CHOICE                          │
-│  ┌───────────────────────┐   ┌───────────────────────┐ │
-│  │     [🎒 Backpack]     │   │    [🔭 Binoculars]    │ │
-│  │ 1st Timer         (○) │   │ Experience Explorer(○)│ │
-│  │ A perfect start to    │   │ Discover more, go     │ │
-│  │ your journey!         │   │ deeper!               │ │
-│  └───────────────────────┘   └───────────────────────┘ │
-│                                                        │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │           ✈️ GENERATE ITINERARY ➔                 │  │
-│  └──────────────────────────────────────────────────┘  │
+│ 🧭 Explore More                            View All ➔  │
+│ ┌──────────────┐  ┌──────────────┐  ┌──────────────┐   │
+│ │ [Photo]      │  │ [Photo]      │  │ [Photo]      │   │
+│ │ 📍 Ranchi    │  │ 📍 Lucknow   │  │ 📍 Mumbai    │   │
+│ └──────────────┘  └──────────────┘  └──────────────┘   │
 │                                                        │
 ├────────────────────────────────────────────────────────┤
-│  [🏠 Home]    [🗺️ Itinerary]    [🧭 Explore]   [🔖 Saved]│
+│   [🏠 Home]      [📅 Itinerary]   [🔍 Explore]   [🔖 Saved]│
 └────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-### Screen 1B: Open Dashboard (With Active/Ongoing Trip)
-*Dynamic landing screen for travelers currently on an active journey. Tapping "Build a New Trip" dynamically switches to Screen 1A.*
+### Screen 2.0: Plan A New Trip Screen
+*Reference: `media_1795432829635_4381baac.jpg`*
 
 ```
 ┌────────────────────────────────────────────────────────┐
-│  📍 Hyderabad, Telangana ∨             [+ SOS]   (👤)  │
+│ 9:41                                                   │
+│ 📍 Hyderabad, Telangana ∨              [+ SOS]   (👤)  │
 ├────────────────────────────────────────────────────────┤
+│ Plan a New Trip                                        │
+│ Let's explore more ✨                                  │
+│ ──────────────────────── (watercolor brush stroke)     │
+│ [Top Places Slideshow: Ranchi • Maharashtra • Guwahati]│
 │                                                        │
-│   Where would you like to explore today?               │
-│                                                        │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │ [Active Trip Pass Pill]                          │  │
-│  │ Old City Heritage Day            [Charminar      │  │
-│  │ Next: Chowmahalla Palace • 11:30 AM  Photo]      │  │
-│  └──────────────────────────────────────────────────┘  │
-│                                                        │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │ 📖 Build a New Trip (1–3 Days)                 > │  │
-│  │    Choose your budget, interests & we'll curate  │  │
-│  │    [Easy ₹1.7k]    [Premium ₹5k]    [Luxury ₹25k]│  │
-│  │    *(Tapping this card opens Screen 1A directly)  │  │
-│  └──────────────────────────────────────────────────┘  │
-│                                                        │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │ 📍 Explore 45 Curated Spots                    > │  │
-│  │    Monuments, food, culture, nature & more       │  │
-│  └──────────────────────────────────────────────────┘  │
+│ ┌─ MASTER PLANNING CARD ─────────────────────────────┐ │
+│ │ 📍 Your Destination                                │ │
+│ │ ┌────────────────────────────────────────────────┐ │ │
+│ │ │ 🔍 Where do you want to go?                 ✈️ │ │ │
+│ │ └────────────────────────────────────────────────┘ │ │
+│ │   └─► [Autocomplete: "H" ➔ Hyderabad, Telangana]   │ │
+│ │                                                    │ │
+│ │ 📅 Trip Dates                                      │ │
+│ │ ┌───────────────────────┐  ┌─────────────────────┐ │ │
+│ │ │ 📅 Arrival Date     > │  │ 📅 Return Date    > │ │ │
+│ │ └───────────────────────┘  └─────────────────────┘ │ │
+│ │                                                    │ │
+│ │ 👥 Travel Dynamic                                  │ │
+│ │ ┌─────────────┐   ┌─────────────┐   ┌────────────┐ │ │
+│ │ │   👤 Solo   │   │   👥 Duo    │   │ 👨‍👩‍👧‍👦 Family │ │ │
+│ │ └─────────────┘   └─────────────┘   └────────────┘ │ │
+│ │                                                    │ │
+│ │ ₹ Budget Range                                     │ │
+│ │ ┌────────────────────────────────────────────────┐ │ │
+│ │ │ 👛 Budget Friendly                           > │ │ │
+│ │ │    • Baseline Saver   • Mid Comfort  • Plus Day│ │ │
+│ │ ├────────────────────────────────────────────────┤ │ │
+│ │ │ 👑 Premium                                   > │ │ │
+│ │ │    • Baseline Saver   • Mid Comfort  • Plus Day│ │ │
+│ │ ├────────────────────────────────────────────────┤ │ │
+│ │ │ 💎 Luxury                                    > │ │ │
+│ │ │    • Baseline Saver   • Mid Comfort  • Plus Day│ │ │
+│ │ └────────────────────────────────────────────────┘ │ │
+│ │                                                    │ │
+│ │ ✨ Experience Choice                               │ │
+│ │ ┌───────────────────────┐  ┌─────────────────────┐ │ │
+│ │ │     [🎒 Backpack]     │  │    [🔭 Binoculars]  │ │ │
+│ │ │ 1st Timer         (○) │  │ Experience Exp. (○) │ │ │
+│ │ │ A perfect start to    │  │ Discover more, go   │ │ │
+│ │ │ your journey!         │  │ deeper!             │ │ │
+│ │ └───────────────────────┘  └─────────────────────┘ │ │
+│ │                                                    │ │
+│ │ ┌────────────────────────────────────────────────┐ │ │
+│ │ │           ✈️ Generate Itinerary ➔               │ │ │
+│ │ └────────────────────────────────────────────────┘ │ │
+│ └────────────────────────────────────────────────────┘ │
 │                                                        │
 ├────────────────────────────────────────────────────────┤
-│  [🏠 Home]    [🗺️ Itinerary]    [🧭 Explore]   [🔖 Saved]│
+│   [🏠 Home]      [📅 Itinerary]   [🔍 Explore]   [🔖 Saved]│
 └────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-### Screen 3.0: "Your Itinerary" Screen (Direct Reference `media_1795249816175.png`)
-*Step-by-step active navigation screen with watercolor heritage hero banner, segmented day switcher pills, vertical terracotta timeline rail, inline food radar, and floating next stop banner.*
+### Screen 3.0: Live Itinerary Screen
+*Reference: `media_1795433517094_a6ae0db1.jpg`*
 
 ```
 ┌────────────────────────────────────────────────────────┐
 │  ←  Your Itinerary                     [🗺️] [🛡️ SOS] (👤)│
 ├────────────────────────────────────────────────────────┤
-│  [HERO WATERCOLOR BACKDROP: CHARMINAR & HERITAGE DOMES]│
+│  [HERO WATERCOLOR BACKDROP: CHARMINAR & PALACE DOMES]  │
 │                                                        │
 │  "Your trip,                                           │
 │   well planned ✨"                                     │
-│   ───────────────── (warm brush stroke)                │
+│   ───────────────── (warm terracotta brush stroke)     │
+│                                                        │
+│  ┌─ VIEW STAYS BANNER (Tapping opens Screen 4.0) ────┐ │
+│  │ 🛏️ [Bed Photo]  View Stays                     >  │ │
+│  │                 Find the best stays nearby        │ │
+│  └───────────────────────────────────────────────────┘ │
 │                                                        │
 │  ┌──────────────────────────────────────────────────┐  │
 │  │ [📍 Day 1: Old City (Active)] [Day 2] [Day 3]    │  │
 │  └──────────────────────────────────────────────────┘  │
 │                                                        │
-│  │ (Vertical Terracotta Timeline Rail)                 │
+│  │ (Vertical Continuous Terracotta Timeline Rail)      │
 │ (1)── ┌─────────────────────────────────────────────┐  │
 │  │    │ [Thumb]  Charminar & Laad Bazaar            │  │
 │  │    │          [🎫 ₹25 Entry]  [🕒 Dwell: 1.5 hrs] │  │
@@ -179,212 +195,173 @@ In Phase 4, the Information Architecture from Phase 3 was translated into **conc
 │  │    │  [ ⇅ Reorder ]   [ ⇄ Swap ]   [ ✕ Skip Stop]│  │
 │  │    └─────────────────────────────────────────────┘  │
 │  │                                                     │
+│ (3)── ┌─────────────────────────────────────────────┐  │
+│  │    │ [Thumb]  Laad Bazaar                        │  │
+│  │    │          [🎫 Free Entry] [🕒 Dwell: 1 hr]    │  │
+│  │    ├─────────────────────────────────────────────┤  │
+│  │    │  [ ⇅ Reorder ]   [ ⇄ Swap ]   [ ✕ Skip Stop]│  │
+│  │    └─────────────────────────────────────────────┘  │
+│  │                                                     │
 │  ┌──────────────────────────────────────────────────┐  │
 │  │ [🏰 Thumb] Next Stop: Golconda Fort [📍 ~20m >]  │  │
 │  └──────────────────────────────────────────────────┘  │
 │                                                        │
 ├────────────────────────────────────────────────────────┤
-│  [🏠 Home]    [📅 Itinerary]    [🔍 Explore]   [🔖 Saved]│
+│   [🏠 Home]      [📅 Itinerary]   [🔍 Explore]   [🔖 Saved]│
 └────────────────────────────────────────────────────────┘
 ```
 
-[INLINE STATE CONTROLS OVER SCREEN 3.0]:
-• Tapping `[⇄ Swap]` ➔ Bottom Sheet slides up with Same-Cluster Recommendations.
-• Selecting Distant Spot ➔ Overlay alert: *"⚠️ Spatial Advisory: Golconda is 14 km away (~45m transit). Proceed?"*
-• Tapping `[✕ Skip Stop]` ➔ Removes stop and smoothly reconnects timeline to next stop.
-• Tapping `[ 🍴 View Options ]` ➔ Expands nearby food radar places within 500m walking radius.
-
-
 ---
 
-### Screen 4.0: "Explore Hyderabad" Screen (Return Explorer — Manual Self-Planner)
+### Screen 4.0: Curated Stays Screen
+*Reference: `media_1795435632279_6cd129b7.jpg`*
+
 ```
 ┌────────────────────────────────────────────────────────┐
-│  Explore Hyderabad                                     │
-│  Discover more. Plan better.                           │
+│  ←  Curated Stays                      [🗺️] [🛡️ SOS] (👤)│
 ├────────────────────────────────────────────────────────┤
+│  [HERO WATERCOLOR BACKDROP: CHARMINAR & HERITAGE DOMES]│
 │                                                        │
-│  [ 🔍 Search monuments, cafes, gardens...         🎛️ ] │
+│  "Stay your way                                        │
+│   in Hyderabad ✨"                                     │
+│  📍                                                    │
 │                                                        │
-│  FILTER PILLS ROW (Horizontal Scroll):                 │
-│  [● Old City Zone] [Hitec City] [Under ₹100] [Dwell<2h]│
+│  FILTER TABS (Horizontal Scroll):                      │
+│  [🛏️ All Stays] [💼 Budget-Friendly] [💎 Premium] [⭐ Excl]│
 │                                                        │
-│  PLACES GRID (2-Column Layout):                        │
-│  ┌────────────────────────┐  ┌───────────────────────┐ │
-│  │ [Image]        [🔖]   │  │ [Image]        [🔖]  │ │
-│  │ 🟢 Open Now            │  │ 🟢 Open Now           │ │
-│  │ Qutb Shahi Tombs       │  │ Golconda Fort         │ │
-│  │ Heritage • History     │  │ Heritage • History    │ │
-│  │ 🎟️ ₹25    🚶 18m walk  │  │ 🎟️ ₹75   🚗 20m drive │ │
-│  │ [Dwell: 1.5h] [ToliCh.]│  │ [Dwell: 2h]  [Golcon.]│ │
-│  │ ⭐ 4.4 (2.8k)          │  │ ⭐ 4.6 (4.2k)         │ │
-│  │ [ + Add to My Plan ]   │  │ [ + Add to My Plan ]  │ │
-│  └────────────────────────┘  └───────────────────────┘ │
-│  ┌────────────────────────┐  ┌───────────────────────┐ │
-│  │ [Image]        [🔖]   │  │ [Image]        [🔖]  │ │
-│  │ 🟢 Open Now            │  │ 🟢 Open Now           │ │
-│  │ Salar Jung Museum      │  │ Mecca Masjid          │ │
-│  │ Museum • Art • Culture │  │ Heritage • Faith      │ │
-│  │ 🎟️ ₹60    🚗 12m drive │  │ 🎟️ ₹10    🚶 15m walk │ │
-│  │ [Dwell: 2h]  [Daruss.] │  │ [Dwell: 1h]  [OldCity]│ │
-│  │ ⭐ 4.5 (3.1k)          │  │ ⭐ 4.3 (1.9k)         │ │
-│  │ [ + Add to My Plan ]   │  │ [ + Add to My Plan ]  │ │
-│  └────────────────────────┘  └───────────────────────┘ │
+│  ┌─ STAY CARD 1 ─────────────────────────────────────┐ │
+│  │ [Photo: Clean Room / Interior]          ⭐ 4.6    │ │
+│  │ •••••• (Pagination Dots)                          │ │
+│  │                                                   │ │
+│  │ Zostel Hyderabad                                  │ │
+│  │ 📍 Old City, Abids • 2.2 km from Charminar        │ │
+│  │                                                   │ │
+│  │ [🛏️ Dorms & Rooms]    [📶 Free Wi-Fi]              │ │
+│  │ [🍴 Cafe On-Site]     [🍃 Eco-Friendly]           │ │
+│  │                                                   │ │
+│  │ ₹799 / night                      [View Details ➔]│ │
+│  └───────────────────────────────────────────────────┘ │
+│                                                        │
+│  ┌─ STAY CARD 2 ─────────────────────────────────────┐ │
+│  │ [Photo: Skyline Window Room]            ⭐ 4.4    │ │
+│  │ ••••••                                            │ │
+│  │                                                   │ │
+│  │ Hotel Name (Courtyard Hub)                        │ │
+│  │ 📍 Hitech City • 4.4 km from Charminar            │ │
+│  │                                                   │ │
+│  │ [❄️ AC Rooms]         [🏊 Swimming Pool]          │ │
+│  │ [🍴 In-Room Dining]   [📶 Free Wi-Fi]             │ │
+│  │                                                   │ │
+│  │ ₹1,999 / night                    [View Details ➔]│ │
+│  └───────────────────────────────────────────────────┘ │
+│                                                        │
+│  ┌─ STAY CARD 3 ─────────────────────────────────────┐ │
+│  │ [Photo: Falaknuma Courtyard]            ⭐ 4.8    │ │
+│  │ ••••••                                            │ │
+│  │                                                   │ │
+│  │ Taj Falaknuma Palace                              │ │
+│  │ 📍 Falaknuma • 7.1 km from Charminar              │ │
+│  │                                                   │ │
+│  │ [👑 Luxury Stay]      [🏛️ Heritage Property]      │ │
+│  │ [🍴 Fine Dining]      [💆 Spa & Wellness]         │ │
+│  │                                                   │ │
+│  │ ₹12,999 / night                   [View Details ➔]│ │
+│  └───────────────────────────────────────────────────┘ │
+│                                                        │
+│  ┌─ CUSTOM STAY BANNER ──────────────────────────────┐ │
+│  │ 🛏️✨ Looking for something specific?            > │ │
+│  │     Explore more stay options for your trip.      │ │
+│  └───────────────────────────────────────────────────┘ │
 │                                                        │
 ├────────────────────────────────────────────────────────┤
-│  [ 🧭 ORGANISE ITINERARY (4 Selected) ➔ FINALISED ]    │
+│   [🏠 Home]      [📅 Itinerary]   [🔍 Explore]   [🔖 Saved]│
 └────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-### Screen 5.0: Dedicated "Curated Stays" Screen (Accommodations Finder)
+### Screen 5.0: Experience Explorer Screen
+*Reference: `media_1795436112703_bbb3352d.jpg`*
+
 ```
 ┌────────────────────────────────────────────────────────┐
-│  ← Back    Curated Stays in Hyderabad             🔍   │
-│            Pre-verified, clean & budget-matched        │
+│ [Charminar Art]  📍 Hyderabad ∨           [SOS]   (👤) │
 ├────────────────────────────────────────────────────────┤
+│ Experience Explorer                                    │
+│ Plan by Yourself ✍️                 (✈️ dashed trail) │
 │                                                        │
-│  FILTER BY BUDGET TIER:                                │
-│  [● Budget-Friendly]   [Premium]   [Exclusive Luxury]  │
+│ ┌──────────────────────────────────────────────────┐   │
+│ │ 🔍 Search for places...                       🎛️ │   │
+│ └──────────────────────────────────────────────────┘   │
 │                                                        │
-│  FILTER BY TRAVELER TYPE:                              │
-│  [● Solo (Hostels/Bunks)]  [Duo (Rooms)]  [Family (Suites)]│
+│ HORIZONTAL FILTER PILLS:                               │
+│ [✨ All] [Under ₹100] [Under ₹200] [Dwell<1.5h] [Dwell<2h]│
 │                                                        │
-│  STAYS FEED:                                           │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │ [Photo: Interior / Clean Room]               🔖  │  │
-│  │                                                  │  │
-│  │ Zostel Hyderabad (Abids / Old City Hub)          │  │
-│  │ ⭐ 4.6 (1.2k Reviews) • 2.2 km from Charminar    │  │
-│  │                                                  │  │
-│  │ 🏷️ Backpacker Bunk • Female/Mixed Dorms          │  │
-│  │ ✨ Fast Wi-Fi • Clean Sanitized Washrooms • AC   │  │
-│  │                                                  │  │
-│  │ 💰 ₹799 / night                                  │  │
-│  │ [ Book on Official Site / Agoda ➔ ]              │  │
-│  └──────────────────────────────────────────────────┘  │
+│ 2-COLUMN PLACES GRID:                                  │
+│ ┌──────────────────────┐    ┌──────────────────────┐   │
+│ │ [Image]              │    │ [Image]              │   │
+│ │ Charminar     ⭐ 4.7 │    │ Golconda Fort ⭐ 4.6 │   │
+│ │ 🏷️ ₹50   🕒 ~1 hr    │    │ 🏷️ ₹25   🕒 ~1.5 hrs │   │
+│ │ [    Add Plan +    ] │    │ [    Add Plan +    ] │   │
+│ └──────────────────────┘    └──────────────────────┘   │
+│ ┌──────────────────────┐    ┌──────────────────────┐   │
+│ │ [Image]              │    │ [Image]              │   │
+│ │ Laad Bazaar   ⭐ 4.5 │    │ Hussain Sagar ⭐ 4.6 │   │
+│ │ 🏷️ ₹50   🕒 ~2 hrs   │    │ 🏷️ ₹20   🕒 ~1.5 hrs │   │
+│ │ [    Add Plan +    ] │    │ [    Add Plan +    ] │   │
+│ └──────────────────────┘    └──────────────────────┘   │
+│ ┌──────────────────────┐    ┌──────────────────────┐   │
+│ │ [Image]              │    │ [Image]              │   │
+│ │ Chowmahalla   ⭐ 4.7 │    │ Qutb Shahi    ⭐ 4.5 │   │
+│ │ 🏷️ ₹100  🕒 ~1.5 hrs │    │ 🏷️ ₹30   🕒 ~1.5 hrs │   │
+│ │ [    Add Plan +    ] │    │ [    Add Plan +    ] │   │
+│ └──────────────────────┘    └──────────────────────┘   │
 │                                                        │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │ [Photo: Heritage Courtyard Guesthouse]       🔖  │  │
-│  │                                                  │  │
-│  │ Heritage Haveli Guesthouse (Lakdikapul)          │  │
-│  │ ⭐ 4.5 (890 Reviews) • Central Transit Hub       │  │
-│  │                                                  │  │
-│  │ 🏷️ Private Deluxe Room • 24/7 Security           │  │
-│  │ ✨ Spacious Restrooms • Quiet Ambience • Metro   │  │
-│  │                                                  │  │
-│  │ 💰 ₹1,450 / night                                │  │
-│  │ [ Book on Official Site / MMT ➔ ]                │  │
-│  └──────────────────────────────────────────────────┘  │
+│ ┌──────────────────────────────────────────────────┐   │
+│ │     🧭 Generate My Itinerary (3 Chosen) ➔        │   │
+│ └──────────────────────────────────────────────────┘   │
 │                                                        │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │ [Photo: Boutique Business Hotel]             🔖  │  │
-│  │                                                  │  │
-│  │ The Park Banjara (Banjara Hills / Jubilee Hub)   │  │
-│  │ ⭐ 4.7 (2.4k Reviews) • Boutique Luxury          │  │
-│  │                                                  │  │
-│  │ 🏷️ Premium City View Room • Rooftop Pool         │  │
-│  │ ✨ Express Check-in • Concierge • Luxury Linen   │  │
-│  │                                                  │  │
-│  │ 💰 ₹4,200 / night                                │  │
-│  │ [ Book on Official Site / Agoda ➔ ]              │  │
-│  └──────────────────────────────────────────────────┘  │
-│                                                        │
+├────────────────────────────────────────────────────────┤
+│   [🏠 Home]        [📍 Map]       [🔖 Saved]     [🧭 Explore]│
 └────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 4. Master User Task Flows
+## 4. End-to-End User Task Flows
 
-### Flow 1: 1st-Timer Guided Planning Flow
 ```mermaid
 flowchart TD
-    A["Screen 1.0: Open Dashboard"] -->|"Tap 'PLAN A NEW TRIP >'"| B["Screen 2.0: Single-Page Setup"]
-    B --> C["Enter City: Hyderabad"]
-    C --> D["Select Trip Dates"]
-    D --> E["Choose Dynamic: Solo / Duo / Family"]
-    E --> F["Select Budget Range: Budget-Friendly / Premium / Exclusive"]
-    F --> G["Select Experience: 1st Timer"]
-    G --> H["Tap 'GENERATE ITINERARY'"]
-    H --> I["Screen 3.0: Live Itinerary (Cluster-Optimized)"]
-    I -->|"Optional: Tap 'View Stays Page'"| J["Screen 5.0: Curated Stays (Direct Official Booking)"]
-    I --> K["Tap 'Download Offline Pass' & Start Trip"]
-```
-
----
-
-### Flow 2: Returning Explorer Manual Self-Planner Flow
-```mermaid
-flowchart TD
-    A["Screen 1.0: Open Dashboard"] -->|"Tap 'PLAN A NEW TRIP >'"| B["Screen 2.0: Single-Page Setup"]
-    B --> C["Enter City, Dates, Dynamic & Budget"]
-    C --> D["Select Experience: Return Explorer"]
-    D --> E["Tap 'GENERATE ITINERARY'"]
-    E --> F["Screen 4.0: Explore Hyderabad Catalog"]
-    F --> G["Filter by Micro-Cluster, Cost, Dwell & Hours"]
-    G --> H["Tap '+ Add to My Plan' on Desired Places"]
-    H --> I["Tap 'ORGANISE ITINERARY (X Chosen) ➔ FINALISED'"]
-    I --> J["Screen 3.0: Live Itinerary (Custom Ordered Sequence)"]
-```
-
----
-
-### Flow 3: In-Trip Real-Time Execution & Intra-Day Modification
-```mermaid
-flowchart TD
-    A["Screen 3.0: Live Itinerary"] --> B{"User Action on Ground"}
+    %% Screen 1.0 Dashboard
+    DASH["Screen 1.0: Dashboard (Home)"]
+    DASH -->|"Tap '✈️ Open Itinerary →'"| ITIN["Screen 3.0: Live Itinerary"]
+    DASH -->|"Tap 'Plan a New Trip >'"| PLAN["Screen 2.0: Plan A New Trip"]
     
-    B -->|"Tired / Short on Time"| C["Tap [✕ Skip]"]
-    C --> D["Stop dropped cleanly; timeline auto-connects to next stop"]
+    %% Screen 2.0 Decisions
+    PLAN -->|"Fills City, Dates, Dynamic, Budget"| EXP_CHOICE{"Experience Choice"}
+    EXP_CHOICE -->|"Selects '1st Timer' + Generate"| ITIN
+    EXP_CHOICE -->|"Selects 'Experience Explorer'"| EXPLORE["Screen 5.0: Experience Explorer"]
     
-    B -->|"Rearrange Sequence"| E["Tap [⇅ Reorder]"]
-    E --> F["Drag-and-drop stops within today's cluster"]
+    %% Screen 5.0 Custom Assembly
+    EXPLORE -->|"Filters by cost/dwell & taps 'Add Plan +'"| ASSEMBLE["Selects 3-5 Custom Stops"]
+    ASSEMBLE -->|"Taps 'Generate My Itinerary →'"| ITIN
     
-    B -->|"Wants alternative activity"| G["Tap [⇄ Swap Spot]"]
-    G --> H["Bottom Sheet: Same-Cluster Verified Spots"]
-    H --> I{"User Selects"}
-    I -->|"Within same cluster"| J["Instant Swap without transit penalty"]
-    I -->|"Picks distant landmark"| K["⚠️ Spatial Warning Pop-up: Dwell & Travel Advisory"]
-    K -->|"Confirm Swap"| L["Swap applied with updated travel time"]
-    K -->|"Cancel"| H
+    %% Screen 3.0 Execution & Stays
+    ITIN -->|"Taps '🛏️ View Stays' Banner"| STAYS["Screen 4.0: Curated Stays"]
+    STAYS -->|"Filters by Tier & taps 'View Details →'"| HOTEL_EXT["External Official Hotel Booking (Zero Comm.)"]
+    STAYS -->|"Tap '← Back'"| ITIN
     
-    B -->|"Hungry during transit"| M["Nearby Budget Meal Radar (Within 350m)"]
-    M --> N["Tap eatery ➔ Direct map directions & estimated cost"]
-```
-
----
-
-### Flow 4: Dedicated Stays Discovery & Direct Booking Flow
-```mermaid
-flowchart TD
-    A["Screen 3.0: Live Itinerary or Screen 2.0 Setup"] -->|"Tap 'View Stays Page'"| B["Screen 5.0: Curated Stays"]
-    B --> C["Filter by Budget Range (Budget / Premium / Exclusive)"]
-    C --> D["Filter by Dynamic (Solo Bunks / Duo Rooms / Family Suites)"]
-    D --> E["Browse Verified Properties with Distance from Micro-Cluster"]
-    E --> F["Tap [ Book on Official Site / Partner ➔ ]"]
-    F --> G["Handoff to Hotel Official Website / Agoda / MMT (Zero App Commission)"]
-```
-
----
-
-### Flow 5: Opt-In Safety Shield & Emergency SOS
-```mermaid
-flowchart TD
-    A["Top Nav Bar: SOS Button (Available on all screens)"] --> B["1-Tap Emergency SOS Modal"]
-    B --> C["Quick-Call: Police (112) / Women Helpline (1091)"]
-    B --> D["Share Real-Time GPS Coordinates with Emergency Contacts"]
-    
-    E["Screen 3.0: Safety Shield Toggle"] -->|"Turn ON"| F["Continuous Geofence & Check-In Monitoring"]
-    F --> G["Safe arrival ping at each itinerary stop"]
+    %% Ground Adjustments on Screen 3.0
+    ITIN -->|"Tap [⇄ Swap]"| SWAP_MODAL["Same-Cluster Swap Sheet (with Spatial Warning)"]
+    ITIN -->|"Tap [⇅ Reorder]"| REORDER_MODAL["Reorder Sequence"]
+    ITIN -->|"Tap [✕ Skip Stop]"| SKIP_ACTION["Drop stop & reconnect rail"]
+    ITIN -->|"Tap 'Feeling Hungry?'"| FOOD_RADAR["Nearby Dining (Nimrah, Shadab within 500m)"]
 ```
 
 ---
 
 ## 5. Summary of Phase Gate Validation
 
-* **Alignment with Creative Director's Vision:** 100% matched to hand-drawn sketches (`Home Screen`, `Plan a New Trip`, `Live Itinerary`, `Explore Hyderabad`, and `Curated Stays`).
-* **Zero Cross-City Transit Waste:** Spatial cluster guardrails actively warn against unfeasible intra-day jumps.
-* **Separation of Concerns:** Stays are housed in their own dedicated discovery screen (Screen 5.0) while micro-adjustments stay inside lightweight modals over Screen 3.0.
-* **Stage Gate Readiness:** Phase 4 wireframes and task flows are complete. Ready for locking and progression to **Phase 5: Visual Design System & Tokens**.
+* **100% Structural Consistency:** Directly faithful to all 5 reference screens (`media_1795432344239_b5db47b1.jpg` through `media_1795436112703_bbb3352d.jpg`).
+* **Cognitive Clarity:** Removes travel anxiety through structured stepper states on Home, single-page setup on Screen 2.0, robust on-ground companion tools on Screen 3.0, and independent curation on Screens 4.0 and 5.0.
+* **Stage Gate Readiness:** Phase 4 master wireframes and flows are fully aligned and locked. Ready for prototype synchronization.

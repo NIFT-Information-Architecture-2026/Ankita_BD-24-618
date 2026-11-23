@@ -4,7 +4,7 @@
 **Creative Director & Product Lead:** NIFT Hyderabad  
 **Technical Project Architect:** AGY  
 **Lifecycle Stage:** Phase 6 — Interactive Prototyping, Code Scaffolding & Web Deployment  
-**Document Purpose:** Master documentation of the production-ready interactive frontend prototype, application architecture, testable interaction flows, and deployment instructions.
+**Document Purpose:** Master documentation of the production-ready interactive frontend prototype, application architecture, testable interaction flows, and deployment instructions matching the 5 official reference designs (`media_1795432344239_b5db47b1.jpg` through `media_1795436112703_bbb3352d.jpg`).
 
 ---
 
@@ -25,59 +25,82 @@ In Phase 6, all research, empathy models, information architecture, wireframes, 
 Ankita_BD-24-618/
 ├── index.html                 # Mobile-first interactive shell with all 5 screens & modals
 ├── css/
-│   └── style.css              # Phase 5 design tokens, soft-cornered cards, typography & ambient shadows
+│   └── style.css              # Design tokens, soft-cornered cards, watercolor headers & stepper tracks
 ├── js/
 │   ├── data.js                # Curated 45-places Hyderabad dataset, curated stays & meal spots
-│   └── app.js                 # Navigation router, state manager, swap bottom sheet & spatial alert logic
+│   └── app.js                 # Master screen router, state controller, filter logic & modal managers
 ├── PHASE1_OUTPUTS.md          # Locked Phase 1 deliverables
 ├── PHASE2_OUTPUTS.md          # Locked Phase 2 deliverables
 ├── PHASE3_OUTPUTS.md          # Locked Phase 3 deliverables
-├── PHASE4_OUTPUTS.md          # Locked Phase 4 deliverables
-├── PHASE5_OUTPUTS.md          # Locked Phase 5 deliverables
-└── PHASE6_OUTPUTS.md          # Locked Phase 6 deliverables
+├── PHASE4_OUTPUTS.md          # Locked Phase 4 deliverables (5-Screen Inventory & Flows)
+├── PHASE5_OUTPUTS.md          # Locked Phase 5 deliverables (Design System & Tokens)
+└── PHASE6_OUTPUTS.md          # Locked Phase 6 deliverables (Prototype Validation)
 ```
 
 ---
 
-## 3. Interactive Features & Screen Walkthrough
+## 3. Interactive Features & Screen Walkthrough (5 Screens)
 
-### 1. Screen 1.0: Open Dashboard (Home)
-* **Live Itinerary Status Tile:** Highlights current active trip (*"NEXT: Chowmahalla Palace • 11:30 AM"*). Tapping it routes instantly to the live timeline.
-* **Hero "PLAN A NEW TRIP >" Card:** Prominent action banner with smooth transition to the setup wizard.
-* **Horizontal Recommendations:** Inspiring cards for Goa, Bali, and Benares showcasing the modular city system.
-* **Emergency SOS:** Persistent top-bar pill accessible from anywhere.
+### 1. Screen 1.0: Dashboard (Home Screen)
+*Reference: `media_1795432344239_b5db47b1.jpg`*
+* **Top Header Row:** Location dropdown pill (`📍 Hyderabad, Telangana ∨`), emergency SOS button (`[ 🛡️ SOS ]`), and circular traveler avatar.
+* **Hero Headline:** `Explore Hyderabad` / *`at your pace ✨`* with watercolor Charminar backdrop and flying birds.
+* **Ongoing Trip Card:** 
+  * Left photo of heritage palace gate.
+  * Tag `🧳 Your Active Trip` and sticky note *`Let's keep going! ↗`*.
+  * Title: `Day 1: Old City Heritage Cluster`, next stop `📍 Next Stop: Chowmahalla Palace • 11:30 AM`.
+  * 4-step stepper with checkmarks (`Charminar ✓`, `Laad Bazaar ✓`, `Chowmahalla Palace (Current)`, `Evening Spot`).
+  * Primary button: `✈️ Open Itinerary ➔` (Routes directly to Screen 3.0 Live Itinerary).
+* **Plan a New Trip Promo Banner:** Warm illustrated card with suitcase, hat, map, and paper airplane trail. Tapping opens Screen 2.0.
+* **Explore More Section:** `🧭 Explore More` with sideways scrollable destination cards (`Ranchi`, `Lucknow`, `Mumbai`).
 
-### 2. Screen 2.0: Plan a New Trip (Single-Page Setup)
-* **Traveler Dynamic Selector:** Instant switching between `Solo`, `Duo / Friends`, and `Family Unit`.
-* **Expandable Two-Tier Budget Accordion:** 
-  * `Budget-Friendly` (Backpacker, Standard, Comfortable numeric sub-ranges).
-  * `Premium` (Boutique, Heritage, Signature sub-ranges).
-  * `Exclusive Luxury` (Royal Suites, Palace Splendor).
-* **Experience Pathway Routing:**
-  * Selecting `[ 1st Timer ]` + `GENERATE` ➔ Builds a zero-transit-waste itinerary on **Screen 3.0**.
-  * Selecting `[ Return Explorer ]` + `GENERATE` ➔ Opens the manual discovery catalog on **Screen 4.0**.
+### 2. Screen 2.0: Plan A New Trip Screen
+*Reference: `media_1795432829635_4381baac.jpg`*
+* **Hero Header:** `Plan a New Trip` / *`Let's explore more ✨`* with top scenic slideshow (`Trip to Ranchi`, `Trip to Maharashtra`, `Trip to Guwahati`).
+* **Section 1 (Your Destination):** Predictive autocomplete search bar (`Hyderabad`, `Himachal Pradesh`, `Hampi`, `Goa`).
+* **Section 2 (Trip Dates):** Interactive arrival date (`18 Oct 2026`) and return date (`21 Oct 2026`) modal pickers.
+* **Section 3 (Travel Dynamic):** Segmented pill controls for `Solo`, `Duo`, and `Family`.
+* **Section 4 (Budget Range):** 3 accordion tiers with unified sub-range pricing:
+  * `Budget Friendly` (Baseline Saver ₹1.5k-₹2k, Mid Comfort ₹2k-₹2.8k, Plus Deluxe ₹2.8k-₹3.5k).
+  * `Premium` (Baseline Saver ₹4.5k-₹6k, Mid Comfort ₹6k-₹8.5k, Plus Deluxe ₹8.5k-₹12k).
+  * `Luxury` (Baseline Saver ₹15k-₹25k, Mid Comfort ₹25k-₹40k, Plus Deluxe ₹40k+).
+* **Section 5 (Experience Choice):**
+  * `1st Timer` (🎒 Illustrated Backpack) ➔ Tapping `Generate Itinerary` opens **Screen 3.0 (Live Itinerary)**.
+  * `Experience Explorer` (🔭 Illustrated Binoculars) ➔ Tapping `Generate Itinerary` opens **Screen 5.0 (Experience Explorer)**.
 
-### 3. Screen 3.0: "Your Itinerary" Screen (Ground Navigation Companion)
-* **Top Navigation Bar:** With Back button (`←`), serif page title `Your Itinerary`, Map icon (`🗺️`), red SOS pill (`[ 🛡️ SOS ]`), and circular profile avatar.
-* **Hero Heritage Watercolor Backdrop:** Rich watercolor banner of Charminar & palace domes with script headline *"Your trip, well planned ✨"* and warm brush stroke accent.
-* **Segmented Day Switcher Bar:** Floating pill row with `[ 📍 Day 1: Old City (Active) ]`, `[ Day 2: Western Forts ]`, and `[ Day 3: Cyberabad ]`.
-* **Vertical Continuous Timeline Rail:** Numbered itinerary stops (`1`, `2`) with dwell times (`🕒 Dwell: 1.5 hrs`), ticket prices (`🎫 ₹25 Entry`), and live status (`🟢 Open Now • Closes 5:30 PM`).
-* **Intra-Day Modification Controls:**
-  * `[ ⇅ Reorder ]`: Dynamically shifts and swaps sequence order.
-  * `[ ⇄ Swap ]`: Slides up bottom sheet with same-cluster alternatives (with Spatial Warning pop-up for cross-city distances).
-  * `[ ✕ Skip Stop ]`: Drops the selected stop cleanly and updates the schedule.
-* **Inline Food Radar Card:** *"Feeling Hungry? (Within 500m)"* with `View Options ›` and quick-access dining cards for Nimrah Cafe and Hotel Shadab.
-* **Floating Next Stop Banner:** Elevated preview banner above bottom dock (`Next Stop Golconda Fort • 📍 ~ 20 min away ›`).
+### 3. Screen 3.0: Live Itinerary Screen
+*Reference: `media_1795433517094_a6ae0db1.jpg`*
+* **Top Navigation:** Back arrow `←` (returns to Dashboard), serif `Your Itinerary` title, Map cluster icon `🗺️`, red SOS badge `[ 🛡️ SOS ]`, and avatar.
+* **Watercolor Hero Header:** *`Your trip, well planned ✨`* with warm terracotta brush stroke accent.
+* **View Stays Top Banner:** `🛏️ View Stays` ("Find the best stays nearby >"). Tapping opens **Screen 4.0 (Curated Stays)**.
+* **Floating Day Switcher:** Translucent segmented pills: `[ 📍 Day 1: Old City (Active) ]`, `[ Day 2: Western Forts ]`, `[ Day 3: Cyberabad ]`.
+* **Continuous Timeline Rail:**
+  * Stop 1: `Charminar & Laad Bazaar` (`🎫 ₹25 Entry`, `🕒 Dwell: 1.5 hrs`, `🟢 Open Now • Closes 5:30 PM`, `[ ⇅ Reorder ]`, `[ ⇄ Swap ]`, `[ ✕ Skip Stop ]`).
+  * Midpoint Meal Break: `🍴 Feeling Hungry? (Within 500m)` with `Nimrah Cafe` (`₹50-₹100`) & `Shadab` (`₹100-₹200`).
+  * Stop 2: `Chowmahalla Palace` (`🎫 ₹100 Entry`, `🕒 Dwell: 2 hrs`, `🟢 Open Now`, `[ ⇅ Reorder ]`, `[ ⇄ Swap ]`, `[ ✕ Skip Stop ]`).
+  * Stop 3: `Laad Bazaar` (`🎫 Free Entry`, `🕒 Dwell: 1 hr`, `[ ⇅ Reorder ]`, `[ ⇄ Swap ]`, `[ ✕ Skip Stop ]`).
+* **Floating Next Stop Banner:** `Next Stop Golconda Fort • 📍 ~ 20 min away >`.
 
-### 4. Screen 4.0: Explore Hyderabad (Return Explorer Catalog)
-* **4-D Filter Pills:** Instant filtering by *Old City*, *Hitec City*, *Under ₹100*, and *Dwell < 2 hrs*.
-* **Live Search:** Fast keyword search across monument names, zones, and descriptions.
-* **2-Column Responsive Cards:** With bookmarking and `[ + Add to My Plan ]` toggles.
-* **Sticky Bottom Assembly Bar:** Real-time counter of selected places with 1-tap assembly into the Live Itinerary.
+### 4. Screen 4.0: Curated Stays Screen
+*Reference: `media_1795435632279_6cd129b7.jpg`*
+* **Top Navigation:** Back arrow `←` (returns to Screen 3.0), title `Curated Stays`, map icon, SOS pill, avatar.
+* **Hero Banner:** *`Stay your way in Hyderabad ✨`* `📍`.
+* **Filter Pills Row:** `[ 🛏️ All Stays ]`, `[ 💼 Budget-Friendly ]`, `[ 💎 Premium ]`, `[ ⭐ Exclusive ]`.
+* **Verified Stays Feed:**
+  * `Zostel Hyderabad` (⭐ 4.6 • 2.2 km from Charminar • Dorms & Rooms, Free Wi-Fi, Cafe, Eco-Friendly • ₹799 / night).
+  * `Courtyard Hotel Hub` (⭐ 4.4 • 4.4 km from Charminar • AC Rooms, Pool, In-Room Dining, Free Wi-Fi • ₹1,999 / night).
+  * `Taj Falaknuma Palace` (⭐ 4.8 • 7.1 km from Charminar • Luxury Stay, Heritage Property, Fine Dining, Spa • ₹12,999 / night).
+* **Bottom Custom Stay Banner:** `🛏️✨ Looking for something specific? Explore more stay options for your trip. >`.
 
-### 5. Screen 5.0: Curated Stays (Accommodations Finder)
-* **Tier Filters:** Filter stays by `Budget-Friendly`, `Premium`, or `Exclusive`.
-* **Verified Lodging Cards:** Displaying cleanliness verification, distance from core itinerary clusters, and direct external links (`[ Official Site / Partner ➔ ]`) with zero in-app booking commissions.
+### 5. Screen 5.0: Experience Explorer Screen
+*Reference: `media_1795436112703_bbb3352d.jpg`*
+* **Top Header Row:** Charminar silhouette cutout art, `📍 Hyderabad ∨`, SOS button, avatar.
+* **Title:** `Experience Explorer` / *`Plan by Yourself ✍️`* with paper airplane dashed trail.
+* **Search Bar & Filter Modal:** Keyword search + settings button `🎛️`.
+* **Horizontal Filter Pills:** `✨ All`, `Under ₹100`, `Under ₹200`, `Dwell < 1.5hr`, `Dwell < 2hr`, `Dwell < 3hr`.
+* **2-Column Places Grid:**
+  * Cards for Charminar, Golconda Fort, Laad Bazaar, Hussain Sagar Lake, Chowmahalla Palace, Qutb Shahi Tombs with rating, cost, dwell, and interactive `Add Plan +` button (toggles to `Added ✓`).
+* **Sticky Bottom Assembly Bar:** `🧭 Generate My Itinerary (X Chosen) ➔` (Assembles selected custom spots into the Screen 3.0 Live Itinerary layout).
 
 ---
 
