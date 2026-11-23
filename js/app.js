@@ -62,7 +62,7 @@ const ITINERARY_DAYS_DATA = {
         image: "https://images.unsplash.com/photo-1600100397608-f010f4438317?auto=format&fit=crop&w=400&q=80",
         entry: "🎫 Free Entry",
         dwell: "🕒 Dwell: 1.0 hr",
-        status: "🟢 Open Now • Vibrant Night Bazaar",
+        status: "🟢 Open Now • Closes 10:30 PM",
         skipped: false,
         foodBreak: {
           title: "Feeling Hungry? (Within 500m)",
@@ -81,7 +81,7 @@ const ITINERARY_DAYS_DATA = {
     swappables: [
       { name: "Mecca Masjid", meta: "Heritage • Faith • 300m away • Free Entry", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 45 mins", hours: "🟢 Open Now • Closes 9:00 PM", image: "https://images.unsplash.com/photo-1585123388867-3bfe6dd4bdbf?auto=format&fit=crop&w=400&q=80" },
       { name: "Salar Jung Museum", meta: "World Art Museum • 800m away • ₹50 Entry", entry: "🎫 ₹50 Entry", dwell: "🕒 Dwell: 3.0 hrs", hours: "🟢 Open Now • Closes 5:00 PM", image: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?auto=format&fit=crop&w=400&q=80" },
-      { name: "Badshahi Ashurkhana", meta: "Enamel Tilework • 900m away • Free Entry", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 45 mins", hours: "🟢 Open Now • Historic Monument", image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=400&q=80" },
+      { name: "Badshahi Ashurkhana", meta: "Enamel Tilework • 900m away • Free Entry", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 45 mins", hours: "🟢 Open Now • Closes 7:00 PM", image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=400&q=80" },
       { name: "British Residency (Koti)", meta: "Colonial Palladian Mansion • 1.2 km away", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.0 hr", hours: "🟢 Open Now • Closes 4:30 PM", image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=400&q=80" }
     ]
   },
@@ -129,7 +129,7 @@ const ITINERARY_DAYS_DATA = {
         image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=400&q=80",
         entry: "🎫 Free Entry",
         dwell: "🕒 Dwell: 1.5 hrs",
-        status: "🟢 Open Now • Sunset Pavilion",
+        status: "🟢 Open Now • Closes 6:00 PM",
         skipped: false,
         foodBreak: {
           title: "Feeling Hungry? (Within 500m)",
@@ -146,9 +146,9 @@ const ITINERARY_DAYS_DATA = {
       image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=200&q=80"
     },
     swappables: [
-      { name: "Hayat Bakshi Begum Mosque", meta: "Grand 17th-c. Mosque • 1 km away • Free", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 45 mins", hours: "🟢 Open Now • Heritage Mosque", image: "https://images.unsplash.com/photo-1585123388867-3bfe6dd4bdbf?auto=format&fit=crop&w=400&q=80" },
-      { name: "Bhagirathi Arts & Crafts", meta: "Telangana Handicrafts Center • 1.2 km away", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.0 hr", hours: "🟢 Open Now • Handlooms Hub", image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80" },
-      { name: "Premavathi Nritya Mandir", meta: "Historic Royal Dance Pavilion • 800m away", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 45 mins", hours: "🟢 Open Now • Sunset Spot", image: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=400&q=80" }
+      { name: "Hayat Bakshi Begum Mosque", meta: "Grand 17th-c. Mosque • 1 km away • Free", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 45 mins", hours: "🟢 Open Now • Closes 8:00 PM", image: "https://images.unsplash.com/photo-1585123388867-3bfe6dd4bdbf?auto=format&fit=crop&w=400&q=80" },
+      { name: "Bhagirathi Arts & Crafts", meta: "Telangana Handicrafts Center • 1.2 km away", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.0 hr", hours: "🟢 Open Now • Closes 7:30 PM", image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80" },
+      { name: "Premavathi Nritya Mandir", meta: "Historic Royal Dance Pavilion • 800m away", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 45 mins", hours: "🟢 Open Now • Closes 6:30 PM", image: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=400&q=80" }
     ]
   },
   3: {
@@ -163,7 +163,7 @@ const ITINERARY_DAYS_DATA = {
         image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80",
         entry: "🎫 Free Entry",
         dwell: "🕒 Dwell: 2.0 hrs",
-        status: "🟢 Open Now • Lakefront Promenade",
+        status: "🟢 Open Now • Closes 8:00 PM",
         skipped: false,
         foodBreak: {
           title: "Feeling Hungry? (Within 500m)",
@@ -195,7 +195,7 @@ const ITINERARY_DAYS_DATA = {
         image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80",
         entry: "🎫 Free Entry",
         dwell: "🕒 Dwell: 1.0 hr",
-        status: "🟢 Open 24 Hours • Modern Architectural Vista",
+        status: "🟢 Open Now • Open 24 Hours",
         skipped: false,
         foodBreak: {
           title: "Feeling Hungry? (Within 500m)",
@@ -212,9 +212,9 @@ const ITINERARY_DAYS_DATA = {
       image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=200&q=80"
     },
     swappables: [
-      { name: "State Gallery of Art", meta: "Modern Indian Art • 1.5 km away • Free", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.0 hr", hours: "🟢 Open Now • Modern Art Gallery", image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=400&q=80" },
+      { name: "State Gallery of Art", meta: "Modern Indian Art • 1.5 km away • Free", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.0 hr", hours: "🟢 Open Now • Closes 7:00 PM", image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=400&q=80" },
       { name: "Inorbit Mall Lake Terrace", meta: "Retail & Overlook Boardwalk • 800m away", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 1.5 hrs", hours: "🟢 Open Now • Closes 10:00 PM", image: "https://images.unsplash.com/photo-1567449303078-57ad995bd301?auto=format&fit=crop&w=400&q=80" },
-      { name: "Cyber Gateway Tech Plaza", meta: "Iconic Tech Hub Gateway • 600m away", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 30 mins", hours: "🟢 Open 24 Hours • Tech Gateway", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80" }
+      { name: "Cyber Gateway Tech Plaza", meta: "Iconic Tech Hub Gateway • 600m away", entry: "🎫 Free Entry", dwell: "🕒 Dwell: 30 mins", hours: "🟢 Open Now • Open 24 Hours", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80" }
     ]
   }
 };
