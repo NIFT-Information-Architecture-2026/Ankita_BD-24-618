@@ -23,6 +23,8 @@ let calViewMonth = 9; // October (0-11)
 let calViewYear = 2026;
 let activeCalTarget = "arrival"; // "arrival" | "return"
 let activePlanDuration = 4; // Days calculated from Arrival and Return
+let currentPlanDynamic = "Solo";
+let currentPlanBudgetTier = "budget-friendly";
 
 // Master Dynamic Itinerary Data by Day (Predefined Cluster Data)
 const ITINERARY_DAYS_DATA = {
@@ -309,8 +311,9 @@ document.addEventListener("DOMContentLoaded", () => {
   startHeroBgSlideshow();
   initCalendar();
 
-  // Render Day 1 by default
+  // Render Day 1 and default Solo budget stays
   renderItineraryDay(1);
+  renderCuratedStays("Solo", "budget-friendly", "all");
 });
 
 // --------------------------------------------------------------------------
@@ -701,37 +704,24 @@ function generateIntelligentItinerary() {
 
   const openBudgetCard = document.querySelector(".budget-tier-expand-card.open") || document.querySelector(".budget-tier-expand-card");
   const budgetTier = openBudgetCard ? openBudgetCard.dataset.tier : "budget-friendly";
-  const selectedSub = openBudgetCard?.querySelector(".subrange-tier-item.selected")?.dataset.range || "₹1,500 – ₹2,000 / day";
 
   const durationDays = Math.min(4, Math.max(1, Math.round((calReturnDate - calArrivalDate) / (1000 * 60 * 60 * 24)) + 1));
   activePlanDuration = durationDays;
+  currentPlanDynamic = travelDynamic;
+  currentPlanBudgetTier = budgetTier;
 
   // Build tailor-made days data based on travelDynamic and budgetTier
   activeItineraryState = buildCustomItinerary(travelDynamic, budgetTier, durationDays);
 
-  // Update Screen 3.0 Header metadata pill
-  const prefsLabel = document.getElementById("itin-user-prefs-label");
-  const prefsDates = document.getElementById("itin-user-prefs-dates");
-  const dynamicIcon = travelDynamic === "Solo" ? "👤" : (travelDynamic === "Duo" ? "👥" : "👨‍👩‍👧‍👦");
-  const tierName = budgetTier === "budget-friendly" ? "Budget Friendly" : (budgetTier === "premium" ? "Premium" : "Luxury");
-
-  if (prefsLabel) prefsLabel.innerHTML = `${dynamicIcon} ${travelDynamic} • ${tierName} (${selectedSub})`;
-  if (prefsDates) prefsDates.textContent = `${formatDateDisplay(calArrivalDate)} – ${formatDateDisplay(calReturnDate)} (${durationDays} Days)`;
-
-  // Update Screen 3.0 View Stays Banner subtitle based on budget
+  // Keep View Stays banner subtitle clean as per design reference
   const staysSub = document.getElementById("view-stays-banner-subtitle");
   if (staysSub) {
-    if (budgetTier === "budget-friendly") {
-      staysSub.textContent = "Budget hostels & verified stays from ₹799/night";
-    } else if (budgetTier === "premium") {
-      staysSub.textContent = "Curated boutique heritage stays from ₹1,999/night";
-    } else {
-      staysSub.textContent = "Royal heritage suites & palaces from ₹12,999/night";
-    }
+    staysSub.textContent = "Find the best stays nearby";
   }
 
-  // Pre-filter Screen 4.0 Stays to match user's budget tier
-  applyStaysTierFilter(budgetTier === "budget-friendly" ? "budget" : (budgetTier === "premium" ? "premium" : "exclusive"));
+  // Render Curated Stays dynamically proportionate to user's daily budget & dynamic
+  renderCuratedStays(currentPlanDynamic, currentPlanBudgetTier, "all");
+  document.querySelectorAll(".stay-filter-chip").forEach(c => c.classList.toggle("active", c.dataset.stayTier === "all"));
 
   // Update Screen 1.0 (Dashboard Ongoing Trip)
   const homeOngoingTitle = document.querySelector(".ongoing-trip-title");
@@ -1316,22 +1306,339 @@ window.openFoodOptionsModalForStop = function(stopName) {
 };
 
 // --------------------------------------------------------------------------
-// 12. Screen 4.0: Curated Stays Controller
+// 12. Screen 4.0: Curated Stays Controller (Budget-Proportionate Engine)
 // --------------------------------------------------------------------------
+const STAYS_DATA = {
+  "budget-friendly": {
+    "Solo": [
+      {
+        name: "Zostel Hyderabad (Solo AC Pod)",
+        location: "Old City, Abids • 1.8 km from Charminar",
+        rating: "4.7",
+        amenities: ["🛏️ Single AC Pod", "📶 Free Wi-Fi", "🔒 Secure Locker", "🍃 Eco-Friendly"],
+        price: "₹599",
+        image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80",
+        tier: "budget"
+      },
+      {
+        name: "Nomads Haven Backpacker Bunk",
+        location: "Nampally • 2.5 km from Charminar",
+        rating: "4.5",
+        amenities: ["🛏️ Mixed Dorm Bed", "📶 Free Wi-Fi", "🍴 Cafe On-Site", "☕ Free Morning Chai"],
+        price: "₹499",
+        image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+        tier: "budget"
+      },
+      {
+        name: "Banjara Solo Capsule Stay",
+        location: "Banjara Hills • Metro Connected",
+        rating: "4.6",
+        amenities: ["🛏️ Private Capsule", "❄️ Personal AC", "📶 High-Speed Wi-Fi", "🚿 Hot Shower"],
+        price: "₹699",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+        tier: "budget"
+      }
+    ],
+    "Duo": [
+      {
+        name: "Hotel Tourist Plaza - Standard Double",
+        location: "Koti, Sultan Bazaar • Near Old City",
+        rating: "4.5",
+        amenities: ["🛏️ Double Bed", "❄️ AC Room", "📶 Free Wi-Fi", "🍳 Breakfast Available"],
+        price: "₹999",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+        tier: "budget"
+      },
+      {
+        name: "Abids Heritage Inn - Cozy Twin",
+        location: "Abids • 2.0 km from Charminar",
+        rating: "4.3",
+        amenities: ["🛏️ 2 Twin Beds", "📶 Free Wi-Fi", "🍴 Room Service", "🚕 Travel Desk"],
+        price: "₹899",
+        image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+        tier: "budget"
+      },
+      {
+        name: "Treebo Trend Heritage Hub",
+        location: "Nampally Station Road",
+        rating: "4.6",
+        amenities: ["🛏️ Queen Bed", "❄️ Central AC", "📶 Free Wi-Fi", "☕ Morning Tea/Coffee"],
+        price: "₹1,199",
+        image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80",
+        tier: "budget"
+      }
+    ],
+    "Family": [
+      {
+        name: "Hotel Royal Heritage - Family Quad",
+        location: "Lakdikapool • Central & Accessible",
+        rating: "4.5",
+        amenities: ["👨‍👩‍👧‍👦 4 Beds Unit", "❄️ AC Suite", "🚗 Free Parking", "📶 Free Wi-Fi"],
+        price: "₹1,399",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+        tier: "budget"
+      },
+      {
+        name: "Golkonda Comfort Stay - Triple Suite",
+        location: "Mehdipatnam • Near Fort & Tombs",
+        rating: "4.4",
+        amenities: ["🛏️ 3 Large Beds", "❄️ Split AC", "🍴 Family Dining On-Site", "👶 Child Friendly"],
+        price: "₹1,249",
+        image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+        tier: "budget"
+      },
+      {
+        name: "Abids Family Residency Suite",
+        location: "Abids • 2 km from Charminar",
+        rating: "4.6",
+        amenities: ["👨‍👩‍👧 Family Unit", "❄️ AC Rooms", "🚿 24hr Hot Water", "📶 Free Wi-Fi"],
+        price: "₹1,499",
+        image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80",
+        tier: "budget"
+      }
+    ]
+  },
+  "premium": {
+    "Solo": [
+      {
+        name: "Courtyard Hub - Executive Solo Room",
+        location: "Hitech City • Near Cyber Towers",
+        rating: "4.6",
+        amenities: ["🛏️ Queen Bed", "🏊 Swimming Pool", "💻 Work Desk", "📶 High-Speed Wi-Fi"],
+        price: "₹1,899",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+        tier: "premium"
+      },
+      {
+        name: "Daspalla Boutique Hotel - Deluxe",
+        location: "Jubilee Hills Road 37",
+        rating: "4.7",
+        amenities: ["❄️ Climate Control", "🍴 Gourmet Breakfast", "🏋️ Fitness Center", "☕ In-Room Espresso"],
+        price: "₹2,299",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        tier: "premium"
+      },
+      {
+        name: "Mercure Banjara Hills Studio",
+        location: "Banjara Hills Road 1",
+        rating: "4.7",
+        amenities: ["🛏️ Studio Bed", "📶 Free Wi-Fi", "🏊 Infinity Pool", "🍴 Rooftop Bistro"],
+        price: "₹2,499",
+        image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80",
+        tier: "premium"
+      }
+    ],
+    "Duo": [
+      {
+        name: "Courtyard Boutique Hotel - King Suite",
+        location: "Gachibowli • Near Lakefront",
+        rating: "4.7",
+        amenities: ["🛏️ King Bed", "🏊 Rooftop Pool", "🍴 In-Room Dining", "🍸 Lounge Bar"],
+        price: "₹2,499",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+        tier: "premium"
+      },
+      {
+        name: "Mercure Hyderabad KCP - City View",
+        location: "Banjara Hills • Overlooking Lake",
+        rating: "4.8",
+        amenities: ["🛏️ Panoramic View", "❄️ AC Room", "🍳 Buffet Breakfast", "💆 Spa Access"],
+        price: "₹3,199",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        tier: "premium"
+      },
+      {
+        name: "Radisson Hitec City Suite",
+        location: "Hitec City • Knowledge Corridor",
+        rating: "4.6",
+        amenities: ["🛏️ Luxury Bedding", "🏊 Heated Pool", "🍴 24hr Dining", "📶 Free Wi-Fi"],
+        price: "₹2,899",
+        image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+        tier: "premium"
+      }
+    ],
+    "Family": [
+      {
+        name: "Courtyard Family Executive Suite",
+        location: "Hitech City • Connected Rooms",
+        rating: "4.7",
+        amenities: ["👨‍👩‍👧‍👦 2 Interconnecting Rooms", "🏊 Kids Pool", "🍴 Multi-cuisine Dining", "🚗 Valet Parking"],
+        price: "₹3,799",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+        tier: "premium"
+      },
+      {
+        name: "Radisson Blu Plaza - Family Deluxe",
+        location: "Banjara Hills Road 6",
+        rating: "4.8",
+        amenities: ["🛏️ 2 King Beds", "🍳 Super Breakfast", "🏊 Heated Pool", "👶 Kids Club"],
+        price: "₹4,499",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        tier: "premium"
+      },
+      {
+        name: "Novotel Hyderabad Convention Suite",
+        location: "Hitec City • Serene Green Grounds",
+        rating: "4.7",
+        amenities: ["👨‍👩‍👦 Spacious Family Suite", "🌿 Garden Lawns", "🏊 Large Pool", "🍴 Family Brunch"],
+        price: "₹4,199",
+        image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+        tier: "premium"
+      }
+    ]
+  },
+  "luxury": {
+    "Solo": [
+      {
+        name: "Taj Falaknuma Palace - Historical Room",
+        location: "Falaknuma • 7.1 km from Charminar",
+        rating: "4.9",
+        amenities: ["👑 Historical Palace Suite", "🏛️ Nizam Heritage Tour", "🍴 Royal Breakfast", "💆 Royal Jiva Spa"],
+        price: "₹14,999",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        tier: "exclusive"
+      },
+      {
+        name: "ITC Kohenur - Premium Lakefront Suite",
+        location: "Knowledge City, Raidurg • Lake View",
+        rating: "4.8",
+        amenities: ["💎 Panoramic Lake View", "🤵 24hr Butler", "🏊 Sky Pool", "🍴 5 Signature Restaurants"],
+        price: "₹12,499",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+        tier: "exclusive"
+      },
+      {
+        name: "Taj Krishna - Club Heritage Room",
+        location: "Banjara Hills Road 1",
+        rating: "4.8",
+        amenities: ["👑 Heritage Club Access", "🌿 Private Garden View", "🏊 Poolside Dining", "🚗 Chauffeur Service"],
+        price: "₹11,999",
+        image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80",
+        tier: "exclusive"
+      }
+    ],
+    "Duo": [
+      {
+        name: "Taj Falaknuma Palace - Royal Suite",
+        location: "Falaknuma Engine Bowli",
+        rating: "4.9",
+        amenities: ["👑 Royal Palace Suite", "🏛️ Private Nizami High Tea", "🐎 Horse Carriage Ride", "💆 Couple Spa Session"],
+        price: "₹16,999",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        tier: "exclusive"
+      },
+      {
+        name: "ITC Kohenur - Grand Presidential Suite",
+        location: "Knowledge City, Raidurg • Lake View",
+        rating: "4.9",
+        amenities: ["💎 Durgam Lake Panorama", "🤵 Personal Butler Service", "🏊 Private Jacuzzi", "🍴 Champagne Breakfast"],
+        price: "₹14,500",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+        tier: "exclusive"
+      },
+      {
+        name: "The Park Hyderabad - Aish Luxury Suite",
+        location: "Somajiguda • Overlooking Hussain Sagar",
+        rating: "4.7",
+        amenities: ["🌊 Direct Lakefront View", "👑 Silver Nizami Decor", "🏊 Infinity Pool", "🍴 Fine Dining"],
+        price: "₹10,999",
+        image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+        tier: "exclusive"
+      }
+    ],
+    "Family": [
+      {
+        name: "Taj Falaknuma Palace - Royal Grand Suite",
+        location: "Falaknuma Hilltop Palace",
+        rating: "4.9",
+        amenities: ["👑 2-Bedroom Palace Suite", "🐎 Horse Carriage Entry", "🍴 Royal Nizam Banquet", "💆 Full Spa Access"],
+        price: "₹28,000",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        tier: "exclusive"
+      },
+      {
+        name: "Taj Krishna - Luxury Presidential Family Villa",
+        location: "Banjara Hills Road 1",
+        rating: "4.8",
+        amenities: ["🏛️ Private Garden Villa", "🏊 Private Plunge Pool", "🤵 Dedicated Butler", "🚗 Airport Chauffeur"],
+        price: "₹22,000",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+        tier: "exclusive"
+      },
+      {
+        name: "ITC Kakatiya - Royal Luxury Pavilion",
+        location: "Begumpet • Heritage Gardens",
+        rating: "4.7",
+        amenities: ["👨‍👩‍👧‍👦 3-Bedroom Family Suite", "🌿 Private Courtyard", "🏊 Swimming Pool", "🍴 Royal Nizami Banquet"],
+        price: "₹18,500",
+        image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80",
+        tier: "exclusive"
+      }
+    ]
+  }
+};
+
+window.renderCuratedStays = function(travelDynamic = "Solo", budgetTier = "budget-friendly", activeFilter = "all") {
+  const container = document.getElementById("stays-feed-container");
+  if (!container) return;
+  container.innerHTML = "";
+
+  let staysToShow = [];
+
+  if (activeFilter === "all") {
+    // Show the customized stays matching the user's travel dynamic and budget tier
+    const tierStays = (STAYS_DATA[budgetTier] && STAYS_DATA[budgetTier][travelDynamic]) || STAYS_DATA["budget-friendly"]["Solo"];
+    staysToShow = [...tierStays];
+  } else {
+    const tierKey = activeFilter === "budget" ? "budget-friendly" : (activeFilter === "premium" ? "premium" : "luxury");
+    const tierStays = (STAYS_DATA[tierKey] && STAYS_DATA[tierKey][travelDynamic]) || (STAYS_DATA[tierKey] && STAYS_DATA[tierKey]["Solo"]) || [];
+    staysToShow = [...tierStays];
+  }
+
+  staysToShow.forEach(stay => {
+    const card = document.createElement("div");
+    card.className = "stay-listing-card";
+    card.dataset.stayTier = stay.tier;
+
+    const chipsHtml = stay.amenities.map(a => `<span class="amenity-chip">${a}</span>`).join("");
+
+    card.innerHTML = `
+      <div class="stay-photo-slider-box">
+        <img src="${stay.image}" alt="${stay.name}" class="stay-photo-slider-img" />
+        <div class="stay-rating-badge">⭐ ${stay.rating}</div>
+        <div class="stay-dots-indicator">
+          <span class="stay-dot active"></span>
+          <span class="stay-dot"></span>
+          <span class="stay-dot"></span>
+          <span class="stay-dot"></span>
+        </div>
+      </div>
+      <h2 class="stay-name-title">${stay.name}</h2>
+      <div class="stay-location-sub">📍 ${stay.location}</div>
+      <div class="stay-amenities-chips-row">
+        ${chipsHtml}
+      </div>
+      <div class="stay-footer-row">
+        <div>
+          <span class="stay-price-bold">${stay.price}</span>
+          <span class="stay-price-sub"> / night</span>
+        </div>
+        <button class="btn-stay-details-cta" onclick="alert('Viewing verified booking details for ${stay.name} (${stay.price}/night). Zero commission booking.')">
+          View Details →
+        </button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+};
+
 function setupStaysScreen() {
   document.querySelectorAll(".stay-filter-chip").forEach(chip => {
     chip.addEventListener("click", () => {
       document.querySelectorAll(".stay-filter-chip").forEach(c => c.classList.remove("active"));
       chip.classList.add("active");
-      const tier = chip.dataset.stayTier;
-
-      document.querySelectorAll(".stay-listing-card").forEach(card => {
-        if (tier === "all" || card.dataset.stayTier === tier) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
-      });
+      const tierFilter = chip.dataset.stayTier;
+      renderCuratedStays(currentPlanDynamic, currentPlanBudgetTier, tierFilter);
     });
   });
 }
