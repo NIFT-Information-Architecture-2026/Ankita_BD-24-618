@@ -6,22 +6,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
 
 :root {
-  /* Exact Reference Color Palette */
-  --bg-canvas: #FAF5EE;
+  /* Master Reference Color Palette */
+  --bg-canvas: #FAF8F5;
   --bg-card: #FFFFFF;
-  --color-charcoal: #1C2026;
+  --color-charcoal: #1C1D1F;
   --color-slate: #5C6068;
-  --color-terracotta: #DE6138;
-  --color-terracotta-dark: #C44D26;
+  --color-terracotta: #D96B43;
+  --color-terracotta-dark: #C0552E;
   --color-terracotta-soft: #FDE8D8;
-  --color-green-open: #28724F;
+  --color-green-open: #2E7D32;
   --color-green-soft: #EBF4EC;
   --color-peach-soft: #FDF0E7;
   --color-lavender-soft: #F1EDFA;
   --color-lavender-text: #6B46C1;
   --color-border: #E8E1D8;
   --color-border-subtle: #F2ECE4;
-  --color-gold: #E5A83B;
+  --color-gold: #C29B38;
+  --color-orange-warm: #E67E22;
+  --color-note-yellow: #FCF1CF;
+  --color-note-border: rgba(235, 215, 160, 0.7);
 
   /* Typography */
   --font-serif: 'Playfair Display', Georgia, serif;
