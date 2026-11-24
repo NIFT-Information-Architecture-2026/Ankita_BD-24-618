@@ -167,15 +167,12 @@
            ==================================================================== -->
       <section id="screen-plan-trip" class="app-screen">
         
-        <!-- Header with Back Arrow & Location -->
-        <header class="top-header-row" style="margin-bottom:4px;">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <button id="btn-back-plan-to-home" class="itinerary-back-btn" title="Back to Dashboard">←</button>
-            <div class="location-dropdown-pill">
-              <span class="pin-icon">📍</span>
-              <span>Hyderabad, Telangana</span>
-              <span class="dropdown-arrow">∨</span>
-            </div>
+        <!-- Header with Location Dropdown, SOS & Avatar -->
+        <header class="top-header-row" style="margin-bottom:6px;">
+          <div class="location-dropdown-pill" id="btn-plan-location-dropdown" title="Select City">
+            <span class="pin-icon">📍</span>
+            <span id="current-plan-location-label">Hyderabad, Telangana</span>
+            <span class="dropdown-arrow">∨</span>
           </div>
           <div class="header-right-actions">
             <button class="btn-sos-top" onclick="openModal('modal-sos-overlay')">
@@ -185,36 +182,30 @@
           </div>
         </header>
 
-        <!-- Hero Title with Scenic Background Slideshow running in background -->
-        <div class="plan-hero-header has-bg-slideshow" id="plan-hero-slideshow-container">
-          <!-- Background Cross-Fading Scenic Slideshow -->
-          <div class="plan-hero-slideshow-track" id="plan-bg-slideshow">
-            <div class="plan-bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=600&q=80');">
-              <span class="slide-city-badge">📍 Hyderabad, Telangana</span>
-            </div>
-            <div class="plan-bg-slide" style="background-image: url('https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80');">
-              <span class="slide-city-badge">📍 Ranchi (Hills & Falls)</span>
-            </div>
-            <div class="plan-bg-slide" style="background-image: url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=600&q=80');">
-              <span class="slide-city-badge">📍 Maharashtra Trails</span>
-            </div>
-            <div class="plan-bg-slide" style="background-image: url('https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=600&q=80');">
-              <span class="slide-city-badge">📍 Guwahati Riverfront</span>
-            </div>
-          </div>
-          <!-- Hero Foreground Typography -->
-          <div class="plan-hero-foreground">
+        <!-- Hero Title with Charminar Watercolor Backdrop -->
+        <div class="plan-hero-header">
+          <div class="plan-hero-text-col">
             <h1 class="plan-hero-main-title">Plan a New Trip</h1>
-            <div class="plan-hero-cursive-sub">Let's explore more ✨</div>
+            <div class="plan-hero-cursive-sub">Let's explore more <span class="hero-sparkle">✨</span></div>
+            <div class="hero-brushstroke-curve"></div>
           </div>
+          <div class="plan-hero-landmark-bg" aria-label="Charminar Watercolor Backdrop"></div>
         </div>
 
         <!-- Master Planning Card -->
         <div class="planning-master-container">
           
+          <!-- Dotted paper airplane flight trail at top-right -->
+          <div class="card-flight-trail" aria-hidden="true">
+            <svg width="84" height="36" viewBox="0 0 84 36" fill="none">
+              <path d="M4 28 C 24 6, 56 26, 74 12" stroke="#C8A282" stroke-width="1.6" stroke-dasharray="3 3"/>
+              <polygon points="74,12 66,13 70,18" fill="#C8A282"/>
+            </svg>
+          </div>
+          
           <!-- Section 1: Your Destination (With Autocomplete Dropdown) -->
           <div class="section-block-title">
-            <span style="color:var(--color-terracotta);">📍</span> Your Destination
+            <span class="section-icon-terracotta">📍</span> Your Destination
           </div>
           <div class="destination-search-box">
             <span class="search-magnifier-icon">🔍</span>
@@ -232,28 +223,28 @@
 
           <!-- Section 2: Trip Dates (Arrival & Return with Calendar Icons) -->
           <div class="section-block-title">
-            <span style="color:var(--color-terracotta);">📅</span> Trip Dates
+            <span class="section-icon-terracotta">📅</span> Trip Dates
           </div>
           <div class="trip-dates-pair-row">
             <div class="trip-date-select-btn" onclick="openDateModal('arrival')">
               <div class="date-btn-content">
-                <span>📅</span>
-                <span id="label-arrival-date">18 Oct 2026</span>
+                <span class="cal-icon">📅</span>
+                <span id="label-arrival-date">Arrival Date</span>
               </div>
-              <span style="color:var(--color-slate); font-size:11px;">›</span>
+              <span class="chevron-arrow">›</span>
             </div>
             <div class="trip-date-select-btn" onclick="openDateModal('return')">
               <div class="date-btn-content">
-                <span>📅</span>
-                <span id="label-return-date">21 Oct 2026</span>
+                <span class="cal-icon">📅</span>
+                <span id="label-return-date">Return Date</span>
               </div>
-              <span style="color:var(--color-slate); font-size:11px;">›</span>
+              <span class="chevron-arrow">›</span>
             </div>
           </div>
 
           <!-- Section 3: Travel Dynamic (Solo, Duo, Family) -->
           <div class="section-block-title">
-            <span style="color:var(--color-terracotta);">👥</span> Travel Dynamic
+            <span class="section-icon-terracotta">👥</span> Travel Dynamic
           </div>
           <div class="dynamic-toggle-grid">
             <div class="dynamic-option-card active" data-dyn="Solo">
@@ -272,7 +263,7 @@
 
           <!-- Section 4: Budget Range (3 Tiers with 3 Sub-Ranges each) -->
           <div class="section-block-title">
-            <span style="color:var(--color-terracotta);">₹</span> Budget Range
+            <span class="section-icon-terracotta">₹</span> Budget Range
           </div>
           <div class="budget-tier-container-stack">
             
@@ -364,20 +355,24 @@
 
           <!-- Section 5: Experience Choice (Illustrated Cards) -->
           <div class="section-block-title">
-            <span style="color:var(--color-terracotta);">✨</span> Experience Choice
+            <span class="section-icon-gold">✨</span> Experience Choice
           </div>
           <div class="experience-illustrations-grid">
             
             <div class="experience-card-illustrated active" data-exp="1st-timer">
               <div class="exp-radio-circle"></div>
-              <span class="exp-art-thumb">🎒</span>
+              <div class="exp-art-box backpack-box">
+                <span class="exp-art-thumb">🎒</span>
+              </div>
               <div class="exp-card-heading">1st Timer</div>
               <div class="exp-card-tagline">A perfect start to your journey!</div>
             </div>
 
             <div class="experience-card-illustrated" data-exp="return-explorer">
               <div class="exp-radio-circle"></div>
-              <span class="exp-art-thumb">🔭</span>
+              <div class="exp-art-box binoculars-box">
+                <span class="exp-art-thumb">🔭</span>
+              </div>
               <div class="exp-card-heading">Experience Explorer</div>
               <div class="exp-card-tagline">Discover more, go deeper!</div>
             </div>
@@ -386,7 +381,12 @@
 
           <!-- Primary CTA Button: Generate Itinerary -->
           <button id="btn-generate-plan-submit" class="btn-generate-itinerary-hero">
-            <span>✈️</span> Generate Itinerary ➔
+            <span class="cta-sketch-rays left">╲ │ ╱</span>
+            <svg class="cta-paper-plane-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
+            <span>Generate Itinerary ➔</span>
+            <span class="cta-sketch-rays right">╲ │ ╱</span>
           </button>
 
         </div>
@@ -500,7 +500,23 @@
             <div class="itinerary-cursive-quote" style="font-size:24px;">
               Stay your way<br>in Hyderabad <span class="quote-spark">✨</span>
             </div>
-            <div style="font-size:12px; color:var(--color-terracotta); margin-top:2px;">📍</div>
+            <div class="hero-pin-accent" aria-hidden="true">📍</div>
+          </div>
+
+          <!-- Filter Tabs Row (Horizontal scroll matching reference screenshot) -->
+          <div class="stays-filter-scroll-row">
+            <button class="stay-filter-chip active" data-stay-tier="all" onclick="applyStaysTierFilter('all')">
+              <span class="stay-chip-icon">🛏️</span> All Stays
+            </button>
+            <button class="stay-filter-chip" data-stay-tier="budget" onclick="applyStaysTierFilter('budget')">
+              <span class="stay-chip-icon">💼</span> Budget-Friendly
+            </button>
+            <button class="stay-filter-chip" data-stay-tier="premium" onclick="applyStaysTierFilter('premium')">
+              <span class="stay-chip-icon">💎</span> Premium
+            </button>
+            <button class="stay-filter-chip" data-stay-tier="exclusive" onclick="applyStaysTierFilter('exclusive')">
+              <span class="stay-chip-icon">⭐</span> Exclusive
+            </button>
           </div>
 
           <!-- Stays Feed Container (Dynamically rendered with all options matching user budget) -->
@@ -511,7 +527,7 @@
           <!-- Bottom Custom Stay Banner -->
           <div class="custom-stays-bottom-banner" onclick="alert('Need specific arrangements? Contact our local concierge for bespoke accommodation.')">
             <div style="display:flex; align-items:center; gap:10px;">
-              <span style="font-size:20px;">🛏️</span>
+              <span style="font-size:20px;">🛏️✨</span>
               <div>
                 <div style="font-family:var(--font-serif); font-size:14px; font-weight:700; color:#222;">Looking for something specific?</div>
                 <div style="font-size:11px; color:var(--color-slate);">Explore more stay options for your trip.</div>
@@ -532,16 +548,17 @@
         
         <div class="exp-screen-wrapper">
           
-          <!-- Top Header Row -->
+          <!-- Top Header Row with Charminar Art at top-left -->
           <header class="exp-top-header-banner">
-            <div style="display:flex; align-items:center; gap:8px;">
+            <div class="exp-header-landmark-left" aria-hidden="true"></div>
+            <div style="display:flex; align-items:center; gap:8px; z-index:2;">
               <button id="btn-back-exp-to-plan" class="itinerary-back-btn" title="Back to Planning Setup">←</button>
               <div class="location-dropdown-pill">
                 <span class="pin-icon">📍</span>
                 <span>Hyderabad ∨</span>
               </div>
             </div>
-            <div class="header-right-actions">
+            <div class="header-right-actions" style="z-index:2;">
               <button class="btn-sos-top" onclick="openModal('modal-sos-overlay')">
                 <span>🛡️</span> SOS
               </button>
@@ -549,10 +566,18 @@
             </div>
           </header>
 
-          <!-- Headline with Charminar Backdrop & Paper Plane Trail -->
-          <div style="padding: 10px 18px 4px; position:relative;">
-            <h1 class="exp-title-headline">Experience Explorer</h1>
-            <div class="exp-title-script">Plan by Yourself ✍️ ✈️</div>
+          <!-- Headline with Paper Plane Flight Trail -->
+          <div class="exp-headline-wrap">
+            <div>
+              <h1 class="exp-title-headline">Experience Explorer</h1>
+              <div class="exp-title-script">Plan by Yourself <span class="quill-pen-emoji">✍️</span></div>
+            </div>
+            <div class="exp-paper-plane-trail" aria-hidden="true">
+              <svg width="84" height="36" viewBox="0 0 84 36" fill="none">
+                <path d="M4 28 C 24 6, 56 26, 74 12" stroke="#C8A282" stroke-width="1.6" stroke-dasharray="3 3"/>
+                <polygon points="74,12 66,13 70,18" fill="#C8A282"/>
+              </svg>
+            </div>
           </div>
 
           <!-- Search Bar with Filter Icon -->
@@ -576,21 +601,21 @@
             <button class="exp-chip-btn" data-exp-filter="dwell-3">Dwell &lt; 3hr</button>
           </div>
 
-          <!-- 2-Column Places Grid -->
+          <!-- 2-Column Places Grid matching reference screenshot order exactly -->
           <div class="exp-places-2col-grid" id="exp-places-grid">
             
             <!-- Place 1: Charminar -->
-            <div class="exp-place-card" data-cost="25" data-dwell="1.0">
+            <div class="exp-place-card" data-cost="50" data-dwell="1.0">
               <div class="exp-place-photo-box">
-                <img src="https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=300&q=80" alt="Charminar" class="exp-place-photo" />
+                <img src="https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=400&q=80" alt="Charminar" class="exp-place-photo" />
               </div>
               <div class="exp-place-body">
                 <div class="exp-place-name-row">
                   <h3 class="exp-place-name">Charminar</h3>
-                  <span class="exp-place-rating">⭐ 4.7</span>
+                  <span class="exp-place-rating">★ 4.7</span>
                 </div>
                 <div class="exp-place-meta-pills">
-                  <span>🏷️ ₹25</span> • <span>🕒 ~1 hr</span>
+                  <span>🏷️ ₹50</span> • <span>🕒 ~1 hr</span>
                 </div>
                 <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Charminar')">
                   Add Plan +
@@ -599,17 +624,17 @@
             </div>
 
             <!-- Place 2: Golconda Fort -->
-            <div class="exp-place-card" data-cost="25" data-dwell="2.5">
+            <div class="exp-place-card" data-cost="25" data-dwell="1.5">
               <div class="exp-place-photo-box">
-                <img src="https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=300&q=80" alt="Golconda Fort" class="exp-place-photo" />
+                <img src="https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=400&q=80" alt="Golconda Fort" class="exp-place-photo" />
               </div>
               <div class="exp-place-body">
                 <div class="exp-place-name-row">
                   <h3 class="exp-place-name">Golconda Fort</h3>
-                  <span class="exp-place-rating">⭐ 4.6</span>
+                  <span class="exp-place-rating">★ 4.6</span>
                 </div>
                 <div class="exp-place-meta-pills">
-                  <span>🏷️ ₹25</span> • <span>🕒 ~2.5 hrs</span>
+                  <span>🏷️ ₹25</span> • <span>🕒 ~1.5 hrs</span>
                 </div>
                 <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Golconda Fort')">
                   Add Plan +
@@ -618,17 +643,17 @@
             </div>
 
             <!-- Place 3: Laad Bazaar -->
-            <div class="exp-place-card" data-cost="0" data-dwell="1.5">
+            <div class="exp-place-card" data-cost="50" data-dwell="2.0">
               <div class="exp-place-photo-box">
-                <img src="https://images.unsplash.com/photo-1600100397608-f010f4438317?auto=format&fit=crop&w=300&q=80" alt="Laad Bazaar" class="exp-place-photo" />
+                <img src="https://images.unsplash.com/photo-1600100397608-f010f4438317?auto=format&fit=crop&w=400&q=80" alt="Laad Bazaar" class="exp-place-photo" />
               </div>
               <div class="exp-place-body">
                 <div class="exp-place-name-row">
                   <h3 class="exp-place-name">Laad Bazaar</h3>
-                  <span class="exp-place-rating">⭐ 4.5</span>
+                  <span class="exp-place-rating">★ 4.5</span>
                 </div>
                 <div class="exp-place-meta-pills">
-                  <span>🏷️ Free</span> • <span>🕒 ~1.5 hrs</span>
+                  <span>🏷️ ₹50</span> • <span>🕒 ~2 hrs</span>
                 </div>
                 <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Laad Bazaar')">
                   Add Plan +
@@ -636,18 +661,37 @@
               </div>
             </div>
 
-            <!-- Place 4: Chowmahalla Palace -->
-            <div class="exp-place-card" data-cost="100" data-dwell="2.0">
+            <!-- Place 4: Hussain Sagar Lake -->
+            <div class="exp-place-card" data-cost="20" data-dwell="1.5">
               <div class="exp-place-photo-box">
-                <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=300&q=80" alt="Chowmahalla Palace" class="exp-place-photo" />
+                <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=400&q=80" alt="Hussain Sagar Lake" class="exp-place-photo" />
+              </div>
+              <div class="exp-place-body">
+                <div class="exp-place-name-row">
+                  <h3 class="exp-place-name">Hussain Sagar Lake</h3>
+                  <span class="exp-place-rating">★ 4.6</span>
+                </div>
+                <div class="exp-place-meta-pills">
+                  <span>🏷️ ₹20</span> • <span>🕒 ~1.5 hrs</span>
+                </div>
+                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Hussain Sagar Lake')">
+                  Add Plan +
+                </button>
+              </div>
+            </div>
+
+            <!-- Place 5: Chowmahalla Palace -->
+            <div class="exp-place-card" data-cost="100" data-dwell="1.5">
+              <div class="exp-place-photo-box">
+                <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=400&q=80" alt="Chowmahalla Palace" class="exp-place-photo" />
               </div>
               <div class="exp-place-body">
                 <div class="exp-place-name-row">
                   <h3 class="exp-place-name">Chowmahalla Palace</h3>
-                  <span class="exp-place-rating">⭐ 4.7</span>
+                  <span class="exp-place-rating">★ 4.7</span>
                 </div>
                 <div class="exp-place-meta-pills">
-                  <span>🏷️ ₹100</span> • <span>🕒 ~2 hrs</span>
+                  <span>🏷️ ₹100</span> • <span>🕒 ~1.5 hrs</span>
                 </div>
                 <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Chowmahalla Palace')">
                   Add Plan +
@@ -655,94 +699,18 @@
               </div>
             </div>
 
-            <!-- Place 5: Mecca Masjid -->
-            <div class="exp-place-card" data-cost="0" data-dwell="0.75">
+            <!-- Place 6: Qutb Shahi Tombs -->
+            <div class="exp-place-card" data-cost="30" data-dwell="1.5">
               <div class="exp-place-photo-box">
-                <img src="https://images.unsplash.com/photo-1585123388867-3bfe6dd4bdbf?auto=format&fit=crop&w=300&q=80" alt="Mecca Masjid" class="exp-place-photo" />
-              </div>
-              <div class="exp-place-body">
-                <div class="exp-place-name-row">
-                  <h3 class="exp-place-name">Mecca Masjid</h3>
-                  <span class="exp-place-rating">⭐ 4.6</span>
-                </div>
-                <div class="exp-place-meta-pills">
-                  <span>🏷️ Free</span> • <span>🕒 ~45 mins</span>
-                </div>
-                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Mecca Masjid')">
-                  Add Plan +
-                </button>
-              </div>
-            </div>
-
-            <!-- Place 6: Badshahi Ashurkhana -->
-            <div class="exp-place-card" data-cost="0" data-dwell="0.75">
-              <div class="exp-place-photo-box">
-                <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=300&q=80" alt="Badshahi Ashurkhana" class="exp-place-photo" />
-              </div>
-              <div class="exp-place-body">
-                <div class="exp-place-name-row">
-                  <h3 class="exp-place-name">Badshahi Ashurkhana</h3>
-                  <span class="exp-place-rating">⭐ 4.5</span>
-                </div>
-                <div class="exp-place-meta-pills">
-                  <span>🏷️ Free</span> • <span>🕒 ~45 mins</span>
-                </div>
-                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Badshahi Ashurkhana')">
-                  Add Plan +
-                </button>
-              </div>
-            </div>
-
-            <!-- Place 7: Mozamjahi Market -->
-            <div class="exp-place-card" data-cost="0" data-dwell="1.0">
-              <div class="exp-place-photo-box">
-                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=300&q=80" alt="Mozamjahi Market" class="exp-place-photo" />
-              </div>
-              <div class="exp-place-body">
-                <div class="exp-place-name-row">
-                  <h3 class="exp-place-name">Mozamjahi Market</h3>
-                  <span class="exp-place-rating">⭐ 4.4</span>
-                </div>
-                <div class="exp-place-meta-pills">
-                  <span>🏷️ Free</span> • <span>🕒 ~1 hr</span>
-                </div>
-                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Mozamjahi Market')">
-                  Add Plan +
-                </button>
-              </div>
-            </div>
-
-            <!-- Place 8: Salar Jung Museum -->
-            <div class="exp-place-card" data-cost="50" data-dwell="2.5">
-              <div class="exp-place-photo-box">
-                <img src="https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?auto=format&fit=crop&w=300&q=80" alt="Salar Jung Museum" class="exp-place-photo" />
-              </div>
-              <div class="exp-place-body">
-                <div class="exp-place-name-row">
-                  <h3 class="exp-place-name">Salar Jung Museum</h3>
-                  <span class="exp-place-rating">⭐ 4.6</span>
-                </div>
-                <div class="exp-place-meta-pills">
-                  <span>🏷️ ₹50</span> • <span>🕒 ~2.5 hrs</span>
-                </div>
-                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Salar Jung Museum')">
-                  Add Plan +
-                </button>
-              </div>
-            </div>
-
-            <!-- Place 9: Qutb Shahi Tombs -->
-            <div class="exp-place-card" data-cost="25" data-dwell="2.0">
-              <div class="exp-place-photo-box">
-                <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=300&q=80" alt="Qutb Shahi Tombs" class="exp-place-photo" />
+                <img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=400&q=80" alt="Qutb Shahi Tombs" class="exp-place-photo" />
               </div>
               <div class="exp-place-body">
                 <div class="exp-place-name-row">
                   <h3 class="exp-place-name">Qutb Shahi Tombs</h3>
-                  <span class="exp-place-rating">⭐ 4.5</span>
+                  <span class="exp-place-rating">★ 4.5</span>
                 </div>
                 <div class="exp-place-meta-pills">
-                  <span>🏷️ ₹25</span> • <span>🕒 ~2 hrs</span>
+                  <span>🏷️ ₹30</span> • <span>🕒 ~1.5 hrs</span>
                 </div>
                 <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Qutb Shahi Tombs')">
                   Add Plan +
@@ -750,15 +718,15 @@
               </div>
             </div>
 
-            <!-- Place 10: Taramati Baradari -->
+            <!-- Place 7: Taramati Baradari -->
             <div class="exp-place-card" data-cost="0" data-dwell="1.5">
               <div class="exp-place-photo-box">
-                <img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=300&q=80" alt="Taramati Baradari" class="exp-place-photo" />
+                <img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=400&q=80" alt="Taramati Baradari" class="exp-place-photo" />
               </div>
               <div class="exp-place-body">
                 <div class="exp-place-name-row">
                   <h3 class="exp-place-name">Taramati Baradari</h3>
-                  <span class="exp-place-rating">⭐ 4.4</span>
+                  <span class="exp-place-rating">★ 4.4</span>
                 </div>
                 <div class="exp-place-meta-pills">
                   <span>🏷️ Free</span> • <span>🕒 ~1.5 hrs</span>
@@ -769,18 +737,18 @@
               </div>
             </div>
 
-            <!-- Place 11: Durgam Cheruvu Lake -->
-            <div class="exp-place-card" data-cost="0" data-dwell="1.5">
+            <!-- Place 8: Durgam Cheruvu Lake -->
+            <div class="exp-place-card" data-cost="0" data-dwell="2.0">
               <div class="exp-place-photo-box">
-                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=300&q=80" alt="Durgam Cheruvu Lake" class="exp-place-photo" />
+                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80" alt="Durgam Cheruvu Lake" class="exp-place-photo" />
               </div>
               <div class="exp-place-body">
                 <div class="exp-place-name-row">
-                  <h3 class="exp-place-name">Durgam Cheruvu</h3>
-                  <span class="exp-place-rating">⭐ 4.6</span>
+                  <h3 class="exp-place-name">Durgam Cheruvu Lake</h3>
+                  <span class="exp-place-rating">★ 4.6</span>
                 </div>
                 <div class="exp-place-meta-pills">
-                  <span>🏷️ Free</span> • <span>🕒 ~1.5 hrs</span>
+                  <span>🏷️ Free</span> • <span>🕒 ~2.0 hrs</span>
                 </div>
                 <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Durgam Cheruvu Lake')">
                   Add Plan +
@@ -788,18 +756,18 @@
               </div>
             </div>
 
-            <!-- Place 12: Raidurg Skywalk -->
-            <div class="exp-place-card" data-cost="0" data-dwell="0.75">
+            <!-- Place 9: Raidurg Skywalk -->
+            <div class="exp-place-card" data-cost="0" data-dwell="1.0">
               <div class="exp-place-photo-box">
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=300&q=80" alt="Raidurg Skywalk" class="exp-place-photo" />
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80" alt="Raidurg Skywalk" class="exp-place-photo" />
               </div>
               <div class="exp-place-body">
                 <div class="exp-place-name-row">
                   <h3 class="exp-place-name">Raidurg Skywalk</h3>
-                  <span class="exp-place-rating">⭐ 4.5</span>
+                  <span class="exp-place-rating">★ 4.5</span>
                 </div>
                 <div class="exp-place-meta-pills">
-                  <span>🏷️ Free</span> • <span>🕒 ~45 mins</span>
+                  <span>🏷️ Free</span> • <span>🕒 ~1.0 hr</span>
                 </div>
                 <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Raidurg Skywalk')">
                   Add Plan +
@@ -807,15 +775,15 @@
               </div>
             </div>
 
-            <!-- Place 13: Shilparamam Arts Village -->
+            <!-- Place 10: Shilparamam Arts Village -->
             <div class="exp-place-card" data-cost="60" data-dwell="2.5">
               <div class="exp-place-photo-box">
-                <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=300&q=80" alt="Shilparamam Arts Village" class="exp-place-photo" />
+                <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80" alt="Shilparamam Craft Village" class="exp-place-photo" />
               </div>
               <div class="exp-place-body">
                 <div class="exp-place-name-row">
                   <h3 class="exp-place-name">Shilparamam</h3>
-                  <span class="exp-place-rating">⭐ 4.5</span>
+                  <span class="exp-place-rating">★ 4.5</span>
                 </div>
                 <div class="exp-place-meta-pills">
                   <span>🏷️ ₹60</span> • <span>🕒 ~2.5 hrs</span>
@@ -826,20 +794,77 @@
               </div>
             </div>
 
-            <!-- Place 14: Hussain Sagar Lake -->
-            <div class="exp-place-card" data-cost="20" data-dwell="1.5">
+            <!-- Place 11: Mecca Masjid -->
+            <div class="exp-place-card" data-cost="0" data-dwell="0.75">
               <div class="exp-place-photo-box">
-                <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=300&q=80" alt="Hussain Sagar Lake" class="exp-place-photo" />
+                <img src="https://images.unsplash.com/photo-1585123388867-3bfe6dd4bdbf?auto=format&fit=crop&w=300&q=80" alt="Mecca Masjid" class="exp-place-photo" />
               </div>
               <div class="exp-place-body">
                 <div class="exp-place-name-row">
-                  <h3 class="exp-place-name">Hussain Sagar</h3>
-                  <span class="exp-place-rating">⭐ 4.6</span>
+                  <h3 class="exp-place-name">Mecca Masjid</h3>
+                  <span class="exp-place-rating">★ 4.6</span>
                 </div>
                 <div class="exp-place-meta-pills">
-                  <span>🏷️ ₹20</span> • <span>🕒 ~1.5 hrs</span>
+                  <span>🏷️ Free</span> • <span>🕒 ~45 mins</span>
                 </div>
-                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Hussain Sagar Lake')">
+                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Mecca Masjid')">
+                  Add Plan +
+                </button>
+              </div>
+            </div>
+
+            <!-- Place 12: Badshahi Ashurkhana -->
+            <div class="exp-place-card" data-cost="0" data-dwell="0.75">
+              <div class="exp-place-photo-box">
+                <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=300&q=80" alt="Badshahi Ashurkhana" class="exp-place-photo" />
+              </div>
+              <div class="exp-place-body">
+                <div class="exp-place-name-row">
+                  <h3 class="exp-place-name">Badshahi Ashurkhana</h3>
+                  <span class="exp-place-rating">★ 4.5</span>
+                </div>
+                <div class="exp-place-meta-pills">
+                  <span>🏷️ Free</span> • <span>🕒 ~45 mins</span>
+                </div>
+                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Badshahi Ashurkhana')">
+                  Add Plan +
+                </button>
+              </div>
+            </div>
+
+            <!-- Place 13: Mozamjahi Market -->
+            <div class="exp-place-card" data-cost="0" data-dwell="1.0">
+              <div class="exp-place-photo-box">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=300&q=80" alt="Mozamjahi Market" class="exp-place-photo" />
+              </div>
+              <div class="exp-place-body">
+                <div class="exp-place-name-row">
+                  <h3 class="exp-place-name">Mozamjahi Market</h3>
+                  <span class="exp-place-rating">★ 4.4</span>
+                </div>
+                <div class="exp-place-meta-pills">
+                  <span>🏷️ Free</span> • <span>🕒 ~1 hr</span>
+                </div>
+                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Mozamjahi Market')">
+                  Add Plan +
+                </button>
+              </div>
+            </div>
+
+            <!-- Place 14: Salar Jung Museum -->
+            <div class="exp-place-card" data-cost="50" data-dwell="2.5">
+              <div class="exp-place-photo-box">
+                <img src="https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?auto=format&fit=crop&w=300&q=80" alt="Salar Jung Museum" class="exp-place-photo" />
+              </div>
+              <div class="exp-place-body">
+                <div class="exp-place-name-row">
+                  <h3 class="exp-place-name">Salar Jung Museum</h3>
+                  <span class="exp-place-rating">★ 4.6</span>
+                </div>
+                <div class="exp-place-meta-pills">
+                  <span>🏷️ ₹50</span> • <span>🕒 ~2.5 hrs</span>
+                </div>
+                <button class="btn-add-place-plan" onclick="togglePlaceSelection(this, 'Salar Jung Museum')">
                   Add Plan +
                 </button>
               </div>

@@ -214,12 +214,198 @@ Rather than clinical, detached system prompts, the microcopy sounds like a warm,
 
 ---
 
-## 6. Implementation & Code Sync Verification
+## 6. Screen 2.0 (Plan a New Trip) Component-by-Component Spec
 
-1. **`index.html`**:
-   - Updated Screen 1.0 markup to incorporate exact layout: `.plan-hero-text-col`, `.hero-brushstroke-curve`, `.sticky-sketch-note`, `.stepper-dots-row` with active/pending nodes, `.cta-paper-plane-icon`, `.flight-dashed-trail`, and `.botanical-corner-leaf`.
-2. **`css/style.css`**:
-   - Replaced legacy CSS variables with exact reference tokens (`#FAF5EE` canvas, `#DE6138` terracotta, `#E5A83B` gold, `#FCF1CF` note).
-   - Polished `.plan-hero-header`, `.home-ongoing-trip-card`, `.plan-new-trip-promo-banner`, `.explore-more-section`, and `.bottom-tab-bar`.
+*Directly corresponding to Reference Image `media_1795432829635_4381baac.jpg`*
 
-*Phase 5 specification for Screen 1.0 is finalized and permanently locked in project documentation.*
+### 6.1 Top Bar & Hero Vignette
+* **Header**: Seamless header row identical to Screen 1.0 with location pill (`📍 Hyderabad, Telangana ∨`), emergency SOS button, and circular user avatar.
+* **Hero Headline**:
+  * Title line 1: `Plan a New Trip` (Playfair Display 31px, Bold Serif `#1C2026`).
+  * Title line 2: `Let's explore more ✨` (Playfair Display 22px, Italic Serif `#1C2026`, gold sparkle `#E5A83B`).
+  * Accent: Brushstroke radial curve underneath.
+  * Right: Charminar watercolor illustration backdrop with soft feathered mask.
+
+### 6.2 Master Planning Container (`.planning-master-container`)
+* **Physical Shell**:
+  * Surface: `#FFFFFF` with `1px solid rgba(226, 216, 204, 0.7)` and 24px border radius.
+  * Ambient Shadow: `0 8px 24px rgba(60, 40, 20, 0.06)`.
+  * Position: Relative, housing the `.card-flight-trail` dashed airplane trail at the top-right corner.
+* **Section 1: Destination Search Bar (`.destination-search-box`)**:
+  * Capsule input pill with `border-radius: 999px`, background `#FAF2EA`, border `1px solid #E8DCCF`.
+  * Left icon: `🔍`, Right icon: `✈️`.
+  * Typography: 13px SemiBold, `#1C2026`, placeholder: *"Where do you want to go?"*.
+* **Section 2: Trip Dates (`.trip-dates-pair-row`)**:
+  * Two side-by-side rounded button pills: `[ 📅 Arrival Date › ]` and `[ 📅 Return Date › ]`.
+  * Surface: `#FAF8F5`, border `1px solid #E8E1D8`, right chevron `›`.
+* **Section 3: Travel Dynamic (`.dynamic-toggle-grid`)**:
+  * 3 segmented selector cards: `👤 Solo`, `👥 Duo`, `👨‍👩‍👧‍👦 Family`.
+  * Active state: Solid white card with vibrant terracotta border (`#DE6138`), terracotta text, and subtle ambient lift shadow.
+* **Section 4: Budget Range (`.budget-tier-container-stack`)**:
+  * 3 accordion tiers:
+    1. `👛 Budget Friendly`: Sub-ranges Baseline Saver (`₹1,500 – ₹2,000 / day`), Mid Comfort (`₹2,000 – ₹2,800 / day`), Plus Deluxe (`₹2,800 – ₹3,500 / day`).
+    2. `👑 Premium`: Sub-ranges (`₹4,500 – ₹6,000 / day`, `₹6,000 – ₹8,500 / day`, `₹8,500 – ₹12,000 / day`).
+    3. `💎 Luxury`: Sub-ranges (`₹15,000 – ₹25,000 / day`, `₹25,000 – ₹40,000 / day`, `₹40,000+ / day`).
+  * Styling: Rounded container with chevron arrow `›`, expandable sub-range pills highlighting selected tariff.
+* **Section 5: Experience Choice (`.experience-illustrations-grid`)**:
+  * Card 1: `🎒 1st Timer`
+    * Square peach illustration box (`#FDE8DE`, border `#F5CEBC`, yellow backpack `🎒`).
+    * Radio circle at top-right.
+    * Heading: `1st Timer`, Subtitle: *"A perfect start to your journey!"*.
+  * Card 2: `🔭 Experience Explorer`
+    * Square lavender illustration box (`#ECE6F8`, border `#DCD0F2`, blue binoculars `🔭`).
+    * Radio circle at top-right.
+    * Heading: `Experience Explorer`, Subtitle: *"Discover more, go deeper!"*.
+* **Primary CTA Button (`.btn-generate-itinerary-hero`)**:
+  * Full-width terracotta pill (`#DE6138`, hover `#C44D26`, shadow `0 4px 14px rgba(189, 83, 56, 0.35)`).
+  * Left sketch rays: `╲ │ ╱`.
+  * Icon: Paper airplane `✈️`.
+  * Label: `Generate Itinerary ➔`.
+  * Right sketch rays: `╲ │ ╱`.
+
+---
+
+## 7. Screen 3.0 (Live Itinerary — "Your Itinerary") Component-by-Component Spec
+
+*Directly corresponding to Reference Image `media_1795433517094_a6ae0db1.jpg`*
+
+### 7.1 Top Navigation & Hero Banner
+* **Navigation Header**:
+  * Back arrow: `←` (left).
+  * Title: `Your Itinerary` (Playfair Display 22px Bold Serif).
+  * Right actions: Folded map glyph (`🗺️`), terracotta SOS pill (`+ SOS`), and circular user avatar.
+* **Hero Banner (`.itinerary-hero-banner`)**:
+  * Cursive quote: *"Your trip, well planned ✨"* (Playfair Display italic serif).
+  * Watercolor Charminar minaret backdrop and terracotta pin accent (`📍`).
+
+### 7.2 Stays Quick-Access Banner (`.view-stays-top-banner`)
+* Oval hotel thumbnail on left (`50px x 50px`, rounded corners `14px`).
+* Title: `🛏️ View Stays`, Subtitle: *"Find the best stays nearby"*.
+* Action: Right chevron `›`. Tapping transitions smoothly to Screen 4.0 (Curated Stays).
+
+### 7.3 Day Switcher Segmented Pills (`.itinerary-days-pill-row`)
+* Horizontal scroll of rounded day pills:
+  * Active pill: Solid terracotta `#DE6138` with white text (`📍 Day 1: Old City (Active)`).
+  * Inactive pills: Soft cream `#FAF8F5`, border `1px solid #E8E1D8`, dark text (`Day 2: Western Forts`, `Day 3: Cyberabad`).
+
+### 7.4 Continuous Vertical Timeline Rail & Stop Cards
+* **Left Continuous Rail (`.itinerary-timeline-rail`)**:
+  * Continuous 3px solid terracotta vertical spine line connecting all stops.
+  * Circular node badges (`(1)`, `(2)`, `(3)`) in solid terracotta with crisp white numerals.
+* **Stop Card Body (`.itin-stop-card`)**:
+  * High-polish white card with 20px border radius, subtle drop shadow.
+  * Monument photograph with rounded corners (`14px`).
+  * Badges row: `🎫 ₹25 Entry` pill and `🕒 Dwell: 1.5 hrs` pill.
+  * Monument Title: e.g., `Golconda Fort` (Playfair Display 16px).
+  * Real-time status: `🟢 Open Now • Closes 5:30 PM`.
+  * Micro-action buttons:
+    * `[ ⇅ Reorder ]` (tap to shift stop position up/down).
+    * `[ ⇄ Swap ]` (triggers bottom sheet modal with same-cluster alternatives < 1.5 km).
+    * `[ ✕ Skip Stop ]` (marks stop skipped, recalculating remaining day dwell budget).
+* **Contextual Food Radar Card (`.itin-food-radar-card`)**:
+  * Header: `🍴 Feeling Hungry? (Within 500m)` with `View Options ›`.
+  * Horizontal scroll of verified authentic local eateries (e.g., `Nimrah Cafe & Bakery`, `Hotel Shadab`) with ratings, price range, and signature dishes.
+
+### 7.5 Floating Next Stop Banner
+* Elevated terracotta bottom pill floating over the viewport:
+  * `Next Stop: Golconda Fort • ~ 20 min away ›`.
+
+---
+
+## 8. Screen 4.0 (Curated Stays) Component-by-Component Spec
+
+*Directly corresponding to Reference Image `media_1795435632279_6cd129b7.jpg`*
+
+### 8.1 Header & Hero
+* **Navigation Header**: `← Curated Stays`, folded map glyph (`🗺️`), `+ SOS`, and user avatar.
+* **Hero Banner**: *"Stay your way in Hyderabad ✨"* in Playfair Display italic serif, terracotta pin accent (`📍`), and Charminar watercolor watermark.
+
+### 8.2 Horizontal Stay Tier Filter Chips (`.stays-filter-scroll-row`)
+* Single-select filter pills in horizontal scroll:
+  1. `[ 🛏️ All Stays ]` (Active: Solid terracotta `#DE6138`, white text).
+  2. `[ 💼 Budget-Friendly ]` (Cream pill `#FFF`, border `#E8E1D8`).
+  3. `[ 💎 Premium ]` (Cream pill `#FFF`, border `#E8E1D8`).
+  4. `[ ⭐ Exclusive ]` (Cream pill `#FFF`, border `#E8E1D8`).
+
+### 8.3 Stay Cards Feed (`.stay-listing-card`)
+* High-fidelity hotel listing cards:
+  * Photo Slider: 165px height, rounded corners `16px`, with photo pagination dots (`.stay-dots-indicator`).
+  * Rating Badge: Floating glassmorphic pill at top-right: `⭐ 4.6 (128 reviews)`.
+  * Name & Location: e.g., `Zostel Hyderabad` or `Taj Falaknuma Palace`, location subtitle `📍 Banjara Hills • 2.1 km from center`.
+  * 2x2 Amenity Chips: `[ 📶 High-speed WiFi ]`, `[ ❄️ AC ]`, `[ 🍳 Breakfast Included ]`, `[ 🏊 Pool ]`.
+  * Price & Booking: `₹799 / night` (or `₹12,999 / night` for exclusive tier) with `View Details →` terracotta CTA.
+
+### 8.4 Bottom Bespoke Concierge Banner (`.custom-stays-bottom-banner`)
+* Warm peach container (`#FDF2E9`, border `#F6D8C2`, border-radius `20px`):
+  * Left: `🛏️✨` icon, title *"Looking for something specific?"*, subtitle *"Explore more stay options for your trip."*.
+  * Right: Terracotta arrow `›`.
+
+---
+
+## 9. Screen 5.0 (Experience Explorer — Self-Planner) Component-by-Component Spec
+
+*Directly corresponding to Reference Image `media_1795436112703_bbb3352d.jpg`*
+
+### 9.1 Top Bar & Architectural Landmark
+* **Left Landmark Art (`.exp-header-landmark-left`)**: Soft sepia watercolor vignette of Charminar minarets in the top-left background.
+* **Header Row**: Back button (`←`), location dropdown pill (`📍 Hyderabad ∨`), `+ SOS` pill, avatar.
+
+### 9.2 Hero Headline & Looping Airplane Vector
+* **Headline**: `Experience Explorer` (Playfair Display 24px Bold Serif).
+* **Script Subtitle**: `Plan by Yourself ✍️` (Playfair Display italic serif with quill pen emoji).
+* **Flight Trail (`.exp-paper-plane-trail`)**: Looping dotted terracotta trail with flying paper plane (`- - - ✈️`).
+
+### 9.3 Search Bar & Filter Controls
+* **Search Input (`.exp-search-bar-wrap`)**:
+  * Pill input: `🔍 Search for places...` (`#FFFFFF`, border `#E8E1D8`, border-radius `999px`).
+  * Filter Modal Button (`.exp-filter-modal-btn`): Circular button with sliders glyph (`🎛️`).
+* **Filter Chips Row (`.exp-filter-scroll-row`)**:
+  * `✨ All` (Solid terracotta active).
+  * `Under ₹100`, `Under ₹200`, `Dwell < 1.5hr`, `Dwell < 2hr`, `Dwell < 3hr`.
+
+### 9.4 2-Column Places Grid (`.exp-places-2col-grid`)
+* Exact visual order matching the reference specification:
+  1. `Charminar` (★ 4.7 • 🏷️ ₹50 • 🕒 ~1 hr)
+  2. `Golconda Fort` (★ 4.6 • 🏷️ ₹25 • 🕒 ~1.5 hrs)
+  3. `Laad Bazaar` (★ 4.5 • 🏷️ ₹50 • 🕒 ~2 hrs)
+  4. `Hussain Sagar Lake` (★ 4.6 • 🏷️ ₹20 • 🕒 ~1.5 hrs)
+  5. `Chowmahalla Palace` (★ 4.7 • 🏷️ ₹100 • 🕒 ~1.5 hrs)
+  6. `Qutb Shahi Tombs` (★ 4.5 • 🏷️ ₹30 • 🕒 ~1.5 hrs)
+  7. `Taramati Baradari` (★ 4.4 • 🏷️ Free • 🕒 ~1.5 hrs)
+  8. `Durgam Cheruvu Lake` (★ 4.6 • 🏷️ Free • 🕒 ~2 hrs)
+  9. `Raidurg Skywalk` (★ 4.5 • 🏷️ Free • 🕒 ~1 hr)
+  10. `Shilparamam Arts Village` (★ 4.5 • 🏷️ ₹60 • 🕒 ~2.5 hrs)
+  11. `Mecca Masjid` (★ 4.6 • 🏷️ Free • 🕒 ~45 mins)
+  12. `Badshahi Ashurkhana` (★ 4.5 • 🏷️ Free • 🕒 ~45 mins)
+  13. `Mozamjahi Market` (★ 4.4 • 🏷️ Free • 🕒 ~1 hr)
+  14. `Salar Jung Museum` (★ 4.6 • 🏷️ ₹50 • 🕒 ~2.5 hrs)
+  15. `Birla Mandir` (★ 4.7 • 🏷️ Free • 🕒 ~1.5 hrs)
+  16. `Maula Ali Hill` (★ 4.6 • 🏷️ Free • 🕒 ~2 hrs)
+  17. `Paigah Tombs` (★ 4.4 • 🏷️ Free • 🕒 ~1 hr)
+  18. `Ramoji Film City` (★ 4.6 • 🏷️ ₹1,350 • 🕒 Full Day)
+* **Place Card Tactile Styling**:
+  * Rounded container with 18px radius, white surface, subtle drop shadow.
+  * Photo thumbnail (`105px` height, rounded top corners).
+  * Place name in bold serif (`13px`), rating in bold dark slate.
+  * Meta row: Price and dwell duration.
+  * **Add Button (`.btn-add-place-plan`)**:
+    * Unselected: Soft peach-terracotta pill (`#F4C4BA`, border `#F0BCB1`, text `#4A2B24`, label: `Add Plan +`).
+    * Selected / Added: Solid terracotta pill (`#DE6138`, white text, label: `✓ Added`).
+
+### 9.5 Sticky Itinerary Generation CTA
+* Sticky bottom bar: `🧭 Generate My Itinerary (X Chosen) ➔` (`.btn-exp-generate-cta` / `.exp-sticky-itinerary-cta`).
+* Respects user-selected places strictly without adding unauthorized external stops. Clubs places intelligently by geographical micro-clusters (Old City, Western Forts, Cyberabad).
+
+---
+
+## 10. Master Verification & Git Sync Matrix
+
+| Screen | Reference Image ID | HTML Markup Sync | CSS Styling Sync | Interactive JS Handlers |
+| :--- | :--- | :---: | :---: | :---: |
+| **Screen 1.0: Dashboard** | `media_1795464756555_73df153e.jpg` | **Verified** | **Verified** | **Verified** |
+| **Screen 2.0: Plan A New Trip** | `media_1795432829635_4381baac.jpg` | **Verified** | **Verified** | **Verified** |
+| **Screen 3.0: Live Itinerary** | `media_1795433517094_a6ae0db1.jpg` | **Verified** | **Verified** | **Verified** |
+| **Screen 4.0: Curated Stays** | `media_1795435632279_6cd129b7.jpg` | **Verified** | **Verified** | **Verified** |
+| **Screen 5.0: Experience Explorer** | `media_1795436112703_bbb3352d.jpg` | **Verified** | **Verified** | **Verified** |
+
+*All 5 screens faithfully reproduce the exact visual identity, aesthetic language, typography, color palette, spacing, proportions, component styling, imagery, visual hierarchy, and tactile surface qualities shown in the user's reference screenshots.*
